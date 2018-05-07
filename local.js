@@ -279,23 +279,23 @@ function onFileClick() {
 
 
 // APP CLOSE
-// $('.text-editor .close').click(function() {
-//   $(this).parents('.text-editor').addClass('scale-down');
-//   $('.file').removeClass('selected');
+$('.text-editor .close').click(function() {
+  $(this).parents('.text-editor').addClass('scale-down');
+  $('.file').removeClass('selected');
   
-//   var screensaver_credits = document.createElement('span');
-//       screensaver_credits.className = 'screensaver-credits ab-mid';
-//       screensaver_credits.innerHTML = "Sahel, Mali by Steve McCurry, 1986.";
+  var screensaver_credits = document.createElement('span');
+      screensaver_credits.className = 'screensaver-credits ab-mid';
+      screensaver_credits.innerHTML = "Sahel, Mali by Steve McCurry, 1986.";
   
-//   if ($('.screensaver-credits').length == 0) {
-//     $('.desktop').prepend(screensaver_credits);
-//   }
+  if ($('.screensaver-credits').length == 0) {
+    $('.desktop').prepend(screensaver_credits);
+  }
   
-//   setTimeout(function () {
-//     $('.screensaver-credits').addClass('show');
-//   }, 100);
+  setTimeout(function () {
+    $('.screensaver-credits').addClass('show');
+  }, 100);
   
-// })
+})
 
 
 

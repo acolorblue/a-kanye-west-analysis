@@ -12,14 +12,7 @@ a {
   height: 100%;
   overflow: hidden;
   background-color: #eeeeee;
-  background-image: url('https://i1.wp.com/www.firstladyb.com/wp-content/uploads/2018/02/180305_r31587ab.jpg?fit=25601712&ssl=1');
-/*   background-image: url('https://wallpaperstudio10.com/static/wpdb/wallpapers/3840x2160/127507.jpg'); */
-  background-image: url('http://howlandechoes.com/wp-content/uploads/2016/05/young-kanye.jpg');
-  background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Harare%2C%20Zimbabwe/Zimbabwe%2C1983%2C%20by%20Alain%20Keler.png');
-  background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Brazzaville%2C%20Congo/The%20first%20prime%20minister%20of%20independent%20Congo%2C%20Patrice%20Lumumba%2C%20arrested%20and%20then%20murdered%20on%20Jan.%2017%2C%201961.jpg');
-  background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Bangui%2C%20Central%20African%20Republic/A%20boy%20brandishes%20a%20knife%20as%20he%20stands%20in%20front%20of%20a%20barricade%20during%20a%20demonstration%20after%20French%20troops%20opened%20fire%20at%20protesters%20blocking%20a%20road%20in%20Bambari%2C%20Central%20African%20Republ.jpg');
   background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Timbuktu%2C%20Mali/Steve%20McCurry%20-%20The%20Sahel%2C%201986.%20A%20group%20of%20young%20men%20pushes%20a%20plane%20out%20of%20the%20mud.jpg');
-/*   background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Steve%20McCurry%20-%20The%20Sahel%2C%201986%20w%20Credit.jpg'); */
   background-size: 100%;
   font-family: sans-serif;
   display: flex;
@@ -76,48 +69,43 @@ a {
   right: 10px;
 }
 
-.mac-os .panel button {
-  font-size: unset;
-}
-
-.mac-os .panel > button {
+.mac-os .panel > * {
   width: inherit;
   height: inherit;
+  font-size: unset;
   line-height: 1.6;
   display: inline-block;
   position: relative;
   padding: 0px 10px;
 }
 
-.mac-os .panel > button:last-child {
-  margin-right: unset; 
+.mac-os .panel > span {
+  user-select: none;
 }
 
-.mac-os .menu-bar button.icons-b {
+.mac-os .menu-bar .icons-b {
   width: 35px;
 }
 
-.mac-os .menu-bar button.icons-b::before {
+.mac-os .menu-bar .icons-b::before {
   width: inherit;
   height: inherit;
   background-size: 15px;
 }
 
-.mac-os .menu-bar button.opened-app-title,
-.mac-os .menu-bar button.name {
+.mac-os .menu-bar .name {
   font-weight: bold;
 }
 
-.mac-os .menu-bar button.notification-center {
+.mac-os .menu-bar .notification-center {
   width: 38px;
 }
 
-.mac-os .menu-bar button.notification-center.icons-b::before {
+.mac-os .menu-bar .notification-center.icons-b::before {
   background-size: 18px;
 }
 
-.mac-os .menu-bar button.selected,
-.mac-os .menu-bar button .menu .item:hover {
+.mac-os .menu-bar .selected {
   background-color: #026cea;
   color: #ffffff;
 }
@@ -260,17 +248,12 @@ a {
   letter-spacing: 0.1px;
   line-height: 1;
   top: auto;
-/*   right: -218px;
-  left: auto; */
-  
   right: auto;
   left: -218px;
   transition: all 200ms ease-in-out;
 }
 
 .mac-os .screensaver-credits.show {
-/*   right: 0px; */
-  
   left: 0px;
 }
 
@@ -278,7 +261,7 @@ a {
 
 
 /* NOTIFICATION CENTER MENU */
-.mac-os .notification-center-window  {
+.mac-os .embed-window  {
   width: 248px;
   height: -webkit-fill-available;
   height: 100%;
@@ -291,74 +274,33 @@ a {
   transition: all 200ms ease-in-out;
 }
 
-.mac-os .notification-center-window.slide-out {
-  right: 0px;
-}
-
-.mac-os .notification-center-window iframe {
-/*   height: -webkit-fill-available !important; */
-  height: 700px !important;
+.mac-os .embed-window.cover::before {
+  content: '';
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-color: inherit;
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Social%20Media%20Icons/Twitter%20-%20White%201.png');
+  background-size: 10%;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  opacity: 1;
   z-index: 1;
 }
 
-.mac-os .notification-center-window a.twitter-timeline {
+.mac-os .embed-window.slide-out {
+  right: 0px;
+}
+
+.mac-os .embed-window iframe.full {
+  height: -webkit-fill-available !important;
+}
+
+.mac-os .embed-window a.twitter-timeline {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   background-color: inherit;
   position: absolute;
-}
-
-.progress-bar {
-  width: 80%;
-  height: 4px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.progress-bar:after {
-  content: '';
-  width: 100%;
-  height: 4px;
-  border-radius: 4px;
-  background: #fff;
-  display: block;
-  animation: loading-bar 0.5s linear;
-}
-
-@-webkit-keyframes loading-bar {
-  0% {
-    width: 0;
-  }
-  10% {
-    width: 5%;
-  }
-  20% {
-    width: 15%;
-  }
-  30% {
-    width: 25%;
-  }
-  40% {
-    width: 30%;
-  }
-  50% {
-    width: 44%;
-  }
-  60% {
-    width: 50%;
-  }
-  70% {
-    width: 72%;
-  }
-  80% {
-    width: 84%;
-  }
-  90% {
-    width: 92%;
-  }
-  100% {
-    width: 100%;
-  }
 }
 
 
@@ -381,7 +323,7 @@ a {
   opacity: 1;
   z-index: 1;
   transform: scale(1);
-  transition: all 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
 }
 
 .text-editor.right-corner {
@@ -582,12 +524,11 @@ a {
 /* CONTENT CONTAINER */
 .text-editor .content-container {
   width: -webkit-fill-available;
-  height: -webkit-fill-available;
+  height: 100%;
   border: 1px solid #cbcbcb;
   border-radius: 4px;
   overflow: scroll;
   background-color: #ffffff;
-  padding: 40px;
   padding: 5%;
   font-family: ahamonomonospaced;
   font-size: 14px;

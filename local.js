@@ -85,8 +85,6 @@ function twitterEmbed() {
       twitter_timeline.src = 'https://twitter.com/search?q=acolorblue';
       twitter_timeline.dataset.widgetId = '993524740462600192';
 
-  var desktop_height = $('.desktop').height();
-  
 
   $('.notification-center.icons-b').click(function() {
     $(this).toggleClass('selected');
@@ -114,16 +112,18 @@ function twitterEmbed() {
     }, 10);
     
     
-    setTimeout(function () {
-      if (!ios || android) {
-        $('.twitter-timeline').addClass('full');
-      } 
-      
-      if (ios || android) {
-        $('.twitter-timeline').css('height', desktop_height);
+    var number_of_calls = 0;
+    var iframe_height_interval = setInterval(iframeMobileHeight, 1);
+    function iframeMobileHeight() {
+     var desktop_height = $('.desktop').height();
+      $('iframe.twitter-timeline').css('height', desktop_height);
+      $('.timeline-Viewport').addClass('scroll-bar');
+
+      if (++number_of_calls === 500) {
+        window.clearInterval(iframe_height_interval);
       }
-    }, 1000);
-    
+    }
+
     
     setTimeout(function () {
       $('.embed-window').removeClass('cover');

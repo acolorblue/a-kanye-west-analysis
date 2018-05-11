@@ -1,9 +1,9 @@
 // ON MOBILE
-function onMobile() {
-  var portrait = window.orientation == 0;
-  var landscape = window.orientation == -90 || 90;
-  
+function userDevice() {
   if (ios || android) {
+    var portrait = window.orientation == 0;
+    var landscape = window.orientation == -90 || 90;
+    
     function orientationChange() {
       if (window.orientation == 0) {
         $('.text-editor').addClass('right-corner');
@@ -21,6 +21,17 @@ function onMobile() {
       });
     }
     orientationChange();
+  }
+
+  if(navigator.userAgent.indexOf("Firefox") != -1) {
+    var alert = document.createElement('div');
+        alert.className = 'alert ab-mid';
+        alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
+    
+    $('.menu-bar').remove();
+    $('.desktop').remove();
+    
+    $('.mac-os').append(alert);
   }
 }
 
@@ -258,27 +269,14 @@ function twitterEmbed() {
 
 // SOCIAL MEDIA VIDEO PLAY/PAUSE ON HOVER
 function socialMediaEmbedVideos() {
-  if (ios || android) {
-    $('.media-container.video').click(function () {
-      if ($('video', this)[0].paused) {
-        $(this).addClass('poster');
-        $('video', this)[0].play();
-        $(this).addClass('playing');
-      }
-      if (!$('video', this)[0].paused) {
-        $(this).removeClass('poster');
-        $('video', this)[0].play();
-        $(this).addClass('playing');
-      }
-    });
-  }
-   
   if (!ios || android) {
     $('.media-container.video')
       .on('mouseenter', function() {
+        $(this).click();
         $('video', this).get(0).play(); 
         $(this).removeClass('poster');
         $(this).addClass('playing');
+        console.log("enter");
     })
 
       .on('mouseleave', function() {
@@ -287,6 +285,26 @@ function socialMediaEmbedVideos() {
         $(this).removeClass('playing');
     })
   }
+  
+  if (ios || android) {
+    $('.media-container.video').click(function () {
+      if ($('video', this)[0].paused) {
+        $(this).removeClass('poster');
+        $('video', this)[0].play();
+        $(this).addClass('playing');
+      }
+      if (!$('video', this)[0].paused) {
+        $(this).addClass('poster');
+        $('video', this)[0].pause();
+        $(this).removeClass('playing');
+      }
+    });
+  }
+  
+  $('video').bind('ended', function(){
+    $(this).parents('.media-container.video').addClass('poster');
+    $(this).parents('.media-container.video').removeClass('playing');
+  })
 }
 
 
@@ -321,11 +339,12 @@ function closeTextEditor() {
 // SEARCH TEXT
 function searchTextEditor() {
   $('.text-editor .search').click(function() {
-    var value_input = document.createElement('input');
-    value_input.className = 'searchbar icons-b abs';
-    value_input.placeholder = "Spotlight Search";
+    var search_bar = document.createElement('input');
+        search_bar.className = 'searchbar icons-b abs';
+        search_bar.placeholder = "Spotlight Search";
 
-    var content_orig = $('.text-editor .content-container').html();
+    var original_content = $('.text-editor .content-container').html();
+    var original_media = $('.text-editor .twitter-embed').html();
 
     if ($('.searchbar').length == 1) {
       $('.searchbar').remove();
@@ -335,7 +354,7 @@ function searchTextEditor() {
 
     if ($('.searchbar').length == 0) {
       $('.text-editor .title').hide();
-      $('.main-controls').after(value_input);
+      $('.main-controls').after(search_bar);
     }
 
 
@@ -345,23 +364,35 @@ function searchTextEditor() {
       var entered_value_global = new RegExp(entered_value, "g");
       var no_value = entered_value == '';
 
-      $('.text-editor p').each(function() {
-        var paragraph_lower = $(this).text().toLowerCase();
-        var paragraph_highlight = paragraph_lower.replace(entered_value_global, '<span class=\'highlight\'>' + entered_value + '</span>');
+      $('.text-editor p, .text-editor .twitter-embed').each(function() {
+        var content_lowercase_text = $(this).text().toLowerCase();
+        var paragraph_highlight = content_lowercase_text.replace(entered_value_global, '<span class=\'highlight\'>' + entered_value + '</span>');
 
-        if (!paragraph_lower.includes(entered_value)) {
+        if (!content_lowercase_text.includes(entered_value)) {
           $(this).hide();
         }
 
-        if (paragraph_lower.includes(entered_value)) {
+        if (content_lowercase_text.includes(entered_value)) {
           $(this).show();
           $(this).html(paragraph_highlight);
         }
 
         if (no_value) {
-          $('.text-editor .content-container').html(content_orig);
+          $('.text-editor .content-container').html(original_content);
+          $('.text-editor .twitter-embed .media-container').remove();
+          $('.text-editor .twitter-embed').append(original_media);
         }
       });
+      
+//       $('.media').each(function() {
+//         if (entered_value.length > 0) {
+//           $('.media').hide();
+//         }
+        
+//         if (no_value) {
+//           $('.media').show();
+//         }
+//       });
     })
   })
 }
@@ -444,10 +475,10 @@ function sharePage() {
           $('.text-editor .title').text("A Kanye West Analysis");
           $('.text-editor .search').show();
           $('.text-editor .share').show();
-          $('.text-editor .content-container p').show();
+          $('.text-editor .content-container p, .twitter-embed').show();
         }
 
-        $('.text-editor .content-container p').hide();
+        $('.text-editor .content-container p, .twitter-embed').hide();
         $('.text-editor .content-container').prepend(image_preview);
         $('.text-editor .title').text("Save Image Then Confirm");
 
@@ -488,7 +519,7 @@ function sharePage() {
 // WINDOW ON LOAD
 window.onload = function() {
   disableBrowserReader();
-  onMobile();
+  userDevice();
   setInterval(function() {
     clock(); 
   }, 1000);

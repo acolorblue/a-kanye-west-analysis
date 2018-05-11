@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
 body {
   width: -webkit-fill-available;
   height: 100%;
@@ -36,11 +41,6 @@ body.loader.opacity::before {
   transition: inherit;
 }
 
-* {
-  box-sizing: border-box;
-  text-decoration: none;
-}
-
 a {
   color: unset;
 }
@@ -55,6 +55,20 @@ a {
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
+}
+
+.mac-os .alert {
+  width: -moz-fit-content;
+  height: 11%;
+  color: #000;
+  text-align: center;
+  background-color: #f6f5f6;
+  border-radius: 6px;
+  border: 1px solid #cbcbcb;
+  box-shadow: 0px 0px 5px #c7c6c6;
+  font-family: ahamonomonospaced;
+  padding: 4%;
+  overflow: hidden;
 }
 
 .mac-os .menu-bar {
@@ -569,10 +583,6 @@ a {
   margin: 2px;
 }
 
-.text-editor .content-container p {
-/*   margin: 0px; */
-}
-
 .text-editor .content-container p::selection { 
   background-color: #000;
   color: #fff; 
@@ -638,12 +648,14 @@ a {
 .twitter-embed .media {
   width: inherit;
   height: inherit;
+  border-radius: inherit;
   display: flex;
 }
 
 .twitter-embed .media video {
   width: 100%;
   height: 100%;
+  border-radius: inherit;
   position: relative;
 }
 
@@ -655,7 +667,7 @@ a {
   bottom: 0px;
 }
 
-.twitter-embed .media .controls .twitter-b {
+.twitter-embed .media .twitter-b {
   width: 40px;
   height: 40px;
   background-color: unset;
@@ -665,15 +677,10 @@ a {
   z-index: 2;
 }
 
-.twitter-embed .media .controls .twitter-b::before {
+.twitter-embed .media .twitter-b::before {
   background-size: 50%;
 }
 
-/* .twitter-embed .media .controls button a {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
-  display: block;
-} */
 
 
 

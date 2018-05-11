@@ -3,7 +3,7 @@ body {
   height: 100%;
 }
 
-/* body.loader::before {
+body.loader::before {
   content: '';
   width: inherit;
   height: inherit;
@@ -34,7 +34,7 @@ body {
 body.loader.opacity::before {
   opacity: 0;
   transition: inherit;
-} */
+}
 
 * {
   box-sizing: border-box;

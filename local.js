@@ -256,6 +256,43 @@ function twitterEmbed() {
 
 
 
+// SOCIAL MEDIA VIDEO PLAY/PAUSE ON HOVER
+function socialMediaEmbedVideos() {
+  if (ios || android) {
+    $('.media-container.video').click(function () {
+      if ($('video', this)[0].paused) {
+        $(this).addClass('poster');
+        $('video', this)[0].play();
+        $(this).addClass('playing');
+      }
+      if (!$('video', this)[0].paused) {
+        $(this).removeClass('poster');
+        $('video', this)[0].play();
+        $(this).addClass('playing');
+      }
+    });
+  }
+   
+  if (!ios || android) {
+    $('.media-container.video')
+      .on('mouseenter', function() {
+        $('video', this).get(0).play(); 
+        $(this).removeClass('poster');
+        $(this).addClass('playing');
+    })
+
+      .on('mouseleave', function() {
+        $('video', this).get(0).pause(); 
+        $(this).addClass('poster');
+        $(this).removeClass('playing');
+    })
+  }
+}
+
+
+
+
+
 // CLOSE TEXT EDITOR
 function closeTextEditor() {
   $('.text-editor .close').click(function() {
@@ -458,6 +495,7 @@ window.onload = function() {
   onFileClick();
   twitterEmbed();
   // automatedText('.content-container p', 2000, [''], 0, '-break-', 500);
+  socialMediaEmbedVideos();
   closeTextEditor();
   searchTextEditor();
   sharePage();

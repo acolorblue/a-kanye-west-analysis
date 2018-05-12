@@ -270,8 +270,9 @@ function twitterEmbed() {
 // SOCIAL MEDIA VIDEO PLAY/PAUSE ON HOVER
 function socialMediaEmbedVideos() {
   if (!ios || android) {
-    $('.media-container.video')
-      .on('mouseenter', function() {
+    $('.media-container.video').addClass('poster icons-b abs');
+    $(document)
+      .on('mouseenter', '.media-container.video', function() {
         $(this).click();
         $('video', this).get(0).play(); 
         $(this).removeClass('poster');
@@ -279,26 +280,30 @@ function socialMediaEmbedVideos() {
         console.log("enter");
     })
 
-      .on('mouseleave', function() {
+      .on('mouseleave', '.media-container.video', function() {
         $('video', this).get(0).pause(); 
         $(this).addClass('poster');
         $(this).removeClass('playing');
     })
   }
   
+  
   if (ios || android) {
-    $('.media-container.video').click(function () {
-      if ($('video', this)[0].paused) {
-        $(this).removeClass('poster');
-        $('video', this)[0].play();
-        $(this).addClass('playing');
+    $('video')[0].controls = true;
+    $(document)
+      .on('click touchstart', '.media-container.video', function() {
+        if ($('video', this)[0].paused) {
+          $(this).removeClass('poster');
+          $('video', this)[0].play();
+          $(this).addClass('playing');
       }
-      if (!$('video', this)[0].paused) {
-        $(this).addClass('poster');
-        $('video', this)[0].pause();
-        $(this).removeClass('playing');
+      
+        if (!$('video', this)[0].paused) {
+          $(this).addClass('poster icons-b abs');
+          $('video', this)[0].pause();
+          $(this).removeClass('playing');
       }
-    });
+    })
   }
   
   $('video').bind('ended', function(){
@@ -306,7 +311,6 @@ function socialMediaEmbedVideos() {
     $(this).parents('.media-container.video').removeClass('playing');
   })
 }
-
 
 
 
@@ -340,59 +344,67 @@ function closeTextEditor() {
 function searchTextEditor() {
   $('.text-editor .search').click(function() {
     var search_bar = document.createElement('input');
-        search_bar.className = 'searchbar icons-b abs';
+        search_bar.className = 'search-bar hide';
         search_bar.placeholder = "Spotlight Search";
 
     var original_content = $('.text-editor .content-container').html();
-    var original_media = $('.text-editor .twitter-embed').html();
+    var original_children = $('.text-editor .content-container').children();
+    
 
-    if ($('.searchbar').length == 1) {
-      $('.searchbar').remove();
-      $('.text-editor .title').show();
-      return;
+    if ($('.search-bar').length == 1) {
+      $('.search-bar').addClass('hide');
+      setTimeout(function() {
+        $('.search-bar').remove();
+        $('.text-editor .title').show();
+        return;
+      }, 100); 
     }
 
-    if ($('.searchbar').length == 0) {
-      $('.text-editor .title').hide();
+    if ($('.search-bar').length == 0) {
       $('.main-controls').after(search_bar);
+      $('.text-editor .title').hide();
+      setTimeout(function() {
+        $('.search-bar').removeClass('hide');
+      }, 100);
     }
 
 
     // SEARCH FUNCTION
-    $('.searchbar').keyup(function() {
+    $('.search-bar').keyup(function() {
       var entered_value = $(this).val().toLowerCase();
       var entered_value_global = new RegExp(entered_value, "g");
       var no_value = entered_value == '';
+      
 
-      $('.text-editor p, .text-editor .twitter-embed').each(function() {
-        var content_lowercase_text = $(this).text().toLowerCase();
-        var paragraph_highlight = content_lowercase_text.replace(entered_value_global, '<span class=\'highlight\'>' + entered_value + '</span>');
+      $('.text-editor p').each(function() {
+        var paragraph_original = $(this).text();
+        var paragraph_lowercase = paragraph_original.toLowerCase();
+        var paragraph_highlight = paragraph_lowercase.replace(entered_value_global, '<span class=\'highlight\'>' + entered_value + '</span>');
 
-        if (!content_lowercase_text.includes(entered_value)) {
+        if (!paragraph_lowercase.includes(entered_value)) {
           $(this).hide();
         }
 
-        if (content_lowercase_text.includes(entered_value)) {
+        if (paragraph_lowercase.includes(entered_value)) {
           $(this).show();
           $(this).html(paragraph_highlight);
         }
 
         if (no_value) {
           $('.text-editor .content-container').html(original_content);
-          $('.text-editor .twitter-embed .media-container').remove();
-          $('.text-editor .twitter-embed').append(original_media);
         }
+
       });
       
-//       $('.media').each(function() {
-//         if (entered_value.length > 0) {
-//           $('.media').hide();
-//         }
+      $('.twitter-embed').each(function() {
+        if (entered_value.length > 0) {
+          $(this).hide();
+        }
         
-//         if (no_value) {
-//           $('.media').show();
-//         }
-//       });
+        if (no_value) {
+          $(this).show();
+        }
+      });
     })
   })
 }
@@ -404,20 +416,24 @@ function searchTextEditor() {
 function sharePage() {
   $('.text-editor .share').click(function(event) {
     var social_share_container = document.createElement('div');
-    social_share_container.className = 'social-share-container ab-mid';
+    social_share_container.className = 'social-share-container hide ab-mid';
 
     var social_share = document.createElement('button');
 
     if ($('.social-share-container').length == 1) {
-      $('.social-share-container').remove();
-      return;
+      $('.social-share-container').addClass('hide');
+      
+      setTimeout(function() {
+        $('.social-share-container').remove();
+        return;
+      }, 100);
     }
 
     if ($('.social-share-container').length == 0) {
       $('.call-to-action-controls').append(social_share_container);
       setTimeout(function() {
-        social_share_container.className += ' show';
-      }, 1000);
+        $('.social-share-container').removeClass('hide');
+      }, 100);
 
       social_share.className = 'twitter-b icons-b abs';
       social_share_container.append(social_share.cloneNode(true));
@@ -463,9 +479,12 @@ function sharePage() {
           return;
         }
 
-        if ($('.searchbar').length == 1) {
-          $('.searchbar').remove();
-          $('.text-editor .title').show();
+        if ($('.search-bar').length == 1) {
+          $('.search-bar').addClass('hide');
+          setTimeout(function() {
+            $('.search-bar').remove();
+            $('.text-editor .title').show();
+          }, 100);
         }  
 
         function closeShare() {

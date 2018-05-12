@@ -498,7 +498,7 @@ a {
 
 
 /* SEARCH BAR */
-.searchbar {
+.search-bar {
   width: 50%;
   height: 26px;
   max-width: 240px;
@@ -509,12 +509,15 @@ a {
   background-color: #ffffff;
   text-align: center;
   display: flex;
-  margin: auto;
+  margin: 0px auto auto auto;
   z-index: 2;
   -webkit-appearance: none;
-  appearance: none;
+  transition: all 100ms ease-in-out;
 }
 
+.search-bar.hide {
+  margin: -35px auto auto auto;
+}
 
 
 
@@ -522,7 +525,9 @@ a {
 .social-share-container {
   width: fit-content;
   height: fit-content;
+/*   height: 86px; */
   border-radius: 5px;
+/*   overflow: hidden; */
   box-shadow: 0px 0px 6px #adadad;
   background-color: #ffffff;
   top: 26px;
@@ -530,6 +535,7 @@ a {
   left: auto;
   display: flex;
   flex-direction: column;
+  transition: all 100ms ease-in-out;
 }
 
 .social-share-container::before {
@@ -545,6 +551,10 @@ a {
   right: 0;
   left: 0;
   z-index: 1;
+}
+
+.social-share-container.hide {
+  transform: translate(0px, -45%) scale(0);
 }
 
 .social-share-container button {
@@ -641,7 +651,6 @@ a {
 }
 
 .twitter-embed .media-container.video.playing:before {
-  background-color: rgba(206, 206, 206, .2);
   background-image: none;
 }
 
@@ -659,12 +668,31 @@ a {
   position: relative;
 }
 
-/* VIDEO CONTROLS */
-.twitter-embed .media .controls {
-  width: 100%;
-  height: 20%;
+.twitter-embed .video.icons-b:before {
+    background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/…er%20Icons/Regular%20Mode%20Icons/Video%20Play/Play%20-%20Icon%20-%202.png');
+/*     background-image: url(https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Souncloud%20Play%20-%20Pause%20Button/Play%20White%20-%204.png); */
+  width: 40px;
+  height: 40px;
+  background-image: url(https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Souncloud%20Play%20-%20Pause%20Button/Play%20White%20-%204.png);
+  background-size: 50%;
+  right: auto;
+  bottom: auto;
+  z-index: 2;
+}
+
+.twitter-embed .media .play {
+  width: 40px;
+  height: 40px;
+  background-color: unset;
   position: absolute;
+  right: 0px;
   bottom: 0px;
+  z-index: 2;
+}
+
+.twitter-embed .media .play::before {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Souncloud%20Play%20-%20Pause%20Button/Play%20White%20-%204.png');
+  background-size: 50%;
 }
 
 .twitter-embed .media .twitter-b {

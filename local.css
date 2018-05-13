@@ -8,7 +8,7 @@ body {
   height: 100%;
 }
 
-body.loader::before {
+/* body.loader::before {
   content: '';
   width: inherit;
   height: inherit;
@@ -37,7 +37,7 @@ body.loader::before {
 
 body.loader.opacity::before {
   opacity: 0;
-}
+} */
 
 a {
   color: unset;
@@ -199,6 +199,10 @@ a {
 
 .mac-os .desktop .file * {
   user-select: none;
+}
+
+.mac-os .desktop .file a {
+  display: block;
 }
 
 .mac-os .file .thumbnail-container {
@@ -609,11 +613,14 @@ a {
 .text-editor .content-container p {
   color: #ffffff;
   text-shadow: 0px 0px 4px #000000;
+  word-break: break-word;
+  visibility: hidden;
 }
 
 .text-editor .content-container p.active::after {
   content: "|";
-  color: #000;
+  color: #000000;
+/*   color: #ffffff; */
 }
 
 .text-editor .content-container p::selection { 
@@ -625,7 +632,7 @@ a {
   margin-top: 0px;
 }
 
-.text-editor .content-container p:last-of-type {
+.text-editor .content-container p.conclusion {
   margin-bottom: 0px;
 }
 
@@ -646,14 +653,15 @@ a {
   border-radius: 10px;
   overflow: hidden;
   position: relative;
+  display: none;
 }
 
 .media-container.video.icons-b:before {
   width: 40px;
   height: 40px;
   background-size: 50%;
+  top: auto;
   right: auto;
-  bottom: auto;
   z-index: 2;
 }
 
@@ -690,7 +698,7 @@ a {
   position: relative;
 }
 
-.media-container .media .twitter-b {
+.media-container .post-link {
   width: 40px;
   height: 40px;
   background-color: unset;
@@ -700,7 +708,7 @@ a {
   z-index: 2;
 }
 
-.media-container .media .twitter-b::before {
+.media-container .post-link::before {
   background-size: 50%;
 }
 

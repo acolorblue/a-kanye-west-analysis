@@ -294,10 +294,9 @@ a {
   border-radius: 0px 5px 0px 0px;
   overflow: hidden;
   box-shadow: 0px 0px 5px #c7c6c6;
-  background-image: inherit;
-  background-size: inherit;
+  background-color: rgba(255, 255, 255, .9);
   font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
-  color: #ffffff;
+  color: #000000;
   letter-spacing: 0.1px;
   line-height: 1;
   top: auto;
@@ -307,7 +306,7 @@ a {
 }
 
 .screensaver-credits::before {
-  content: '';
+/*   content: '';
   width: 120%;
   height: 120%;
   display: block;
@@ -317,7 +316,7 @@ a {
   top: -10%;
   left: -10%;
   position: absolute;
-  margin: auto;
+  margin: auto; */
 }
 
 .screensaver-credits.show {
@@ -656,15 +655,6 @@ a {
   display: none;
 }
 
-.media-container.video.icons-b:before {
-  width: 40px;
-  height: 40px;
-  background-size: 50%;
-  top: auto;
-  right: auto;
-  z-index: 2;
-}
-
 .media-container.video.poster::after {
   content: '';
   width: -webkit-fill-available;
@@ -678,10 +668,6 @@ a {
   top: 0px;
   margin: auto;
   z-index: 1;
-}
-
-.media-container.video.playing::before {
-  background-image: none;
 }
 
 .media-container .media {
@@ -698,18 +684,30 @@ a {
   position: relative;
 }
 
-.media-container .post-link {
+.media-container .media .controls {
+  height: 40px;
+  bottom: auto;
+}
+
+.media-container .media .controls > * {
   width: 40px;
   height: 40px;
   background-color: unset;
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
   z-index: 2;
 }
 
-.media-container .post-link::before {
+.media-container .media .controls > *::before {
   background-size: 50%;
+}
+
+.media-container .media .controls .play {
+  right: auto;
+  bottom: auto;
+}
+
+.media-container .media .controls .post-link {
+  top: auto;
+  left: auto;
 }
 
 

@@ -498,24 +498,6 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
       }
       
       function media() {
-        var media_container = document.createElement('div');
-            media_container.className = 'media-container video';
-        
-        var media = document.createElement('div');
-            media.className = 'media';
-        
-        var video = document.createElement('video');
-            video.poster = 'https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Steve%20Jobs%20At%20NeXT.jpg';
-        
-        var source = document.createElement('source');
-            source.src = 'https://video.twimg.com/amplify_video/850921020156387328/vid/640x360/wkYv6pJhxC_E-ye1.mp4';
-            source.type = 'video/mp4';
-            
-        var post_link = document.createElement('a');
-            post_link.className = 'post-link twitter-b icons-b abs';
-            post_link.href = 'https://twitter.com/acolorblue/status/850923969846718464';
-            post_link.target = '_blank';
-        
         var show_media_interval = setInterval(showMedia, 1);
         function showMedia() {
           $('.content-container p').each(function() {  
@@ -530,6 +512,7 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
             if (paragraphs_text.includes(specified_text)) {
               setTimeout(function() {
                 $('.media-container').show();
+                // $('.media-container').click();
               }, 1000);
             }
           })
@@ -569,46 +552,55 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
 // MEDIA PLAYER
 function mediaPlayer() {
   if (!ios || android) {
-    $('.media-container.video').addClass('poster icons-b abs');
+    $('.media-container.video').addClass('poster');
+    var element_has_been_clicked = false;
+    
     $(document)
-      .on('mouseenter', '.media-container.video', function() {
-        $(this).click();
+      .on('click', '.media-container.video', function() {
+        element_has_been_clicked = true;
         $('video', this).get(0).play(); 
+        $(this).find('.play').hide();
         $(this).removeClass('poster');
-        $(this).addClass('playing');
-        console.log("enter");
-    })
-
+      })
+    
+      .on('mouseenter', '.media-container.video', function() {
+        if (element_has_been_clicked == true) {
+          $('video', this).get(0).play(); 
+          $(this).find('.play').hide();
+          $(this).removeClass('poster');
+        }
+      })
+      
       .on('mouseleave', '.media-container.video', function() {
         $('video', this).get(0).pause(); 
         $(this).addClass('poster');
-        $(this).removeClass('playing');
-    })
+        $(this).find('.play').show();
+      })
   }
   
   if (ios || android) {
+    $('.media-container.video').find('.controls').hide();
     $('video')[0].controls = true;
-    $('.media-container .post-link').hide();
+    
     $(document)
       .on('click touchstart', '.media-container.video', function() {
         if ($('video', this)[0].paused) {
+          $(this).find('.controls').hide();
           $(this).removeClass('poster');
           $('video', this)[0].play();
-          $(this).addClass('playing');
       }
       
         if (!$('video', this)[0].paused) {
-          $(this).addClass('poster icons-b abs');
           $('video', this)[0].pause();
-          $(this).removeClass('playing');
-          $('.media-container .post-link').show();
+          $(this).addClass('poster');
+          $(this).find('.controls').show();
       }
     })
   }
   
   $('video').bind('ended', function(){
     $(this).parents('.media-container.video').addClass('poster');
-    $(this).parents('.media-container.video').removeClass('playing');
+    $(this).parents('.media-container.video').find('.play').show();
     
     if ($('.conclusion').length == 0) {
       var conclusion = document.createElement('p');
@@ -639,6 +631,8 @@ window.onload = function() {
   closeTextEditor();
   searchTextEditor();
   sharePage();
-  automatedText('.content-container p', 2000, ['.conclusion'], 0, '-break-', 500);
+  setTimeout(function() {
+    automatedText('.content-container p', 2000, [], 0, '-break-', 800);
+  }, 3500); 
   mediaPlayer();
 }

@@ -68,8 +68,14 @@ function onFileClick() {
     if (!$(this).hasClass('selected')) {
       if ($(this).find('.title').text() == $('.text-editor .title').text()) {
         $(this).addClass('selected');
-        $('.text-editor').removeClass('scale-down');
+        $('.text-editor').removeClass('hide');
         $('.screensaver-credits').removeClass('show');
+      }
+      
+      if ($(this).hasClass('audio')) {
+        if ($(this).hasClass('soundcloud')) {
+          window.open('https://soundcloud.com/acolorblue/sets/a-synthesis-of-kanye-west/s-0DZX2');
+        }
       }
     }
   })
@@ -89,7 +95,7 @@ function onFileClick() {
 // TWITTER EMBED
 function twitterEmbed() {
   var embed_window = document.createElement('div');
-      embed_window.className = 'embed-window cover ab-mid';
+      embed_window.className = 'embed-window cover twitter-b icons-b abs ab-mid';
  
   var twitter_timeline = document.createElement('a');
       twitter_timeline.className = 'twitter-timeline';
@@ -137,7 +143,7 @@ function twitterEmbed() {
 
     
     setTimeout(function () {
-      $('.embed-window').removeClass('cover');
+      $('.embed-window').removeClass('cover twitter-b icons-b abs');
     }, 2000);
   })
 }
@@ -267,6 +273,21 @@ function twitterEmbed() {
 
 
 
+// TEXT EDITOR BACKGROUD IMAGE
+function textEditorBackgroundImage() {
+//   var device_width = $('.mac-os').width();
+//   var device_height = $('.mac-os').height();
+
+//   console.log(device_width);
+//   console.log(device_height);
+  
+//   $('.blurred').css('background-size', device_width, device_height);
+}
+
+
+
+
+
 // SOCIAL MEDIA VIDEO PLAY/PAUSE ON HOVER
 function socialMediaEmbedVideos() {
   if (!ios || android) {
@@ -290,6 +311,7 @@ function socialMediaEmbedVideos() {
   
   if (ios || android) {
     $('video')[0].controls = true;
+    $('.media .twitter-b').hide();
     $(document)
       .on('click touchstart', '.media-container.video', function() {
         if ($('video', this)[0].paused) {
@@ -302,6 +324,7 @@ function socialMediaEmbedVideos() {
           $(this).addClass('poster icons-b abs');
           $('video', this)[0].pause();
           $(this).removeClass('playing');
+          $('.media .twitter-b').show();
       }
     })
   }
@@ -318,16 +341,19 @@ function socialMediaEmbedVideos() {
 // CLOSE TEXT EDITOR
 function closeTextEditor() {
   $('.text-editor .close').click(function() {
-    $(this).parents('.text-editor').addClass('scale-down');
+    $(this).parents('.text-editor').addClass('hide');
     $('.file').removeClass('selected');
 
     var screensaver_credits = document.createElement('span');
-    screensaver_credits.className = 'screensaver-credits ab-mid';
-    screensaver_credits.innerHTML = "Sahel, Mali by Steve McCurry, 1986.";
+        screensaver_credits.className = 'screensaver-credits ab-mid';
+    
+    var screensaver_credits_text = document.createElement('span');
+        screensaver_credits_text.className = 'text';
+        screensaver_credits_text.innerHTML = "Sahel, Mali by Steve McCurry, 1986.";
 
     if ($('.screensaver-credits').length == 0) {
-      $('.desktop').prepend(screensaver_credits);
-
+      $('.mac-os').append(screensaver_credits);
+      screensaver_credits.append(screensaver_credits_text);
     }
 
     setTimeout(function () {
@@ -396,7 +422,7 @@ function searchTextEditor() {
 
       });
       
-      $('.twitter-embed').each(function() {
+      $('.media-container').each(function() {
         if (entered_value.length > 0) {
           $(this).hide();
         }
@@ -416,7 +442,7 @@ function searchTextEditor() {
 function sharePage() {
   $('.text-editor .share').click(function(event) {
     var social_share_container = document.createElement('div');
-    social_share_container.className = 'social-share-container hide ab-mid';
+    social_share_container.className = 'social-share-container hide';
 
     var social_share = document.createElement('button');
 
@@ -425,12 +451,22 @@ function sharePage() {
       
       setTimeout(function() {
         $('.social-share-container').remove();
+        $('button.search').show();
         return;
       }, 100);
     }
 
     if ($('.social-share-container').length == 0) {
-      $('.call-to-action-controls').append(social_share_container);
+      if ($('.search-bar').length == 1) {
+        $('.search-bar').addClass('hide');
+        setTimeout(function() {
+          $('.search-bar').remove();
+          $('.text-editor .title').show();
+        }, 100); 
+      }
+      
+      $('button.search').hide();
+      $('.call-to-action-controls').prepend(social_share_container);
       setTimeout(function() {
         $('.social-share-container').removeClass('hide');
       }, 100);
@@ -450,15 +486,15 @@ function sharePage() {
 
     // SOCIAL SHARE FUNCTION
     $('.social-share-container button').click(function(event) {
-      var poster = 'https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Poster1.jpg', 
+      var poster = 'https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Poster3.jpg', 
           webpage = 'https://acolorblue.co/a-kanye-west-analysis',
           line_break = '%0A',
           caption = "A Kanye West Analysis, by @acolorblue.",
           window_link;
 
       var image_preview = document.createElement('img');
-      image_preview.className = 'image-preview';
-      image_preview.src = poster;
+          image_preview.className = 'image-preview';
+          image_preview.src = poster;
 
       var action_button = document.createElement('button');
 
@@ -494,10 +530,10 @@ function sharePage() {
           $('.text-editor .title').text("A Kanye West Analysis");
           $('.text-editor .search').show();
           $('.text-editor .share').show();
-          $('.text-editor .content-container p, .twitter-embed').show();
+          $('.text-editor .content-container p, .media-container').show();
         }
 
-        $('.text-editor .content-container p, .twitter-embed').hide();
+        $('.text-editor .content-container p, .media-container').hide();
         $('.text-editor .content-container').prepend(image_preview);
         $('.text-editor .title').text("Save Image Then Confirm");
 
@@ -545,6 +581,7 @@ window.onload = function() {
   onFileClick();
   twitterEmbed();
   // automatedText('.content-container p', 2000, [''], 0, '-break-', 500);
+  textEditorBackgroundImage();
   socialMediaEmbedVideos();
   closeTextEditor();
   searchTextEditor();

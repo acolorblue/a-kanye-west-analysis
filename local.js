@@ -71,12 +71,6 @@ function onFileClick() {
         $('.text-editor').removeClass('hide');
         $('.screensaver-credits').removeClass('show');
       }
-      
-      if ($(this).hasClass('audio')) {
-        if ($(this).hasClass('soundcloud')) {
-          window.open('https://soundcloud.com/acolorblue/sets/a-synthesis-of-kanye-west/s-0DZX2');
-        }
-      }
     }
   })
 
@@ -151,128 +145,6 @@ function twitterEmbed() {
 
 
 
-// AUTOMATED TEXT
-// function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, breakWord, breakTime) {
-//   var booSkipAutomatedText = false;
-  
-//   if (selector == null || selector.trim() == '')
-//     return;
-
-//   timeBetweenText = (timeBetweenText == null ? 0 : timeBetweenText);
-//   timeBeforeStart = (timeBeforeStart == null ? 0 : timeBeforeStart);
-//   let textInfo = {
-//     selector: selector,
-//     timeBetweenText: timeBetweenText,
-//     exclude: exclude,
-//     timeBeforeStart, timeBeforeStart
-//   }
- 
-//   if (breakWord != null) {
-//     textInfo['breakWord'] = breakWord;
-//     textInfo['breakTime'] = (breakTime == null ? 0 : breakTime);
-//   }
- 
-//   setTimeout(function () {
-//     automaticText(textInfo);
-//   }, textInfo.timeBeforeStart);
-
-//   function automaticText(objTextInfo) {
-//     let $lines = document.querySelectorAll(objTextInfo.selector),
-//         lineContents = new Array(),
-//         lineCount = $lines.length;
-
-//     var skip = 0;
-
-//     for (var i = 0; i < lineCount; i++) {
-//       lineContents[i] = $lines[i].textContent;
-//       $lines[i].textContent = '';
-//       $lines[i].style.visibility = 'visible';
-//     }
-//     typeLine();
-
-//     function typeLine(idx) {
-//       idx == null && (idx = 0);
-//       var element = $lines[idx];
-//       var content = lineContents[idx];
-
-//       if (typeof content == "undefined") {
-//         let elClassSkip = document.getElementsByClassName('skip');
-//         let lengthClassSkip = elClassSkip.length;
-
-//         while (lengthClassSkip--) {
-//           elClassSkip[lengthClassSkip].style.display = 'none';
-//         }
-//         return;
-//       }
-
-//       var booExclude = false;
-
-//       if (objTextInfo.exclude != null) {
-//         element.classList.forEach(function (elementClass) {
-//           if (!booExclude) { booExclude = objTextInfo.exclude.includes(elementClass); }
-//         });
-
-//         booExclude = (booExclude || !booExclude && objTextInfo.exclude.includes(element.tagName.toLowerCase()));
-//       }
-
-//       var charIdx = 0;
-
-//       if (booExclude || booSkipAutomatedText) {
-//         element.textContent = content;
-//         typeLine(++idx);
-//       } else {
-//         content = '' + content + '';
-//         element.appendChild(document.createTextNode(' '));
-//         element.className += ' active';
-//         typeChar();
-//       }
-
-//       function typeChar() {
-
-//         var rand = (!booSkipAutomatedText ? Math.round(Math.random() * 60) + 25 : 0);
-
-//         setTimeout(function () {
-//           var char = content[charIdx++],
-//               booBreak = false;
-
-//           if (objTextInfo.breakWord != null && char == objTextInfo.breakWord.charAt(0) && content.substring(charIdx - 1, charIdx + objTextInfo.breakWord.length - 1) == objTextInfo.breakWord) {
-//             content = content.replace(objTextInfo.breakWord, '');
-//             char = content[charIdx - 1];
-//             booBreak = true;
-//           }
-//           setTimeout(function () {
-//             if (typeof char !== "undefined") {
-//               element.appendChild(document.createTextNode(char));
-//               typeChar();
-//             }
-//             else {
-//               element.classList.remove('active');
-//               setTimeout(function () {
-//                 typeLine(++idx);
-//               }, (!booSkipAutomatedText ? objTextInfo.timeBetweenText : 0));
-//             }
-//           }, (booBreak && !booSkipAutomatedText ? objTextInfo.breakTime : 0))
-//         }, rand);
-//       }
-//     }
-//   }
-  
-//   function updateScroll() {
-//     $('.content-container').scrollTop($('.content-container')[0].scrollHeight);
-//   }
-  
-//   setInterval(function() {
-//    updateScroll(); 
-//   }, 1);
-  
-//   $('button').click(function() {
-//     booSkipAutomatedText = true;
-//   })
-// } 
-
-
-
-
 // TEXT EDITOR BACKGROUD IMAGE
 function textEditorBackgroundImage() {
 //   var device_width = $('.mac-os').width();
@@ -282,57 +154,6 @@ function textEditorBackgroundImage() {
 //   console.log(device_height);
   
 //   $('.blurred').css('background-size', device_width, device_height);
-}
-
-
-
-
-
-// SOCIAL MEDIA VIDEO PLAY/PAUSE ON HOVER
-function socialMediaEmbedVideos() {
-  if (!ios || android) {
-    $('.media-container.video').addClass('poster icons-b abs');
-    $(document)
-      .on('mouseenter', '.media-container.video', function() {
-        $(this).click();
-        $('video', this).get(0).play(); 
-        $(this).removeClass('poster');
-        $(this).addClass('playing');
-        console.log("enter");
-    })
-
-      .on('mouseleave', '.media-container.video', function() {
-        $('video', this).get(0).pause(); 
-        $(this).addClass('poster');
-        $(this).removeClass('playing');
-    })
-  }
-  
-  
-  if (ios || android) {
-    $('video')[0].controls = true;
-    $('.media .twitter-b').hide();
-    $(document)
-      .on('click touchstart', '.media-container.video', function() {
-        if ($('video', this)[0].paused) {
-          $(this).removeClass('poster');
-          $('video', this)[0].play();
-          $(this).addClass('playing');
-      }
-      
-        if (!$('video', this)[0].paused) {
-          $(this).addClass('poster icons-b abs');
-          $('video', this)[0].pause();
-          $(this).removeClass('playing');
-          $('.media .twitter-b').show();
-      }
-    })
-  }
-  
-  $('video').bind('ended', function(){
-    $(this).parents('.media-container.video').addClass('poster');
-    $(this).parents('.media-container.video').removeClass('playing');
-  })
 }
 
 
@@ -568,6 +389,240 @@ function sharePage() {
   })
 }
 
+
+
+
+// AUTOMATED TEXT
+function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, breakWord, breakTime) {
+  var booSkipAutomatedText = false;
+  
+  var characters_without_break = $('.content-container p').text().replace(/-break-/g, "").length;
+
+  if (selector == null || selector.trim() == '')
+    return;
+
+  timeBetweenText = (timeBetweenText == null ? 0 : timeBetweenText);
+  timeBeforeStart = (timeBeforeStart == null ? 0 : timeBeforeStart);
+  let textInfo = {
+    selector: selector,
+    timeBetweenText: timeBetweenText,
+    exclude: exclude,
+    timeBeforeStart, timeBeforeStart
+  }
+ 
+  if (breakWord != null) {
+    textInfo['breakWord'] = breakWord;
+    textInfo['breakTime'] = (breakTime == null ? 0 : breakTime);
+  }
+ 
+  setTimeout(function () {
+    automaticText(textInfo);
+  }, textInfo.timeBeforeStart);
+
+  function automaticText(objTextInfo) {
+    let $lines = document.querySelectorAll(objTextInfo.selector),
+        lineContents = new Array(),
+        lineCount = $lines.length;
+
+    var skip = 0;
+
+    for (var i = 0; i < lineCount; i++) {
+      lineContents[i] = $lines[i].textContent;
+      $lines[i].textContent = '';
+      $lines[i].style.visibility = 'visible';
+    }
+    typeLine();
+
+    function typeLine(idx) {
+      idx == null && (idx = 0);
+      var element = $lines[idx];
+      var content = lineContents[idx];
+
+      if (typeof content == "undefined") {
+        let elClassSkip = document.getElementsByClassName('skip');
+        let lengthClassSkip = elClassSkip.length;
+
+        while (lengthClassSkip--) {
+          elClassSkip[lengthClassSkip].style.display = 'none';
+        }
+        return;
+      }
+
+      var booExclude = false;
+
+      if (objTextInfo.exclude != null) {
+        element.classList.forEach(function (elementClass) {
+          if (!booExclude) { booExclude = objTextInfo.exclude.includes(elementClass); }
+        });
+
+        booExclude = (booExclude || !booExclude && objTextInfo.exclude.includes(element.tagName.toLowerCase()));
+      }
+
+      var charIdx = 0;
+
+      if (booExclude || booSkipAutomatedText) {
+        element.textContent = content;
+        typeLine(++idx);
+      } else {
+        content = '' + content + '';
+        element.appendChild(document.createTextNode(' '));
+        element.className += ' active';
+        typeChar();
+      }
+
+      function typeChar() {
+        var rand = (!booSkipAutomatedText ? Math.round(Math.random() * 60) + 25 : 0);
+
+        setTimeout(function () {
+          var char = content[charIdx++],
+              booBreak = false;
+
+          if (objTextInfo.breakWord != null && char == objTextInfo.breakWord.charAt(0) && content.substring(charIdx - 1, charIdx + objTextInfo.breakWord.length - 1) == objTextInfo.breakWord) {
+            content = content.replace(objTextInfo.breakWord, '');
+            char = content[charIdx - 1];
+            booBreak = true;
+          }
+          setTimeout(function () {
+            if (typeof char !== "undefined") {
+              element.appendChild(document.createTextNode(char));
+              typeChar();
+            }
+            else {
+              element.classList.remove('active');
+              setTimeout(function () {
+                typeLine(++idx);
+              }, (!booSkipAutomatedText ? objTextInfo.timeBetweenText : 0));
+            }
+          }, (booBreak && !booSkipAutomatedText ? objTextInfo.breakTime : 0))
+        }, rand);
+      }
+      
+      function media() {
+        var media_container = document.createElement('div');
+            media_container.className = 'media-container video';
+        
+        var media = document.createElement('div');
+            media.className = 'media';
+        
+        var video = document.createElement('video');
+            video.poster = 'https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Steve%20Jobs%20At%20NeXT.jpg';
+        
+        var source = document.createElement('source');
+            source.src = 'https://video.twimg.com/amplify_video/850921020156387328/vid/640x360/wkYv6pJhxC_E-ye1.mp4';
+            source.type = 'video/mp4';
+            
+        var post_link = document.createElement('a');
+            post_link.className = 'post-link twitter-b icons-b abs';
+            post_link.href = 'https://twitter.com/acolorblue/status/850923969846718464';
+            post_link.target = '_blank';
+        
+        var show_media_interval = setInterval(showMedia, 1);
+        function showMedia() {
+          $('.content-container p').each(function() {  
+            if ($('.media-container').is(':visible')) {
+              window.clearInterval(show_media_interval);
+              return;
+            }
+            
+            var paragraphs_text = $(this).text();
+            var specified_text = "just show them clearly where they are going.";
+            
+            if (paragraphs_text.includes(specified_text)) {
+              setTimeout(function() {
+                $('.media-container').show();
+              }, 1000);
+            }
+          })
+        }
+        
+      }
+      media();
+      
+      function entireScroll() {
+        var number_of_calls = 0;
+        var update_scroll_interval = setInterval(updatingScroll, 1);
+
+        function updatingScroll() {
+          var current_characters_amount = $('.content-container p').text().length;
+          
+          if (current_characters_amount != characters_without_break) {
+            $('.content-container').scrollTop($('.content-container')[0].scrollHeight);
+          }
+
+          if (current_characters_amount == characters_without_break) {
+            window.clearInterval(update_scroll_interval);
+          }
+        }
+      }
+      entireScroll();
+    }
+  }
+  
+  $('button.cancel-automated-text').click(function() {
+    booSkipAutomatedText = true;
+  })
+}
+  
+
+
+
+// MEDIA PLAYER
+function mediaPlayer() {
+  if (!ios || android) {
+    $('.media-container.video').addClass('poster icons-b abs');
+    $(document)
+      .on('mouseenter', '.media-container.video', function() {
+        $(this).click();
+        $('video', this).get(0).play(); 
+        $(this).removeClass('poster');
+        $(this).addClass('playing');
+        console.log("enter");
+    })
+
+      .on('mouseleave', '.media-container.video', function() {
+        $('video', this).get(0).pause(); 
+        $(this).addClass('poster');
+        $(this).removeClass('playing');
+    })
+  }
+  
+  if (ios || android) {
+    $('video')[0].controls = true;
+    $('.media-container .post-link').hide();
+    $(document)
+      .on('click touchstart', '.media-container.video', function() {
+        if ($('video', this)[0].paused) {
+          $(this).removeClass('poster');
+          $('video', this)[0].play();
+          $(this).addClass('playing');
+      }
+      
+        if (!$('video', this)[0].paused) {
+          $(this).addClass('poster icons-b abs');
+          $('video', this)[0].pause();
+          $(this).removeClass('playing');
+          $('.media-container .post-link').show();
+      }
+    })
+  }
+  
+  $('video').bind('ended', function(){
+    $(this).parents('.media-container.video').addClass('poster');
+    $(this).parents('.media-container.video').removeClass('playing');
+    
+    if ($('.conclusion').length == 0) {
+      var conclusion = document.createElement('p');
+          conclusion.className = 'conclusion';
+          conclusion.innerHTML = "Will a part of Kanye always live in us due to everything he gave us and the tremendous influence he’s had on our culture?-break- Do black women still fight against the dehumanization of black men?-break-";
+
+      setTimeout(function() {
+        $('.media-container').after(conclusion);
+        automatedText('.content-container .conclusion', 2000, [], 0, '-break-', 1000);
+      }, 1500);
+    }
+  })
+}
+
  
 
 
@@ -580,10 +635,10 @@ window.onload = function() {
   }, 1000);
   onFileClick();
   twitterEmbed();
-  // automatedText('.content-container p', 2000, [''], 0, '-break-', 500);
   textEditorBackgroundImage();
-  socialMediaEmbedVideos();
   closeTextEditor();
   searchTextEditor();
   sharePage();
+  automatedText('.content-container p', 2000, ['.conclusion'], 0, '-break-', 500);
+  mediaPlayer();
 }

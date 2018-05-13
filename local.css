@@ -60,25 +60,29 @@ a {
 .mac-os .alert {
   width: -moz-fit-content;
   height: 11%;
+  border: 1px solid #cbcbcb;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px #c7c6c6;
+  background-color: #f6f5f6;
+  padding: 4%;
+  font-family: ahamonomonospaced;
   color: #000;
   text-align: center;
-  background-color: #f6f5f6;
-  border-radius: 6px;
-  border: 1px solid #cbcbcb;
-  box-shadow: 0px 0px 5px #c7c6c6;
-  font-family: ahamonomonospaced;
-  padding: 4%;
-  overflow: hidden;
 }
 
+
+
+
+/* MENU BAR */
 .mac-os .menu-bar {
   width: -webkit-fill-available;
   height: 22px;
+  box-shadow: inset 0 0 2.13px 0 rgba(0, 0, 0, 0.142), 0 0 0 0.71px #c1c1c1, 0 0 21.3px 0px rgba(0, 0, 0, 0.197);
   background-color: rgba(255, 255, 255, 0.9);
   background-image: inherit;
   background-size: inherit;
   font-size: 14px;
-  box-shadow: inset 0 0 2.13px 0 rgba(0, 0, 0, 0.142), 0 0 0 0.71px #c1c1c1, 0 0 21.3px 0px rgba(0, 0, 0, 0.197);
   position: relative;
   flex-shrink: 0;
 }
@@ -106,62 +110,61 @@ a {
   z-index: 1;
 }
 
-.mac-os .panel {
+.mac-os .menu-bar .panel {
   width: fit-content;
   height: inherit;
   display: inline-flex;
   position: absolute;
 }
 
-.mac-os .panel.left {
+.mac-os .menu-bar .panel.left {
   left: 10px;
 }
 
-.mac-os .panel.right {
+.mac-os .menu-bar .panel.right {
   right: 10px;
 }
 
-.mac-os .panel > * {
+.mac-os .menu-bar .panel > * {
   width: inherit;
   height: inherit;
+  padding: 0px 10px;
   font-size: unset;
   line-height: 1.6;
   display: inline-block;
   position: relative;
-  padding: 0px 10px;
 }
 
-.mac-os .panel > span {
+.mac-os .menu-bar .panel > span {
   user-select: none;
 }
 
-.mac-os .menu-bar .icons-b {
+.mac-os .menu-bar .panel > .icons-b {
   width: 35px;
 }
 
-.mac-os .menu-bar .icons-b::before {
+.mac-os .menu-bar .panel > .icons-b::before {
   width: inherit;
   height: inherit;
   background-size: 15px;
 }
 
-.mac-os .menu-bar .name {
+.mac-os .menu-bar .panel .name {
   font-weight: bold;
 }
 
-.mac-os .menu-bar .notification-center {
+.mac-os .menu-bar .panel .notification-center {
   width: 38px;
 }
 
-.mac-os .menu-bar .notification-center.icons-b::before {
+.mac-os .menu-bar .panel .notification-center.icons-b::before {
   background-size: 18px;
 }
 
-.mac-os .menu-bar .selected {
+.mac-os .menu-bar .panel .selected {
   background-color: #026cea;
   color: #ffffff;
 }
-
 
 
 
@@ -186,13 +189,10 @@ a {
 } 
 
 .mac-os .desktop .file {
-  width: 110px;
-  height: 110px;
   width: 130px;
   height: 130px;
   display: block;
   margin: 10px;
-/*   border: 1px solid #000000; */
 }
 
 .mac-os .desktop .file.selected {
@@ -218,20 +218,19 @@ a {
   background-color: rgba(0, 0, 0, .5);
 }
 
-.mac-os .file .thumbnail-container .file-type {
+.mac-os .file .thumbnail-container .file-type-indicator {
   width: fit-content;
   height: fit-content;
   font-size: 10px;
   text-shadow: 0px 0px 4px #545454;
 }
 
-.mac-os .file .thumbnail-container .file-type.icons-b {
+.mac-os .file .thumbnail-container .file-type-indicator.icons-b {
   width: 40px;
   height: 40px;
 }
 
-.mac-os .file .thumbnail-container .file-type.soundcloud::before {
-  background-image: url('https://cdn2.iconfinder.com/data/icons/minimalism/512/soundcloud.png');
+.mac-os .file.soundcloud .thumbnail-container .file-type-indicator::before {
   background-size: contain;
 }
 
@@ -245,13 +244,13 @@ a {
   margin: auto;
 }
 
-.mac-os .file.mp3 .thumbnail-container .thumbnail {
+.mac-os .file.audio .thumbnail-container .thumbnail {
   border: none;
 }
 
 .mac-os .file .title-container {
-  padding: 2px;
   overflow: hidden;
+  padding: 2px;
   margin-top: 4px;
 }
 
@@ -259,7 +258,6 @@ a {
   width: fit-content;
   height: fit-content;
   max-height: 16px;
-  display: block;
   display: -webkit-box;
   padding: 2px 4px;
   color: #ffffff;
@@ -291,22 +289,45 @@ a {
 .mac-os .screensaver-credits {
   width: 212px;
   height: 20px;
-  border-radius: 2px;
+  border-radius: 0px 5px 0px 0px;
+  overflow: hidden;
   box-shadow: 0px 0px 5px #c7c6c6;
-  background-color: #ffffff;
-  padding: 4px;
+  background-image: inherit;
+  background-size: inherit;
   font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
-  color: #747374;
+  color: #ffffff;
   letter-spacing: 0.1px;
   line-height: 1;
   top: auto;
   right: auto;
   left: -218px;
-  transition: all 200ms ease-in-out;
+  transition: all 100ms ease-in-out;
 }
 
-.mac-os .screensaver-credits.show {
+.screensaver-credits::before {
+  content: '';
+  width: 120%;
+  height: 120%;
+  display: block;
+  background-image: inherit;
+  background-size: inherit;
+  filter: blur(10px);
+  top: -10%;
+  left: -10%;
+  position: absolute;
+  margin: auto;
+}
+
+.screensaver-credits.show {
   left: 0px;
+}
+
+.screensaver-credits span {
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: 4px;
+  position: absolute;
 }
 
 
@@ -327,16 +348,10 @@ a {
 }
 
 .mac-os .embed-window.cover::before {
-  content: '';
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   background-color: inherit;
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Social%20Media%20Icons/Twitter%20-%20White%201.png');
   background-size: 10%;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: absolute;
-  opacity: 1;
   z-index: 1;
 }
 
@@ -355,22 +370,32 @@ a {
 
 
 /* TEXT EDITOR */
-.text-editor {
+.text-editor.blurred {
   width: 80%;
   height: 86%;
   max-width: 800px;
   max-height: 650px;
-  border: 1px solid #cbcbcb;
+  border: 1px solid #ffffff;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0px 0px 5px #c7c6c6;
-  background-color: #f6f5f6;
   display: flex;
   flex-direction: column;
-  opacity: 1;
+  background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Timbuktu%2C%20Mali/Steve%20McCurry%20-%20The%20Sahel%2C%201986.%20A%20group%20of%20young%20men%20pushes%20a%20plane%20out%20of%20the%20mud.jpg');
   z-index: 1;
-  transform: scale(1);
   transition: transform 200ms ease-in-out;
+}
+
+.text-editor.blurred::before {
+  content: '';
+  width: 120%;
+  height: 120%;
+  background-image: inherit;
+  background-size: inherit;
+  filter: blur(14px);
+  top: -10%;
+  left: -10%;
+  position: absolute;
 }
 
 .text-editor.right-corner {
@@ -381,7 +406,7 @@ a {
   left: auto;
 }
 
-.text-editor.scale-down {
+.text-editor.hide {
   transform: scale(0);
 }
 
@@ -392,15 +417,12 @@ a {
 .text-editor .header {
   width: 100%;
   height: 35px;
-  background-color: #f6f5f6;
   border-bottom: none;
   position: relative;
   flex-shrink: 0;
+  z-index: 1;
 }
 
-
-
-/* TOP BAR */
 .text-editor .header .top-bar {
   width: 98.598%;
   height: 20px;
@@ -418,21 +440,25 @@ a {
   display: inline-flex;
   right: auto;
   left: 8px;
-  flex-shrink: 0;
   margin: auto auto auto 8px;
+  flex-shrink: 0;
 }
 
 .text-editor .header .main-controls button {
   width: 12px;
   height: 12px;
+  border: 1px solid #ffffff !important;
   border-radius: 100%;
-  background-color: #acabac;
+  background-color: rgba(255, 255, 255, .1) !important;
   position: relative;
   margin: auto auto auto 0px;
 }
 
+.text-editor .header .main-controls .icons-b::before {
+  background-size: 6.58px;
+}
+
 .text-editor .header .main-controls .close.grey::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Apple%20Media%20File%20Controls/AMF%20-%20Close%20Icon/Close%20-%20Grey%203.png');
   opacity: 1;
 }
 
@@ -443,7 +469,8 @@ a {
 .text-editor .header .top-bar .title {
   width: fit-content;
   height: fit-content;
-  color: #747374;
+  color: #ffffff;
+  text-shadow: 0px 0px 4px #545454;
   text-align: center;
   font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
   letter-spacing: 0.1px;
@@ -468,14 +495,18 @@ a {
 .text-editor .header .call-to-action-controls > button {
   width: fit-content;
   height: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
   border-radius: 4px;
   background: linear-gradient(#fcfcfc, #f1f1f1);
-  position: relative;
-  margin: auto;
   padding: 2px 8px;
   color: #000;
-  margin-left: 4px;
+  position: relative;
+  margin: auto auto auto 4px;
+}
+
+.text-editor.blurred .header .call-to-action-controls > button {
+  background: rgba(255, 255, 255, .1);
+  color: #ffffff;
 }
 
 .text-editor .header .call-to-action-controls > button.icons-b {
@@ -484,14 +515,6 @@ a {
 
 .text-editor .header .call-to-action-controls > button.icons-b::before {
   background-size: 11px;
-}
-
-.text-editor .header .call-to-action-controls button.search::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/App%20Design%20References/Mac%20OS/Icons/Menu%20Bar%20Search/Search%20-%20Black%20-%204.png');
-}
-
-.text-editor .header .call-to-action-controls button.share::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Share%20Icon/Share%20-%20Old%20-%201.png');
 }
 
 
@@ -503,58 +526,55 @@ a {
   height: 26px;
   max-width: 240px;
   outline: none;
-  border: 2px solid #dddcdc;
+  border: 2px solid #ffffff;
   border-radius: 5px;
   box-shadow: 0px 0px 5px #c7c6c6;
   background-color: #ffffff;
   text-align: center;
   display: flex;
-  margin: 0px auto auto auto;
-  z-index: 2;
+  margin: auto;
   -webkit-appearance: none;
+  z-index: 2;
   transition: all 100ms ease-in-out;
 }
 
 .search-bar.hide {
-  margin: -35px auto auto auto;
+  transform: translate(0px, -120%);
 }
+
+.blurred .search-bar {
+  background-color: rgba(255, 255, 255, .1) !important;
+  color: #ffffff;
+}
+
+.blurred .search-bar::-webkit-input-placeholder {
+  color: white;
+}
+
 
 
 
 /* SOCIAL SHARE */
 .social-share-container {
-  width: fit-content;
-  height: fit-content;
-/*   height: 86px; */
+  width: 104px;
+  height: 30px;
   border-radius: 5px;
-/*   overflow: hidden; */
   box-shadow: 0px 0px 6px #adadad;
   background-color: #ffffff;
-  top: 26px;
-  bottom: auto;
-  left: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  position: relative;
+  z-index: 1;
   transition: all 100ms ease-in-out;
 }
 
-.social-share-container::before {
-  content: "";
-  width: fit-content;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 5px solid white;
-  display: block;
-  position: absolute;
-  margin: auto;
-  top: -5px;
-  right: 0;
-  left: 0;
-  z-index: 1;
+.blurred .social-share-container {
+  border: 1px solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 .social-share-container.hide {
-  transform: translate(0px, -45%) scale(0);
+  transform: translate(0px, -110%);
 }
 
 .social-share-container button {
@@ -563,16 +583,11 @@ a {
   border-radius: 5px;
   display: block;
   position: relative;
-  margin: 5.2px auto auto auto;
-  margin: 8px;
+  margin: auto;
 }
 
-.social-share-container button:first-of-type {
-  margin-bottom: 0px;
-}
-
-.social-share-container button:last-of-type {
-  margin-top: 0px;
+.blurred .social-share-container button {
+  background: rgba(255, 255, 255, .2);
 }
 
 
@@ -582,15 +597,25 @@ a {
 .text-editor .content-container {
   width: -webkit-fill-available;
   height: 100%;
-  border: 1px solid #cbcbcb;
+  border: 1px solid #ffffff;
   border-radius: 4px;
   overflow: scroll;
-  background-color: #ffffff;
   padding: 5%;
   font-family: ahamonomonospaced;
   font-size: 14px;
   line-height: 1.4;
+  position: relative;
   margin: 2px;
+}
+
+.text-editor .content-container p {
+  color: #ffffff;
+  text-shadow: 0px 0px 4px #000000;
+}
+
+.text-editor .content-container p.active::after {
+  content: "|";
+  color: #000;
 }
 
 .text-editor .content-container p::selection { 
@@ -606,40 +631,39 @@ a {
   margin-bottom: 0px;
 }
 
-.text-editor .content-container .twitter-video {
-  width: 100%;
-  height: auto;
-  min-width: auto !important;
-  margin: auto !important;
+.text-editor .content-container p span.highlight { 
+  width: fit-content;
+  height: fit-content;
+  background-color: #000;
+  color: #fff; 
 }
 
-.text-editor .content-container .twitter-embed {
+
+
+
+/* MEDIA  CONTAINER */
+.media-container {
   width: 100%;
   height: fit-content;
-  position: relative;
-}
-
-.text-editor .content-container .media-container {
-  width: -webkit-fill-available;
   border-radius: 10px;
   overflow: hidden;
   position: relative;
 }
 
-.twitter-embed .media-container.video::before {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
-  height: auto;
-  background-size: 38px;
+.media-container.video.icons-b:before {
+  width: 40px;
+  height: 40px;
+  background-size: 50%;
+  right: auto;
+  bottom: auto;
   z-index: 2;
 }
 
-.twitter-embed .media-container.video.poster::after {
+.media-container.video.poster::after {
   content: '';
   width: -webkit-fill-available;
   height: 100%;
   border-radius: inherit;
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Steve%20Jobs%20-%201.png');
   background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Steve%20Jobs%20At%20NeXT.jpg');
   background-size: cover;
   background-position: center;
@@ -650,37 +674,25 @@ a {
   z-index: 1;
 }
 
-.twitter-embed .media-container.video.playing:before {
+.media-container.video.playing::before {
   background-image: none;
 }
 
-.twitter-embed .media {
+.media-container .media {
   width: inherit;
   height: inherit;
   border-radius: inherit;
   display: flex;
 }
 
-.twitter-embed .media video {
+.media-container .media video {
   width: 100%;
   height: 100%;
   border-radius: inherit;
   position: relative;
 }
 
-.twitter-embed .video.icons-b:before {
-    background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/…er%20Icons/Regular%20Mode%20Icons/Video%20Play/Play%20-%20Icon%20-%202.png');
-/*     background-image: url(https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Souncloud%20Play%20-%20Pause%20Button/Play%20White%20-%204.png); */
-  width: 40px;
-  height: 40px;
-  background-image: url(https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Souncloud%20Play%20-%20Pause%20Button/Play%20White%20-%204.png);
-  background-size: 50%;
-  right: auto;
-  bottom: auto;
-  z-index: 2;
-}
-
-.twitter-embed .media .play {
+.media-container .media .twitter-b {
   width: 40px;
   height: 40px;
   background-color: unset;
@@ -690,43 +702,18 @@ a {
   z-index: 2;
 }
 
-.twitter-embed .media .play::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Souncloud%20Play%20-%20Pause%20Button/Play%20White%20-%204.png');
-  background-size: 50%;
-}
-
-.twitter-embed .media .twitter-b {
-  width: 40px;
-  height: 40px;
-  background-color: unset;
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  z-index: 2;
-}
-
-.twitter-embed .media .twitter-b::before {
+.media-container .media .twitter-b::before {
   background-size: 50%;
 }
 
 
 
 
-.text-editor .content-container p span.highlight { 
-  width: fit-content;
-  height: fit-content;
-  background-color: #000;
-  color: #fff; 
-}
-
-.active:after {
-  content: '|';
-  color: #000;
-}
-  
+/*  POSTER FOR INSTAGRAM SHARE  */
 .text-editor .content-container .image-preview {
   width: auto;
   height: 90%;
+  border-radius: inherit;
   display: block;
   margin: auto;
 }

@@ -18,7 +18,6 @@ body.loader::before {
   bottom: 0px;
   left: 0px;
   z-index: 9999;
-  transition: inherit;
   -webkit-animation: body-loader 4.5s linear;
 }
 
@@ -38,7 +37,6 @@ body.loader::before {
 
 body.loader.opacity::before {
   opacity: 0;
-  transition: inherit;
 }
 
 a {

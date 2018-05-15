@@ -8,7 +8,7 @@ body {
   height: 100%;
 }
 
-body.loader::before {
+/* body.loader::before {
   content: '';
   width: inherit;
   height: inherit;
@@ -37,7 +37,7 @@ body.loader::before {
 
 body.loader.opacity::before {
   opacity: 0;
-}
+} */
 
 a {
   color: unset;
@@ -605,20 +605,31 @@ a {
   font-family: ahamonomonospaced;
   font-size: 14px;
   line-height: 1.4;
+  word-break: break-word;
   position: relative;
   margin: 2px;
+  transition: all 100ms ease-in-out;
+}
+
+.text-editor .content-container .scroll-container {
+  width: inherit;
+  overflow: scroll;
 }
 
 .text-editor .content-container p {
+  line-height: 19px;
   color: #ffffff;
   text-shadow: 0px 0px 4px #000000;
   visibility: hidden;
 }
 
+.text-editor .content-container p.active {
+  padding-bottom: 19px;
+}
+
 .text-editor .content-container p.active::after {
   content: "|";
   color: #000000;
-/*   color: #ffffff; */
 }
 
 .text-editor .content-container p::selection { 

@@ -463,7 +463,9 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
       if (booExclude || booSkipAutomatedText) {
         element.textContent = content;
         typeLine(++idx);
-      } else {
+      } 
+      
+      else {
         content = '' + content + '';
         element.appendChild(document.createTextNode(' '));
         element.className += ' active';
@@ -512,7 +514,6 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
             if (paragraphs_text.includes(specified_text)) {
               setTimeout(function() {
                 $('.media-container').show();
-                // $('.media-container').click();
               }, 1000);
             }
           })
@@ -521,19 +522,26 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
       }
       media();
       
+      
       function entireScroll() {
-        var number_of_calls = 0;
+        var mac_os_height = $('.mac-os').height();
+        var content_container_height = $('.content-container').height();
+        var line_height = $('.scroll-container p').height();
+  
+        
         var update_scroll_interval = setInterval(updatingScroll, 1);
-
         function updatingScroll() {
-          var current_characters_amount = $('.content-container p').text().length;
-          
+          var current_scroll_container_height = $('.scroll-container').height();
+          var current_characters_amount = $('.scroll-container p').text().length;
+
           if (current_characters_amount != characters_without_break) {
-            $('.content-container').scrollTop($('.content-container')[0].scrollHeight);
+            $('.content-container').scrollTop($('.scroll-container')[0].scrollHeight); 
           }
 
           if (current_characters_amount == characters_without_break) {
-            window.clearInterval(update_scroll_interval);
+            setTimeout(function() {
+              window.clearInterval(update_scroll_interval);
+            }, 2000); 
           }
         }
       }

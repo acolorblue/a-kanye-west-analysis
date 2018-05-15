@@ -8,7 +8,7 @@ body {
   height: 100%;
 }
 
-/* body.loader::before {
+body.loader::before {
   content: '';
   width: inherit;
   height: inherit;
@@ -37,7 +37,7 @@ body {
 
 body.loader.opacity::before {
   opacity: 0;
-} */
+}
 
 a {
   color: unset;

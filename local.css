@@ -369,11 +369,13 @@ a {
 
 
 
-
+ 
 /* TEXT EDITOR */
 .text-editor.blurred {
   width: 80%;
   height: 86%;
+/*   height: 30%;
+  height: 38%; */
   max-width: 800px;
   max-height: 650px;
   border: 1px solid #ffffff;
@@ -595,7 +597,7 @@ a {
 
 
 /* CONTENT CONTAINER */
-.text-editor .content-container {
+.text-editor .parent-content-container {
   width: -webkit-fill-available;
   height: 100%;
   border: 1px solid #ffffff;
@@ -611,41 +613,41 @@ a {
   transition: all 100ms ease-in-out;
 }
 
-.text-editor .content-container .scroll-container {
+.text-editor .parent-content-container .scroll-container {
   width: inherit;
   overflow: scroll;
+/*   background-color: red; */
+/*   transition: all 100ms ease-in-out; */
 }
 
-.text-editor .content-container p {
+.text-editor .scroll-container p {
   line-height: 19px;
+/*   background-color: blue; */
   color: #ffffff;
   text-shadow: 0px 0px 4px #000000;
   visibility: hidden;
+  display: none;
 }
 
-.text-editor .content-container p.active {
-  padding-bottom: 19px;
-}
-
-.text-editor .content-container p.active::after {
-  content: "|";
-  color: #000000;
-}
-
-.text-editor .content-container p::selection { 
+.text-editor .scroll-container p::selection { 
   background-color: #000;
   color: #fff; 
 }
 
-.text-editor .content-container p:first-of-type {
+.text-editor .scroll-container p:first-of-type {
   margin-top: 0px;
 }
 
-.text-editor .content-container p.conclusion {
+.text-editor .scroll-container p.active::after {
+  content: "|";
+  color: #000000;
+}
+
+.text-editor .scroll-container p.conclusion {
   margin-bottom: 0px;
 }
 
-.text-editor .content-container p span.highlight { 
+.text-editor .scroll-container p span.highlight { 
   width: fit-content;
   height: fit-content;
   background-color: #000;
@@ -656,66 +658,99 @@ a {
 
 
 /* MEDIA  CONTAINER */
-.media-container {
+.text-editor .scroll-container .media-container {
   width: 100%;
   height: fit-content;
   border-radius: 10px;
   overflow: hidden;
+  background-color: #000000;
   position: relative;
+  cursor: pointer;
+  opacity: 0;
   display: none;
 }
 
-.media-container.video.poster::after {
-  content: '';
-  width: -webkit-fill-available;
-  height: 100%;
-  border-radius: inherit;
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Steve%20Jobs%20At%20NeXT.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 0px;
-  margin: auto;
-  z-index: 1;
-}
-
-.media-container .media {
+.text-editor .media-container .media {
   width: inherit;
   height: inherit;
   border-radius: inherit;
   display: flex;
+/*   opacity: 0; */
 }
 
-.media-container .media video {
+.text-editor .media img.poster {
+  width: -webkit-fill-available;
+  height: 100%;
+  border-radius: inherit;
+  position: absolute;
+  top: 0px;
+  margin: auto;
+  z-index: 2;
+}
+
+.text-editor .media video {
   width: 100%;
   height: 100%;
   border-radius: inherit;
   position: relative;
+/*   z-index: -1; */
 }
 
-.media-container .media .controls {
-  height: 40px;
-  bottom: auto;
+
+/* CONTROLS */
+.text-editor .media .controls {
+  transition: all 300ms ease-in-out;
 }
 
-.media-container .media .controls > * {
-  width: 40px;
-  height: 40px;
+.text-editor .media .controls > * {
   background-color: unset;
   z-index: 2;
 }
 
-.media-container .media .controls > *::before {
+
+/* CONTROLS - FULL */
+.text-editor .media .controls.full {
+  height: 100%;
+}
+
+.text-editor .media .controls.full > * {
+  width: 30%;
+  height: 30%;
+}
+
+.text-editor .media .controls.full > *::before {
+  background-size: contain;
+}
+
+.text-editor .media .controls.full .post-link {
+  display: none;
+}
+
+
+/* CONTROLS - CORNER */
+.text-editor .media .controls.corner {
+  height: 40px;
+  bottom: auto;
+/*   z-index: -1; */
+}
+
+.text-editor .media .controls.corner > * {
+  width: 40px;
+  height: 40px;
+}
+
+.text-editor .media .controls.corner > *::before {
   background-size: 50%;
 }
 
-.media-container .media .controls .play {
+.text-editor .media .controls.corner .play-pause {
+  border-radius: 0px 0px 10px 0px;
   right: auto;
   bottom: auto;
 }
 
-.media-container .media .controls .post-link {
+.text-editor .media .controls.corner .post-link {
+  border-radius: 0px 0px 0px 10px;
   top: auto;
   left: auto;
 }
@@ -724,7 +759,7 @@ a {
 
 
 /*  POSTER FOR INSTAGRAM SHARE  */
-.text-editor .content-container .image-preview {
+.text-editor .parent-content-container .image-preview {
   width: auto;
   height: 90%;
   border-radius: inherit;

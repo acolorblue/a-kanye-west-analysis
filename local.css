@@ -6,6 +6,7 @@
 body {
   width: -webkit-fill-available;
   height: 100%;
+  transition: all 3s ease-in-out;
 }
 
 body.loader::before {
@@ -18,7 +19,7 @@ body.loader::before {
   bottom: 0px;
   left: 0px;
   z-index: 9999;
-  -webkit-animation: body-loader 4.5s linear;
+  -webkit-animation: inherit;
 }
 
 @-webkit-keyframes body-loader {
@@ -289,12 +290,13 @@ a {
 
 /* SCREENSAVER CREDITS */
 .mac-os .screensaver-credits {
-  width: 212px;
+  width: auto;
   height: 20px;
   border-radius: 0px 5px 0px 0px;
   overflow: hidden;
   box-shadow: 0px 0px 5px #c7c6c6;
   background-color: rgba(255, 255, 255, .9);
+  padding: 4px;
   font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
   color: #000000;
   letter-spacing: 0.1px;
@@ -305,30 +307,8 @@ a {
   transition: all 100ms ease-in-out;
 }
 
-.screensaver-credits::before {
-/*   content: '';
-  width: 120%;
-  height: 120%;
-  display: block;
-  background-image: inherit;
-  background-size: inherit;
-  filter: blur(10px);
-  top: -10%;
-  left: -10%;
-  position: absolute;
-  margin: auto; */
-}
-
 .screensaver-credits.show {
   left: 0px;
-}
-
-.screensaver-credits span {
-  width: 100%;
-  height: 100%;
-  display: block;
-  padding: 4px;
-  position: absolute;
 }
 
 
@@ -374,44 +354,58 @@ a {
 .text-editor.blurred {
   width: 80%;
   height: 86%;
-/*   height: 30%;
-  height: 38%; */
-  max-width: 800px;
-  max-height: 650px;
   border: 1px solid #ffffff;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0px 0px 5px #c7c6c6;
   display: flex;
   flex-direction: column;
-  background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Timbuktu%2C%20Mali/Steve%20McCurry%20-%20The%20Sahel%2C%201986.%20A%20group%20of%20young%20men%20pushes%20a%20plane%20out%20of%20the%20mud.jpg');
   z-index: 1;
   transition: transform 200ms ease-in-out;
 }
 
-.text-editor.blurred::before {
-  content: '';
-  width: 120%;
-  height: 120%;
-  background-image: inherit;
-  background-size: inherit;
-  filter: blur(14px);
-  top: -10%;
-  left: -10%;
-  position: absolute;
+.text-editor.contained {
+  max-width: 800px;
+  max-height: 650px;
+  
+  min-width: 328px;
+  min-height: 20%;
 }
 
-.text-editor.right-corner {
-  max-width: 420px;
-  top: 10px;
-  right: 10px;
-  bottom: auto;
-  left: auto;
+.text-editor.portrait {
+  margin: 10px 10px auto auto;
 }
 
 .text-editor.hide {
-  transform: scale(0);
+  transform: scale(0); 
 }
+
+.text-editor ::selection { 
+  background-color: #000;
+  color: #fff; 
+}
+
+
+
+
+/* BLUR */
+.text-editor .blur {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Timbuktu%2C%20Mali/Steve%20McCurry%20-%20The%20Sahel%2C%201986.%20A%20group%20of%20young%20men%20pushes%20a%20plane%20out%20of%20the%20mud.jpg');
+  filter: blur(14px);
+  filter: blur(20px);
+  position: absolute;
+}
+
+.text-editor .blur.cover {
+  background-size: cover;
+}
+ 
+.text-editor .blur.contain {
+  background-size: contain;
+}
+
 
 
 
@@ -524,7 +518,7 @@ a {
 
 
 /* SEARCH BAR */
-.search-bar {
+.text-editor .search-bar {
   width: 50%;
   height: 26px;
   max-width: 240px;
@@ -541,16 +535,16 @@ a {
   transition: all 100ms ease-in-out;
 }
 
-.search-bar.hide {
+.text-editor .search-bar.hide {
   transform: translate(0px, -120%);
 }
 
-.blurred .search-bar {
+.text-editor.blurred .search-bar {
   background-color: rgba(255, 255, 255, .1) !important;
   color: #ffffff;
 }
 
-.blurred .search-bar::-webkit-input-placeholder {
+.text-editor.blurred .search-bar::-webkit-input-placeholder {
   color: white;
 }
 
@@ -558,7 +552,7 @@ a {
 
 
 /* SOCIAL SHARE */
-.social-share-container {
+.text-editor .social-share-container {
   width: 104px;
   height: 30px;
   border-radius: 5px;
@@ -571,16 +565,16 @@ a {
   transition: all 100ms ease-in-out;
 }
 
-.blurred .social-share-container {
+.text-editor.blurred .social-share-container {
   border: 1px solid #ffffff;
   background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-.social-share-container.hide {
+.text-editor .social-share-container.hide {
   transform: translate(0px, -110%);
 }
 
-.social-share-container button {
+.text-editor .social-share-container button {
   width: 18px;
   height: 18px;
   border-radius: 5px;
@@ -589,7 +583,7 @@ a {
   margin: auto;
 }
 
-.blurred .social-share-container button {
+.text-editor.blurred .social-share-container button {
   background: rgba(255, 255, 255, .2);
 }
 
@@ -618,6 +612,7 @@ a {
   overflow: scroll;
 /*   background-color: red; */
 /*   transition: all 100ms ease-in-out; */
+/*   display: none; */
 }
 
 .text-editor .scroll-container p {
@@ -627,11 +622,6 @@ a {
   text-shadow: 0px 0px 4px #000000;
   visibility: hidden;
   display: none;
-}
-
-.text-editor .scroll-container p::selection { 
-  background-color: #000;
-  color: #fff; 
 }
 
 .text-editor .scroll-container p:first-of-type {

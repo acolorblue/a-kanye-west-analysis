@@ -1,29 +1,39 @@
-// ON MOBILE
-function userDevice() {
+// DEVICE SPECIFICATIONS
+function userDeviceSpecifications() {
   if (ios || android) {
     var portrait = window.orientation == 0;
     var landscape = window.orientation == -90 || 90;
     
     function orientationChange() {
       if (window.orientation == 0) {
-        $('.text-editor').addClass('right-corner');
+        $('.text-editor').addClass('portrait');
+        $('.text-editor .blur').removeClass('cover').addClass('contain');
       }
+
       window.addEventListener('orientationchange', function() {
         if (window.orientation == 0) {
-          $('.text-editor').addClass('right-corner');
+          $('.text-editor').addClass('portrait');
+          $('.text-editor .blur').removeClass('cover').addClass('contain');
+          automatedScrollAdjustment();
           return;
         }
 
         if (window.orientation == -90 || 90) {
-          $('.text-editor').removeClass('right-corner');
+          $('.text-editor').removeClass('portrait');
+          $('.text-editor .blur').removeClass('contain').addClass('cover');
+          automatedScrollAdjustment();
           return;
         }
       });
     }
     orientationChange();
   }
-
-  if(navigator.userAgent.indexOf("Firefox") != -1) {
+  
+  if (desktop) {
+    $('.text-editor').addClass('contained');
+  }
+  
+  if (firefox) {
     var alert = document.createElement('div');
         alert.className = 'alert ab-mid';
         alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
@@ -33,54 +43,48 @@ function userDevice() {
     
     $('.mac-os').append(alert);
   }
+  
+  
+  
+  function disableBrowserReader() {
+    var meta_scale = document.createElement('meta');
+        meta_scale.name = 'viewport';
+        meta_scale.content = 'width=device-width, initial-scale=0.75';
+
+    if (safariMobile) {
+      $('body.loader').css('-webkit-animation', 'body-loader 4.5s linear');
+
+      setTimeout(function() {
+        $('meta').after(meta_scale);
+      }, 1300);
+
+      setTimeout(function() {
+        $('body').removeClass('loader');
+        $(window).trigger('resize');
+      }, 4500); 
+    }
+
+    if (twitterInAppBrowser || instagramInAppBrowser || chrome) {
+      $('body.loader').css('-webkit-animation', 'body-loader 1.6s linear');
+      $('meta').after(meta_scale);
+
+      setTimeout(function() {
+        $('body').removeClass('loader');
+      }, 1600); 
+    }
+  }
+  disableBrowserReader();
 }
 
 
 
 
-// DISABLE READER
-function disableBrowserReader() {
-  var meta_scale = document.createElement('meta');
-      meta_scale.name = 'viewport';
-      meta_scale.content = 'width=device-width, initial-scale=0.75';
-      
-  setTimeout(function() {
-    $('head').append(meta_scale);
-  }, 1300);
-  
-  
-  setTimeout(function() {
-    $('body').removeClass('loader');
-  }, 4500); 
-}
-    
-
-
- 
-// FILE CLICK 
-function onFileClick() {
-  $('.file')  
-    .on('click', function() {
-    if ($(this).hasClass('selected')) {
-      return;
-    }
-
-    if (!$(this).hasClass('selected')) {
-      if ($(this).find('.title').text() == $('.text-editor .title').text()) {
-        $(this).addClass('selected');
-        $('.text-editor').removeClass('hide');
-        $('.screensaver-credits').removeClass('show');
-      }
-    }
-  })
-
-    .on('contextmenu', function() {
-    return false;
-  })
-
-    .on('dragstart', function(event) { 
-    event.preventDefault(); 
-  }) 
+// DETECT SIZE CHANGE
+function detectSizeChange() {   
+  $('.mac-os').mutate('width height', function(el, info) {
+    textEditorBlur();
+    automatedScrollAdjustment();
+  });
 }
 
 
@@ -130,7 +134,7 @@ function twitterEmbed() {
       $('iframe.twitter-timeline').css('height', desktop_height);
       $('.timeline-Viewport').addClass('scroll-bar');
 
-      if (++number_of_calls === 500) {
+      if (++number_of_calls === 600) {
         window.clearInterval(iframe_height_interval);
       }
     }
@@ -140,20 +144,82 @@ function twitterEmbed() {
       $('.embed-window').removeClass('cover twitter-b icons-b abs');
     }, 2000);
   })
+}  
+
+
+ 
+
+// FILE CLICK 
+function onFileClick() {
+  $('.file')  
+    .on('click', function() {
+    if ($(this).hasClass('selected')) {
+      return;
+    }
+
+    if (!$(this).hasClass('selected')) {
+      if ($(this).find('.title').text() == $('.text-editor .title').text()) {
+        $(this).addClass('selected');
+        $('.text-editor').removeClass('hide');
+        $('.screensaver-credits').removeClass('show');
+      }
+    }
+  })
+
+    .on('contextmenu', function() {
+    return false;
+  })
+
+    .on('dragstart', function(event) { 
+    event.preventDefault(); 
+  }) 
 }
 
 
 
 
 // TEXT EDITOR BACKGROUD IMAGE
-function textEditorBackgroundImage() {
-//   var device_width = $('.mac-os').width();
-//   var device_height = $('.mac-os').height();
-
-//   console.log(device_width);
-//   console.log(device_height);
+function textEditorBlur() {
+  var mac_os_width,
+      mac_os_height,
+      menu_bar_height,
+      text_editor_margin_top,
+      text_editor_margin_left;
   
-//   $('.blurred').css('background-size', device_width, device_height);
+  function blurSizing() {
+    mac_os_width = $('.mac-os').width();
+    mac_os_height = $('.mac-os').height();
+    menu_bar_height = $('.menu-bar').height() + 'px';
+    text_editor_margin_top = $('.text-editor').css('marginTop');
+    text_editor_margin_left = $('.text-editor').css('marginLeft');
+
+    text_editor_margin_top = parseFloat(text_editor_margin_top) + parseInt(menu_bar_height);
+
+    $('.blur').css('width', mac_os_width);
+    $('.blur').css('height', mac_os_height);
+    $('.blur').css('top', '-' + text_editor_margin_top.toFixed(2) + 'px');
+    $('.blur').css('left', '-' + text_editor_margin_left);
+    
+    if (desktop) { 
+      if ($('.mac-os').width() < 1000) {
+        $('.text-editor .blur').removeClass('cover').addClass('contain');
+      }
+
+      if ($('.mac-os').width() >= 1000) {
+        $('.text-editor .blur').removeClass('contain').addClass('cover');
+      }
+    }
+  }
+  
+  if ($('body').hasClass('loader')) {
+    setTimeout(function() {
+      blurSizing();
+    }, 1500); 
+  }
+  
+  if (!$('body').hasClass('loader')) {
+    blurSizing();
+  }
 }
 
 
@@ -163,24 +229,25 @@ function textEditorBackgroundImage() {
 function closeTextEditor() {
   $('.text-editor .close').click(function() {
     $(this).parents('.text-editor').addClass('hide');
+    $('video').each(function () {
+      var video = $(this).get(0);
+      if (!video.paused) {
+        video.pause(); 
+      }
+    });
     $('.file').removeClass('selected');
 
     var screensaver_credits = document.createElement('span');
         screensaver_credits.className = 'screensaver-credits ab-mid';
+        screensaver_credits.innerHTML = "Sahel, Mali by Steve McCurry, 1986.";
     
-    var screensaver_credits_text = document.createElement('span');
-        screensaver_credits_text.className = 'text';
-        screensaver_credits_text.innerHTML = "Sahel, Mali by Steve McCurry, 1986.";
-
     if ($('.screensaver-credits').length == 0) {
       $('.mac-os').append(screensaver_credits);
-      screensaver_credits.append(screensaver_credits_text);
     }
-
+    
     setTimeout(function () {
       $('.screensaver-credits').addClass('show');
     }, 100);
-
   })
 }
 
@@ -209,7 +276,7 @@ function searchTextEditor() {
 
     if ($('.search-bar').length == 0) {
       if ($('p').hasClass('unread')) {
-        $('.text-editor .title').text("Nigga Finish Reading First Damn");
+        $('.text-editor .title').text("Nigga Finish Reading First");
         setTimeout(function() {
            $('.text-editor .title').text("A Kanye West Analysis");
         }, 2500);
@@ -249,7 +316,6 @@ function searchTextEditor() {
         if (no_value) {
           $('.text-editor .parent-content-container').html(original_content);
         }
-
       });
       
       $('.media-container').each(function() {
@@ -363,6 +429,7 @@ function sharePage() {
           $('.text-editor .search').show();
           $('.text-editor .share').show();
           $('.text-editor .scroll-container').show();
+          automatedScrollAdjustment();
         }
 
         
@@ -511,41 +578,13 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
         }, rand);
       }
       
-      
-      
-      
-      
-      
-      
-      function detectSizeChange() {   
-        var line_height = $('.scroll-container p').height();     
-        var margin_top = 0;
- 
-        $('.scroll-container').mutate('height', function(el, info) {
-          if ($('p').hasClass('unread')) {
-            function automatedScroll() {
-              if (!$('body').hasClass('loader')) {
-                var parent_container_height = $('.parent-content-container').height();
-              }
-
-              // $('.text-editor .title').text('scroll container height:' + $(el).height());
-              // $('.name').text('content container height:' + parent_container_height);
-
-              var current_scroll_container_height = $('.scroll-container').height();
-              if (current_scroll_container_height >= parent_container_height) {
-                margin_top = -current_scroll_container_height - -parent_container_height;
-                $('.scroll-container').css('margin-top', margin_top);
-              } 
-            }
-            automatedScroll();
-          }
-        });
-      }
-      detectSizeChange();
+      $('.scroll-container').mutate('height', function(el, info) {
+        automatedScrollAdjustment();
+      });
     }
   }
   
-  $('button.cancel-automated-text').click(function() {
+  $('button.search').click(function() {
     booSkipAutomatedText = true;
   })
 }
@@ -553,8 +592,8 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
 
 
 
-// MEDIA MAIN
-function mediaMain() {
+// MEDIA AFTER PARAGRAPHS
+function mediaAfterParagraphs() {
   var current_paragraph,
       after_first_block_interval,
       after_second_block_interval,
@@ -566,7 +605,6 @@ function mediaMain() {
   function afterFirstBlock() {
     $('p.active').each(function() {  
       current_paragraph = $(this).text();
-      console.log("first block");
       
       if (current_paragraph.includes("(A candidate backed by the KKK) he states,")) {
         window.clearInterval(after_first_block_interval);
@@ -575,7 +613,6 @@ function mediaMain() {
         $('.malcolm-x-on-goldwater').parents('.media-container').show();
         setTimeout(function() {
           if ($('.malcolm-x-on-goldwater').prev('img.poster')[0].complete == true) {
-            // $('.malcolm-x-on-goldwater').parents('.media').css('opacity', '1');
             $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
           }
         }, 1000);
@@ -595,7 +632,6 @@ function mediaMain() {
   function afterSecondBlock() {
     $('p.active').each(function() {
       current_paragraph = $(this).text();
-      console.log("second block");
       
       if (current_paragraph.includes("wrong approach, stating in his apology")) {
         window.clearInterval(after_second_block_interval);
@@ -604,7 +640,6 @@ function mediaMain() {
         $('.george-bush-apology').parents('.media-container').show();
         setTimeout(function() {
           if ($('.george-bush-apology').prev('img.poster')[0].complete == true) {
-            // $('.george-bush-apology').parents('.media').css('opacity', '1');
             $('.george-bush-apology').parents('.media-container').css('opacity', '1');
           }
         }, 1000);
@@ -624,7 +659,6 @@ function mediaMain() {
   function afterThirdBlock() {
     $('p').each(function() {
       current_paragraph = $(this).text();
-      console.log("third block");
       
       if (current_paragraph.includes("just show them clearly where they are going.")) {
         window.clearInterval(after_third_block_interval);
@@ -634,11 +668,10 @@ function mediaMain() {
           $('.steve-jobs-on-vision-articulation').parents('.media-container').show();
           setTimeout(function() {
             if ($('.steve-jobs-on-vision-articulation').prev('img.poster')[0].complete == true) {
-              // $('.steve-jobs-on-vision-articulation').parents('.media').css('opacity', '1');
               $('.steve-jobs-on-vision-articulation').parents('.media-container').css('opacity', '1');
             }        
           }, 1000); 
-        }, 500); 
+        }, 1000); 
         $('.steve-jobs-on-vision-articulation').bind('ended', function() {
             if ($('.fourth-block').hasClass('unread')) {
               setTimeout(function() {
@@ -655,7 +688,7 @@ function mediaMain() {
   function theEnd() {
     $('p').each(function() {
       current_paragraph = $(this).text();
-      console.log("Ending Funtions");
+      
       if (current_paragraph.includes("fight against the dehumanization of black men?")) {
         window.clearInterval(ending_interval);
         
@@ -692,6 +725,8 @@ function mediaMain() {
                 var post_link = media_container.find('.controls .post-link');
                 var paused =  video.paused;
                 var playing = !video.paused;
+                
+                enableInlineVideo(video);
 
                 if ($(media_container).hasClass('not-clicked')) {
                   $(media_container).removeClass('not-clicked');
@@ -721,7 +756,6 @@ function mediaMain() {
             }
           }
           videoActiveOnClick();
-          
         }, 4000);
       }
     })
@@ -733,15 +767,23 @@ function mediaMain() {
 
 // MEDIA PLAYER
 function mediaPlayer() { 
-  if (!ios || android) {
+  var media_container,
+      poster,
+      video,
+      controls,
+      post_link,
+      paused,
+      playing;
+  
+  if (desktop) {
     $(document).on('click', '.media-container.video', function(event) {
-      var media_container = $(this);
-      var poster = $(this).find('.poster');
-      var video = $(this).find('video')[0];
-      var controls = $(this).find('.controls');
-      var post_link = $(this).find('.controls .post-link');
-      var paused =  video.paused;
-      var playing = !video.paused;
+       media_container = $(this);
+       poster = $(this).find('.poster');
+       video = $(this).find('video')[0];
+       controls = $(this).find('.controls');
+       post_link = $(this).find('.controls .post-link');
+       paused =  video.paused;
+       playing = !video.paused;
 
       if ($(this).hasClass('not-clicked')) {
         $(this).removeClass('not-clicked');
@@ -769,17 +811,17 @@ function mediaPlayer() {
   
   
   if (ios || android) {
-    enableInlineVideo($('video')[0]);
-    
     if ($('p').hasClass('unread')) {
       $(document).on('touchstart', '.media-container.video', function(event) {
-        var media_container = $(this);
-        var poster = $(this).find('.poster');
-        var video = $(this).find('video')[0];
-        var controls = $(this).find('.controls');
-        var post_link = $(this).find('.controls .post-link');
-        var paused =  video.paused;
-        var playing = !video.paused;
+         media_container = $(this);
+         poster = $(this).find('.poster');
+         video = $(this).find('video')[0];
+         controls = $(this).find('.controls');
+         post_link = $(this).find('.controls .post-link');
+         paused =  video.paused;
+         playing = !video.paused;
+        
+        enableInlineVideo(video);
 
         if ($(this).hasClass('not-clicked')) {
           $(this).removeClass('not-clicked');
@@ -800,7 +842,6 @@ function mediaPlayer() {
         $(video).bind('ended', function() {
           poster.show();
           controls.show();
-          // post_link.show();
         })
         event.stopPropagation();
       })
@@ -809,24 +850,48 @@ function mediaPlayer() {
 }
 
 
+
+
+// AUTOMATED SCROLL READJUSTMENT
+function automatedScrollAdjustment() {
+  if (!$('body').hasClass('loader')) {
+    var parent_container_height = $('.parent-content-container').height();
+  }
+
+  if ($('p').hasClass('unread')) {
+    var margin_top = 0;
+    var current_scroll_container_height = $('.scroll-container').height();
+
+    if (current_scroll_container_height <= parent_container_height) {
+      $('.scroll-container').css('margin-top', margin_top);
+    } 
+
+    if (current_scroll_container_height >= parent_container_height) {
+      margin_top = -current_scroll_container_height - -parent_container_height;
+      $('.scroll-container').css('margin-top', margin_top);
+    } 
+  }
+}
+
  
+
 
 // WINDOW ON LOAD
 window.onload = function() {
-  disableBrowserReader();
-  userDevice();
+  userDeviceSpecifications();
+  detectSizeChange();
   setInterval(function() {
     clock(); 
   }, 1000);
   onFileClick();
   twitterEmbed();
-  textEditorBackgroundImage();
+  textEditorBlur();
   closeTextEditor();
   searchTextEditor();
   sharePage();
   setTimeout(function() {
     automatedText('.scroll-container .first-block', 2000, [''], 0, '-break-', 800);
   }, 3500); 
-  mediaMain();
+  mediaAfterParagraphs();
   mediaPlayer();
 }

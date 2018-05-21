@@ -1,88 +1,60 @@
-// DEVICE SPECIFICATIONS
-function userDeviceSpecifications() {
-  if (ios || android) {
-    var portrait = window.orientation == 0;
-    var landscape = window.orientation == -90 || 90;
-    
-    function orientationChange() {
-      if (window.orientation == 0) {
-        $('.text-editor').addClass('portrait');
-        $('.text-editor .blur').removeClass('cover').addClass('contain');
-      }
-
-      window.addEventListener('orientationchange', function() {
-        if (window.orientation == 0) {
-          $('.text-editor').addClass('portrait');
-          $('.text-editor .blur').removeClass('cover').addClass('contain');
-          automatedScrollAdjustment();
-          return;
-        }
-
-        if (window.orientation == -90 || 90) {
-          $('.text-editor').removeClass('portrait');
-          $('.text-editor .blur').removeClass('contain').addClass('cover');
-          automatedScrollAdjustment();
-          return;
-        }
-      });
-    }
-    orientationChange();
-  }
-  
-  if (desktop) {
-    $('.text-editor').addClass('contained');
-  }
-  
-  if (firefox) {
-    var alert = document.createElement('div');
-        alert.className = 'alert ab-mid';
-        alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
-    
-    $('.menu-bar').remove();
-    $('.desktop').remove();
-    
-    $('.mac-os').append(alert);
-  }
-  
-  
-  
-  function disableBrowserReader() {
-    var meta_scale = document.createElement('meta');
-        meta_scale.name = 'viewport';
-        meta_scale.content = 'width=device-width, initial-scale=0.75';
-
-    if (safariMobile) {
-      $('body.loader').css('-webkit-animation', 'body-loader 4.5s linear');
-
-      setTimeout(function() {
-        $('meta').after(meta_scale);
-      }, 1300);
-
-      setTimeout(function() {
-        $('body').removeClass('loader');
-        $(window).trigger('resize');
-      }, 4500); 
-    }
-
-    if (twitterInAppBrowser || instagramInAppBrowser || chrome) {
-      $('body.loader').css('-webkit-animation', 'body-loader 1.6s linear');
-      $('meta').after(meta_scale);
-
-      setTimeout(function() {
-        $('body').removeClass('loader');
-      }, 1600); 
-    }
-  }
-  disableBrowserReader();
+// DISABLE LOADER
+function removeLoader() {
+  setTimeout(function() {
+    $('body').removeClass('loader');
+  }, 3500); 
 }
 
 
 
 
+// DEVICE SPECIFICATIONS
+function userDeviceSpecifications() {
+  if (mobile) {
+    $('.text-editor').addClass('mobile');
+  }
+  
+  if (desktop) {
+    $('.text-editor').addClass('computer');
+
+    function draggableApp() {
+      manuallyCenter('.desktop', '.text-editor');
+      $('.text-editor').draggable({
+        handle: '.header',
+        cursor: 'move', 
+        drag: function(event, ui) {
+          textEditorBlur();
+        }
+      });
+    } 
+    draggableApp();
+  }
+   
+  if (firefox) {
+    var browser_alert = document.createElement('div');
+        browser_alert.className = 'alert ab-mid';
+        browser_alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
+    
+    $('.menu-bar').remove();
+    $('.desktop').remove();
+    $('.mac-os').append(browser_alert);
+  }
+}
+
+ 
+
+
 // DETECT SIZE CHANGE
 function detectSizeChange() {   
   $('.mac-os').mutate('width height', function(el, info) {
-    textEditorBlur();
+    if (desktop) {
+      manuallyCenter('.desktop', '.text-editor');
+    }
+    
+    if (mobile) {
+    }
+    
+    textEditorBlur(); 
     automatedScrollAdjustment();
   });
 }
@@ -90,135 +62,41 @@ function detectSizeChange() {
 
 
 
-// TWITTER EMBED
-function twitterEmbed() {
-  var embed_window = document.createElement('div');
-      embed_window.className = 'embed-window cover twitter-b icons-b abs ab-mid';
- 
-  var twitter_timeline = document.createElement('a');
-      twitter_timeline.className = 'twitter-timeline';
-      twitter_timeline.src = 'https://twitter.com/search?q=acolorblue';
-      twitter_timeline.dataset.widgetId = '993524740462600192';
-
-
-  $('.notification-center.icons-b').click(function() {
-    $(this).toggleClass('selected');
-    
-    if ($('.embed-window').length == 0) {
-      $('.desktop').prepend(embed_window);
-      embed_window.append(twitter_timeline);
-      
-      !function(d, s, id) {
-        var js,
-            fjs = d.getElementsByTagName(s)[0],
-            p = /^http:/.test(d.location)?'http':'https';
-
-        if (!d.getElementById(id)) { 
-          js = d.createElement(s); 
-          js.id = id; 
-          js.src = p + "://platform.twitter.com/widgets.js"; 
-          fjs.parentNode.insertBefore(js, fjs);
-        }
-      }
-      (document,"script","twitter-wjs");
-    } 
-    setTimeout(function () {
-      $(embed_window).toggleClass('slide-out');
-    }, 10);
-    
-    
-    var number_of_calls = 0;
-    var iframe_height_interval = setInterval(iframeMobileHeight, 1);
-    function iframeMobileHeight() {
-     var desktop_height = $('.desktop').height();
-      $('iframe.twitter-timeline').css('height', desktop_height);
-      $('.timeline-Viewport').addClass('scroll-bar');
-
-      if (++number_of_calls === 600) {
-        window.clearInterval(iframe_height_interval);
-      }
-    }
-
-    
-    setTimeout(function () {
-      $('.embed-window').removeClass('cover twitter-b icons-b abs');
-    }, 2000);
-  })
-}  
-
-
- 
-
-// FILE CLICK 
-function onFileClick() {
-  $('.file')  
-    .on('click', function() {
-    if ($(this).hasClass('selected')) {
-      return;
-    }
-
-    if (!$(this).hasClass('selected')) {
-      if ($(this).find('.title').text() == $('.text-editor .title').text()) {
-        $(this).addClass('selected');
-        $('.text-editor').removeClass('hide');
-        $('.screensaver-credits').removeClass('show');
-      }
-    }
-  })
-
-    .on('contextmenu', function() {
-    return false;
-  })
-
-    .on('dragstart', function(event) { 
-    event.preventDefault(); 
-  }) 
-}
-
-
-
 
 // TEXT EDITOR BACKGROUD IMAGE
 function textEditorBlur() {
-  var mac_os_width,
-      mac_os_height,
-      menu_bar_height,
-      text_editor_margin_top,
-      text_editor_margin_left;
-  
-  function blurSizing() {
-    mac_os_width = $('.mac-os').width();
-    mac_os_height = $('.mac-os').height();
-    menu_bar_height = $('.menu-bar').height() + 'px';
-    text_editor_margin_top = $('.text-editor').css('marginTop');
-    text_editor_margin_left = $('.text-editor').css('marginLeft');
+  var mac_os_width = $('.mac-os').width(),
+      mac_os_height = $('.mac-os').height(),
+      menu_bar_height = $('.menu-bar').height(),
+      text_editor_top = $('.text-editor').css('top'),
+      text_editor_left = $('.text-editor').css('left'),
+      text_editor_top = parseFloat(text_editor_top) + parseInt(menu_bar_height);
 
-    text_editor_margin_top = parseFloat(text_editor_margin_top) + parseInt(menu_bar_height);
+  $('.blur').css('width', mac_os_width);
+  $('.blur').css('height', mac_os_height);
+  $('.blur').css('top', '-' + text_editor_top.toFixed(2) + 'px');
+  $('.blur').css('left', '-' + text_editor_left);
 
-    $('.blur').css('width', mac_os_width);
-    $('.blur').css('height', mac_os_height);
-    $('.blur').css('top', '-' + text_editor_margin_top.toFixed(2) + 'px');
-    $('.blur').css('left', '-' + text_editor_margin_left);
-    
-    if (desktop) { 
-      if ($('.mac-os').width() < 1000) {
-        $('.text-editor .blur').removeClass('cover').addClass('contain');
-      }
-
-      if ($('.mac-os').width() >= 1000) {
-        $('.text-editor .blur').removeClass('contain').addClass('cover');
-      }
+  if (mobile) {
+    if (window.orientation == 0) {
+      $('.text-editor .blur').removeClass('cover').addClass('contain');
+      return;
     }
+
+    if (window.orientation == -90 || 90) {
+      $('.text-editor .blur').removeClass('contain').addClass('cover');
+      return;
+    } 
   }
-  
-  if ($('body').hasClass('loader')) {
-    setTimeout(function() {
-      blurSizing();
-    }, 1500); 
-  }
-  
-  if (!$('body').hasClass('loader')) {
-    blurSizing();
+
+  if (desktop) { 
+    if ($('.mac-os').width() < 1000) {
+      $('.text-editor .blur').removeClass('cover').addClass('contain');
+    }
+
+    if ($('.mac-os').width() >= 1000) {
+      $('.text-editor .blur').removeClass('contain').addClass('cover');
+    }
   }
 }
 
@@ -713,7 +591,7 @@ function mediaAfterParagraphs() {
           
           
           function videoActiveOnClick() {
-            if (ios || android) {
+            if (mobile) {
               $(document).off('touchstart', '.media-container.video');
               
               $(document).on('touchstart', '.play-pause', function(event) {
@@ -810,7 +688,7 @@ function mediaPlayer() {
   }
   
   
-  if (ios || android) {
+  if (mobile) {
     if ($('p').hasClass('unread')) {
       $(document).on('touchstart', '.media-container.video', function(event) {
          media_container = $(this);
@@ -873,18 +751,105 @@ function automatedScrollAdjustment() {
   }
 }
 
+
+
+
+// TWITTER EMBED
+function twitterEmbed() {
+  var embed_window = document.createElement('div');
+      embed_window.className = 'embed-window cover twitter-b icons-b abs ab-mid';
+ 
+  var twitter_timeline = document.createElement('a');
+      twitter_timeline.className = 'twitter-timeline';
+      twitter_timeline.src = 'https://twitter.com/search?q=acolorblue';
+      twitter_timeline.dataset.widgetId = '993524740462600192';
+
+
+  $('.notification-center.icons-b').click(function() {
+    $(this).toggleClass('selected');
+    
+    if ($('.embed-window').length == 0) {
+      $('.desktop').prepend(embed_window);
+      embed_window.append(twitter_timeline);
+      
+      !function(d, s, id) {
+        var js,
+            fjs = d.getElementsByTagName(s)[0],
+            p = /^http:/.test(d.location)?'http':'https';
+
+        if (!d.getElementById(id)) { 
+          js = d.createElement(s); 
+          js.id = id; 
+          js.src = p + "://platform.twitter.com/widgets.js"; 
+          fjs.parentNode.insertBefore(js, fjs);
+        }
+      }
+      (document,"script","twitter-wjs");
+    } 
+    setTimeout(function () {
+      $(embed_window).toggleClass('slide-out');
+    }, 10);
+    
+    
+    var number_of_calls = 0;
+    var iframe_height_interval = setInterval(iframeMobileHeight, 1);
+    function iframeMobileHeight() {
+     var desktop_height = $('.desktop').height();
+      $('iframe.twitter-timeline').css('height', desktop_height);
+      $('.timeline-Viewport').addClass('scroll-bar');
+
+      if (++number_of_calls === 600) {
+        window.clearInterval(iframe_height_interval);
+      }
+    }
+
+    
+    setTimeout(function () {
+      $('.embed-window').removeClass('cover twitter-b icons-b abs');
+    }, 2000);
+  })
+}  
+
+
+ 
+
+// FILE CLICK 
+function onFileClick() {
+  $('.file')  
+    .on('click', function() {
+    if ($(this).hasClass('selected')) {
+      return;
+    }
+
+    if (!$(this).hasClass('selected')) {
+      if ($(this).find('.title').text() == $('.text-editor .title').text()) {
+        $(this).addClass('selected');
+        $('.text-editor').removeClass('hide');
+        $('.screensaver-credits').removeClass('show');
+      }
+    }
+  })
+
+    .on('contextmenu', function() {
+    return false;
+  })
+
+    .on('dragstart', function(event) { 
+    event.preventDefault(); 
+  }) 
+}
+
  
 
 
 // WINDOW ON LOAD
 window.onload = function() {
+  removeLoader();
   userDeviceSpecifications();
   detectSizeChange();
   setInterval(function() {
     clock(); 
   }, 1000);
-  onFileClick();
-  twitterEmbed();
   textEditorBlur();
   closeTextEditor();
   searchTextEditor();
@@ -894,4 +859,6 @@ window.onload = function() {
   }, 3500); 
   mediaAfterParagraphs();
   mediaPlayer();
+  twitterEmbed();
+  onFileClick();
 }

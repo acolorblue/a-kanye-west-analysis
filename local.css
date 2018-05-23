@@ -1,54 +1,89 @@
-html {
+/* LOADER */
+.loader {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  background-color: #eeeeee;
+  font-family: ahamonomonospaced;
+  color: #f9f9f9;
+  text-shadow: 0px 0px 5px #8e8e8e;
+  font-size: 30px;
+  text-transform: uppercase;
+  line-height: 1;
+  text-align: center;
+  z-index: 9;
 }
 
-* {
-  box-sizing: border-box;
-  text-decoration: none;
-}
-
-body {
+.loader::before {
+  content: '';
   width: -webkit-fill-available;
   height: -webkit-fill-available;
-  margin: 0px;
+  background-color: inherit;
+  position: absolute;
+  top: inherit;
+  right: inherit;
+  bottom: inherit;
+  left: inherit;
+  z-index: 9;
+  transition: opacity 1s ease-in-out; 
 }
 
-body.loader::before {
-  content: '';
-  width: inherit;
-  height: inherit;
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  z-index: 9999;
-  -webkit-animation: body-loader 3.5s linear;
+.loader.hide {
+  -webkit-animation: loader-hide 3s linear 5s;
 }
 
-@-webkit-keyframes body-loader {
+.loader.hide::before {
+  opacity: 0; 
+}
+
+@-webkit-keyframes loader-hide {  
   0% {
-    background-color: #eeeeee;
-  }
-  
-  50% {
-    background-color: #eeeeee;
+    transform: translate(0%, 0%);
   }
 
   100% {
-    background-color: unset;
+    transform: translate(0%, -110%);
   }
 }
 
-body.loader.opacity::before {
-  opacity: 0;
+
+
+
+/* LOADER TEXS */
+.loader span {
+  height: fit-content;
 }
 
-a {
-  color: unset;
+.loader .countdown {
+  width: fit-content;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
+.loader .caption {
+  width: 400px;
+}
+
+
+
+
+/* LOADER MEME */
+.loader img.meme {
+  height: 300px;
+  top: auto;
+  bottom: -300px;
+  transition: bottom 1s ease-in-out;
+}
+
+.loader img.meme.show {
+  bottom: 0%;
+} 
+
+
+
+
+/* MAC OS */
 .mac-os {
   width: 100%;
   height: 100%;
@@ -61,7 +96,7 @@ a {
   flex-direction: column;
 }
 
-.mac-os .alert {
+.mac-os .browser-alert {
   width: -moz-fit-content;
   height: 11%;
   border: 1px solid #cbcbcb;
@@ -75,7 +110,7 @@ a {
   text-align: center;
 }
 
-
+  
 
 
 /* MENU BAR */
@@ -356,7 +391,7 @@ a {
 
  
 /* TEXT EDITOR */
-.text-editor.blurred {
+.text-editor {
   width: 80%;
   height: 86%;
   border: 1px solid #ffffff;
@@ -375,7 +410,6 @@ a {
   max-height: 650px;
   min-width: 328px;
   min-height: 20%;
-  
   right: auto;
 }
 
@@ -401,11 +435,9 @@ a {
 .text-editor .blur {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
-  background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Timbuktu%2C%20Mali/Steve%20McCurry%20-%20The%20Sahel%2C%201986.%20A%20group%20of%20young%20men%20pushes%20a%20plane%20out%20of%20the%20mud.jpg');
   filter: blur(14px);
   filter: blur(20px);
   position: absolute;
-/*   transition: all 10ms ease-in-out; */
 }
 
 .text-editor .blur.cover {
@@ -504,16 +536,11 @@ a {
   height: 20px;
   border: 1px solid #ffffff;
   border-radius: 4px;
-  background: linear-gradient(#fcfcfc, #f1f1f1);
+  background: rgba(255, 255, 255, .1);
   padding: 2px 8px;
-  color: #000;
+  color: #ffffff;
   position: relative;
   margin: auto auto auto 4px;
-}
-
-.text-editor.blurred .header .call-to-action-controls > button {
-  background: rgba(255, 255, 255, .1);
-  color: #ffffff;
 }
 
 .text-editor .header .call-to-action-controls > button.icons-b {
@@ -536,7 +563,8 @@ a {
   border: 2px solid #ffffff;
   border-radius: 5px;
   box-shadow: 0px 0px 5px #c7c6c6;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, .1) !important;
+  color: #ffffff;
   text-align: center;
   display: flex;
   margin: auto;
@@ -549,12 +577,7 @@ a {
   transform: translate(0px, -120%);
 }
 
-.text-editor.blurred .search-bar {
-  background-color: rgba(255, 255, 255, .1) !important;
-  color: #ffffff;
-}
-
-.text-editor.blurred .search-bar::-webkit-input-placeholder {
+.text-editor .search-bar::-webkit-input-placeholder {
   color: white;
 }
 
@@ -565,19 +588,15 @@ a {
 .text-editor .social-share-container {
   width: 104px;
   height: 30px;
+  border: 1px solid #ffffff;
   border-radius: 5px;
   box-shadow: 0px 0px 6px #adadad;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2) !important;
   display: flex;
   flex-direction: row;
   position: relative;
   z-index: 1;
   transition: all 100ms ease-in-out;
-}
-
-.text-editor.blurred .social-share-container {
-  border: 1px solid #ffffff;
-  background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 .text-editor .social-share-container.hide {
@@ -588,13 +607,10 @@ a {
   width: 18px;
   height: 18px;
   border-radius: 5px;
+  background: rgba(255, 255, 255, .2);
   display: block;
   position: relative;
   margin: auto;
-}
-
-.text-editor.blurred .social-share-container button {
-  background: rgba(255, 255, 255, .2);
 }
 
 
@@ -606,7 +622,8 @@ a {
   height: 100%;
   border: 1px solid #ffffff;
   border-radius: 4px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   padding: 5%;
   font-family: ahamonomonospaced;
   font-size: 14px;
@@ -626,6 +643,7 @@ a {
 }
 
 .text-editor .scroll-container p {
+  padding: 0px 2px;
   line-height: 19px;
 /*   background-color: blue; */
   color: #ffffff;
@@ -634,7 +652,7 @@ a {
   display: none;
 }
 
-.text-editor .scroll-container p:first-of-type {
+.text-editor .scroll-container .first-block p:first-of-type {
   margin-top: 0px;
 }
 
@@ -664,6 +682,7 @@ a {
   border-radius: 10px;
   overflow: hidden;
   background-color: #000000;
+  background-color: rgba(0, 0, 0, .1);
   position: relative;
   cursor: pointer;
   opacity: 0;
@@ -675,10 +694,9 @@ a {
   height: inherit;
   border-radius: inherit;
   display: flex;
-/*   opacity: 0; */
 }
 
-.text-editor .media img.poster {
+.text-editor .media img.thumbnail {
   width: -webkit-fill-available;
   height: 100%;
   border-radius: inherit;
@@ -693,7 +711,6 @@ a {
   height: 100%;
   border-radius: inherit;
   position: relative;
-/*   z-index: -1; */
 }
 
 
@@ -758,8 +775,40 @@ a {
 
 
 
+/* MEME */
+.text-editor .meme {
+  width: 300px;
+  border-radius: 5px;
+  margin: auto;
+  position: absolute;
+  right: -300px;
+  left: auto;
+  display: none;
+}
+
+.text-editor .meme.show {
+  -webkit-animation: meme-transition 4.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes meme-transition {
+  0% {
+    right: -300px;
+  }
+  
+  30%, 70% {
+    right: 5%;
+  }
+  
+  100% {
+    right: 100%;
+  }
+}
+
+
+
+
 /*  POSTER FOR INSTAGRAM SHARE  */
-.text-editor .parent-content-container .image-preview {
+.text-editor .parent-content-container .poster {
   width: auto;
   height: 90%;
   border-radius: inherit;

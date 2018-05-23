@@ -1,8 +1,35 @@
-// DISABLE LOADER
-function removeLoader() {
-  setTimeout(function() {
-    $('body').removeClass('loader');
-  }, 3500); 
+// LOADER
+function loader() {
+  var countdown_interval = setInterval(countdown, 1000);
+  function countdown() {
+    var countdown_origin = $('.countdown').text();
+  
+    
+    if (countdown_origin >= 0) {
+      countdown_origin--;
+      $('.countdown').text(countdown_origin);
+      
+      if (countdown_origin == 5) {
+        $('.loader').addClass('hide');
+      }
+      
+      if (countdown_origin == 2) {
+        $('.loader .meme').addClass('show');
+      }
+      
+      if (countdown_origin == 0) {
+        window.clearInterval(countdown_interval);
+        
+        setTimeout(function() {
+          $('.loader').remove();
+        }, 3000);
+        
+        setTimeout(function() {
+          automatedText('.scroll-container .first-block p', 2000, [''], 0, '-break-', 800);
+        }, 4500);
+      }
+    } 
+  }
 }
 
 
@@ -32,7 +59,7 @@ function userDeviceSpecifications() {
    
   if (firefox) {
     var browser_alert = document.createElement('div');
-        browser_alert.className = 'alert ab-mid';
+        browser_alert.className = 'browser-alert ab-mid';
         browser_alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
     
     $('.menu-bar').remove();
@@ -62,16 +89,19 @@ function detectSizeChange() {
 
 
 
-
 // TEXT EDITOR BACKGROUD IMAGE
 function textEditorBlur() {
-  var mac_os_width = $('.mac-os').width(),
+  var container_background_image = $('.mac-os').css('background-image'),
+      mac_os_width = $('.mac-os').width(),
       mac_os_height = $('.mac-os').height(),
       menu_bar_height = $('.menu-bar').height(),
       text_editor_top = $('.text-editor').css('top'),
       text_editor_left = $('.text-editor').css('left'),
       text_editor_top = parseFloat(text_editor_top) + parseInt(menu_bar_height);
-
+  
+  if (container_background_image != $('.blur').css('background-image')) {
+    $('.blur').css('background-image', container_background_image);
+  }
   $('.blur').css('width', mac_os_width);
   $('.blur').css('height', mac_os_height);
   $('.blur').css('top', '-' + text_editor_top.toFixed(2) + 'px');
@@ -262,15 +292,15 @@ function sharePage() {
 
     // SOCIAL SHARE FUNCTION
     $('.social-share-container button').click(function(event) {
-      var poster = 'https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Poster3.jpg', 
+      var poster_link = 'https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Poster3.jpg', 
           webpage = 'https://acolorblue.co/a-kanye-west-analysis',
           line_break = '%0A',
           caption = "A Kanye West Analysis, by @acolorblue.",
           window_link;
 
-      var image_preview = document.createElement('img');
-          image_preview.className = 'image-preview';
-          image_preview.src = poster;
+      var poster = document.createElement('img');
+          poster.className = 'poster';
+          poster.src = poster_link;
 
       var action_button = document.createElement('button');
 
@@ -287,7 +317,7 @@ function sharePage() {
           window_link = 'https://www.instagram.com/_u/acolorblue';
         }
 
-        if ($('.image-preview').length == 1) {
+        if ($('.poster').length == 1) {
           return;
         }
 
@@ -300,7 +330,7 @@ function sharePage() {
         }  
 
         function closeShare() {
-          image_preview.remove();
+          poster.remove();
           $('.text-editor .confirm-action').remove();
           $('.text-editor .cancel-action').remove();
           $('.text-editor .title').text("A Kanye West Analysis");
@@ -312,7 +342,7 @@ function sharePage() {
 
         
         $('.text-editor .scroll-container').hide();
-        $('.text-editor .parent-content-container').prepend(image_preview);
+        $('.text-editor .parent-content-container').prepend(poster);
         $('.text-editor .title').text("Save Image Then Confirm");
 
         $('.text-editor .search').hide();
@@ -335,7 +365,7 @@ function sharePage() {
 
 
       if ($(this).hasClass('tumblr-b')) {
-        window_link = 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=' + poster + '&caption=' + '<a href=\''+  webpage + '\'>' + '<i>' + caption.slice(0, 21) + '</i></a>' + caption.slice(21);
+        window_link = 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=' + poster_link + '&caption=' + '<a href=\''+  webpage + '\'>' + '<i>' + caption.slice(0, 21) + '</i></a>' + caption.slice(21);
 
         window.open(window_link);
       }
@@ -473,32 +503,44 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
 // MEDIA AFTER PARAGRAPHS
 function mediaAfterParagraphs() {
   var current_paragraph,
-      after_first_block_interval,
-      after_second_block_interval,
-      after_third_block_interval,
+      first_block_interval,
+      second_block_interval,
+      third_block_interval,
       ending_interval;
   
+  var meme = document.createElement('img');
+      meme.className = 'meme';
   
-  after_first_block_interval = setInterval(afterFirstBlock, 10);
-  function afterFirstBlock() {
+  
+  first_block_interval = setInterval(firstBlock, 10);
+  function firstBlock() {
     $('p.active').each(function() {  
       current_paragraph = $(this).text();
       
+      if (current_paragraph.includes("for massa to give us something to do.")) {
+        $('.you-dont-think').show();
+        $('.you-dont-think').addClass('show');
+        
+        setTimeout(function() {
+          $('.you-dont-think').remove();
+        }, 4500); 
+      }
+      
       if (current_paragraph.includes("(A candidate backed by the KKK) he states,")) {
-        window.clearInterval(after_first_block_interval);
+        window.clearInterval(first_block_interval);
         
         $('.malcolm-x-on-goldwater')[0].load();
         $('.malcolm-x-on-goldwater').parents('.media-container').show();
         setTimeout(function() {
-          if ($('.malcolm-x-on-goldwater').prev('img.poster')[0].complete == true) {
+          if ($('.malcolm-x-on-goldwater').prev('img.thumbnail')[0].complete == true) {
             $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
           }
         }, 1000);
         $('.malcolm-x-on-goldwater').bind('ended', function() {
             setTimeout(function() {
-              if ($('.second-block').hasClass('unread')) {
-                automatedText('.scroll-container .second-block', 2000, [], 0, '-break-', 1000);
-                after_second_block_interval = setInterval(afterSecondBlock, 10);
+              if ($('.second-block p').hasClass('unread')) {
+                automatedText('.scroll-container .second-block p', 2000, [], 0, '-break-', 1000);
+                second_block_interval = setInterval(secondBlock, 10);
               }
             }, 2000);
           })
@@ -507,25 +549,25 @@ function mediaAfterParagraphs() {
   }
   
 
-  function afterSecondBlock() {
+  function secondBlock() {
     $('p.active').each(function() {
       current_paragraph = $(this).text();
       
       if (current_paragraph.includes("wrong approach, stating in his apology")) {
-        window.clearInterval(after_second_block_interval);
+        window.clearInterval(second_block_interval);
         
         $('.george-bush-apology')[0].load();
         $('.george-bush-apology').parents('.media-container').show();
         setTimeout(function() {
-          if ($('.george-bush-apology').prev('img.poster')[0].complete == true) {
+          if ($('.george-bush-apology').prev('img.thumbnail')[0].complete == true) {
             $('.george-bush-apology').parents('.media-container').css('opacity', '1');
           }
         }, 1000);
         $('.george-bush-apology').bind('ended', function() {
-            if ($('.third-block').hasClass('unread')) {
+            if ($('.third-block p').hasClass('unread')) {
               setTimeout(function() {
-                automatedText('.scroll-container .third-block', 2000, [], 0, '-break-', 1000);
-                after_third_block_interval = setInterval(afterThirdBlock, 10);
+                automatedText('.scroll-container .third-block p', 2000, [], 0, '-break-', 1000);
+                third_block_interval = setInterval(thirdBlock, 10);
               }, 2000);
             }
           })
@@ -534,27 +576,27 @@ function mediaAfterParagraphs() {
   }
   
   
-  function afterThirdBlock() {
+  function thirdBlock() {
     $('p').each(function() {
       current_paragraph = $(this).text();
       
       if (current_paragraph.includes("just show them clearly where they are going.")) {
-        window.clearInterval(after_third_block_interval);
+        window.clearInterval(third_block_interval);
         
         setTimeout(function() {
           $('.steve-jobs-on-vision-articulation')[0].load();
           $('.steve-jobs-on-vision-articulation').parents('.media-container').show();
           setTimeout(function() {
-            if ($('.steve-jobs-on-vision-articulation').prev('img.poster')[0].complete == true) {
+            if ($('.steve-jobs-on-vision-articulation').prev('img.thumbnail')[0].complete == true) {
               $('.steve-jobs-on-vision-articulation').parents('.media-container').css('opacity', '1');
             }        
           }, 1000); 
         }, 1000); 
         $('.steve-jobs-on-vision-articulation').bind('ended', function() {
-            if ($('.fourth-block').hasClass('unread')) {
+            if ($('.fourth-block p').hasClass('unread')) {
               setTimeout(function() {
-                automatedText('.scroll-container .fourth-block', 2000, [], 0, '-break-', 1000);
-                ending_interval = setInterval(theEnd, 10);
+                automatedText('.scroll-container .fourth-block p', 2000, [], 0, '-break-', 1000);
+                ending_interval = setInterval(fourthBlock, 10);
               }, 2000);
             }
           })
@@ -563,7 +605,7 @@ function mediaAfterParagraphs() {
   }
   
   
-  function theEnd() {
+  function fourthBlock() {
     $('p').each(function() {
       current_paragraph = $(this).text();
       
@@ -596,7 +638,7 @@ function mediaAfterParagraphs() {
               
               $(document).on('touchstart', '.play-pause', function(event) {
                 var media_container = $(this).parents('.media-container');
-                var poster = media_container.find('.poster');
+                var thumbnail = media_container.find('.thumbnail');
                 var video = media_container.find('video')[0];
                 var controls = media_container.find('.controls');
                 var play_pause = media_container.find('.controls .play-pause');
@@ -611,7 +653,7 @@ function mediaAfterParagraphs() {
                 }
 
                 if (paused) {
-                  poster.hide();
+                  thumbnail.hide();
                   video.play(); 
                   play_pause.removeClass('play');
                   play_pause.addClass('pause');
@@ -619,13 +661,13 @@ function mediaAfterParagraphs() {
 
                 else if (playing) {
                   video.pause(); 
-                  poster.show();
+                  thumbnail.show();
                   play_pause.removeClass('pause');
                   play_pause.addClass('play');
                 }
 
                 $(video).bind('ended', function() {
-                  poster.show();
+                  thumbnail.show();
                   play_pause.removeClass('pause');
                   play_pause.addClass('play');
                 })
@@ -646,7 +688,7 @@ function mediaAfterParagraphs() {
 // MEDIA PLAYER
 function mediaPlayer() { 
   var media_container,
-      poster,
+      thumbnail,
       video,
       controls,
       post_link,
@@ -656,7 +698,7 @@ function mediaPlayer() {
   if (desktop) {
     $(document).on('click', '.media-container.video', function(event) {
        media_container = $(this);
-       poster = $(this).find('.poster');
+       thumbnail = $(this).find('.thumbnail');
        video = $(this).find('video')[0];
        controls = $(this).find('.controls');
        post_link = $(this).find('.controls .post-link');
@@ -669,18 +711,18 @@ function mediaPlayer() {
 
       if (paused) {
         controls.hide();
-        poster.hide();
+        thumbnail.hide();
         video.play(); 
       }
 
       else if (playing) {
         video.pause(); 
-        poster.show();
+        thumbnail.show();
         controls.show();
       }
 
       $(video).bind('ended', function() {
-        poster.show();
+        thumbnail.show();
         controls.show();
       })
       event.stopPropagation();
@@ -692,7 +734,7 @@ function mediaPlayer() {
     if ($('p').hasClass('unread')) {
       $(document).on('touchstart', '.media-container.video', function(event) {
          media_container = $(this);
-         poster = $(this).find('.poster');
+         thumbnail = $(this).find('.thumbnail');
          video = $(this).find('video')[0];
          controls = $(this).find('.controls');
          post_link = $(this).find('.controls .post-link');
@@ -707,18 +749,18 @@ function mediaPlayer() {
 
         if (paused) {
           controls.hide();
-          poster.hide();
+          thumbnail.hide();
           video.play(); 
         }
 
         else if (playing) {
           video.pause(); 
-          poster.show();
+          thumbnail.show();
           controls.show();
         }
 
         $(video).bind('ended', function() {
-          poster.show();
+          thumbnail.show();
           controls.show();
         })
         event.stopPropagation();
@@ -732,9 +774,7 @@ function mediaPlayer() {
 
 // AUTOMATED SCROLL READJUSTMENT
 function automatedScrollAdjustment() {
-  if (!$('body').hasClass('loader')) {
-    var parent_container_height = $('.parent-content-container').height();
-  }
+  var parent_container_height = $('.parent-content-container').height();
 
   if ($('p').hasClass('unread')) {
     var margin_top = 0;
@@ -822,7 +862,7 @@ function onFileClick() {
     }
 
     if (!$(this).hasClass('selected')) {
-      if ($(this).find('.title').text() == $('.text-editor .title').text()) {
+      if ($(this).find('.title').text() == $('.text-editor .title').text() || $('.poster').length == 1) {
         $(this).addClass('selected');
         $('.text-editor').removeClass('hide');
         $('.screensaver-credits').removeClass('show');
@@ -844,7 +884,7 @@ function onFileClick() {
 
 // WINDOW ON LOAD
 window.onload = function() {
-  removeLoader();
+  loader();
   userDeviceSpecifications();
   detectSizeChange();
   setInterval(function() {
@@ -854,9 +894,9 @@ window.onload = function() {
   closeTextEditor();
   searchTextEditor();
   sharePage();
-  setTimeout(function() {
-    automatedText('.scroll-container .first-block', 2000, [''], 0, '-break-', 800);
-  }, 3500); 
+  // setTimeout(function() {
+    // automatedText('.scroll-container .first-block p', 2000, [''], 0, '-break-', 800);
+  // }, 3500); 
   mediaAfterParagraphs();
   mediaPlayer();
   twitterEmbed();

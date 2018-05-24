@@ -639,7 +639,6 @@
   overflow: scroll;
 /*   background-color: red; */
 /*   transition: all 100ms ease-in-out; */
-/*   display: none; */
 }
 
 .text-editor .scroll-container p {
@@ -659,6 +658,10 @@
 .text-editor .scroll-container p.active::after {
   content: "|";
   color: #000000;
+}
+
+.text-editor .scroll-container p.kanye-wiz-tweets:first-of-type {
+  padding-right: 0px;
 }
 
 .text-editor .scroll-container p.conclusion {
@@ -748,7 +751,6 @@
 .text-editor .media .controls.corner {
   height: 40px;
   bottom: auto;
-/*   z-index: -1; */
 }
 
 .text-editor .media .controls.corner > * {
@@ -776,23 +778,26 @@
 
 
 /* MEME */
-.text-editor .meme {
+.text-editor .pop-up-image {
   width: 300px;
+  width: 74%;
   border-radius: 5px;
   margin: auto;
   position: absolute;
   right: -300px;
+  right: -74%;
   left: auto;
   display: none;
 }
 
-.text-editor .meme.show {
-  -webkit-animation: meme-transition 4.5s ease-in-out infinite;
+.text-editor .pop-up-image.show {
+  -webkit-animation: pop-up-image-transition 4.5s ease-in-out infinite;
 }
 
-@-webkit-keyframes meme-transition {
+@-webkit-keyframes pop-up-image-transition {
   0% {
     right: -300px;
+    right: -74%;
   }
   
   30%, 70% {

@@ -506,107 +506,345 @@ function mediaAfterParagraphs() {
       first_block_interval,
       second_block_interval,
       third_block_interval,
+      fourth_block_interval,
+      fifth_block_interval,
+      sixth_block_interval,
+      seventh_block_interval,
+      eight_block_interval,
+      ninth_block_interval,
+      tenth_block_interval,
+      eleventh_block_interval,
       ending_interval;
   
-  var meme = document.createElement('img');
-      meme.className = 'meme';
+  var pop_up_image = document.createElement('img');
+      pop_up_image.className = 'pop-up-image';
   
   
+  // MALCOLM X POLICE VERDICT
   first_block_interval = setInterval(firstBlock, 10);
   function firstBlock() {
     $('p.active').each(function() {  
       current_paragraph = $(this).text();
       
-      if (current_paragraph.includes("for massa to give us something to do.")) {
-        $('.you-dont-think').show();
-        $('.you-dont-think').addClass('show');
+      if (current_paragraph.includes("\“That’s too much power for one man to have.\”")) {
+        window.clearInterval(first_block_interval);   
         
         setTimeout(function() {
-          $('.you-dont-think').remove();
-        }, 4500); 
+          // $('.malcolm-x-police-predict')[0].load();
+          $('.malcolm-x-police-predict').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.malcolm-x-police-predict').prev('img.thumbnail')[0].complete == true) {
+              $('.malcolm-x-police-predict').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.malcolm-x-police-predict').bind('ended', function() {
+          setTimeout(function() {
+            if ($('.second-block p').hasClass('unread')) {
+              automatedText('.scroll-container .second-block p', 2000, [], 0, '-break-', 1000);
+              second_block_interval = setInterval(secondBlock, 10);
+            }
+          }, 2000);
+        })
+      }
+    })
+  }
+  
+
+  // KANYE TO CUDI
+  function secondBlock() {
+    $('p.active').each(function() {
+      current_paragraph = $(this).text();
+      
+      if (current_paragraph.includes("I\’m out here fighting for y’all!!\”")) {
+        window.clearInterval(second_block_interval);
+        
+        setTimeout(function() {
+          // $('.kanye-to-cudi')[0].load();
+          $('.kanye-to-cudi').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.kanye-to-cudi').prev('img.thumbnail')[0].complete == true) {
+              $('.kanye-to-cudi').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.kanye-to-cudi').bind('ended', function() {
+          if ($('.third-block p').hasClass('unread')) {
+            setTimeout(function() {
+              automatedText('.scroll-container .third-block p', 2000, [], 0, '-break-', 1000);
+              third_block_interval = setInterval(thirdBlock, 10);
+            }, 2000);
+          }
+        })
+      }
+    })
+  }
+  
+  
+  // RADIO FUCK YOU
+  function thirdBlock() {
+    $('p.active').each(function() {
+      current_paragraph = $(this).text();
+      
+      if (current_paragraph.includes("Imma take his lead! Radio fuck you!!!\”")) {
+        window.clearInterval(third_block_interval);
+        
+        setTimeout(function() {
+          // $('.radio-fuck-you')[0].load();
+          $('.radio-fuck-you').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.radio-fuck-you').prev('img.thumbnail')[0].complete == true) {
+              $('.radio-fuck-you').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.radio-fuck-you').bind('ended', function() {
+            if ($('.fourth-block p').hasClass('unread')) {
+              setTimeout(function() {
+                automatedText('.scroll-container .fourth-block p', 2000, [], 0, '-break-', 1000);
+                fourth_block_interval = setInterval(fourthBlock, 10);
+              }, 2000);
+            }
+          })
+      }
+    })
+  }
+  
+  
+  // MALCOLM X ON GOLDWATER
+  function fourthBlock() {
+    $('p.active').each(function() {
+      current_paragraph = $(this).text();
+      
+      if (current_paragraph.includes("getting the support of the negro.\”")) {
+        window.clearInterval(fourth_block_interval);
+        
+        setTimeout(function() {
+          // $('.malcolm-x-on-goldwater')[0].load();
+          $('.malcolm-x-on-goldwater').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.malcolm-x-on-goldwater').prev('img.thumbnail')[0].complete == true) {
+              $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.malcolm-x-on-goldwater').bind('ended', function() {
+            if ($('.fifth-block p').hasClass('unread')) {
+              setTimeout(function() {
+                automatedText('.scroll-container .fifth-block p', 2000, [], 0, '-break-', 1000);
+                fifth_block_interval = setInterval(fifthBlock, 10);
+              }, 2000);
+            }
+          })
+      }
+    })
+  }
+  
+   
+  // MALCOLM X ON MLK
+  function fifthBlock() {
+    $('p.active').each(function() { 
+      current_paragraph = $(this).text();
+         
+      if (current_paragraph.includes("Martin Luther King received from Malcolm X.")) {
+        window.clearInterval(fifth_block_interval);
+        
+        setTimeout(function() {
+          // $('.malcolm-x-on-mlk')[0].load();
+          $('.malcolm-x-on-mlk').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.malcolm-x-on-mlk').prev('img.thumbnail')[0].complete == true) {
+              $('.malcolm-x-on-mlk').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.malcolm-x-on-mlk').bind('ended', function() {
+            if ($('.sixth-block p').hasClass('unread')) {
+              setTimeout(function() {
+                automatedText('.scroll-container .sixth-block p', 2000, [], 0, '-break-', 1000);
+                sixth_block_interval = setInterval(sixthBlock, 10);
+              }, 2000);
+            }
+          })
+      }
+    })
+  }
+  
+  
+  // WIZ TWEETS & SLAVERY WAS A CHOICE
+  function sixthBlock() {
+    $('p.active').each(function() {
+      current_paragraph = $(this).text();
+      
+      if ($(this).hasClass('kanye-wiz-tweets')) {
+        $(this).css('display', 'inline');
       }
       
-      if (current_paragraph.includes("(A candidate backed by the KKK) he states,")) {
-        window.clearInterval(first_block_interval);
-        
-        $('.malcolm-x-on-goldwater')[0].load();
-        $('.malcolm-x-on-goldwater').parents('.media-container').show();
+      if (current_paragraph.includes("TLOP because it was just too personal,")) {
+        $('.tweet-5').show().addClass('show');
+        $('.tweet-5').css('-webkit-animation', 'pop-up-image-transition 7s ease-in-out infinite');
+
         setTimeout(function() {
-          if ($('.malcolm-x-on-goldwater').prev('img.thumbnail')[0].complete == true) {
-            $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
-          }
-        }, 1000);
-        $('.malcolm-x-on-goldwater').bind('ended', function() {
-            setTimeout(function() {
-              if ($('.second-block p').hasClass('unread')) {
-                automatedText('.scroll-container .second-block p', 2000, [], 0, '-break-', 1000);
-                second_block_interval = setInterval(secondBlock, 10);
-              }
-            }, 2000);
+          $('.tweet-13').show().addClass('show');
+        }, 6000);
+
+        setTimeout(function() {
+          $('.tweet-5').remove();
+        }, 7000); 
+
+        setTimeout(function() {
+          $('.tweet-13').remove();
+        }, 10500); 
+      }
+      
+      if (current_paragraph.includes("You was there for 400 years and it’s all of y’all??\”")) {
+        window.clearInterval(sixth_block_interval);
+        
+        setTimeout(function() {
+          // $('.slavery-was-a-choice')[0].load();
+          $('.slavery-was-a-choice').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.slavery-was-a-choice').prev('img.thumbnail')[0].complete == true) {
+              $('.slavery-was-a-choice').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.slavery-was-a-choice').bind('ended', function() {
+            if ($('.seventh-block p').hasClass('unread')) {
+              setTimeout(function() {
+                automatedText('.scroll-container .seventh-block p', 2000, [], 0, '-break-', 1000);
+                seventh_block_interval = setInterval(seventhBlock, 10);
+              }, 2000);
+            }
+          })
+      }
+    })
+  }
+  
+  
+  // CANDACE OWENS ECONOMICS
+  function seventhBlock() {
+    $('p.active').each(function() {
+      current_paragraph = $(this).text();
+      
+      if (current_paragraph.includes("third world country while screaming about pronouns\”")) {
+        window.clearInterval(seventh_block_interval);
+        
+        setTimeout(function() {
+          // $('.candace-owens-economics')[0].load();
+          $('.candace-owens-economics').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.candace-owens-economics').prev('img.thumbnail')[0].complete == true) {
+              $('.candace-owens-economics').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.candace-owens-economics').bind('ended', function() {
+            if ($('.eight-block p').hasClass('unread')) {
+              setTimeout(function() {
+                automatedText('.scroll-container .eight-block p', 2000, [], 0, '-break-', 1000);
+                eight_block_interval = setInterval(eightBlock, 10);
+              }, 2000);
+            }
+          })
+      }
+    })
+  }
+  
+  
+  // WE MAKE GOOD MUSIC
+  function eightBlock() {
+    $('p.active').each(function() {
+      current_paragraph = $(this).text();
+      
+      if (current_paragraph.includes("about actual great art and quality of work,")) {
+        window.clearInterval(eight_block_interval);
+        
+        setTimeout(function() {
+          // $('.we-make-good-music')[0].load();
+          $('.we-make-good-music').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.we-make-good-music').prev('img.thumbnail')[0].complete == true) {
+              $('.we-make-good-music').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.we-make-good-music').bind('ended', function() {
+            if ($('.ninth-block p').hasClass('unread')) {
+              setTimeout(function() {
+                automatedText('.scroll-container .ninth-block p', 2000, [], 0, '-break-', 1000);
+                ninth_block_interval = setInterval(ninthBlock, 10);
+              }, 2000);
+            }
+          })
+      }
+    })
+  }
+  
+  
+  // GEORGE BUSH EXPLANATION
+  function ninthBlock() {
+    $('p.active').each(function() {
+      current_paragraph = $(this).text();
+      
+      if (current_paragraph.includes("so wrong, my motivation was from a good place.\”")) {
+        window.clearInterval(ninth_block_interval);
+        
+        setTimeout(function() {
+          // $('.george-bush-explanation')[0].load();
+          $('.george-bush-explanation').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.george-bush-explanation').prev('img.thumbnail')[0].complete == true) {
+              $('.george-bush-explanation').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.george-bush-explanation').bind('ended', function() {
+            if ($('.tenth-block p').hasClass('unread')) {
+              setTimeout(function() {
+                automatedText('.scroll-container .tenth-block p', 2000, [], 0, '-break-', 1000);
+                tenth_block_interval = setInterval(theEnd, 10);
+              }, 2000);
+            }
+          })
+      }
+    })
+  }
+  
+  
+  // MACINTOSH TEAM
+  function tenthBlock() {
+    $('p.active').each(function() {
+      current_paragraph = $(this).text();
+      
+      if (current_paragraph.includes("just show them clearly where they are going.")) {
+        window.clearInterval(tenth_block_interval);
+        
+        setTimeout(function() {
+          // $('.macintosh-team')[0].load();
+          $('.macintosh-team').parents('.media-container').show();
+          setTimeout(function() {
+            if ($('.macintosh-team').prev('img.thumbnail')[0].complete == true) {
+              $('.macintosh-team').parents('.media-container').css('opacity', '1');
+            }        
+          }, 1000); 
+        }, 1000); 
+        $('.macintosh-team').bind('ended', function() {
+            if ($('.eleventh-block p').hasClass('unread')) {
+              setTimeout(function() {
+                automatedText('.scroll-container .eleventh-block p', 2000, [], 0, '-break-', 1000);
+                ending_interval = setInterval(theEnd, 10);
+              }, 2000);
+            }
           })
       }
     })
   }
   
 
-  function secondBlock() {
+  // END OF ESSAY
+  function theEnd() {
     $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("wrong approach, stating in his apology")) {
-        window.clearInterval(second_block_interval);
-        
-        $('.george-bush-apology')[0].load();
-        $('.george-bush-apology').parents('.media-container').show();
-        setTimeout(function() {
-          if ($('.george-bush-apology').prev('img.thumbnail')[0].complete == true) {
-            $('.george-bush-apology').parents('.media-container').css('opacity', '1');
-          }
-        }, 1000);
-        $('.george-bush-apology').bind('ended', function() {
-            if ($('.third-block p').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .third-block p', 2000, [], 0, '-break-', 1000);
-                third_block_interval = setInterval(thirdBlock, 10);
-              }, 2000);
-            }
-          })
-      }
-    })
-  }
-  
-  
-  function thirdBlock() {
-    $('p').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("just show them clearly where they are going.")) {
-        window.clearInterval(third_block_interval);
-        
-        setTimeout(function() {
-          $('.steve-jobs-on-vision-articulation')[0].load();
-          $('.steve-jobs-on-vision-articulation').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.steve-jobs-on-vision-articulation').prev('img.thumbnail')[0].complete == true) {
-              $('.steve-jobs-on-vision-articulation').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
-        }, 1000); 
-        $('.steve-jobs-on-vision-articulation').bind('ended', function() {
-            if ($('.fourth-block p').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .fourth-block p', 2000, [], 0, '-break-', 1000);
-                ending_interval = setInterval(fourthBlock, 10);
-              }, 2000);
-            }
-          })
-      }
-    })
-  }
-  
-  
-  function fourthBlock() {
-    $('p').each(function() {
       current_paragraph = $(this).text();
       
       if (current_paragraph.includes("fight against the dehumanization of black men?")) {
@@ -897,6 +1135,8 @@ window.onload = function() {
   // setTimeout(function() {
     // automatedText('.scroll-container .first-block p', 2000, [''], 0, '-break-', 800);
   // }, 3500); 
+  
+  // automatedText('.scroll-container .sixth-block p', 2000, [''], 0, '-break-', 800);
   mediaAfterParagraphs();
   mediaPlayer();
   twitterEmbed();

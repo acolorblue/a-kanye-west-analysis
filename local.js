@@ -516,9 +516,6 @@ function mediaAfterParagraphs() {
       eleventh_block_interval,
       ending_interval;
   
-  var pop_up_image = document.createElement('img');
-      pop_up_image.className = 'pop-up-image';
-  
   
   // MALCOLM X POLICE VERDICT
   first_block_interval = setInterval(firstBlock, 10);
@@ -530,19 +527,15 @@ function mediaAfterParagraphs() {
         window.clearInterval(first_block_interval);   
         
         setTimeout(function() {
-          // $('.malcolm-x-police-predict')[0].load();
           $('.malcolm-x-police-predict').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.malcolm-x-police-predict').prev('img.thumbnail')[0].complete == true) {
-              $('.malcolm-x-police-predict').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.malcolm-x-police-predict').parents('.media-container').css('opacity', '1');
         }, 1000); 
+        
         $('.malcolm-x-police-predict').bind('ended', function() {
           setTimeout(function() {
             if ($('.second-block p').hasClass('unread')) {
               automatedText('.scroll-container .second-block p', 2000, [], 0, '-break-', 1000);
-              second_block_interval = setInterval(secondBlock, 10);
+              second_block_interval = setInterval(secondBlock, 10); 
             }
           }, 2000);
         })
@@ -562,11 +555,12 @@ function mediaAfterParagraphs() {
         setTimeout(function() {
           // $('.kanye-to-cudi')[0].load();
           $('.kanye-to-cudi').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.kanye-to-cudi').prev('img.thumbnail')[0].complete == true) {
-              $('.kanye-to-cudi').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.kanye-to-cudi').parents('.media-container').css('opacity', '1');
+          // setTimeout(function() {
+          //   if ($('.kanye-to-cudi').prev('img.thumbnail')[0].complete == true) {
+          //     $('.kanye-to-cudi').parents('.media-container').css('opacity', '1');
+          //   }        
+          // }, 1000); 
         }, 1000); 
         $('.kanye-to-cudi').bind('ended', function() {
           if ($('.third-block p').hasClass('unread')) {
@@ -622,11 +616,12 @@ function mediaAfterParagraphs() {
         setTimeout(function() {
           // $('.malcolm-x-on-goldwater')[0].load();
           $('.malcolm-x-on-goldwater').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.malcolm-x-on-goldwater').prev('img.thumbnail')[0].complete == true) {
-              $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
+          // setTimeout(function() {
+          //   if ($('.malcolm-x-on-goldwater').prev('img.thumbnail')[0].complete == true) {
+          //     $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
+          //   }        
+          // }, 1000); 
         }, 1000); 
         $('.malcolm-x-on-goldwater').bind('ended', function() {
             if ($('.fifth-block p').hasClass('unread')) {
@@ -652,11 +647,12 @@ function mediaAfterParagraphs() {
         setTimeout(function() {
           // $('.malcolm-x-on-mlk')[0].load();
           $('.malcolm-x-on-mlk').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.malcolm-x-on-mlk').prev('img.thumbnail')[0].complete == true) {
-              $('.malcolm-x-on-mlk').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.malcolm-x-on-mlk').parents('.media-container').css('opacity', '1');
+          // setTimeout(function() {
+          //   if ($('.malcolm-x-on-mlk').prev('img.thumbnail')[0].complete == true) {
+          //     $('.malcolm-x-on-mlk').parents('.media-container').css('opacity', '1');
+          //   }        
+          // }, 1000); 
         }, 1000); 
         $('.malcolm-x-on-mlk').bind('ended', function() {
             if ($('.sixth-block p').hasClass('unread')) {
@@ -703,11 +699,12 @@ function mediaAfterParagraphs() {
         setTimeout(function() {
           // $('.slavery-was-a-choice')[0].load();
           $('.slavery-was-a-choice').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.slavery-was-a-choice').prev('img.thumbnail')[0].complete == true) {
-              $('.slavery-was-a-choice').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.slavery-was-a-choice').parents('.media-container').css('opacity', '1');
+          // setTimeout(function() {
+          //   if ($('.slavery-was-a-choice').prev('img.thumbnail')[0].complete == true) {
+          //     $('.slavery-was-a-choice').parents('.media-container').css('opacity', '1');
+          //   }        
+          // }, 1000); 
         }, 1000); 
         $('.slavery-was-a-choice').bind('ended', function() {
             if ($('.seventh-block p').hasClass('unread')) {
@@ -733,11 +730,12 @@ function mediaAfterParagraphs() {
         setTimeout(function() {
           // $('.candace-owens-economics')[0].load();
           $('.candace-owens-economics').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.candace-owens-economics').prev('img.thumbnail')[0].complete == true) {
-              $('.candace-owens-economics').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.candace-owens-economics').parents('.media-container').css('opacity', '1');
+          // setTimeout(function() {
+          //   if ($('.candace-owens-economics').prev('img.thumbnail')[0].complete == true) {
+          //     $('.candace-owens-economics').parents('.media-container').css('opacity', '1');
+          //   }        
+          // }, 1000); 
         }, 1000); 
         $('.candace-owens-economics').bind('ended', function() {
             if ($('.eight-block p').hasClass('unread')) {
@@ -763,11 +761,12 @@ function mediaAfterParagraphs() {
         setTimeout(function() {
           // $('.we-make-good-music')[0].load();
           $('.we-make-good-music').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.we-make-good-music').prev('img.thumbnail')[0].complete == true) {
-              $('.we-make-good-music').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.we-make-good-music').parents('.media-container').css('opacity', '1');
+          // setTimeout(function() {
+          //   if ($('.we-make-good-music').prev('img.thumbnail')[0].complete == true) {
+          //     $('.we-make-good-music').parents('.media-container').css('opacity', '1');
+          //   }        
+          // }, 1000); 
         }, 1000); 
         $('.we-make-good-music').bind('ended', function() {
             if ($('.ninth-block p').hasClass('unread')) {
@@ -793,11 +792,12 @@ function mediaAfterParagraphs() {
         setTimeout(function() {
           // $('.george-bush-explanation')[0].load();
           $('.george-bush-explanation').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.george-bush-explanation').prev('img.thumbnail')[0].complete == true) {
-              $('.george-bush-explanation').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.george-bush-explanation').parents('.media-container').css('opacity', '1');
+          // setTimeout(function() {
+          //   if ($('.george-bush-explanation').prev('img.thumbnail')[0].complete == true) {
+          //     $('.george-bush-explanation').parents('.media-container').css('opacity', '1');
+          //   }        
+          // }, 1000); 
         }, 1000); 
         $('.george-bush-explanation').bind('ended', function() {
             if ($('.tenth-block p').hasClass('unread')) {
@@ -823,11 +823,12 @@ function mediaAfterParagraphs() {
         setTimeout(function() {
           // $('.macintosh-team')[0].load();
           $('.macintosh-team').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.macintosh-team').prev('img.thumbnail')[0].complete == true) {
-              $('.macintosh-team').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.macintosh-team').parents('.media-container').css('opacity', '1');
+          // setTimeout(function() {
+          //   if ($('.macintosh-team').prev('img.thumbnail')[0].complete == true) {
+          //     $('.macintosh-team').parents('.media-container').css('opacity', '1');
+          //   }        
+          // }, 1000); 
         }, 1000); 
         $('.macintosh-team').bind('ended', function() {
             if ($('.eleventh-block p').hasClass('unread')) {
@@ -1132,13 +1133,18 @@ window.onload = function() {
   closeTextEditor();
   searchTextEditor();
   sharePage();
-  // setTimeout(function() {
-    // automatedText('.scroll-container .first-block p', 2000, [''], 0, '-break-', 800);
-  // }, 3500); 
-  
   // automatedText('.scroll-container .sixth-block p', 2000, [''], 0, '-break-', 800);
   mediaAfterParagraphs();
   mediaPlayer();
   twitterEmbed();
   onFileClick();
+}
+
+
+
+
+// WINDOW ON ERROR
+window.onerror = function(msg, url, linenumber) {
+  alert('Error message: '+ msg +'\nURL: '+ url +'\nLine Number: '+ linenumber);
+  return true;
 }

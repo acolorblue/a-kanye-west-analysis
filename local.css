@@ -1,1297 +1,836 @@
-// LOADER
-function loader() {
-  var countdown_interval = setInterval(countdown, 1000);
-  function countdown() {
-    var countdown_origin = $('.countdown').text();
-  
-    
-    if (countdown_origin >= 0) {
-      countdown_origin--;
-      $('.countdown').text(countdown_origin);
-      
-      if (countdown_origin == 5) {
-        $('.loader').addClass('hide');
-      }
-      
-      if (countdown_origin == 2) {
-        $('.loader .meme').addClass('show');
-      }
-      
-      if (countdown_origin == 0) {
-        window.clearInterval(countdown_interval);
-        
-        setTimeout(function() {
-          $('.loader').remove();
-        }, 3000);
-        
-        setTimeout(function() {
-          automatedText('.scroll-container .first-block p', 2000, [''], 0, '-break-', 800);
-        }, 4500);
-      }
-    } 
+/* LOADER */
+.loader {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #eeeeee;
+  font-family: ahamonomonospaced;
+  color: #f9f9f9;
+  text-shadow: 0px 0px 5px #8e8e8e;
+  font-size: 30px;
+  text-transform: uppercase;
+  line-height: 1;
+  text-align: center;
+  z-index: 9;
+}
+
+.loader::before {
+  content: '';
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-color: inherit;
+  position: absolute;
+  top: inherit;
+  right: inherit;
+  bottom: inherit;
+  left: inherit;
+  z-index: 9;
+  transition: opacity 1s ease-in-out; 
+}
+
+.loader.hide {
+  -webkit-animation: loader-hide 3s linear 5s;
+}
+
+.loader.hide::before {
+  opacity: 0; 
+}
+
+@-webkit-keyframes loader-hide {  
+  0% {
+    transform: translate(0%, 0%);
+  }
+
+  100% {
+    transform: translate(0%, -110%);
   }
 }
 
 
 
 
-// DEVICE SPECIFICATIONS
-function userDeviceSpecifications() {
-  if (mobile) {
-    $('.text-editor').addClass('mobile');
-  }
-  
-  if (desktop) {
-    $('.text-editor').addClass('computer');
-
-    function draggableApp() {
-      manuallyCenter('.desktop', '.text-editor');
-      $('.text-editor').draggable({
-        handle: '.header',
-        cursor: 'move', 
-        drag: function(event, ui) {
-          textEditorBlur();
-        }
-      });
-    } 
-    draggableApp();
-  }
-   
-  if (firefox) {
-    var browser_alert = document.createElement('div');
-        browser_alert.className = 'browser-alert ab-mid';
-        browser_alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
-    
-    $('.menu-bar').remove();
-    $('.desktop').remove();
-    $('.mac-os').append(browser_alert);
-  }
+/* LOADER TEXS */
+.loader span {
+  height: fit-content;
 }
 
- 
+.loader .countdown {
+  width: fit-content;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 
-
-// DETECT SIZE CHANGE
-function detectSizeChange() {   
-  $('.mac-os').mutate('width height', function(el, info) {
-    if (desktop) {
-      manuallyCenter('.desktop', '.text-editor');
-    }
-    
-    if (mobile) {
-    }
-    
-    textEditorBlur(); 
-    automatedScrollAdjustment();
-  });
+.loader .caption {
+  width: 400px;
 }
 
 
 
 
-// TEXT EDITOR BACKGROUD IMAGE
-function textEditorBlur() {
-  var container_background_image = $('.mac-os').css('background-image'),
-      mac_os_width = $('.mac-os').width(),
-      mac_os_height = $('.mac-os').height(),
-      menu_bar_height = $('.menu-bar').height(),
-      text_editor_top = $('.text-editor').css('top'),
-      text_editor_left = $('.text-editor').css('left'),
-      text_editor_top = parseFloat(text_editor_top) + parseInt(menu_bar_height);
+/* LOADER MEME */
+.loader img.meme {
+  height: 300px;
+  top: auto;
+  bottom: -300px;
+  transition: bottom 1s ease-in-out;
+}
+
+.loader img.meme.show {
+  bottom: 0%;
+} 
+
+
+
+
+/* MAC OS */
+.mac-os {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #eeeeee;
+  background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Timbuktu%2C%20Mali/Steve%20McCurry%20-%20The%20Sahel%2C%201986.%20A%20group%20of%20young%20men%20pushes%20a%20plane%20out%20of%20the%20mud.jpg');
+  background-size: 100%;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.mac-os .browser-alert {
+  width: -moz-fit-content;
+  height: 11%;
+  border: 1px solid #cbcbcb;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px #c7c6c6;
+  background-color: #f6f5f6;
+  padding: 4%;
+  font-family: ahamonomonospaced;
+  color: #000;
+  text-align: center;
+}
+
   
-  if (container_background_image != $('.blur').css('background-image')) {
-    $('.blur').css('background-image', container_background_image);
-  }
-  $('.blur').css('width', mac_os_width);
-  $('.blur').css('height', mac_os_height);
-  $('.blur').css('top', '-' + text_editor_top.toFixed(2) + 'px');
-  $('.blur').css('left', '-' + text_editor_left);
 
-  if (mobile) {
-    if (window.orientation == 0) {
-      $('.text-editor .blur').removeClass('cover').addClass('contain');
-      return;
-    }
 
-    if (window.orientation == -90 || 90) {
-      $('.text-editor .blur').removeClass('contain').addClass('cover');
-      return;
-    } 
-  }
+/* MENU BAR */
+.mac-os .menu-bar {
+  width: -webkit-fill-available;
+  height: 22px;
+  box-shadow: inset 0 0 2.13px 0 rgba(0, 0, 0, 0.142), 0 0 0 0.71px #c1c1c1, 0 0 21.3px 0px rgba(0, 0, 0, 0.197);
+  background-color: rgba(255, 255, 255, 0.9);
+  background-image: inherit;
+  background-size: inherit;
+  font-size: 14px;
+  position: relative;
+  flex-shrink: 0;
+}
 
-  if (desktop) { 
-    if ($('.mac-os').width() < 1000) {
-      $('.text-editor .blur').removeClass('cover').addClass('contain');
-    }
+.mac-os .menu-bar::before {
+  content: '';
+  width: inherit;
+  height: inherit;
+  background-image: inherit;
+  background-size: inherit;
+  filter: blur(6px);
+  display: block;
+  position: absolute;
+}
 
-    if ($('.mac-os').width() >= 1000) {
-      $('.text-editor .blur').removeClass('contain').addClass('cover');
-    }
-  }
+.mac-os .menu-bar::after {
+  content: '';
+  width: inherit;
+  height: inherit;
+  background-color: rgba(255, 255, 255, .9);
+  position: absolute;
+}
+
+.mac-os .menu-bar * {
+  z-index: 1;
+}
+
+.mac-os .menu-bar .panel {
+  width: fit-content;
+  height: inherit;
+  display: inline-flex;
+  position: absolute;
+}
+
+.mac-os .menu-bar .panel.left {
+  left: 10px;
+}
+
+.mac-os .menu-bar .panel.right {
+  right: 10px;
+}
+
+.mac-os .menu-bar .panel > * {
+  width: inherit;
+  height: inherit;
+  padding: 0px 10px;
+  font-size: unset;
+  line-height: 1.6;
+  display: inline-block;
+  position: relative;
+}
+
+.mac-os .menu-bar .panel > span {
+  user-select: none;
+}
+
+.mac-os .menu-bar .panel > .icons-b {
+  width: 35px;
+}
+
+.mac-os .menu-bar .panel > .icons-b::before {
+  width: inherit;
+  height: inherit;
+  background-size: 15px;
+}
+
+.mac-os .menu-bar .panel .name {
+  font-weight: bold;
+}
+
+.mac-os .menu-bar .panel .notification-center {
+  width: 38px;
+}
+
+.mac-os .menu-bar .panel .notification-center.icons-b::before {
+  background-size: 18px;
+}
+
+.mac-os .menu-bar .panel .selected {
+  background-color: #026cea;
+  color: #ffffff;
 }
 
 
 
 
-// CLOSE TEXT EDITOR
-function closeTextEditor() {
-  $('.text-editor .close').click(function() {
-    $(this).parents('.text-editor').addClass('hide');
-    $('video').each(function () {
-      var video = $(this).get(0);
-      if (!video.paused) {
-        video.pause(); 
-      }
-    });
-    $('.file').removeClass('selected');
+/* DESKTOP */
+.mac-os .desktop {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  overflow: hidden;
+  position: relative;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 
-    var screensaver_credits = document.createElement('span');
-        screensaver_credits.className = 'screensaver-credits ab-mid';
-        screensaver_credits.innerHTML = "Sahel, Mali by Steve McCurry, 1986.";
-    
-    if ($('.screensaver-credits').length == 0) {
-      $('.mac-os').append(screensaver_credits);
-    }
-    
-    setTimeout(function () {
-      $('.screensaver-credits').addClass('show');
-    }, 100);
-  })
+.mac-os .desktop .files-row {  
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  overflow: scroll;
+  display: flex;
+  flex-flow: column wrap;
+  align-content: space-evenly;
+} 
+
+.mac-os .desktop .file {
+  width: 130px;
+  height: 130px;
+  display: block;
+  margin: 10px;
+}
+
+.mac-os .desktop .file.selected {
+  opacity: unset;
+}
+
+.mac-os .desktop .file * {
+  user-select: none;
+}
+
+.mac-os .desktop .file a {
+  display: block;
+}
+
+.mac-os .file .thumbnail-container {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  position: relative;
+  margin: auto;
+}
+
+.mac-os .file.selected .thumbnail-container {
+  outline: #a6a6a6 auto 5px;
+  border: 1px solid #a6a6a6;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.mac-os .file .thumbnail-container .file-type-indicator {
+  width: fit-content;
+  height: fit-content;
+  font-size: 10px;
+  text-shadow: 0px 0px 4px #545454;
+}
+
+.mac-os .file .thumbnail-container .file-type-indicator.icons-b {
+  width: 40px;
+  height: 40px;
+}
+
+.mac-os .file.soundcloud .thumbnail-container .file-type-indicator::before {
+  background-size: contain;
+}
+
+.mac-os .file .thumbnail-container .thumbnail {
+  width: auto;
+  height: auto;
+  max-width: 60px;
+  max-height: 60px;
+  border: 2px solid #ffffff;
+  box-shadow: 0px 1px 5px #4b4b4b;
+  margin: auto;
+}
+
+.mac-os .file.audio .thumbnail-container .thumbnail {
+  border: none;
+}
+
+.mac-os .file .title-container {
+  overflow: hidden;
+  padding: 2px;
+  margin-top: 4px;
+}
+
+.mac-os .file .title {
+  width: fit-content;
+  height: fit-content;
+  max-height: 16px;
+  display: -webkit-box;
+  padding: 2px 4px;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1;
+  text-shadow: 0px 0px 4px #000000;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-align: center;
+  margin: auto;
+}
+
+.mac-os .file.selected .title {
+  outline: #0168da auto 5px;
+  border-radius: 3px;
+  background-color: #0168da;
+  text-shadow: unset;
+}
+
+.mac-os .file.selected .title:nth-child(2) {
+  border-radius: 0px 0px 3px 3px;
 }
 
 
 
 
-// SEARCH TEXT
-function searchTextEditor() {
-  $('.text-editor .search').click(function() {
-    var search_bar = document.createElement('input');
-        search_bar.className = 'search-bar hide';
-        search_bar.placeholder = "Spotlight Search";
+/* SCREENSAVER CREDITS */
+.mac-os .screensaver-credits {
+  width: auto;
+  height: 20px;
+  border-radius: 0px 5px 0px 0px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px #c7c6c6;
+  background-color: rgba(255, 255, 255, .9);
+  padding: 4px;
+  font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
+  color: #000000;
+  letter-spacing: 0.1px;
+  line-height: 1;
+  top: auto;
+  right: auto;
+  left: -218px;
+  transition: all 100ms ease-in-out;
+}
 
-    var original_content = $('.text-editor .parent-content-container').html();
-    var original_children = $('.text-editor .parent-content-container').children();
-    
-
-    if ($('.search-bar').length == 1) {
-      $('.search-bar').addClass('hide');
-      setTimeout(function() {
-        $('.search-bar').remove();
-        $('.text-editor .title').show();
-        return;
-      }, 100); 
-    }
-
-    if ($('.search-bar').length == 0) {
-      if ($('p').hasClass('unread')) {
-        $('.text-editor .title').text("Nigga Finish Reading First");
-        setTimeout(function() {
-           $('.text-editor .title').text("A Kanye West Analysis");
-        }, 2500);
-      }
-      
-      if (!$('p').hasClass('unread')) {
-        $('.main-controls').after(search_bar);
-        $('.text-editor .title').hide();
-        setTimeout(function() {
-          $('.search-bar').removeClass('hide');
-        }, 100);
-      }
-    }
-
-
-    // SEARCH FUNCTION
-    $('.search-bar').keyup(function() {
-      var entered_value = $(this).val().toLowerCase();
-      var entered_value_global = new RegExp(entered_value, "g");
-      var no_value = entered_value == '';
-      
-
-      $('.text-editor p').each(function() {
-        var paragraph_original = $(this).text();
-        var paragraph_lowercase = paragraph_original.toLowerCase();
-        var paragraph_highlight = paragraph_lowercase.replace(entered_value_global, '<span class=\'highlight\'>' + entered_value + '</span>');
-
-        if (!paragraph_lowercase.includes(entered_value)) {
-          $(this).hide();
-        }
-
-        if (paragraph_lowercase.includes(entered_value)) {
-          $(this).show();
-          $(this).html(paragraph_highlight);
-        }
-
-        if (no_value) {
-          $('.text-editor .parent-content-container').html(original_content);
-        }
-      });
-      
-      $('.media-container').each(function() {
-        if ($(this).is(':visible')) {
-          if (entered_value.length > 0) {
-            $(this).hide();
-          }
-
-          if (no_value) {
-            $(this).show();
-          }
-        }
-      });
-    })
-  })
+.screensaver-credits.show {
+  left: 0px;
 }
 
 
 
 
-// SHARE PAGE
-function sharePage() {
-  $('.text-editor .share').click(function(event) {
-    var social_share_container = document.createElement('div');
-    social_share_container.className = 'social-share-container hide';
-
-    var social_share = document.createElement('button');
-
-    if ($('.social-share-container').length == 1) {
-      $('.social-share-container').addClass('hide');
-      
-      setTimeout(function() {
-        $('.social-share-container').remove();
-        $('button.search').show();
-        return;
-      }, 100);
-    }
-
-    if ($('.social-share-container').length == 0) {
-      if ($('.search-bar').length == 1) {
-        $('.search-bar').addClass('hide');
-        setTimeout(function() {
-          $('.search-bar').remove();
-          $('.text-editor .title').show();
-        }, 100); 
-      }
-      
-      $('button.search').hide();
-      $('.call-to-action-controls').prepend(social_share_container);
-      setTimeout(function() {
-        $('.social-share-container').removeClass('hide');
-      }, 100);
-
-      social_share.className = 'twitter-b icons-b abs';
-      social_share_container.append(social_share.cloneNode(true));
-
-      social_share.className = 'instagram-b icons-b abs';
-      social_share_container.append(social_share.cloneNode(true));
-
-      social_share.className = 'tumblr-b icons-b abs';
-      social_share_container.append(social_share.cloneNode(true));
-    }
-
-
-
-
-    // SOCIAL SHARE FUNCTION
-    $('.social-share-container button').click(function(event) {
-      var poster_link = 'https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Poster3.jpg', 
-          webpage = 'https://acolorblue.co/a-kanye-west-analysis',
-          line_break = '%0A',
-          caption = "A Kanye West Analysis, by @acolorblue.",
-          window_link;
-
-      var poster = document.createElement('img');
-          poster.className = 'poster';
-          poster.src = poster_link;
-
-      var action_button = document.createElement('button');
-
-      if ($(this).hasClass('twitter-b')) {
-        window_link = 'https://twitter.com/intent/tweet?source=webclient&text=' + caption + line_break + webpage;
-
-        window.open(window_link);
-      }
-
-
-      if ($(this).hasClass('instagram-b')) {
-        window_link = 'instagram://camera';
-        if (android) {
-          window_link = 'https://www.instagram.com/_u/acolorblue';
-        }
-
-        if ($('.poster').length == 1) {
-          return;
-        }
-
-        if ($('.search-bar').length == 1) {
-          $('.search-bar').addClass('hide');
-          setTimeout(function() {
-            $('.search-bar').remove();
-            $('.text-editor .title').show();
-          }, 100);
-        }  
-
-        function closeShare() {
-          poster.remove();
-          $('.text-editor .confirm-action').remove();
-          $('.text-editor .cancel-action').remove();
-          $('.text-editor .title').text("A Kanye West Analysis");
-          $('.text-editor .search').show();
-          $('.text-editor .share').show();
-          $('.text-editor .scroll-container').show();
-          automatedScrollAdjustment();
-        }
-
-        
-        $('.text-editor .scroll-container').hide();
-        $('.text-editor .parent-content-container').prepend(poster);
-        $('.text-editor .title').text("Save Image Then Confirm");
-
-        $('.text-editor .search').hide();
-        action_button.className = 'confirm-action';
-        action_button.innerHTML = "Confirm";
-        $('.text-editor .call-to-action-controls').append(action_button.cloneNode(true));
-        $('.text-editor .confirm-action').click(function() {
-          window.location.href = window_link;
-          closeShare();
-        });
-
-        $('.text-editor .share').hide();
-        action_button.className = 'cancel-action';
-        action_button.innerHTML = "Cancel";
-        $('.text-editor .call-to-action-controls').append(action_button.cloneNode(true));
-        $('.text-editor .cancel-action').click(function() {
-          closeShare();
-        });
-      }
-
-
-      if ($(this).hasClass('tumblr-b')) {
-        window_link = 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=' + poster_link + '&caption=' + '<a href=\''+  webpage + '\'>' + '<i>' + caption.slice(0, 21) + '</i></a>' + caption.slice(21);
-
-        window.open(window_link);
-      }
-
-      $('.social-share-container').remove();
-    })
-
-  })
+/* NOTIFICATION CENTER MENU */
+.mac-os .embed-window  {
+  width: 248px;
+  height: -webkit-fill-available;
+  height: 100%;
+  box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  background-color: #ffffff;
+  background-color: #252525;
+  left: auto;
+  right: -258px;
+  transition: all 200ms ease-in-out;
 }
 
-
-
-
-// AUTOMATED TEXT
-function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, breakWord, breakTime) {
-  var original_characters_length = $('.scroll-container p').text().replace(/-break-/g, "").length;
-  var booSkipAutomatedText = false;
-
-  if (selector == null || selector.trim() == '')
-    return;
-
-  timeBetweenText = (timeBetweenText == null ? 0 : timeBetweenText);
-  timeBeforeStart = (timeBeforeStart == null ? 0 : timeBeforeStart);
-  let textInfo = {
-    selector: selector,
-    timeBetweenText: timeBetweenText,
-    exclude: exclude,
-    timeBeforeStart, timeBeforeStart
-  }
- 
-  if (breakWord != null) {
-    textInfo['breakWord'] = breakWord;
-    textInfo['breakTime'] = (breakTime == null ? 0 : breakTime);
-  }
- 
-  setTimeout(function () {
-    automaticText(textInfo);
-  }, textInfo.timeBeforeStart);
-
-  function automaticText(objTextInfo) {
-    let $lines = document.querySelectorAll(objTextInfo.selector),
-        lineContents = new Array(), 
-        lineCount = $lines.length; 
- 
-    var skip = 0; 
-   
-    for (var i = 0; i < lineCount; i++) { 
-      lineContents[i] = $lines[i].textContent;
-      $lines[i].textContent = '';
-      $lines[i].style.visibility = 'visible';
-      $lines[i].style.display = 'block';
-    }
-    typeLine();
-
-    function typeLine(idx) {
-      idx == null && (idx = 0);
-      var element = $lines[idx];
-      var content = lineContents[idx];
-
-      if (typeof content == "undefined") {
-        let elClassSkip = document.getElementsByClassName('skip');
-        let lengthClassSkip = elClassSkip.length;
-
-        while (lengthClassSkip--) {
-          elClassSkip[lengthClassSkip].style.display = 'none';
-        }
-        return;
-      }
-
-      var booExclude = false;
-
-      if (objTextInfo.exclude != null) {
-        element.classList.forEach(function (elementClass) {
-          if (!booExclude) { booExclude = objTextInfo.exclude.includes(elementClass); }
-        });
-
-        booExclude = (booExclude || !booExclude && objTextInfo.exclude.includes(element.tagName.toLowerCase()));
-      }
-
-      var charIdx = 0;
-
-      if (booExclude || booSkipAutomatedText) {
-        element.textContent = content;
-        typeLine(++idx);
-      } 
-      else {
-        content = '' + content + '';
-        element.appendChild(document.createTextNode(' '));
-        element.className += ' active';
-        typeChar();
-      }
-
-      function typeChar() {
-        var rand = (!booSkipAutomatedText ? Math.round(Math.random() * 60) + 25 : 0);
-
-        setTimeout(function () {
-          var char = content[charIdx++],
-              booBreak = false;
-
-          if (objTextInfo.breakWord != null && char == objTextInfo.breakWord.charAt(0) && content.substring(charIdx - 1, charIdx + objTextInfo.breakWord.length - 1) == objTextInfo.breakWord) {
-            content = content.replace(objTextInfo.breakWord, '');
-            char = content[charIdx - 1];
-            booBreak = true;
-          }
-          setTimeout(function () {
-            if (typeof char !== "undefined") {
-              element.appendChild(document.createTextNode(char));
-              typeChar();
-            }
-            else { 
-              element.classList.remove('active');
-              element.classList.remove('unread');
-              setTimeout(function () {
-                typeLine(++idx);
-              }, (!booSkipAutomatedText ? objTextInfo.timeBetweenText : 0));
-            }
-          }, (booBreak && !booSkipAutomatedText ? objTextInfo.breakTime : 0))
-        }, rand);
-      }
-      
-      $('.scroll-container').mutate('height', function(el, info) {
-        automatedScrollAdjustment();
-      });
-    }
-  }
-  
-  $('button.search').click(function() {
-    booSkipAutomatedText = true;
-  })
+.mac-os .embed-window.cover::before {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-color: inherit;
+  background-size: 10%;
+  z-index: 1;
 }
 
-
-
-
-// MEDIA AFTER PARAGRAPHS
-function mediaAfterParagraphs() {
-  var current_paragraph,
-      first_block_interval,
-      second_block_interval,
-      third_block_interval,
-      fourth_block_interval,
-      fifth_block_interval,
-      sixth_block_interval,
-      seventh_block_interval,
-      eight_block_interval,
-      ninth_block_interval,
-      tenth_block_interval,
-      eleventh_block_interval,
-      ending_interval;
-  
-  
-  // MALCOLM X POLICE VERDICT
-  first_block_interval = setInterval(firstBlock, 10);
-  function firstBlock() {
-    $('p.active').each(function() {  
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("\“That’s too much power for one man to have.\”")) {
-        window.clearInterval(first_block_interval);   
-        
-        setTimeout(function() {
-          $('.malcolm-x-police-predict').parents('.media-container').show();
-          $('.malcolm-x-police-predict').parents('.media-container').css('opacity', '1');
-        }, 1000); 
-        
-        $('.malcolm-x-police-predict').bind('ended', function() {
-          setTimeout(function() {
-            if ($('.second-block p:first-child').hasClass('unread')) {
-              automatedText('.scroll-container .second-block p', 2000, [], 0, '-break-', 1000);
-              second_block_interval = setInterval(secondBlock, 10); 
-            }
-          }, 2000);
-        })
-      }
-    })
-  }
-  
-
-  // KANYE TO CUDI
-  function secondBlock() {
-    $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("I\’m out here fighting for y’all!!\”")) {
-        window.clearInterval(second_block_interval);
-        
-        setTimeout(function() {
-          $('.kanye-to-cudi').parents('.media-container').show();
-          $('.kanye-to-cudi').parents('.media-container').css('opacity', '1');
-        }, 1000); 
-        $('.kanye-to-cudi').bind('ended', function() {
-          if ($('.third-block p:first-child').hasClass('unread')) {
-            setTimeout(function() {
-              automatedText('.scroll-container .third-block p', 2000, [], 0, '-break-', 1000);
-              third_block_interval = setInterval(thirdBlock, 10);
-            }, 2000);
-          }
-        })
-      }
-    })
-  }
-  
-  
-  // RADIO FUCK YOU
-  function thirdBlock() {
-    $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("Imma take his lead! Radio fuck you!!!\”")) {
-        window.clearInterval(third_block_interval);
-        
-        setTimeout(function() {
-          $('.radio-fuck-you').parents('.media-container').show();
-          $('.radio-fuck-you').parents('.media-container').css('opacity', '1');
-        }, 1000); 
-        $('.radio-fuck-you').bind('ended', function() {
-          if ($('.fourth-block p:first-child').hasClass('unread')) {
-            setTimeout(function() {
-              automatedText('.scroll-container .fourth-block p', 2000, [], 0, '-break-', 1000);
-              fourth_block_interval = setInterval(fourthBlock, 10);
-            }, 2000);
-          }
-        })
-      }
-    })
-  }
-  
-  
-  // MALCOLM X ON GOLDWATER
-  function fourthBlock() {
-    $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("getting the support of the negro.\”")) {
-        window.clearInterval(fourth_block_interval);
-        
-        setTimeout(function() {
-          $('.malcolm-x-on-goldwater').parents('.media-container').show();
-          $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
-        }, 1000); 
-        $('.malcolm-x-on-goldwater').bind('ended', function() {
-          if ($('.fifth-block p:first-child').hasClass('unread')) {
-            setTimeout(function() {
-              automatedText('.scroll-container .fifth-block p', 2000, [], 0, '-break-', 1000);
-              fifth_block_interval = setInterval(fifthBlock, 10);
-            }, 2000);
-          }
-        })
-      }
-    })
-  }
-  
-   
-  // MALCOLM X ON MLK
-  function fifthBlock() {
-    $('p.active').each(function() { 
-      current_paragraph = $(this).text();
-         
-      if (current_paragraph.includes("Martin Luther King received from Malcolm X.")) {
-        window.clearInterval(fifth_block_interval);
-        alert("Martin Luther King received from Malcolm X.")
-        
-        setTimeout(function() {
-          $('.malcolm-x-on-mlk').parents('.media-container').show();
-          $('.malcolm-x-on-mlk').parents('.media-container').css('opacity', '1');
-        }, 1000); 
-        $('.malcolm-x-on-mlk').bind('ended', function() {
-          if ($('.sixth-block p:first-child').hasClass('unread')) {
-            setTimeout(function() {
-              automatedText('.scroll-container .sixth-block p', 2000, [], 0, '-break-', 1000);
-              sixth_block_interval = setInterval(sixthBlock, 10);
-            }, 2000);
-          }
-        })
-      }
-    })
-  }
-  
-  
-  // WIZ TWEETS & SLAVERY WAS A CHOICE
-  function sixthBlock() {
-    $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if ($(this).hasClass('kanye-wiz-tweets')) {
-        $(this).css('display', 'inline');
-      }
-      
-      if (current_paragraph.includes("TLOP because it was just too personal,")) {
-        $('.tweet-5').show().addClass('show');
-        $('.tweet-5').css('-webkit-animation', 'pop-up-image-transition 7s ease-in-out infinite');
-
-        setTimeout(function() {
-          $('.tweet-13').show().addClass('show');
-        }, 6000);
-
-        setTimeout(function() {
-          $('.tweet-5').remove();
-        }, 7000); 
-
-        setTimeout(function() {
-          $('.tweet-13').remove();
-        }, 10500); 
-      }
-      
-      if (current_paragraph.includes("You was there for 400 years and it’s all of y’all??\”")) {
-        window.clearInterval(sixth_block_interval);
-        
-        setTimeout(function() {
-          $('.slavery-was-a-choice').parents('.media-container').show();
-          $('.slavery-was-a-choice').parents('.media-container').css('opacity', '1');
-        }, 1000); 
-        $('.slavery-was-a-choice').bind('ended', function() {
-          if ($('.seventh-block p:first-child').hasClass('unread')) {
-            setTimeout(function() {
-              automatedText('.scroll-container .seventh-block p', 2000, [], 0, '-break-', 1000);
-              seventh_block_interval = setInterval(seventhBlock, 10);
-            }, 2000);
-          }
-        })
-      }
-    })
-  }
-  
-  
-  // CANDACE OWENS ECONOMICS
-  function seventhBlock() {
-    $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("third world country while screaming about pronouns\”")) {
-        window.clearInterval(seventh_block_interval);
-        
-        setTimeout(function() {
-          $('.candace-owens-economics').parents('.media-container').show();
-          $('.candace-owens-economics').parents('.media-container').css('opacity', '1');
-        }, 1000); 
-        $('.candace-owens-economics').bind('ended', function() {
-          if ($('.eight-block p:first-child').hasClass('unread')) {
-            setTimeout(function() {
-              automatedText('.scroll-container .eight-block p', 2000, [], 0, '-break-', 1000);
-              eight_block_interval = setInterval(eightBlock, 10);
-            }, 2000);
-          }
-        })
-      }
-    })
-  }
-  
-  
-  // WE MAKE GOOD MUSIC
-  function eightBlock() {
-    $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("about actual great art and quality of work,")) {
-        window.clearInterval(eight_block_interval);
-        
-        setTimeout(function() {
-          $('.we-make-good-music').parents('.media-container').show();
-          $('.we-make-good-music').parents('.media-container').css('opacity', '1');
-        }, 1000); 
-        $('.we-make-good-music').bind('ended', function() {
-            if ($('.ninth-block p:first-child').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .ninth-block p', 2000, [], 0, '-break-', 1000);
-                ninth_block_interval = setInterval(ninthBlock, 10);
-              }, 2000);
-            }
-          })
-      }
-    })
-  }
-  
-  
-  // GEORGE BUSH EXPLANATION
-  function ninthBlock() {
-    $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("so wrong, my motivation was from a good place.\”")) {
-        window.clearInterval(ninth_block_interval);
-        
-        setTimeout(function() {
-          $('.george-bush-explanation').parents('.media-container').show();
-          $('.george-bush-explanation').parents('.media-container').css('opacity', '1');
-        }, 1000); 
-        $('.george-bush-explanation').bind('ended', function() {
-          if ($('.tenth-block p:first-child').hasClass('unread')) {
-            setTimeout(function() {
-              automatedText('.scroll-container .tenth-block p', 2000, [], 0, '-break-', 1000);
-              tenth_block_interval = setInterval(theEnd, 10);
-            }, 2000);
-          }
-        })
-      }
-    })
-  }
-  
-  
-  // MACINTOSH TEAM
-  function tenthBlock() {
-    $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("just show them clearly where they are going.")) {
-        window.clearInterval(tenth_block_interval);
-        
-        setTimeout(function() {
-          $('.macintosh-team').parents('.media-container').show();
-          $('.macintosh-team').parents('.media-container').css('opacity', '1'); 
-        }, 1000); 
-        $('.macintosh-team').bind('ended', function() {
-          if ($('.eleventh-block p:first-child').hasClass('unread')) {
-            setTimeout(function() {
-              automatedText('.scroll-container .eleventh-block p', 2000, [], 0, '-break-', 1000);
-              ending_interval = setInterval(theEnd, 10);
-            }, 2000);
-          }
-        })
-      }
-    })
-  }
-  
-
-  // END OF ESSAY
-  function theEnd() {
-    $('p.active').each(function() {
-      current_paragraph = $(this).text();
-      
-      if (current_paragraph.includes("fight against the dehumanization of black men?")) {
-        window.clearInterval(ending_interval);
-        
-        setTimeout(function() {
-          function disableAutomatedScroll() {
-            $('.scroll-container').css('transition', 'margin-top 1s ease-in-out');
-            $('.scroll-container').css('margin-top', '0px');
-          }
-          disableAutomatedScroll();
-          
-
-          function mediaControlsAdjustments() {
-            $('.controls').removeClass('full');
-            $('.controls').addClass('corner');
-            $('.controls .post-link').show();
-            
-            $('.controls .post-link').click(function(event) {
-              event.stopPropagation();
-            })
-          }
-          mediaControlsAdjustments();
-          
-          
-          function videoActiveOnClick() {
-            if (mobile) {
-              $(document).off('touchstart', '.media-container.video');
-              
-              $(document).on('touchstart', '.play-pause', function(event) {
-                var media_container = $(this).parents('.media-container');
-                var thumbnail = media_container.find('.thumbnail');
-                var video = media_container.find('video')[0];
-                var controls = media_container.find('.controls');
-                var play_pause = media_container.find('.controls .play-pause');
-                var post_link = media_container.find('.controls .post-link');
-                var paused =  video.paused;
-                var playing = !video.paused;
-                
-                enableInlineVideo(video);
-
-                if ($(media_container).hasClass('not-clicked')) {
-                  $(media_container).removeClass('not-clicked');
-                }
-
-                if (paused) {
-                  thumbnail.hide();
-                  video.play(); 
-                  play_pause.removeClass('play');
-                  play_pause.addClass('pause');
-                }
-
-                else if (playing) {
-                  video.pause(); 
-                  thumbnail.show();
-                  play_pause.removeClass('pause');
-                  play_pause.addClass('play');
-                }
-
-                $(video).bind('ended', function() {
-                  thumbnail.show();
-                  play_pause.removeClass('pause');
-                  play_pause.addClass('play');
-                })
-                event.stopPropagation();
-              })
-            }
-          }
-          videoActiveOnClick();
-        }, 4000);
-      }
-    })
-  }
+.mac-os .embed-window.slide-out {
+  right: 0px;
 }
 
-
-  
-
-// MEDIA PLAYER
-function mediaPlayer() { 
-  var media_container,
-      thumbnail,
-      video,
-      controls,
-      post_link,
-      paused,
-      playing;
-  
-  if (desktop) {
-    $(document).on('click', '.media-container.video', function(event) {
-       media_container = $(this);
-       thumbnail = $(this).find('.thumbnail');
-       video = $(this).find('video')[0];
-       controls = $(this).find('.controls');
-       post_link = $(this).find('.controls .post-link');
-       paused =  video.paused;
-       playing = !video.paused;
-
-      if ($(this).hasClass('not-clicked')) {
-        $(this).removeClass('not-clicked');
-      }
-
-      if (paused) {
-        controls.hide();
-        thumbnail.hide();
-        video.play(); 
-      }
-
-      else if (playing) {
-        video.pause(); 
-        thumbnail.show();
-        controls.show();
-      }
-
-      $(video).bind('ended', function() {
-        thumbnail.show();
-        controls.show();
-      })
-      event.stopPropagation();
-    })
-  }
-  
-  
-  if (mobile) {
-    if ($('p').hasClass('unread')) {
-      $(document).on('touchstart', '.media-container.video', function(event) {
-         media_container = $(this);
-         thumbnail = $(this).find('.thumbnail');
-         video = $(this).find('video')[0];
-         controls = $(this).find('.controls');
-         post_link = $(this).find('.controls .post-link');
-         paused =  video.paused;
-         playing = !video.paused;
-        
-        enableInlineVideo(video);
-
-        if ($(this).hasClass('not-clicked')) {
-          $(this).removeClass('not-clicked');
-        }
-
-        if (paused) {
-          controls.hide();
-          thumbnail.hide();
-          video.play(); 
-        }
-
-        else if (playing) {
-          video.pause(); 
-          thumbnail.show();
-          controls.show();
-        }
-
-        $(video).bind('ended', function() {
-          thumbnail.show();
-          controls.show();
-        })
-        event.stopPropagation();
-      })
-    }
-  }
+.mac-os .embed-window a.twitter-timeline {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-color: inherit;
+  position: absolute;
 }
 
-
-
-
-// AUTOMATED SCROLL READJUSTMENT
-function automatedScrollAdjustment() {
-  var parent_container_height = $('.parent-content-container').height();
-
-  if ($('p').hasClass('unread')) {
-    var margin_top = 0;
-    var current_scroll_container_height = $('.scroll-container').height();
-
-    if (current_scroll_container_height <= parent_container_height) {
-      $('.scroll-container').css('margin-top', margin_top);
-    } 
-
-    // if (current_scroll_container_height >= parent_container_height) {
-    //   margin_top = -current_scroll_container_height - -parent_container_height;
-    //   $('.scroll-container').css('margin-top', margin_top);
-    // } 
-    
-    if (current_scroll_container_height >= parent_container_height) {
-      
-      if (current_scroll_container_height >= parent_container_height * 1) {
-        margin_top = -parent_container_height / 2;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 1.5) {
-        margin_top = -parent_container_height;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 2) {
-        margin_top = -parent_container_height * 1.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 2.5) {
-        margin_top = -parent_container_height * 2;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 3) {
-        margin_top = -parent_container_height * 2.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 3.5) {
-        margin_top = -parent_container_height * 3;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 4) {
-        margin_top = -parent_container_height * 3.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-    
-      if (current_scroll_container_height >= parent_container_height * 4.5) {
-        margin_top = -parent_container_height * 4;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 5) {
-        margin_top = -parent_container_height * 4.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-
-      if (current_scroll_container_height >= parent_container_height * 5.5) {
-        margin_top = -parent_container_height * 5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-  
-      if (current_scroll_container_height >= parent_container_height * 6) {
-        margin_top = -parent_container_height * 5.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-
-      if (current_scroll_container_height >= parent_container_height * 6.5) {
-        margin_top = -parent_container_height * 6;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 7) {
-        margin_top = -parent_container_height * 6.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 7.5) {
-        margin_top = -parent_container_height * 7;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 8) {
-        margin_top = -parent_container_height * 7.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 8.5) {
-        margin_top = -parent_container_height * 8;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 9) {
-        margin_top = -parent_container_height * 8.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 9.5) {
-        margin_top = -parent_container_height * 9;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 10) {
-        margin_top = -parent_container_height * 9.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 10.5) {
-        margin_top = -parent_container_height * 10;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 11) {
-        margin_top = -parent_container_height * 10.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 11.5) {
-        margin_top = -parent_container_height * 11;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 12) {
-        margin_top = -parent_container_height * 11.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 12.5) {
-        margin_top = -parent_container_height * 12;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 13) {
-        margin_top = -parent_container_height * 12.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 13.5) {
-        margin_top = -parent_container_height * 13;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 14) {
-        margin_top = -parent_container_height * 13.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 14.5) {
-        margin_top = -parent_container_height * 14;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-
-      if (current_scroll_container_height >= parent_container_height * 15) {
-        margin_top = -parent_container_height * 14.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 15.5) {
-        margin_top = -parent_container_height * 15;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 16) {
-        margin_top = -parent_container_height * 15.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-    
-      if (current_scroll_container_height >= parent_container_height * 16.5) {
-        margin_top = -parent_container_height * 16;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 17) {
-        margin_top = -parent_container_height * 16.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 17.5) {
-        margin_top = -parent_container_height * 17;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 18) {
-        margin_top = -parent_container_height * 17.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-    
-      if (current_scroll_container_height >= parent_container_height * 18.5) {
-        margin_top = -parent_container_height * 18;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-  
-      if (current_scroll_container_height >= parent_container_height * 19) {
-        margin_top = -parent_container_height * 18.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 19.5) {
-        margin_top = -parent_container_height * 19;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 20) {
-        margin_top = -parent_container_height * 19.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-    }
-
-  }
-}
-
-
-
-
-// TWITTER EMBED
-function twitterEmbed() {
-  var embed_window = document.createElement('div');
-      embed_window.className = 'embed-window cover twitter-b icons-b abs ab-mid';
- 
-  var twitter_timeline = document.createElement('a');
-      twitter_timeline.className = 'twitter-timeline';
-      twitter_timeline.src = 'https://twitter.com/search?q=acolorblue';
-      twitter_timeline.dataset.widgetId = '993524740462600192';
-
-
-  $('.notification-center.icons-b').click(function() {
-    $(this).toggleClass('selected');
-    
-    if ($('.embed-window').length == 0) {
-      $('.desktop').prepend(embed_window);
-      embed_window.append(twitter_timeline);
-      
-      !function(d, s, id) {
-        var js,
-            fjs = d.getElementsByTagName(s)[0],
-            p = /^http:/.test(d.location)?'http':'https';
-
-        if (!d.getElementById(id)) { 
-          js = d.createElement(s); 
-          js.id = id; 
-          js.src = p + "://platform.twitter.com/widgets.js"; 
-          fjs.parentNode.insertBefore(js, fjs);
-        }
-      }
-      (document,"script","twitter-wjs");
-    } 
-    setTimeout(function () {
-      $(embed_window).toggleClass('slide-out');
-    }, 10);
-    
-    
-    var number_of_calls = 0;
-    var iframe_height_interval = setInterval(iframeMobileHeight, 1);
-    function iframeMobileHeight() {
-     var desktop_height = $('.desktop').height();
-      $('iframe.twitter-timeline').css('height', desktop_height);
-      $('.timeline-Viewport').addClass('scroll-bar');
-
-      if (++number_of_calls === 600) {
-        window.clearInterval(iframe_height_interval);
-      }
-    }
-
-    
-    setTimeout(function () {
-      $('.embed-window').removeClass('cover twitter-b icons-b abs');
-    }, 2000);
-  })
-}  
 
 
  
-
-// FILE CLICK 
-function onFileClick() {
-  $('.file')  
-    .on('click', function() {
-    if ($(this).hasClass('selected')) {
-      return;
-    }
-
-    if (!$(this).hasClass('selected')) {
-      if ($(this).find('.title').text() == $('.text-editor .title').text() || $('.poster').length == 1) {
-        $(this).addClass('selected');
-        $('.text-editor').removeClass('hide');
-        $('.screensaver-credits').removeClass('show');
-      }
-    }
-  })
-
-    .on('contextmenu', function() {
-    return false;
-  })
-
-    .on('dragstart', function(event) { 
-    event.preventDefault(); 
-  }) 
+/* TEXT EDITOR */
+.text-editor {
+  width: 80%;
+  height: 86%;
+/*   height: 40%; */
+  height: 90%;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px #c7c6c6;
+  display: flex;
+  flex-direction: column;
+  bottom: auto;
+  z-index: 1;
+  transition: transform 200ms ease-in-out;
 }
 
+.text-editor.computer {
+  max-width: 800px;
+  
+/*   max-width: 600px; */
+  max-height: 650px;
+  min-width: 328px;
+  min-height: 20%;
+  right: auto;
+}
+
+.text-editor.mobile {
+  top: 10px;
+  right: 10px;
+  left: auto;
+}
+
+.text-editor.hide {
+  transform: scale(0); 
+}
+
+.text-editor ::selection { 
+  background-color: #000;
+  color: #fff; 
+}
+
+
+
+
+/* BLUR */
+.text-editor .blur {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  filter: blur(14px);
+  filter: blur(20px);
+  position: absolute;
+}
+
+.text-editor .blur.cover {
+  background-size: cover;
+}
  
-
-
-// WINDOW ON LOAD
-window.onload = function() {
-  loader();
-  userDeviceSpecifications();
-  detectSizeChange();
-  setInterval(function() {
-    clock(); 
-  }, 1000);
-  textEditorBlur();
-  closeTextEditor();
-  searchTextEditor();
-  sharePage();
-  // automatedText('.scroll-container .first-block p', 2000, [''], 0, '-break-', 800);
-  mediaAfterParagraphs();
-  mediaPlayer();
-  twitterEmbed();
-  onFileClick();
+.text-editor .blur.contain {
+  background-size: contain;
 }
 
 
 
 
-// WINDOW ON ERROR
-window.onerror = function(msg, url, linenumber) {
-  alert('Error message: '+ msg +'\nURL: '+ url +'\nLine Number: '+ linenumber);
-  return true;
+
+/* HEADER */
+.text-editor .header {
+  width: 100%;
+  height: 35px;
+  border-bottom: none;
+  position: relative;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.text-editor .header .top-bar {
+  width: 98.598%;
+  height: 20px;
+  height: fit-content;
+  display: inline-flex;
+}
+
+
+
+
+/* MAIN CONTROLS */
+.text-editor .header .top-bar .main-controls {
+  width: fit-content;
+  height: fit-content;
+  display: inline-flex;
+  right: auto;
+  left: 8px;
+  margin: auto auto auto 8px;
+  flex-shrink: 0;
+}
+
+.text-editor .header .main-controls button {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #ffffff !important;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, .1) !important;
+  position: relative;
+  margin: auto auto auto 0px;
+}
+
+.text-editor .header .main-controls .icons-b::before {
+  background-size: 6.58px;
+}
+
+.text-editor .header .main-controls .close.grey::before {
+  opacity: 1;
+}
+
+
+
+
+/* TITLE */
+.text-editor .header .top-bar .title {
+  width: fit-content;
+  height: fit-content;
+  color: #ffffff;
+  text-shadow: 0px 0px 4px #545454;
+  text-align: center;
+  font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
+  letter-spacing: 0.1px;
+  margin: auto;
+  flex-shrink: 1;
+  white-space: nowrap;
+}
+
+
+
+
+/* CALL TO ACTION */
+.text-editor .header .top-bar .call-to-action-controls {
+  width: fit-content;
+  height: fit-content;
+  display: inline-flex;
+  margin: auto 4px auto auto;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.text-editor .header .call-to-action-controls > button {
+  width: fit-content;
+  height: 20px;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, .1);
+  padding: 2px 8px;
+  color: #ffffff;
+  position: relative;
+  margin: auto auto auto 4px;
+}
+
+.text-editor .header .call-to-action-controls > button.icons-b {
+  width: 36px;
+}
+
+.text-editor .header .call-to-action-controls > button.icons-b::before {
+  background-size: 11px;
+}
+
+
+
+
+/* SEARCH BAR */
+.text-editor .search-bar {
+  width: 50%;
+  height: 26px;
+  max-width: 240px;
+  outline: none;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #c7c6c6;
+  background-color: rgba(255, 255, 255, .1) !important;
+  color: #ffffff;
+  text-align: center;
+  display: flex;
+  margin: auto;
+  -webkit-appearance: none;
+  z-index: 2;
+  transition: all 100ms ease-in-out;
+}
+
+.text-editor .search-bar.hide {
+  transform: translate(0px, -120%);
+}
+
+.text-editor .search-bar::-webkit-input-placeholder {
+  color: white;
+}
+
+
+
+
+/* SOCIAL SHARE */
+.text-editor .social-share-container {
+  width: 104px;
+  height: 30px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 6px #adadad;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  z-index: 1;
+  transition: all 100ms ease-in-out;
+}
+
+.text-editor .social-share-container.hide {
+  transform: translate(0px, -110%);
+}
+
+.text-editor .social-share-container button {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .2);
+  display: block;
+  position: relative;
+  margin: auto;
+}
+
+
+
+
+/* CONTENT CONTAINER */
+.text-editor .parent-content-container {
+  width: -webkit-fill-available;
+  height: 100%;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 5%;
+  font-family: ahamonomonospaced;
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+  position: relative;
+  margin: 2px;
+  transition: all 100ms ease-in-out;
+}
+
+.text-editor .parent-content-container .scroll-container {
+  width: inherit;
+  overflow: scroll;
+/*   background-color: red; */
+/*   transition: all 100ms ease-in-out; */
+  transition: all 300ms ease-in-out;
+}
+
+.text-editor .scroll-container p {
+  padding: 0px 2px;
+  line-height: 19px;
+/*   background-color: blue; */
+  color: #ffffff;
+  text-shadow: 0px 0px 4px #000000;
+  visibility: hidden;
+  display: none;
+}
+
+.text-editor .scroll-container .first-block p:first-of-type {
+  margin-top: 0px;
+}
+
+.text-editor .scroll-container p.active::after {
+  content: "|";
+  color: #000000;
+}
+
+.text-editor .scroll-container p.kanye-wiz-tweets:first-of-type {
+  padding-right: 0px;
+}
+
+.text-editor .scroll-container p.conclusion {
+  margin-bottom: 0px;
+}
+
+.text-editor .scroll-container p span.highlight { 
+  width: fit-content;
+  height: fit-content;
+  background-color: #000;
+  color: #fff; 
+}
+
+
+
+
+/* MEDIA  CONTAINER */
+.text-editor .scroll-container .media-container {
+  height: fit-content;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #000000;
+  background-color: rgba(0, 0, 0, .1);
+  position: relative;
+  margin: auto;
+  cursor: pointer;
+  opacity: 0;
+  display: none;
+}
+
+.text-editor.computer .scroll-container .media-container {
+  width: 80%;
+}
+
+.text-editor.mobile .scroll-container .media-container {
+  width: 100%;
+}
+
+.text-editor .media-container .media {
+  width: inherit;
+  width: -webkit-fill-available;
+  height: inherit;
+  border-radius: inherit;
+  display: flex;
+}
+
+.text-editor .media img.thumbnail {
+  width: -webkit-fill-available;
+  height: 100%;
+  border-radius: inherit;
+  position: absolute;
+  top: 0px;
+  margin: auto;
+  z-index: 2;
+}
+
+.text-editor .media video {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  position: relative;
+}
+
+
+/* CONTROLS */
+.text-editor .media .controls {
+  transition: all 300ms ease-in-out;
+}
+
+.text-editor .media .controls > * {
+  background-color: unset;
+  z-index: 2;
+}
+
+
+/* CONTROLS - FULL */
+.text-editor .media .controls.full {
+  height: 100%;
+}
+
+.text-editor .media .controls.full > * {
+  width: 30%;
+  height: 30%;
+}
+
+.text-editor .media .controls.full > *::before {
+  background-size: contain;
+}
+
+.text-editor .media .controls.full .post-link {
+  display: none;
+}
+
+
+/* CONTROLS - CORNER */
+.text-editor .media .controls.corner {
+  height: 40px;
+  bottom: auto;
+}
+
+.text-editor .media .controls.corner > * {
+  width: 40px;
+  height: 40px;
+}
+
+.text-editor .media .controls.corner > *::before {
+  background-size: 50%;
+}
+
+.text-editor .media .controls.corner .play-pause {
+  border-radius: 0px 0px 10px 0px;
+  right: auto;
+  bottom: auto;
+}
+
+.text-editor .media .controls.corner .post-link {
+  border-radius: 0px 0px 0px 10px;
+  top: auto;
+  left: auto;
+}
+
+
+
+
+/* MEME */
+.text-editor .pop-up-image {
+  width: 300px;
+  width: 74%;
+  border-radius: 5px;
+  margin: auto;
+  position: absolute;
+  right: -300px;
+  right: -74%;
+  left: auto;
+  display: none;
+}
+
+.text-editor .pop-up-image.show {
+  -webkit-animation: pop-up-image-transition 4.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes pop-up-image-transition {
+  0% {
+    right: -300px;
+    right: -74%;
+  }
+  
+  30%, 70% {
+    right: 5%;
+  }
+  
+  100% {
+    right: 100%;
+  }
+}
+
+
+
+
+/*  POSTER FOR INSTAGRAM SHARE  */
+.text-editor .parent-content-container .poster {
+  width: auto;
+  height: 90%;
+  border-radius: inherit;
+  display: block;
+  margin: auto;
 }

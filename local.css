@@ -394,6 +394,7 @@
 .text-editor {
   width: 80%;
   height: 86%;
+/*   height: 40%; */
   border: 1px solid #ffffff;
   border-radius: 5px;
   overflow: hidden;
@@ -407,6 +408,9 @@
 
 .text-editor.computer {
   max-width: 800px;
+  
+/*   max-width: 600px; */
+  
   max-height: 650px;
   min-width: 328px;
   min-height: 20%;
@@ -639,6 +643,7 @@
   overflow: scroll;
 /*   background-color: red; */
 /*   transition: all 100ms ease-in-out; */
+  transition: all 300ms ease-in-out;
 }
 
 .text-editor .scroll-container p {

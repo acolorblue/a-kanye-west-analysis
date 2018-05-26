@@ -533,7 +533,7 @@ function mediaAfterParagraphs() {
         
         $('.malcolm-x-police-predict').bind('ended', function() {
           setTimeout(function() {
-            if ($('.second-block p').hasClass('unread')) {
+            if ($('.second-block p:first-child').hasClass('unread')) {
               automatedText('.scroll-container .second-block p', 2000, [], 0, '-break-', 1000);
               second_block_interval = setInterval(secondBlock, 10); 
             }
@@ -553,17 +553,11 @@ function mediaAfterParagraphs() {
         window.clearInterval(second_block_interval);
         
         setTimeout(function() {
-          // $('.kanye-to-cudi')[0].load();
           $('.kanye-to-cudi').parents('.media-container').show();
           $('.kanye-to-cudi').parents('.media-container').css('opacity', '1');
-          // setTimeout(function() {
-          //   if ($('.kanye-to-cudi').prev('img.thumbnail')[0].complete == true) {
-          //     $('.kanye-to-cudi').parents('.media-container').css('opacity', '1');
-          //   }        
-          // }, 1000); 
         }, 1000); 
         $('.kanye-to-cudi').bind('ended', function() {
-          if ($('.third-block p').hasClass('unread')) {
+          if ($('.third-block p:first-child').hasClass('unread')) {
             setTimeout(function() {
               automatedText('.scroll-container .third-block p', 2000, [], 0, '-break-', 1000);
               third_block_interval = setInterval(thirdBlock, 10);
@@ -584,22 +578,17 @@ function mediaAfterParagraphs() {
         window.clearInterval(third_block_interval);
         
         setTimeout(function() {
-          // $('.radio-fuck-you')[0].load();
           $('.radio-fuck-you').parents('.media-container').show();
-          setTimeout(function() {
-            if ($('.radio-fuck-you').prev('img.thumbnail')[0].complete == true) {
-              $('.radio-fuck-you').parents('.media-container').css('opacity', '1');
-            }        
-          }, 1000); 
+          $('.radio-fuck-you').parents('.media-container').css('opacity', '1');
         }, 1000); 
         $('.radio-fuck-you').bind('ended', function() {
-            if ($('.fourth-block p').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .fourth-block p', 2000, [], 0, '-break-', 1000);
-                fourth_block_interval = setInterval(fourthBlock, 10);
-              }, 2000);
-            }
-          })
+          if ($('.fourth-block p:first-child').hasClass('unread')) {
+            setTimeout(function() {
+              automatedText('.scroll-container .fourth-block p', 2000, [], 0, '-break-', 1000);
+              fourth_block_interval = setInterval(fourthBlock, 10);
+            }, 2000);
+          }
+        })
       }
     })
   }
@@ -614,23 +603,17 @@ function mediaAfterParagraphs() {
         window.clearInterval(fourth_block_interval);
         
         setTimeout(function() {
-          // $('.malcolm-x-on-goldwater')[0].load();
           $('.malcolm-x-on-goldwater').parents('.media-container').show();
           $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
-          // setTimeout(function() {
-          //   if ($('.malcolm-x-on-goldwater').prev('img.thumbnail')[0].complete == true) {
-          //     $('.malcolm-x-on-goldwater').parents('.media-container').css('opacity', '1');
-          //   }        
-          // }, 1000); 
         }, 1000); 
         $('.malcolm-x-on-goldwater').bind('ended', function() {
-            if ($('.fifth-block p').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .fifth-block p', 2000, [], 0, '-break-', 1000);
-                fifth_block_interval = setInterval(fifthBlock, 10);
-              }, 2000);
-            }
-          })
+          if ($('.fifth-block p:first-child').hasClass('unread')) {
+            setTimeout(function() {
+              automatedText('.scroll-container .fifth-block p', 2000, [], 0, '-break-', 1000);
+              fifth_block_interval = setInterval(fifthBlock, 10);
+            }, 2000);
+          }
+        })
       }
     })
   }
@@ -643,25 +626,20 @@ function mediaAfterParagraphs() {
          
       if (current_paragraph.includes("Martin Luther King received from Malcolm X.")) {
         window.clearInterval(fifth_block_interval);
+        alert("Martin Luther King received from Malcolm X.")
         
         setTimeout(function() {
-          // $('.malcolm-x-on-mlk')[0].load();
           $('.malcolm-x-on-mlk').parents('.media-container').show();
           $('.malcolm-x-on-mlk').parents('.media-container').css('opacity', '1');
-          // setTimeout(function() {
-          //   if ($('.malcolm-x-on-mlk').prev('img.thumbnail')[0].complete == true) {
-          //     $('.malcolm-x-on-mlk').parents('.media-container').css('opacity', '1');
-          //   }        
-          // }, 1000); 
         }, 1000); 
         $('.malcolm-x-on-mlk').bind('ended', function() {
-            if ($('.sixth-block p').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .sixth-block p', 2000, [], 0, '-break-', 1000);
-                sixth_block_interval = setInterval(sixthBlock, 10);
-              }, 2000);
-            }
-          })
+          if ($('.sixth-block p:first-child').hasClass('unread')) {
+            setTimeout(function() {
+              automatedText('.scroll-container .sixth-block p', 2000, [], 0, '-break-', 1000);
+              sixth_block_interval = setInterval(sixthBlock, 10);
+            }, 2000);
+          }
+        })
       }
     })
   }
@@ -697,23 +675,17 @@ function mediaAfterParagraphs() {
         window.clearInterval(sixth_block_interval);
         
         setTimeout(function() {
-          // $('.slavery-was-a-choice')[0].load();
           $('.slavery-was-a-choice').parents('.media-container').show();
           $('.slavery-was-a-choice').parents('.media-container').css('opacity', '1');
-          // setTimeout(function() {
-          //   if ($('.slavery-was-a-choice').prev('img.thumbnail')[0].complete == true) {
-          //     $('.slavery-was-a-choice').parents('.media-container').css('opacity', '1');
-          //   }        
-          // }, 1000); 
         }, 1000); 
         $('.slavery-was-a-choice').bind('ended', function() {
-            if ($('.seventh-block p').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .seventh-block p', 2000, [], 0, '-break-', 1000);
-                seventh_block_interval = setInterval(seventhBlock, 10);
-              }, 2000);
-            }
-          })
+          if ($('.seventh-block p:first-child').hasClass('unread')) {
+            setTimeout(function() {
+              automatedText('.scroll-container .seventh-block p', 2000, [], 0, '-break-', 1000);
+              seventh_block_interval = setInterval(seventhBlock, 10);
+            }, 2000);
+          }
+        })
       }
     })
   }
@@ -728,23 +700,17 @@ function mediaAfterParagraphs() {
         window.clearInterval(seventh_block_interval);
         
         setTimeout(function() {
-          // $('.candace-owens-economics')[0].load();
           $('.candace-owens-economics').parents('.media-container').show();
           $('.candace-owens-economics').parents('.media-container').css('opacity', '1');
-          // setTimeout(function() {
-          //   if ($('.candace-owens-economics').prev('img.thumbnail')[0].complete == true) {
-          //     $('.candace-owens-economics').parents('.media-container').css('opacity', '1');
-          //   }        
-          // }, 1000); 
         }, 1000); 
         $('.candace-owens-economics').bind('ended', function() {
-            if ($('.eight-block p').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .eight-block p', 2000, [], 0, '-break-', 1000);
-                eight_block_interval = setInterval(eightBlock, 10);
-              }, 2000);
-            }
-          })
+          if ($('.eight-block p:first-child').hasClass('unread')) {
+            setTimeout(function() {
+              automatedText('.scroll-container .eight-block p', 2000, [], 0, '-break-', 1000);
+              eight_block_interval = setInterval(eightBlock, 10);
+            }, 2000);
+          }
+        })
       }
     })
   }
@@ -759,17 +725,11 @@ function mediaAfterParagraphs() {
         window.clearInterval(eight_block_interval);
         
         setTimeout(function() {
-          // $('.we-make-good-music')[0].load();
           $('.we-make-good-music').parents('.media-container').show();
           $('.we-make-good-music').parents('.media-container').css('opacity', '1');
-          // setTimeout(function() {
-          //   if ($('.we-make-good-music').prev('img.thumbnail')[0].complete == true) {
-          //     $('.we-make-good-music').parents('.media-container').css('opacity', '1');
-          //   }        
-          // }, 1000); 
         }, 1000); 
         $('.we-make-good-music').bind('ended', function() {
-            if ($('.ninth-block p').hasClass('unread')) {
+            if ($('.ninth-block p:first-child').hasClass('unread')) {
               setTimeout(function() {
                 automatedText('.scroll-container .ninth-block p', 2000, [], 0, '-break-', 1000);
                 ninth_block_interval = setInterval(ninthBlock, 10);
@@ -790,23 +750,17 @@ function mediaAfterParagraphs() {
         window.clearInterval(ninth_block_interval);
         
         setTimeout(function() {
-          // $('.george-bush-explanation')[0].load();
           $('.george-bush-explanation').parents('.media-container').show();
           $('.george-bush-explanation').parents('.media-container').css('opacity', '1');
-          // setTimeout(function() {
-          //   if ($('.george-bush-explanation').prev('img.thumbnail')[0].complete == true) {
-          //     $('.george-bush-explanation').parents('.media-container').css('opacity', '1');
-          //   }        
-          // }, 1000); 
         }, 1000); 
         $('.george-bush-explanation').bind('ended', function() {
-            if ($('.tenth-block p').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .tenth-block p', 2000, [], 0, '-break-', 1000);
-                tenth_block_interval = setInterval(theEnd, 10);
-              }, 2000);
-            }
-          })
+          if ($('.tenth-block p:first-child').hasClass('unread')) {
+            setTimeout(function() {
+              automatedText('.scroll-container .tenth-block p', 2000, [], 0, '-break-', 1000);
+              tenth_block_interval = setInterval(theEnd, 10);
+            }, 2000);
+          }
+        })
       }
     })
   }
@@ -821,23 +775,17 @@ function mediaAfterParagraphs() {
         window.clearInterval(tenth_block_interval);
         
         setTimeout(function() {
-          // $('.macintosh-team')[0].load();
           $('.macintosh-team').parents('.media-container').show();
-          $('.macintosh-team').parents('.media-container').css('opacity', '1');
-          // setTimeout(function() {
-          //   if ($('.macintosh-team').prev('img.thumbnail')[0].complete == true) {
-          //     $('.macintosh-team').parents('.media-container').css('opacity', '1');
-          //   }        
-          // }, 1000); 
+          $('.macintosh-team').parents('.media-container').css('opacity', '1'); 
         }, 1000); 
         $('.macintosh-team').bind('ended', function() {
-            if ($('.eleventh-block p').hasClass('unread')) {
-              setTimeout(function() {
-                automatedText('.scroll-container .eleventh-block p', 2000, [], 0, '-break-', 1000);
-                ending_interval = setInterval(theEnd, 10);
-              }, 2000);
-            }
-          })
+          if ($('.eleventh-block p:first-child').hasClass('unread')) {
+            setTimeout(function() {
+              automatedText('.scroll-container .eleventh-block p', 2000, [], 0, '-break-', 1000);
+              ending_interval = setInterval(theEnd, 10);
+            }, 2000);
+          }
+        })
       }
     })
   }
@@ -1023,10 +971,140 @@ function automatedScrollAdjustment() {
       $('.scroll-container').css('margin-top', margin_top);
     } 
 
+    // if (current_scroll_container_height >= parent_container_height) {
+    //   margin_top = -current_scroll_container_height - -parent_container_height;
+    //   $('.scroll-container').css('margin-top', margin_top);
+    // } 
+    
     if (current_scroll_container_height >= parent_container_height) {
-      margin_top = -current_scroll_container_height - -parent_container_height;
-      $('.scroll-container').css('margin-top', margin_top);
-    } 
+      
+      if (current_scroll_container_height >= parent_container_height * 1) {
+        margin_top = -parent_container_height / 2;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 1.5) {
+        margin_top = -parent_container_height;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 2) {
+        margin_top = -parent_container_height * 1.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 2.5) {
+        margin_top = -parent_container_height * 2;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 3) {
+        margin_top = -parent_container_height * 2.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 3.5) {
+        margin_top = -parent_container_height * 3;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 4) {
+        margin_top = -parent_container_height * 3.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+    
+      if (current_scroll_container_height >= parent_container_height * 4.5) {
+        margin_top = -parent_container_height * 4;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 5) {
+        margin_top = -parent_container_height * 4.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+
+      if (current_scroll_container_height >= parent_container_height * 5.5) {
+        margin_top = -parent_container_height * 5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+  
+      if (current_scroll_container_height >= parent_container_height * 6) {
+        margin_top = -parent_container_height * 5.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+
+      if (current_scroll_container_height >= parent_container_height * 6.5) {
+        margin_top = -parent_container_height * 6;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 7) {
+        margin_top = -parent_container_height * 6.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 7.5) {
+        margin_top = -parent_container_height * 7;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 8) {
+        margin_top = -parent_container_height * 7.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 8.5) {
+        margin_top = -parent_container_height * 8;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 9) {
+        margin_top = -parent_container_height * 8.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 9.5) {
+        margin_top = -parent_container_height * 9;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 10) {
+        margin_top = -parent_container_height * 9.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 10.5) {
+        margin_top = -parent_container_height * 10;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 11) {
+        margin_top = -parent_container_height * 10.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 11.5) {
+        margin_top = -parent_container_height * 11;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 12) {
+        margin_top = -parent_container_height * 11.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 12.5) {
+        margin_top = -parent_container_height * 12;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+      if (current_scroll_container_height >= parent_container_height * 13) {
+        margin_top = -parent_container_height * 12.5;
+        $('.scroll-container').css('margin-top', margin_top);
+      }
+      
+    }
+
   }
 }
 
@@ -1133,7 +1211,7 @@ window.onload = function() {
   closeTextEditor();
   searchTextEditor();
   sharePage();
-  // automatedText('.scroll-container .sixth-block p', 2000, [''], 0, '-break-', 800);
+  // automatedText('.scroll-container .first-block p', 2000, [''], 0, '-break-', 800);
   mediaAfterParagraphs();
   mediaPlayer();
   twitterEmbed();

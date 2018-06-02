@@ -39,18 +39,19 @@ function loader() {
 function userDeviceSpecifications() {
   if (mobile) {
     $('.text-editor').addClass('mobile');
+    // manuallyCenter('.desktop', '.text-editor');
   }
   
   if (desktop) {
     $('.text-editor').addClass('computer');
-
+    manuallyCenter('.desktop', '.text-editor');
+    
     function draggableApp() {
-      manuallyCenter('.desktop', '.text-editor');
       $('.text-editor').draggable({
         handle: '.header',
         cursor: 'move', 
         drag: function(event, ui) {
-          backgroundImageBlur();
+          backgroundImageBlur('.mac-os', '.text-editor', '.text-editor .blur');
         }
       });
     } 
@@ -75,13 +76,12 @@ function userDeviceSpecifications() {
 function detectSizeChange() {   
   $('.mac-os, .text-editor').mutate('width height top left', function(el, info) {
     if (desktop) {
-      manuallyCenter('.desktop', '.text-editor');
+      if (!$('.text-editor').hasClass('ui-draggable-dragging')) {
+        manuallyCenter('.desktop', '.text-editor');
+      }
     }
     
-    if (mobile) {
-    }
-    
-    backgroundImageBlur(); 
+    backgroundImageBlur('.mac-os', '.text-editor', '.text-editor .blur'); 
     automatedScrollAdjustment();
   });
 }
@@ -90,42 +90,42 @@ function detectSizeChange() {
 
 
 // BACKGROUND IMAGE BLUR
-function backgroundImageBlur() {
-  var container_background_image = $('.mac-os').css('background-image'),
-      container_width = $('.mac-os').width(),
-      container_height = $('.mac-os').height(),
+function backgroundImageBlur(container, element, blur) {
+  var container_background_image = $(container).css('background-image'),
+      container_width = $(container).width(),
+      container_height = $(container).height(),
       menu_bar_height = $('.menu-bar').height(),
-      element_top = $('.text-editor').css('top'),
-      element_left = $('.text-editor').css('left'),
+      element_top = $(element).css('top'),
+      element_left = $(element).css('left'),
       element_top = parseFloat(element_top) + parseInt(menu_bar_height);
   
-  if (container_background_image != $('.blur').css('background-image')) {
-    $('.blur').css('background-image', container_background_image);
+  if (container_background_image != $(blur).css('background-image')) {
+    $(blur).css('background-image', container_background_image);
   }
-  $('.blur').css('width', container_width);
-  $('.blur').css('height', container_height);
-  $('.blur').css('top', '-' + element_top.toFixed(2) + 'px');
-  $('.blur').css('left', '-' + element_left);
+  $(blur).css('width', container_width);
+  $(blur).css('height', container_height);
+  $(blur).css('top', '-' + element_top.toFixed(2) + 'px');
+  $(blur).css('left', '-' + element_left);
 
   if (mobile) {
     if (window.orientation == 0) {
-      $('.text-editor .blur').removeClass('cover').addClass('contain');
+      $(blur).removeClass('cover').addClass('contain');
       return;
     }
 
     if (window.orientation == -90 || 90) {
-      $('.text-editor .blur').removeClass('contain').addClass('cover');
+      $(blur).removeClass('contain').addClass('cover');
       return;
     } 
   }
 
   if (desktop) { 
-    if ($('.mac-os').width() < 1000) {
-      $('.text-editor .blur').removeClass('cover').addClass('contain');
+    if ($(container).width() < 1000) {
+      $(blur).removeClass('cover').addClass('contain');
     }
 
-    if ($('.mac-os').width() >= 1000) {
-      $('.text-editor .blur').removeClass('contain').addClass('cover');
+    if ($(container).width() >= 1000) {
+      $(blur).removeClass('contain').addClass('cover');
     }
   }
 }
@@ -184,9 +184,9 @@ function searchTextEditor() {
 
     if ($('.search-bar').length == 0) {
       if ($('p').hasClass('unread')) {
-        $('.text-editor .title').text("Nigga Finish Reading First");
+        $('.text-editor .title').text("Damn Finish Reading First");
         setTimeout(function() {
-           $('.text-editor .title').text("A Kanye West Analysis");
+          $('.text-editor .title').text("A Kanye West Analysis");
         }, 2500);
       }
       
@@ -248,7 +248,7 @@ function searchTextEditor() {
 function sharePage() {
   $('.text-editor .share').click(function(event) {
     var social_share_container = document.createElement('div');
-    social_share_container.className = 'social-share-container hide';
+        social_share_container.className = 'social-share-container hide';
 
     var social_share = document.createElement('button');
 
@@ -270,9 +270,9 @@ function sharePage() {
           $('.text-editor .title').show();
         }, 100); 
       }
-      
+     
       $('button.search').hide();
-      $('.call-to-action-controls').prepend(social_share_container);
+      $('.text.call-to-action-controls').prepend(social_share_container);
       setTimeout(function() {
         $('.social-share-container').removeClass('hide');
       }, 100);
@@ -302,7 +302,7 @@ function sharePage() {
           poster.className = 'poster';
           poster.src = poster_link;
 
-      var action_button = document.createElement('button');
+      var call_to_action = document.createElement('button');
 
       if ($(this).hasClass('twitter-b')) {
         window_link = 'https://twitter.com/intent/tweet?source=webclient&text=' + caption + line_break + webpage;
@@ -331,34 +331,41 @@ function sharePage() {
 
         function closeShare() {
           poster.remove();
-          $('.text-editor .confirm-action').remove();
-          $('.text-editor .cancel-action').remove();
+          $('.share.call-to-action-controls').hide();
           $('.text-editor .title').text("A Kanye West Analysis");
-          $('.text-editor .search').show();
-          $('.text-editor .share').show();
+          $('.text-editor').removeClass('instagram-share');
+          $('.text.call-to-action-controls, .text.call-to-action-controls .search').show();
           $('.text-editor .scroll-container').show();
           automatedScrollAdjustment();
         }
 
         
+        $('.text-editor').addClass('instagram-share');
         $('.text-editor .scroll-container').hide();
         $('.text-editor .parent-container').prepend(poster);
         $('.text-editor .title').text("Save Image Then Confirm");
 
-        $('.text-editor .search').hide();
-        action_button.className = 'confirm-action';
-        action_button.innerHTML = "Confirm";
-        $('.text-editor .call-to-action-controls').append(action_button.cloneNode(true));
-        $('.text-editor .confirm-action').click(function() {
+        // NEW
+        $('.text.call-to-action-controls').hide();
+        
+        var call_to_action_controls = document.createElement('div');
+            call_to_action_controls.className = 'call-to-action-controls share';
+
+        var call_to_action = document.createElement('button');
+
+        $('.top-bar').append(call_to_action_controls);
+        call_to_action.className += ' confirm-action';
+        call_to_action.innerHTML = "Confirm";
+        call_to_action_controls.prepend(call_to_action.cloneNode(true));
+        $('.share .confirm-action').click(function() {
           window.location.href = window_link;
           closeShare();
         });
 
-        $('.text-editor .share').hide();
-        action_button.className = 'cancel-action';
-        action_button.innerHTML = "Cancel";
-        $('.text-editor .call-to-action-controls').append(action_button.cloneNode(true));
-        $('.text-editor .cancel-action').click(function() {
+        call_to_action.className += ' cancel-action';
+        call_to_action.innerHTML = "Cancel";
+        call_to_action_controls.append(call_to_action.cloneNode(true));
+        $('.share .cancel-action').click(function() {
           closeShare();
         });
       }
@@ -503,6 +510,8 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
 // MEDIA AFTER PARAGRAPHS
 function mediaAfterParagraphs() {
   var current_paragraph,
+      header_height,
+      media_container_height,
       first_block_interval,
       second_block_interval,
       third_block_interval,
@@ -516,6 +525,35 @@ function mediaAfterParagraphs() {
       eleventh_block_interval,
       ending_interval;
   
+  function appendPlaybackControls() {
+    $('.text.call-to-action-controls').hide();
+    
+    var call_to_action_controls = document.createElement('div');
+        call_to_action_controls.className = 'call-to-action-controls video';
+    
+    var call_to_action = document.createElement('button');
+        call_to_action.className = 'white icons-b abs';
+    
+    $('.top-bar').append(call_to_action_controls);
+    call_to_action.className += ' rewind';
+    call_to_action_controls.prepend(call_to_action.cloneNode(true));
+    
+    call_to_action.className += ' forward';
+    call_to_action_controls.append(call_to_action.cloneNode(true));
+  }
+  
+  function showPlaybackControls() {
+    $('.text.call-to-action-controls').hide();
+    $('.video.call-to-action-controls').show();
+  }
+  
+  function hideInstagramShare() {
+    if ($('.text-editor').hasClass('instagram-share')) {
+      $('img.poster').remove();
+      $('.share.call-to-action-controls').hide();
+      $('.text-editor').removeClass('instagram-share');
+    } 
+  }
 
   
   // MALCOLM X POLICE VERDICT
@@ -528,31 +566,41 @@ function mediaAfterParagraphs() {
         window.clearInterval(first_block_interval);   
         
         setTimeout(function() {
+          hideInstagramShare();
+
+          if (desktop) {
+            $('.malcolm-x-police-predict').parents('.media-container').slideDown(500);
+          } 
+
           if (mobile) {
             $('.malcolm-x-police-predict').parents('.media-container').show();
           }
 
-          if (desktop) {
-            $('.malcolm-x-police-predict').parents('.media-container').slideDown(500);
+          setTimeout(function() {
+            $('.parent-container').append($('.malcolm-x-police-predict').parents('.media-container'));
+            $('.header .title').text("'Police Precinct' scene from Malcolm X (1992)");
+            appendPlaybackControls();
+          }, 500);
 
-            setTimeout(function() {
-              $('.parent-container').append($('.malcolm-x-police-predict').parents('.media-container'));
-            }, 500);
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player');
+          }, 700);
 
+          if (mobile) {
             setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.malcolm-x-police-predict').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
           }
         }, 1000);
         
         $('.malcolm-x-police-predict').bind('ended', function() { 
-          if (desktop) {
-            setTimeout(function() {
-              $('.first-block').after($('.malcolm-x-police-predict').parents('.media-container'));
-            }, 1000);
-          }
+          setTimeout(function() {
+            $('.first-block').after($('.malcolm-x-police-predict').parents('.media-container'));
+          }, 1000);
           
-          if ($('.second-block p:first-child').hasClass('unread')) {
+          if ($('.second-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .second-block p', 2000, [], 0, '-break-', 1000);
               second_block_interval = setInterval(secondBlock, 10);
@@ -573,31 +621,41 @@ function mediaAfterParagraphs() {
         window.clearInterval(second_block_interval);
         
         setTimeout(function() {
+          hideInstagramShare();
+
+          if (desktop) {
+            $('.kanye-to-cudi').parents('.media-container').slideDown(500);
+          } 
+
           if (mobile) {
             $('.kanye-to-cudi').parents('.media-container').show();
           }
 
-          if (desktop) {
-            $('.kanye-to-cudi').parents('.media-container').slideDown(500);
+          setTimeout(function() {
+            $('.parent-container').append($('.kanye-to-cudi').parents('.media-container'));
+            $('.header .title').text("Kanye West responded to Kid Cudi");
+            showPlaybackControls();
+          }, 500);
 
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player'); 
+          }, 700);
+          
+          if (mobile) {
             setTimeout(function() {
-              $('.parent-container').append($('.kanye-to-cudi').parents('.media-container'));
-            }, 500);
-
-            setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.kanye-to-cudi').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
           }
         }, 1000);
         
         $('.kanye-to-cudi').bind('ended', function() {
-          if (desktop) {
-            setTimeout(function() {
-              $('.second-block').after($('.kanye-to-cudi').parents('.media-container'));
-            }, 1000);
-          }
+          setTimeout(function() {
+            $('.second-block').after($('.kanye-to-cudi').parents('.media-container'));
+          }, 1000);
           
-          if ($('.third-block p:first-child').hasClass('unread')) {
+          if ($('.third-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .third-block p', 2000, [], 0, '-break-', 1000);
               third_block_interval = setInterval(thirdBlock, 10);
@@ -618,31 +676,41 @@ function mediaAfterParagraphs() {
         window.clearInterval(third_block_interval);
         
         setTimeout(function() {
+          hideInstagramShare();
+
+          if (desktop) {
+            $('.radio-fuck-you').parents('.media-container').slideDown(500);
+          } 
+
           if (mobile) {
             $('.radio-fuck-you').parents('.media-container').show();
           }
 
-          if (desktop) {
-            $('.radio-fuck-you').parents('.media-container').slideDown(500);
+          setTimeout(function() { 
+            $('.parent-container').append($('.radio-fuck-you').parents('.media-container'));
+            $('.header .title').text("Kanye\'s Sacremento Rant from November 2016");
+            showPlaybackControls();
+          }, 500);
 
-            setTimeout(function() { 
-              $('.parent-container').append($('.radio-fuck-you').parents('.media-container'));
-            }, 500);
-
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player'); 
+          }, 700);
+          
+          if (mobile) {
             setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
-          } 
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.radio-fuck-you').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
+          }
         }, 1000);
         
         $('.radio-fuck-you').bind('ended', function() {
-          if (desktop) {
-            setTimeout(function() {
-              $('.third-block').after($('.radio-fuck-you').parents('.media-container'));
-            }, 1000); 
-          }
+          setTimeout(function() {
+            $('.third-block').after($('.radio-fuck-you').parents('.media-container'));
+          }, 1000); 
              
-          if ($('.fourth-block p:first-child').hasClass('unread')) {
+          if ($('.fourth-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .fourth-block p', 2000, [], 0, '-break-', 1000);
               fourth_block_interval = setInterval(fourthBlock, 10);
@@ -663,31 +731,41 @@ function mediaAfterParagraphs() {
         window.clearInterval(fourth_block_interval);
         
         setTimeout(function() {
+          hideInstagramShare();
+
+          if (desktop) {
+            $('.malcolm-x-on-goldwater').parents('.media-container').slideDown(500);
+          } 
+
           if (mobile) {
             $('.malcolm-x-on-goldwater').parents('.media-container').show();
           }
 
-          if (desktop) {
-            $('.malcolm-x-on-goldwater').parents('.media-container').slideDown(500);
+          setTimeout(function() {
+            $('.parent-container').append($('.malcolm-x-on-goldwater').parents('.media-container'));
+            $('.header .title').text("Malcolm X On Barry Goldwater, 1964");
+            showPlaybackControls();
+          }, 500);
 
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player'); 
+          }, 700);
+          
+          if (mobile) {
             setTimeout(function() {
-              $('.parent-container').append($('.malcolm-x-on-goldwater').parents('.media-container'));
-            }, 500);
-
-            setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
-          } 
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.malcolm-x-on-goldwater').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
+          }
         }, 1000);
         
         $('.malcolm-x-on-goldwater').bind('ended', function() {
-          if (desktop) {
-            setTimeout(function() {
-              $('.fourth-block').after($('.malcolm-x-on-goldwater').parents('.media-container'));
-            }, 1000); 
-          }
+          setTimeout(function() {
+            $('.fourth-block').after($('.malcolm-x-on-goldwater').parents('.media-container'));
+          }, 1000); 
           
-          if ($('.fifth-block p:first-child').hasClass('unread')) {
+          if ($('.fifth-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .fifth-block p', 2000, [], 0, '-break-', 1000);
               fifth_block_interval = setInterval(fifthBlock, 10);
@@ -708,31 +786,41 @@ function mediaAfterParagraphs() {
         window.clearInterval(fifth_block_interval);
         
         setTimeout(function() {
+          hideInstagramShare();
+
+          if (desktop) {
+            $('.malcolm-x-on-mlk').parents('.media-container').slideDown(500);
+          } 
+
           if (mobile) {
             $('.malcolm-x-on-mlk').parents('.media-container').show();
           }
 
-          if (desktop) {
-            $('.malcolm-x-on-mlk').parents('.media-container').slideDown(500);
+          setTimeout(function() {
+            $('.parent-container').append($('.malcolm-x-on-mlk').parents('.media-container'));
+            $('.header .title').text("Malcolm X & Louis Lomax On Martin Luther King, 1963");
+            showPlaybackControls();
+          }, 500);
 
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player'); 
+          }, 700);
+          
+          if (mobile) {
             setTimeout(function() {
-              $('.parent-container').append($('.malcolm-x-on-mlk').parents('.media-container'));
-            }, 500);
-
-            setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
-          } 
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.malcolm-x-on-mlk').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
+          }
         }, 1000);
         
         $('.malcolm-x-on-mlk').bind('ended', function() {
-          if (desktop) {
-            setTimeout(function() {
-              $('.fifth-block').after($('.malcolm-x-on-mlk').parents('.media-container'));
-            }, 1000); 
-          }
+          setTimeout(function() {
+            $('.fifth-block').after($('.malcolm-x-on-mlk').parents('.media-container'));
+          }, 1000); 
                 
-          if ($('.sixth-block p:first-child').hasClass('unread')) {
+          if ($('.sixth-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .sixth-block p', 2000, [], 0, '-break-', 1000);
               sixth_block_interval = setInterval(sixthBlock, 10);
@@ -774,31 +862,41 @@ function mediaAfterParagraphs() {
         window.clearInterval(sixth_block_interval);
         
         setTimeout(function() {
+          hideInstagramShare();
+
+          if (desktop) {
+            $('.slavery-was-a-choice').parents('.media-container').slideDown(500);
+          } 
+
           if (mobile) {
             $('.slavery-was-a-choice').parents('.media-container').show();
           }
 
-          if (desktop) {
-            $('.slavery-was-a-choice').parents('.media-container').show();
+          setTimeout(function() {
+            $('.parent-container').append($('.slavery-was-a-choice').parents('.media-container'));
+            $('.header .title').text("Kanye on the choice of slavery");
+            showPlaybackControls();
+          }, 500);
 
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player'); 
+          }, 700);
+          
+          if (mobile) {
             setTimeout(function() {
-              $('.parent-container').append($('.slavery-was-a-choice').parents('.media-container'));
-            }, 500);
-
-            setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
-          } 
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.slavery-was-a-choice').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
+          }
         }, 1000);
         
         $('.slavery-was-a-choice').bind('ended', function() {
-          if (desktop) {
-            setTimeout(function() {
-              $('.sixth-block').after($('.slavery-was-a-choice').parents('.media-container'));
-            }, 1000); 
-          }
+          setTimeout(function() {
+            $('.sixth-block').after($('.slavery-was-a-choice').parents('.media-container'));
+          }, 1000); 
           
-          if ($('.seventh-block p:first-child').hasClass('unread')) {
+          if ($('.seventh-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .seventh-block p', 2000, [], 0, '-break-', 1000);
               seventh_block_interval = setInterval(seventhBlock, 10);
@@ -819,31 +917,41 @@ function mediaAfterParagraphs() {
         window.clearInterval(seventh_block_interval);
         
         setTimeout(function() {
+          hideInstagramShare();
+
+          if (desktop) {
+            $('.candace-owens-economics').parents('.media-container').slideDown(500);
+          } 
+
           if (mobile) {
             $('.candace-owens-economics').parents('.media-container').show();
           }
 
-          if (desktop) {
-            $('.candace-owens-economics').parents('.media-container').slideDown(500);
+          setTimeout(function() {
+            $('.parent-container').append($('.candace-owens-economics').parents('.media-container'));
+            $('.header .title').text("Candace Owens on economics over social issues");
+            showPlaybackControls();
+          }, 500);
 
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player'); 
+          }, 700);
+          
+          if (mobile) {
             setTimeout(function() {
-              $('.parent-container').append($('.candace-owens-economics').parents('.media-container'));
-            }, 500);
-
-            setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
-          } 
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.candace-owens-economics').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
+          }
         }, 1000);
         
         $('.candace-owens-economics').bind('ended', function() {
-          if (desktop) {
-            setTimeout(function() {
-              $('.seventh-block').after($('.candace-owens-economics').parents('.media-container'));
-            }, 1000); 
-          }
+          setTimeout(function() {
+            $('.seventh-block').after($('.candace-owens-economics').parents('.media-container'));
+          }, 1000); 
           
-          if ($('.eight-block p:first-child').hasClass('unread')) {
+          if ($('.eight-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .eight-block p', 2000, [], 0, '-break-', 1000);
               eight_block_interval = setInterval(eightBlock, 10);
@@ -864,31 +972,41 @@ function mediaAfterParagraphs() {
         window.clearInterval(eight_block_interval);
         
         setTimeout(function() {
+          hideInstagramShare();
+
+          if (desktop) {
+            $('.we-make-good-music').parents('.media-container').slideDown(500);
+          }
+
           if (mobile) {
             $('.we-make-good-music').parents('.media-container').show();
           }
 
-          if (desktop) {
-            $('.we-make-good-music').parents('.media-container').slideDown(500);
+          setTimeout(function() {
+            $('.parent-container').append($('.we-make-good-music').parents('.media-container'));
+            $('.header .title').text("We Make Good Music");
+            showPlaybackControls();
+          }, 500);
 
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player'); 
+          }, 700);
+          
+          if (mobile) {
             setTimeout(function() {
-              $('.parent-container').append($('.we-make-good-music').parents('.media-container'));
-            }, 500);
-
-            setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.we-make-good-music').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
           }
         }, 1000);
         
         $('.we-make-good-music').bind('ended', function() {
-          if (desktop) {
-            setTimeout(function() {
-              $('.eight-block').after($('.we-make-good-music').parents('.media-container'));
-            }, 1000); 
-          }
+          setTimeout(function() {
+            $('.eight-block').after($('.we-make-good-music').parents('.media-container'));
+          }, 1000); 
           
-          if ($('.ninth-block p:first-child').hasClass('unread')) {
+          if ($('.ninth-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .ninth-block p', 2000, [], 0, '-break-', 1000);
               ninth_block_interval = setInterval(ninthBlock, 10);
@@ -909,31 +1027,40 @@ function mediaAfterParagraphs() {
         window.clearInterval(ninth_block_interval);
         
         setTimeout(function() {
+          hideInstagramShare();
           if (mobile) {
             $('.george-bush-explanation').parents('.media-container').show();
           }
 
           if (desktop) {
             $('.george-bush-explanation').parents('.media-container').slideDown(500);
+          }
 
-            setTimeout(function() {
-              $('.parent-container').append($('.george-bush-explanation').parents('.media-container'));
-            }, 500);
+          setTimeout(function() {
+            $('.parent-container').append($('.george-bush-explanation').parents('.media-container'));
+            $('.header .title').text("Kanye the root of is motive");
+            showPlaybackControls();
+          }, 500);
 
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player'); 
+          }, 700);
+          
+          if (mobile) {
             setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.george-bush-explanation').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
           }
         }, 1000);
         
         $('.george-bush-explanation').bind('ended', function() {
-          if (desktop) {
-            setTimeout(function() {
-              $('.ninth-block').after($('.george-bush-explanation').parents('.media-container'));
-            }, 1000); 
-          }
+          setTimeout(function() {
+            $('.ninth-block').after($('.george-bush-explanation').parents('.media-container'));
+          }, 1000); 
           
-          if ($('.tenth-block p:first-child').hasClass('unread')) {
+          if ($('.tenth-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .tenth-block p', 2000, [], 0, '-break-', 1000);
               tenth_block_interval = setInterval(tenthBlock, 10);
@@ -954,31 +1081,40 @@ function mediaAfterParagraphs() {
         window.clearInterval(tenth_block_interval);
         
         setTimeout(function() {
+          hideInstagramShare();
+          if (desktop) {
+            $('.macintosh-team').parents('.media-container').slideDown(500);
+          }
+
           if (mobile) {
             $('.macintosh-team').parents('.media-container').show();
           }
 
-          if (desktop) {
-            $('.macintosh-team').parents('.media-container').slideDown(500);
+          setTimeout(function() {
+            $('.parent-container').append($('.macintosh-team').parents('.media-container'));
+            $('.header .title').text("On the creation of the MacIntosh, 1985");
+            showPlaybackControls();
+          }, 500);
 
+          setTimeout(function() {
+            $('.text-editor').addClass('video-player'); 
+          }, 700);
+          
+          if (mobile) {
             setTimeout(function() {
-              $('.parent-container').append($('.macintosh-team').parents('.media-container'));
-            }, 500);
-
-            setTimeout(function() {
-              $('.text-editor').addClass('video-player'); 
-            }, 700);
+              header_height = $('.text-editor .header').height();
+              media_container_height = $('.macintosh-team').parents('.media-container').height();
+              $('.text-editor.video-player').css('height', header_height + media_container_height); 
+            }, 1000); 
           }
         }, 1000);
         
         $('.macintosh-team').bind('ended', function() {
-          if (desktop) {
-            setTimeout(function() {
-              $('.tenth-block').after($('.macintosh-team').parents('.media-container'));
-            }, 1000); 
-          }
+          setTimeout(function() {
+            $('.tenth-block').after($('.macintosh-team').parents('.media-container'));
+          }, 1000); 
           
-          if ($('.eleventh-block p:first-child').hasClass('unread')) {
+          if ($('.eleventh-block p:first-child').is(':hidden')) {
             setTimeout(function() {
               automatedText('.scroll-container .eleventh-block p', 2000, [], 0, '-break-', 1000);
               ending_interval = setInterval(theEnd, 10);
@@ -1073,20 +1209,27 @@ function mediaAfterParagraphs() {
 
 // MEDIA PLAYER
 function mediaPlayer() { 
-  var text_editor,
-      parent_content_container,
+  var text_editor = $('.text-editor'),
+      text_editor_title = $('.text-editor .header .title'),
+      text_call_to_action_controls = $('.text.call-to-action-controls'),
+      video_call_to_action_controls,
+      video_call_to_action_controls_button,
+      search_button = $('.search'),
+      parent_content_container = $('.parent-container'),
+      scroll_container = $('.scroll-container'),
       media_container,
       thumbnail,
       video,
+      current_time,
       controls,
       post_link,
       paused,
-      playing;
+      playing; 
   
   if (desktop) {
     $(document).on('click', '.media-container.video', function(event) {
-       text_editor = $('.text-editor');
-       parent_content_container = $('.parent-container');
+       video_call_to_action_controls = $('.video.call-to-action-controls');
+       video_call_to_action_controls_button =  $('.video.call-to-action-controls button');
        media_container = $(this);
        thumbnail = $(this).find('.thumbnail');
        video = $(this).find('video')[0];
@@ -1103,6 +1246,18 @@ function mediaPlayer() {
         controls.hide();
         thumbnail.hide();
         video.play(); 
+
+        $(video_call_to_action_controls_button).click(function() {
+          current_time = video.currentTime;
+          
+          if ($(this).hasClass('rewind')) {
+            video.currentTime = current_time - 4;
+          }
+
+          if ($(this).hasClass('forward')) {
+            video.currentTime = current_time + 4;
+          }
+        })
       }
 
       else if (playing) {
@@ -1110,12 +1265,18 @@ function mediaPlayer() {
         thumbnail.show();
         controls.show();
       }
+      
 
       $(video).bind('ended', function() {
         thumbnail.show();
         controls.show();
         setTimeout(function() {
+          video_call_to_action_controls.hide();
           text_editor.removeClass('video-player');
+          text_editor_title.text("A Kanye West Analysis");
+          text_call_to_action_controls.show();
+          search_button.show();
+          scroll_container.show();
         }, 900);
       })
       event.stopPropagation();
@@ -1126,6 +1287,8 @@ function mediaPlayer() {
   if (mobile) {
     if ($('p').hasClass('unread')) {
       $(document).on('touchstart', '.media-container.video', function(event) {
+         video_call_to_action_controls = $('.video.call-to-action-controls');
+         video_call_to_action_controls_button =  $('.video.call-to-action-controls button');
          media_container = $(this);
          thumbnail = $(this).find('.thumbnail');
          video = $(this).find('video')[0];
@@ -1144,6 +1307,19 @@ function mediaPlayer() {
           controls.hide();
           thumbnail.hide();
           video.play(); 
+          
+          
+          $(video_call_to_action_controls_button).click(function() {
+            current_time = video.currentTime;
+
+            if ($(this).hasClass('rewind')) {
+              video.currentTime = current_time - 4;
+            }
+
+            if ($(this).hasClass('forward')) {
+              video.currentTime = current_time + 4;
+            }
+          })
         }
 
         else if (playing) {
@@ -1155,6 +1331,15 @@ function mediaPlayer() {
         $(video).bind('ended', function() {
           thumbnail.show();
           controls.show();
+          setTimeout(function() {
+            video_call_to_action_controls.hide();
+            text_editor.removeClass('video-player');
+            text_editor.css('height', '90%');
+            text_editor_title.text("A Kanye West Analysis");
+            text_call_to_action_controls.show();
+            search_button.show();
+            scroll_container.show();
+          }, 900);
         })
         event.stopPropagation();
       })
@@ -1373,7 +1558,6 @@ function automatedScrollAdjustment() {
         $('.scroll-container').css('margin-top', margin_top);
       }
     }
-
   }
 }
 
@@ -1448,7 +1632,7 @@ function onFileClick() {
     }
 
     if (!$(this).hasClass('selected')) {
-      if ($(this).find('.title').text() == $('.text-editor .title').text() || $('.poster').length == 1) {
+      if ($(this).hasClass('text')) {
         $(this).addClass('selected');
         $('.text-editor').removeClass('hide');
         $('.screensaver-credits').removeClass('show');
@@ -1459,10 +1643,11 @@ function onFileClick() {
     .on('contextmenu', function() {
     return false;
   })
-
-    .on('dragstart', function(event) { 
-    event.preventDefault(); 
-  }) 
+  
+    $('.file').draggable({
+      cancel: false,
+      cursor: 'move'
+    });
 }
 
  
@@ -1474,10 +1659,11 @@ window.onload = function() {
   userDeviceSpecifications();
   detectSizeChange();
   clock(); 
-  backgroundImageBlur();
+  backgroundImageBlur('.mac-os', '.text-editor', '.text-editor .blur');
   closeTextEditor();
   searchTextEditor();
   sharePage();
+  // automatedText('.scroll-container .first-block p', 2000, [''], 0, '-break-', 800);
   mediaAfterParagraphs();
   mediaPlayer();
   twitterEmbed();
@@ -1489,6 +1675,7 @@ window.onload = function() {
 
 // WINDOW ON ERROR
 window.onerror = function(msg, url, linenumber) {
-  alert('Error message: '+ msg +'\nURL: '+ url +'\nLine Number: '+ linenumber);
+  alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but refresh the page though.");
+  console.log('Error message: '+ msg +'\nURL: '+ url +'\nLine Number: '+ linenumber);
   return true;
 }

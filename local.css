@@ -1,3 +1,9 @@
+* {
+  transition: all 200ms ease-in-out !important;
+/*   transition: all 5s ease-in-out !important; */
+}
+
+
 /* LOADER */
 .loader {
   width: 100%;
@@ -71,8 +77,10 @@
 /* LOADER MEME */
 .loader img.meme {
   height: 300px;
+  height: 250px;
   top: auto;
   bottom: -300px;
+  bottom: -250px;
   transition: bottom 1s ease-in-out;
 }
 
@@ -232,10 +240,6 @@
   height: 130px;
   display: block;
   margin: 10px;
-}
-
-.mac-os .desktop .file.selected {
-  opacity: unset;
 }
 
 .mac-os .desktop .file * {
@@ -413,10 +417,29 @@
   top: 10px;
   right: 10px;
   left: auto;
+/*   bottom: 0px; */
 }
 
 .text-editor.hide {
   transform: scale(0); 
+}
+
+.text-editor.video-player {
+  border: unset;
+  box-shadow: 0 0 20px #333;
+}
+
+.text-editor.computer.video-player {
+  height: fit-content;
+}
+
+.text-editor.mobile.video-player {
+  height: fit-content;
+}
+
+.text-editor.instagram-share {
+  width: fit-content;
+  background-color: #f6f5f6;
 }
 
 .text-editor ::selection { 
@@ -424,9 +447,7 @@
   color: #fff; 
 }
 
-.text-editor.video-player {
-  height: fit-content;
-}
+
 
 
 
@@ -444,6 +465,11 @@
   height: -webkit-fill-available;
   filter: blur(20px);
   position: absolute;
+  transition: unset !important;
+}
+
+.text-editor.instagram-share .blur {
+  background-image: unset !important;
 }
 
 .text-editor .blur.cover {
@@ -462,9 +488,15 @@
   width: 100%;
   height: 35px;
   border-bottom: none;
+  background-color: transparent;
   position: relative;
   flex-shrink: 0;
   z-index: 1;
+  transition: all 200ms ease-in-out;
+}
+
+.text-editor.video-player .header {
+  background-color: #111111;
 }
 
 .text-editor .header .top-bar {
@@ -491,11 +523,21 @@
 .text-editor .header .main-controls button {
   width: 12px;
   height: 12px;
-  border: 1px solid #ffffff !important;
+  border: 1px solid #ffffff;
   border-radius: 100%;
-  background-color: rgba(255, 255, 255, .1) !important;
+  background-color: rgba(255, 255, 255, .1);
   position: relative;
   margin: auto auto auto 0px;
+  transition: border 200ms ease-in-out;
+}
+
+.text-editor.video-player .header .main-controls button {
+  border: unset;
+}
+
+.text-editor.instagram-share .header .main-controls button {
+  background-color: #acabac;
+  border: unset;
 }
 
 .text-editor .header .main-controls .icons-b::before {
@@ -513,17 +555,23 @@
 .text-editor .header .top-bar .title {
   width: fit-content;
   height: fit-content;
+  max-width: 67%;
+  overflow: hidden;
+  font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
+  letter-spacing: 0.1px;
   color: #ffffff;
   text-shadow: 0px 0px 4px #545454;
   text-align: center;
-  font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
-  letter-spacing: 0.1px;
+  text-overflow: ellipsis;
   margin: auto;
   flex-shrink: 1;
   white-space: nowrap;
 }
 
-
+.text-editor.instagram-share .header .top-bar .title {
+  color: #747374;
+  text-shadow: unset;
+}
 
 
 /* CALL TO ACTION */
@@ -548,12 +596,26 @@
   margin: auto auto auto 4px;
 }
 
+.text-editor.video-player .header .call-to-action-controls > button {
+  border: unset;
+}
+
+.text-editor.instagram-share .header .call-to-action-controls > button {
+  border: 1px solid #ccc;
+  background: linear-gradient(#fcfcfc, #f1f1f1);
+  color: #000;
+}
+
 .text-editor .header .call-to-action-controls > button.icons-b {
   width: 36px;
 }
 
 .text-editor .header .call-to-action-controls > button.icons-b::before {
   background-size: 11px;
+}
+
+.text-editor.video-player .header .call-to-action-controls > button.icons-b::before {
+  background-size: 10px;
 }
 
 
@@ -641,6 +703,15 @@
 
 .text-editor.video-player .parent-container {
   height: fit-content;
+  border: unset;
+  border-radius: 0px 0px 4px 4px;
+  background-color: #111111;
+  padding: 0%;
+  margin: 0px;
+}
+
+.text-editor.instagram-share .parent-container {
+  border: 1px solid #cbcbcb;
   padding: 0%;
 }
 
@@ -711,6 +782,7 @@
 
 .text-editor.video-player .media-container {
   border-radius: 4px;
+  border-radius: 0px 0px 4px 4px;
 }
 
 .text-editor .media-container .media {
@@ -836,7 +908,7 @@
 /*  POSTER FOR INSTAGRAM SHARE  */
 .text-editor .parent-container .poster {
   width: auto;
-  height: 90%;
+  height: 100%;
   border-radius: inherit;
   display: block;
   margin: auto;

@@ -12,26 +12,20 @@ function loader() {
     function addMoveLoop() {
       if (desktop) {
         $('.gta .character').removeClass('move');
+        
+        setTimeout(function() {
+          $('.gta .character').addClass('move'); 
+        }, 100);
       }
 
       if (mobile) {
         $('.gta .background, .gta .character').removeClass('move');
+        
+        setTimeout(function() {
+          $('.gta .background, .gta .character').addClass('move');
+        }, 100);
       }
       
-      setTimeout(function() {
-        $('.gta .background, .gta .character').addClass('move');
-        
-        if (desktop) {
-          $('.gta .character').addClass('move'); 
-          if (!$('.gta .background').hasClass('move')) {
-            $('.gta .background').addClass('move');
-          }
-        }
-
-        if (mobile) {
-          $('.gta .background, .gta .character').addClass('move');
-        }
-      }, 100);
     }
 
     setTimeout(function() {
@@ -85,8 +79,7 @@ function loader() {
         instructionsBuild();
       }, 4500);
       return;
-    }
-    
+    } 
     
     function transitions() {
       setTimeout(function() { 

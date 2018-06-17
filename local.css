@@ -1,45 +1,50 @@
 * {
-  transition: all 200ms ease-in-out !important;
-/*   transition: all 5s ease-in-out !important; */
+  transition: all 200ms ease-in-out;
 }
 
+.active::after {
+  content: "|";
+  color: #000000;
+}
 
 /* LOADER */
 .loader {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #eeeeee;
-  font-family: ahamonomonospaced;
-  color: #f9f9f9;
-  text-shadow: 0px 0px 5px #8e8e8e;
-  font-size: 30px;
-  text-transform: uppercase;
-  line-height: 1;
-  text-align: center;
+  background-color: #111111;
+  color: #ffffff;
   z-index: 9;
+  transition: all 2;
 }
 
 .loader::before {
+  transition: all 1s ease-in-out;
+}
+
+.loader.covered::before {
   content: '';
   width: -webkit-fill-available;
   height: -webkit-fill-available;
-  background-color: inherit;
+  background-color: #111111;
+  background-color: red;
   position: absolute;
   top: inherit;
   right: inherit;
   bottom: inherit;
   left: inherit;
   z-index: 9;
-  transition: opacity 1s ease-in-out; 
+  opacity: 1;
 }
 
-.loader.hide {
-  -webkit-animation: loader-hide 3s linear 5s;
-}
-
-.loader.hide::before {
+.loader.uncovered::before {
+  content: '';
   opacity: 0; 
+}
+
+/* HIDE - PULL UP */
+.loader.hide {
+  -webkit-animation: loader-hide 3s linear 1s;
 }
 
 @-webkit-keyframes loader-hide {  
@@ -50,6 +55,278 @@
   100% {
     transform: translate(0%, -110%);
   }
+}
+
+.loader.unremoved {
+  opacity: 0;
+}
+
+
+/* LOADER - GTA */
+.loader .gta {
+  width: inherit;
+  height: inherit;
+  background-color: #111;
+  position: inherit;
+}
+
+.loader .gta > div {
+  background-repeat: no-repeat;
+/*   transition: unset; */
+}
+
+
+/* BACKGROUND & CHARACTER */
+.loader .gta .background,
+.loader .gta .character {
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  transition: opacity 2s ease-in-out;
+/*   transition: all 200ms ease-in-out, opacity 2s ease-in-out; */
+}
+
+.loader .gta.hide .background,
+.loader .gta.hide .character {
+  opacity: 0;
+}
+
+
+/* BACKGROUND */
+.loader .gta .background {
+  background-position: center;
+}
+
+.computer .loader .gta .background {
+  width: 80%;
+  height: 80%;
+  background-size: contain;
+  transform: perspective(211px) rotateX(-1deg) rotateY(2deg) rotateZ(1deg);
+  transform-origin: center center 0px;
+}
+
+.computer .loader .gta .background.move {
+  -webkit-animation: background-perspective 20s linear;
+}
+
+@-webkit-keyframes background-perspective {  
+  0% {
+    transform: perspective(122px) rotateX(-3deg) rotateY(0deg) rotateZ(-2deg);
+  }
+
+  100% { 
+    transform: perspective(211px) rotateX(-1deg) rotateY(2deg) rotateZ(1deg);
+  }
+}
+
+.mobile .loader .gta .background {
+  background-size: cover;
+}
+
+.mobile .loader .gta .background.move {
+  background-position-x: 60%;
+  -webkit-animation: background-and-character-move 5s linear;
+}
+
+
+/* CHARACTER */
+.loader .gta .character {
+  background-size: contain;
+  background-position: bottom;
+}
+
+.computer .loader .gta .character {
+  background-size: auto 95%;
+}
+
+.mobile .loader .gta .character {
+  background-size: 90% auto;
+}
+
+.loader .gta .character.move {
+  background-position-x: 60%;
+  -webkit-animation: background-and-character-move 5s linear;
+} 
+
+@-webkit-keyframes background-and-character-move {  
+  0% {
+    background-position-x: 50%;
+  }
+
+  100% { 
+    background-position-x: 60%;
+  }
+}
+
+
+
+/* MICHAEL */
+.loader .gta.michael .background {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Michael.jpg');
+}
+
+.loader .gta.michael .character {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Michael%20-%201.png');
+}
+
+
+/* FRANKLIN */
+.loader .gta.franklin .background {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Franklin%20And%20Chop.jpg');
+}
+
+.loader .gta.franklin .character {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Franklin%20-%201.png');
+}
+
+
+/* TREVOR */
+.loader .gta.trevor .background {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Trevor.jpg');
+}
+
+.loader .gta.trevor .character {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Trevor%20-%202.png');
+}
+
+
+/* KANYE */
+.loader .gta.kanye .background {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Background%20-%20Room%203.jpg');
+}
+
+.loader .gta.kanye .character {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Character%20-%202.png');
+}
+
+.loader.mobile .gta.kanye .character {
+  background-size: auto 90%;
+}
+
+.loader .gta.kanye .text-logo {
+  width: 210px;
+  height: fit-content;
+  font-family: 'Pricedown';
+  font-size: 55px;
+  line-height: 0.85;
+  text-transform: lowercase;
+  text-shadow: none;
+  -webkit-text-stroke: 2.4px black;
+  visibility: hidden;
+}
+
+.loader .gta.kanye .icon-logo {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Logo%20-%201.png');
+}
+
+
+/* LOGOS */
+.loader .gta.original .text-logo {
+  width: 180px;
+  height: 180px;
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Logo%20-%201.png');
+  background-size: contain;
+  background-position: bottom;
+  top: auto;
+  right: auto;
+  bottom: 20px;
+  left: 20px;
+}
+
+.loader .gta.original .icon-logo {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Rockstar/Logo%20-%201.png');
+}
+
+.loader .gta .icon-logo {
+  width: 40px;
+  height: 40px;
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  background-size: contain;
+  background-position: center;
+}
+
+
+/* INFORMATION CONTAINER */
+.loader .gta .information-container {
+  width: auto;
+  height: auto;
+  border: 4px solid #000000;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: rgba(17, 17, 17, .7);
+  padding: 1%;
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.loader .gta .information-container .icons-b::before {
+  width: 14px;
+  height: 14px;
+  background-size: contain;
+  margin-top: auto;
+  margin-right: 4px;
+  margin-bottom: -2px;
+  margin-left: 4px;
+}
+
+
+/* INFORMATION > INSTRUCTION */
+.loader .gta .information-container.instructions {
+  width: 180px;
+  top: auto;
+  right: auto;
+  left: 20px;
+  visibility: hidden;
+}
+
+.loader .gta.original .information-container.instructions {
+  bottom: 200px;
+}
+
+.loader .gta.kanye .information-container.instructions {
+  bottom: 20px;
+}
+
+.loader .gta .information-container.instructions .info::before {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Information/Information%20-%20White%20-%202.png');
+}
+
+.loader .gta .information-container.instructions .extra-options::before {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Twitter%20Icons/Regular%20Mode%20Icons/Extra%20Options/1.png');
+}
+
+
+/* INFORMATION > LOADING INDICATOR */
+.loader .gta .information-container.loading-indicator {
+  width: auto;
+  background-color: #000000;
+  top: auto;
+  right: 20px;
+  bottom: 70px;
+  left: auto;
+}
+
+.loader .gta .information-container.loading-indicator .loading-circle::before {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Loading%20Indicator/Fading%20Circle%20-%201.gif');
+}
+
+
+
+
+/* LOADER - MEME */
+.loader-container .meme {
+  font-family: ahamonomonospaced;
+  font-size: 30px;
+  color: #f9f9f9;
+  text-shadow: 0px 0px 5px #8e8e8e;
+  text-transform: uppercase;
+  line-height: 1;
+  text-align: center;
 }
 
 
@@ -81,7 +358,7 @@
   top: auto;
   bottom: -300px;
   bottom: -250px;
-  transition: bottom 1s ease-in-out;
+/*   transition: bottom 1s ease-in-out; */
 }
 
 .loader img.meme.show {
@@ -345,7 +622,7 @@
   top: auto;
   right: auto;
   left: -218px;
-  transition: all 100ms ease-in-out;
+/*   transition: all 100ms ease-in-out; */
 }
 
 .screensaver-credits.show {
@@ -365,7 +642,7 @@
   background-color: #252525;
   right: -258px;
   left: auto;
-  transition: all 200ms ease-in-out;
+/*   transition: all 200ms ease-in-out; */
 }
 
 .mac-os .embed-window.cover::before {
@@ -397,12 +674,12 @@
   border: 1px solid #ffffff;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0px 0px 5px #c7c6c6;
+/*   box-shadow: 0px 0px 5px #c7c6c6; */
+  box-shadow: 0 0 20px #333;
   display: flex;
   flex-direction: column;
   bottom: auto;
   z-index: 1;
-  transition: all 200ms ease-in-out;
 }
 
 .text-editor.computer {
@@ -414,53 +691,38 @@
 }
 
 .text-editor.mobile {
+  border: 1px solid #ffffff;
+}
+
+.text-editor.mobile.portrait {
   top: 10px;
   right: 10px;
   left: auto;
-/*   bottom: 0px; */
+}
+
+.text-editor.mobile.landscape,
+.text-editor.mobile.landscape.video-player {
+  width: 70%;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
 }
 
 .text-editor.hide {
   transform: scale(0); 
 }
 
-.text-editor.video-player {
-  border: unset;
-  box-shadow: 0 0 20px #333;
-}
-
-.text-editor.computer.video-player {
-  height: fit-content;
-}
-
-.text-editor.mobile.video-player {
-  height: fit-content;
-}
-
-.text-editor.instagram-share {
-  width: fit-content;
-  background-color: #f6f5f6;
-}
-
 .text-editor ::selection { 
-  background-color: #000;
-  color: #fff; 
-}
-
-
-
-
-
-/* TRANSTIONS */
-.text-editor * {
-  transition: opacity 200ms ease-in-out;
+  background-color: rgba(255, 255, 255, .3);
+  color: rgba(0, 0, 0, .8);
 }
 
 
 
 
 /* BLUR */
-.text-editor .blur {
+.text-editor > .blur {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   filter: blur(20px);
@@ -468,15 +730,11 @@
   transition: unset !important;
 }
 
-.text-editor.instagram-share .blur {
-  background-image: unset !important;
-}
-
-.text-editor .blur.cover {
+.text-editor > .blur.cover {
   background-size: cover;
 }
  
-.text-editor .blur.contain {
+.text-editor > .blur.contain {
   background-size: contain;
 }
 
@@ -492,17 +750,16 @@
   position: relative;
   flex-shrink: 0;
   z-index: 1;
-  transition: all 200ms ease-in-out;
-}
-
-.text-editor.video-player .header {
-  background-color: #111111;
 }
 
 .text-editor .header .top-bar {
   width: 98.598%;
   height: 20px;
   height: fit-content;
+  
+  
+  width: 100%;
+  padding: 0px 0.701%;
   display: inline-flex;
 }
 
@@ -528,16 +785,7 @@
   background-color: rgba(255, 255, 255, .1);
   position: relative;
   margin: auto auto auto 0px;
-  transition: border 200ms ease-in-out;
-}
-
-.text-editor.video-player .header .main-controls button {
-  border: unset;
-}
-
-.text-editor.instagram-share .header .main-controls button {
-  background-color: #acabac;
-  border: unset;
+/*   transition: border 200ms ease-in-out; */
 }
 
 .text-editor .header .main-controls .icons-b::before {
@@ -562,16 +810,45 @@
   color: #ffffff;
   text-shadow: 0px 0px 4px #545454;
   text-align: center;
-  text-overflow: ellipsis;
   margin: auto;
   flex-shrink: 1;
   white-space: nowrap;
 }
 
-.text-editor.instagram-share .header .top-bar .title {
-  color: #747374;
-  text-shadow: unset;
+.text-editor .header .top-bar .title .title-scroll {
+  width: fit-content;
+  height: fit-content;
+  white-space: nowrap;
+  display: block;
 }
+
+.text-editor .header .top-bar .title .title-scroll.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-editor .header .top-bar .title .title-scroll.overflow {
+  margin-right: 50%;
+  display: inline-block;
+  -webkit-animation: title-overflow 10s linear infinite;
+}
+
+@-webkit-keyframes title-overflow {
+  0%, 20%, 100% { 
+    transform: translateX(0%); 
+  }
+  
+  70% {
+    transform: translateX(-145%);  
+  }
+
+  70.0001% {
+    transform: translateX(0%); 
+  }
+}
+
+
 
 
 /* CALL TO ACTION */
@@ -579,8 +856,12 @@
   width: fit-content;
   height: fit-content;
   display: inline-flex;
-  margin: auto 4px auto auto;
   flex-shrink: 0;
+}
+
+.text-editor .header .top-bar .call-to-action-controls.share,
+.text-editor .header .top-bar .call-to-action-controls.text {
+  margin: auto 4px auto auto;
   position: relative;
 }
 
@@ -592,30 +873,16 @@
   background: rgba(255, 255, 255, .1);
   padding: 2px 8px;
   color: #ffffff;
-  position: relative;
+  position: relative; 
   margin: auto auto auto 4px;
-}
-
-.text-editor.video-player .header .call-to-action-controls > button {
-  border: unset;
-}
-
-.text-editor.instagram-share .header .call-to-action-controls > button {
-  border: 1px solid #ccc;
-  background: linear-gradient(#fcfcfc, #f1f1f1);
-  color: #000;
-}
+} 
 
 .text-editor .header .call-to-action-controls > button.icons-b {
   width: 36px;
 }
 
-.text-editor .header .call-to-action-controls > button.icons-b::before {
+.text-editor > .header .call-to-action-controls > button.icons-b::before {
   background-size: 11px;
-}
-
-.text-editor.video-player .header .call-to-action-controls > button.icons-b::before {
-  background-size: 10px;
 }
 
 
@@ -637,7 +904,7 @@
   margin: auto;
   -webkit-appearance: none;
   z-index: 2;
-  transition: all 100ms ease-in-out;
+/*   transition: all 100ms ease-in-out; */
 }
 
 .text-editor .search-bar.hide {
@@ -663,7 +930,7 @@
   flex-direction: row;
   position: relative;
   z-index: 1;
-  transition: all 100ms ease-in-out;
+/*   transition: all 100ms ease-in-out; */
 }
 
 .text-editor .social-share-container.hide {
@@ -698,32 +965,23 @@
   word-break: break-word;
   position: relative;
   margin: 2px;
-  transition: all 100ms ease-in-out;
+/*   transition: all 100ms ease-in-out; */
 }
 
-.text-editor.video-player .parent-container {
-  height: fit-content;
-  border: unset;
-  border-radius: 0px 0px 4px 4px;
-  background-color: #111111;
-  padding: 0%;
-  margin: 0px;
-}
-
-.text-editor.instagram-share .parent-container {
-  border: 1px solid #cbcbcb;
-  padding: 0%;
+.text-editor.mobile .parent-container {
+  border: 1px solid #ffffff;
 }
 
 .text-editor .parent-container .scroll-container {
   width: inherit;
   height: fit-content;
   overflow: scroll;
-  transition: all 300ms ease-in-out;
+/*   transition: all 300ms ease-in-out; */
 }
 
-.text-editor.video-player .parent-container .scroll-container {
-  display: none;
+.text-editor .parent-container .scroll-container.completed {
+  margin-top: 0px !important;
+  transition: margin-top 1s ease-in-out;
 }
 
 
@@ -732,6 +990,7 @@
 /* PARAGRAPH */
 .text-editor .scroll-container p {
   padding: 0px 2px;
+  font-size: 14px;
   line-height: 19px;
   color: #ffffff;
   text-shadow: 0px 0px 4px #000000;
@@ -739,14 +998,11 @@
   display: none;
 }
  
-.text-editor .scroll-container .first-block p:first-of-type {
+.text-editor .scroll-container .first p:first-of-type {
   margin-top: 0px;
 }
 
-.text-editor .scroll-container p.active::after {
-  content: "|";
-  color: #000000;
-}
+
 
 .text-editor .scroll-container p.kanye-wiz-tweets:first-of-type {
   padding-right: 0px;
@@ -759,8 +1015,8 @@
 .text-editor .scroll-container p span.highlight { 
   width: fit-content;
   height: fit-content;
-  background-color: #000;
-  color: #fff; 
+  background-color: rgba(255, 255, 255, .3);
+  color: rgba(0, 0, 0, .8);
 }
 
 
@@ -771,18 +1027,13 @@
   width: 100%;
   height: fit-content;
   border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
   background-color: rgba(0, 0, 0, .1);
   margin: auto;
   position: relative;
   cursor: pointer;
   display: none;
-  transition: all 200ms ease-in-out;
-}
-
-.text-editor.video-player .media-container {
-  border-radius: 4px;
-  border-radius: 0px 0px 4px 4px;
 }
 
 .text-editor .media-container .media {
@@ -792,7 +1043,7 @@
   display: flex;
 }
 
-.text-editor .media img.thumbnail {
+.text-editor .media .thumbnail {
   width: -webkit-fill-available;
   height: 100%;
   border-radius: inherit;
@@ -810,67 +1061,136 @@
 }
 
 
-/* CONTROLS */
-.text-editor .media .controls {
-  transition: all 300ms ease-in-out;
+
+
+/* VIDEO PLAYER - GLOBAL */
+/* .video-player .header, */
+.video-player .parent-container,
+.video-player.media-container {
+  background-color: #111111;
 }
 
-.text-editor .media .controls > * {
-  background-color: unset;
-  z-index: 2;
+.video-player .header {
+  bottom: auto;
+  position: absolute;
+  z-index: 3;
+}
+
+.video-player .header.hide {
+  transform: translate(0%, -100%);
+}
+
+.video-player .header .top-bar {
+  height: inherit;
+}
+
+.video-player .header .main-controls button {
+  border: unset;
+}
+
+.video-player .header .top-bar .call-to-action-controls {
+  height: inherit;
+  border-radius: 0px 0px 5px 5px;
+  overflow: hidden;
+  padding: 0px 8px;
+  margin: auto; 
+}
+
+.video-player .header .top-bar .call-to-action-controls .blur {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-size: cover;
+  filter: blur(10px) brightness(1.4);
+/*   filter: blur(10px) saturate(1.4); */
+  margin: unset;
+}
+
+.video-player .header .call-to-action-controls > button.icons-b {
+  border: unset;
+  background: unset;
+}
+
+.video-player .header .call-to-action-controls > button.icons-b:first-of-type {
+  margin: auto;
+}
+
+.video-player .header .call-to-action-controls > .icons-b::before {
+  background-size: 10px;
+  background-size: auto 68%;
+  -webkit-filter: drop-shadow(0px 0px 1px #303030);
 }
 
 
-/* CONTROLS - FULL */
-.text-editor .media .controls.full {
-  height: 100%;
+/* VIDEO PLAYER - TEXT EDITOR */
+.text-editor.video-player {
+  border: unset;
+  box-shadow: 0 0 20px #333;
 }
 
-.text-editor .media .controls.full > * {
-  width: 30%;
-  height: 30%;
+.text-editor.computer.video-player {
+  height: fit-content;
 }
 
-.text-editor .media .controls.full > *::before {
-  background-size: contain;
+.text-editor.mobile.portrait.video-player {
+  width: 90%;
 }
 
-.text-editor .media .controls.full .post-link {
+.text-editor.video-player > .header {
+  display: none;
+}
+
+.text-editor.video-player .parent-container {
+  height: fit-content;
+  border: unset;
+  border-radius: 0px 0px 4px 4px;
+  background-color: #111111;
+  padding: 0%;
+  margin: 0px;
+}
+
+.text-editor.video-player .parent-container .scroll-container {
   display: none;
 }
 
 
-/* CONTROLS - CORNER */
-.text-editor .media .controls.corner {
-  height: 40px;
-  bottom: auto;
+/* VIDEO PLAYER - MEDIA CONTAINER */
+.media-container.video-player {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.text-editor .media .controls.corner > * {
-  width: 40px;
-  height: 40px;
+.media-container.video-player .header {
+  border-radius: 10px 10px 0px 0px;
+  z-index: 3;
+} 
+
+.media-container.video-player .header .post-link {
+  display: none;
+} 
+
+.media-container.video-player .media {
+  position: relative;
+} 
+
+
+/* VIDEO LOADER */
+.media-container .video-loader {
+  width: auto;
+  height: 50%;
+  z-index: 2;
+  visibility: visible;
 }
 
-.text-editor .media .controls.corner > *::before {
-  background-size: 50%;
-}
-
-.text-editor .media .controls.corner .play-pause {
-  border-radius: 0px 0px 10px 0px;
-  right: auto;
-  bottom: auto;
-}
-
-.text-editor .media .controls.corner .post-link {
-  border-radius: 0px 0px 0px 10px;
-  top: auto;
-  left: auto;
+.media-container .video-loader.hide {
+  z-index: -1;
+  visibility: hidden;
 }
 
 
 
 
-/* MEME */
+/* SLIDE ACROSS IMAGE */ 
 .text-editor .pop-up-image {
   width: 300px;
   width: 74%;
@@ -883,8 +1203,12 @@
   display: none;
 }
 
-.text-editor .pop-up-image.show {
-  -webkit-animation: pop-up-image-transition 4.5s ease-in-out infinite;
+.text-editor .tweet-5.show {
+  -webkit-animation: pop-up-image-transition 7s ease-in-out infinite;
+}
+
+.text-editor .tweet-13.show {
+  -webkit-animation: pop-up-image-transition 4.5s ease-in-out;
 }
 
 @-webkit-keyframes pop-up-image-transition {
@@ -905,11 +1229,116 @@
 
 
 
-/*  POSTER FOR INSTAGRAM SHARE  */
-.text-editor .parent-container .poster {
-  width: auto;
-  height: 100%;
+/* INSTAGRAM SHARE */
+.text-editor.instagram-share {
+  background-color: #f6f5f6;
+}
+
+.text-editor.computer.instagram-share {
+  width: fit-content;
+}
+
+.text-editor.mobile.instagram-share {
+  height: auto;
+}
+
+.text-editor.instagram-share .blur {
+  background-image: unset !important;
+}
+
+.text-editor.instagram-share .header .main-controls button {
+  background-color: #acabac;
+  border: unset;
+}
+
+.text-editor.instagram-share .header .top-bar .title {
+  color: #747374;
+  text-shadow: unset;
+}
+
+.text-editor.instagram-share .header .call-to-action-controls > button {
+  border: 1px solid #ccc;
+  background: linear-gradient(#fcfcfc, #f1f1f1);
+  color: #000;
+}
+
+.text-editor.instagram-share .parent-container {
+  border: 1px solid #cbcbcb;
+  padding: 0%;
+}
+
+.text-editor.instagram-share .parent-container .poster {
   border-radius: inherit;
   display: block;
   margin: auto;
 }
+
+.text-editor.computer.instagram-share .parent-container .poster {
+  width: auto;
+  height: 100%;
+}
+
+.text-editor.mobile.instagram-share .parent-container .poster {
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+/* ERROR EMAIL */
+.text-editor.error .scroll-container p {
+  visibility: visible;
+  display: block;
+}
+
+.text-editor.error .scroll-container .section-title {
+  width: fit-content;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin: auto;
+}
+
+.text-editor.error .scroll-container .section-title.experience {
+  margin-top: 40px; 
+}
+
+.text-editor.error .scroll-container .code-error span {
+  width: fit-content;
+  height: fit-content;
+  display: block;
+  margin: 10px 0px;
+}
+ 
+.text-editor.error .scroll-container .user-experience {
+  width: 100%;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 2%;
+  display: block;
+  position: relative;
+  outline: none;
+  cursor: text;
+  margin: 14px auto;
+}
+
+.text-editor.error .scroll-container .user-experience.empty::before {
+  content: "What happened slime?";
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+}
+
+
+
+
+/* COMPLETED */
+.completed .scroll-container {
+  margin-top: 0px !important;
+  transition: margin-top 1s ease-in-out !important;
+} 
+
+.completed .media-container.video-player .header .post-link {
+  display: block;
+} 

@@ -102,10 +102,7 @@
   background-size: contain;
   transform: perspective(211px) rotateX(-1deg) rotateY(2deg) rotateZ(1deg);
   transform-origin: center center 0px;
-}
-
-.computer .loader .gta .background.move {
-  -webkit-animation: background-perspective 20s linear;
+  -webkit-animation: background-perspective 30s linear;
 }
 
 @-webkit-keyframes background-perspective {  

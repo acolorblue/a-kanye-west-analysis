@@ -518,7 +518,7 @@ function sharePage() {
 
     // SOCIAL SHARE FUNCTION
     $('.social-share-container button').click(function(event) {
-      var poster_link = 'https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Poster3.jpg', 
+      var poster_link = 'https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Poster%20-%204.jpg', 
           webpage = 'https://acolorblue.co/a-kanye-west-analysis',
           line_break = '%0A',
           caption = "A Kanye West Analysis, by @acolorblue.",

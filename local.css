@@ -1,10 +1,9 @@
 * {
   transition: all 200ms ease-in-out;
 }
-
+ 
 .active::after {
   content: "|";
-  color: #000000;
 }
 
 /* LOADER */
@@ -71,7 +70,6 @@
 
 .loader .gta > div {
   background-repeat: no-repeat;
-/*   transition: unset; */
 }
 
 
@@ -82,7 +80,6 @@
   background-position: center;
   opacity: 1;
   transition: opacity 2s ease-in-out;
-/*   transition: all 200ms ease-in-out, opacity 2s ease-in-out; */
 }
 
 .loader .gta.hide .background,
@@ -144,6 +141,11 @@
   -webkit-animation: background-and-character-move 5s linear;
 } 
 
+.loader .gta.kanye .character.move {
+  background-position-x: 60%;
+  -webkit-animation: background-and-character-move 3s linear;
+} 
+
 @-webkit-keyframes background-and-character-move {  
   0% {
     background-position-x: 50%;
@@ -158,44 +160,44 @@
 
 /* MICHAEL */
 .loader .gta.michael .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Michael.jpg');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Michael%20-%20Comp.jpg');
 }
 
 .loader .gta.michael .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Michael%20-%201.png');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Michael%20-%201%20Comp.png');
 }
 
 
 /* FRANKLIN */
 .loader .gta.franklin .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Franklin%20And%20Chop.jpg');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Franklin%20And%20Chop%20-%20Comp.jpg');
 }
 
 .loader .gta.franklin .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Franklin%20-%201.png');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Franklin%20-%201%20Comp.png');
 }
 
 
 /* TREVOR */
 .loader .gta.trevor .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Trevor.jpg');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Trevor%20-%20Comp.jpg');
 }
 
 .loader .gta.trevor .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Trevor%20-%202.png');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Trevor%20-%202%20Comp.png');
 }
 
 
 /* KANYE */
 .loader .gta.kanye .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Background%20-%20Room%203.jpg');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Background%20-%20Room%203%20-%20Comp.jpg');
 }
 
 .loader .gta.kanye .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Character%20-%202.png');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Character%20-%202%20-%20Comp.png');
 }
 
-.loader.mobile .gta.kanye .character {
+.mobile .loader .gta.kanye .character {
   background-size: auto 90%;
 }
 
@@ -211,8 +213,12 @@
   visibility: hidden;
 }
 
+.loader .gta.kanye .text-logo.active::after {
+  color: #eee;
+}
+
 .loader .gta.kanye .icon-logo {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Logo%20-%201.png');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Logo%20-%201%20-%20Comp.png');
 }
 
 
@@ -220,7 +226,7 @@
 .loader .gta.original .text-logo {
   width: 180px;
   height: 180px;
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Logo%20-%201.png');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Logo%20-%201%20-%20Comp.png');
   background-size: contain;
   background-position: bottom;
   top: auto;
@@ -230,7 +236,7 @@
 }
 
 .loader .gta.original .icon-logo {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Rockstar/Logo%20-%201.png');
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Rockstar/Logo%20-%201%20-%20Comp.png');
 }
 
 .loader .gta .icon-logo {
@@ -258,6 +264,10 @@
   font-size: 13px;
   line-height: 1.3;
   color: #ffffff;
+}
+
+.loader .gta .information-container .active::after {
+  color: #fff;
 }
 
 .loader .gta .information-container .icons-b::before {
@@ -377,6 +387,19 @@
   flex-direction: column;
 }
 
+.mac-os::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  transition: inherit;
+}
+
+.mac-os.dim::after {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .9);
+}
+
 .mac-os .browser-alert {
   width: -moz-fit-content;
   height: 11%;
@@ -405,6 +428,7 @@
   font-size: 14px;
   position: relative;
   flex-shrink: 0;
+  z-index: 3;
 }
 
 .mac-os .menu-bar::before {
@@ -495,6 +519,7 @@
   height: -webkit-fill-available;
   overflow: hidden;
   position: relative;
+/*   transform: translate(0); */
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -513,6 +538,7 @@
   height: 130px;
   display: block;
   margin: 10px;
+/*   z-index: 3; */
 }
 
 .mac-os .desktop .file * {
@@ -618,10 +644,9 @@
   top: auto;
   right: auto;
   left: -218px;
-/*   transition: all 100ms ease-in-out; */
 }
 
-.screensaver-credits.show {
+.mac-os .screensaver-credits.show {
   left: 0px;
 }
 
@@ -638,7 +663,6 @@
   background-color: #252525;
   right: -258px;
   left: auto;
-/*   transition: all 200ms ease-in-out; */
 }
 
 .mac-os .embed-window.cover::before {
@@ -667,18 +691,21 @@
 .text-editor {
   width: 80%;
   height: 90%;
-  border: 1px solid #ffffff;
   border-radius: 5px;
   overflow: hidden;
-/*   box-shadow: 0px 0px 5px #c7c6c6; */
   box-shadow: 0 0 20px #333;
+  background: rgba(0, 0, 0, .8);
   display: flex;
   flex-direction: column;
   bottom: auto;
-  z-index: 1;
+  z-index: 2;
 }
 
-.text-editor.computer {
+.text-editor.dragged {
+  height: 90% !important;
+}
+
+.computer .text-editor {
   max-width: 800px;
   max-height: 650px;
   min-width: 328px;
@@ -686,18 +713,18 @@
   right: auto;
 }
 
-.text-editor.mobile {
-  border: 1px solid #ffffff;
+.mobile .text-editor {
+  width: 80%;
 }
 
-.text-editor.mobile.portrait {
+.mobile.portrait .text-editor {
   top: 10px;
   right: 10px;
   left: auto;
 }
 
-.text-editor.mobile.landscape,
-.text-editor.mobile.landscape.video-player {
+.mobile.landscape .text-editor,
+.mobile.landscape .text-editor.video-player {
   width: 70%;
   top: 0px;
   right: 0px;
@@ -709,8 +736,9 @@
   transform: scale(0); 
 }
 
-.text-editor ::selection { 
-  background-color: rgba(255, 255, 255, .3);
+.text-editor ::selection,
+.text-editor .highlight { 
+  background-color: rgba(255, 255, 255, .9);
   color: rgba(0, 0, 0, .8);
 }
 
@@ -721,9 +749,9 @@
 .text-editor > .blur {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
-  filter: blur(20px);
+  filter: blur(20px) brightness(.2);
   position: absolute;
-  transition: unset !important;
+  transition: unset;
 }
 
 .text-editor > .blur.cover {
@@ -743,19 +771,22 @@
   height: 35px;
   border-bottom: none;
   background-color: transparent;
-  position: relative;
   flex-shrink: 0;
-  z-index: 1;
+  z-index: 3;
+}
+
+.text-editor > .header {
+  position: relative;
 }
 
 .text-editor .header .top-bar {
   width: 98.598%;
-  height: 20px;
+  
+  width: 100%; 
   height: fit-content;
+/*   padding: 0px 0.701%;
   
-  
-  width: 100%;
-  padding: 0px 0.701%;
+  padding: 0px 2%; */
   display: inline-flex;
 }
 
@@ -768,20 +799,17 @@
   height: fit-content;
   display: inline-flex;
   right: auto;
-  left: 8px;
-  margin: auto auto auto 8px;
+  margin: auto auto auto 11.75px;
   flex-shrink: 0;
 }
 
 .text-editor .header .main-controls button {
   width: 12px;
   height: 12px;
-  border: 1px solid #ffffff;
   border-radius: 100%;
   background-color: rgba(255, 255, 255, .1);
   position: relative;
   margin: auto auto auto 0px;
-/*   transition: border 200ms ease-in-out; */
 }
 
 .text-editor .header .main-controls .icons-b::before {
@@ -848,25 +876,17 @@
 
 
 /* CALL TO ACTION */
-.text-editor .header .top-bar .call-to-action-controls {
+.text-editor .header .call-to-action-controls {
   width: fit-content;
   height: fit-content;
   display: inline-flex;
   flex-shrink: 0;
 }
 
-.text-editor .header .top-bar .call-to-action-controls.share,
-.text-editor .header .top-bar .call-to-action-controls.text {
-  margin: auto 4px auto auto;
-  position: relative;
-}
-
 .text-editor .header .call-to-action-controls > button {
   width: fit-content;
   height: 20px;
-  border: 1px solid #ffffff;
   border-radius: 4px;
-  background: rgba(255, 255, 255, .1);
   padding: 2px 8px;
   color: #ffffff;
   position: relative; 
@@ -876,6 +896,20 @@
 .text-editor .header .call-to-action-controls > button.icons-b {
   width: 36px;
 }
+
+
+/* CALL TO ACTION IN MAIN HEADER */
+.text-editor > .header .call-to-action-controls {
+  margin: auto 4px auto auto;
+  margin: auto 0px auto auto;
+  margin: auto 8px auto auto;
+
+  position: relative;
+}
+
+.text-editor > .header .call-to-action-controls > button {
+  background: rgba(255, 255, 255, .1);
+} 
 
 .text-editor > .header .call-to-action-controls > button.icons-b::before {
   background-size: 11px;
@@ -890,17 +924,17 @@
   height: 26px;
   max-width: 240px;
   outline: none;
-  border: 2px solid #ffffff;
+/*   border: 2px solid #ffffff; */
   border-radius: 5px;
-  box-shadow: 0px 0px 5px #c7c6c6;
-  background-color: rgba(255, 255, 255, .1) !important;
+  border: unset;
+  /* box-shadow: 0px 0px 5px #c7c6c6; */
+  background-color: rgba(255, 255, 255, .1);
   color: #ffffff;
   text-align: center;
   display: flex;
   margin: auto;
   -webkit-appearance: none;
   z-index: 2;
-/*   transition: all 100ms ease-in-out; */
 }
 
 .text-editor .search-bar.hide {
@@ -918,15 +952,12 @@
 .text-editor .social-share-container {
   width: 104px;
   height: 30px;
-  border: 1px solid #ffffff;
   border-radius: 5px;
-  box-shadow: 0px 0px 6px #adadad;
-  background-color: rgba(255, 255, 255, 0.2) !important;
+  background-color: rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: row;
   position: relative;
   z-index: 1;
-/*   transition: all 100ms ease-in-out; */
 }
 
 .text-editor .social-share-container.hide {
@@ -950,7 +981,6 @@
 .text-editor .parent-container {
   width: -webkit-fill-available;
   height: 100%;
-  border: 1px solid #ffffff;
   border-radius: 4px;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -961,23 +991,12 @@
   word-break: break-word;
   position: relative;
   margin: 2px;
-/*   transition: all 100ms ease-in-out; */
-}
-
-.text-editor.mobile .parent-container {
-  border: 1px solid #ffffff;
 }
 
 .text-editor .parent-container .scroll-container {
   width: inherit;
   height: fit-content;
   overflow: scroll;
-/*   transition: all 300ms ease-in-out; */
-}
-
-.text-editor .parent-container .scroll-container.completed {
-  margin-top: 0px !important;
-  transition: margin-top 1s ease-in-out;
 }
 
 
@@ -993,12 +1012,14 @@
   visibility: hidden;
   display: none;
 }
+
+.text-editor .scroll-container p.active::after {
+  color: #707070;
+}
  
 .text-editor .scroll-container .first p:first-of-type {
   margin-top: 0px;
 }
-
-
 
 .text-editor .scroll-container p.kanye-wiz-tweets:first-of-type {
   padding-right: 0px;
@@ -1008,13 +1029,6 @@
   margin-bottom: 0px;
 }
 
-.text-editor .scroll-container p span.highlight { 
-  width: fit-content;
-  height: fit-content;
-  background-color: rgba(255, 255, 255, .3);
-  color: rgba(0, 0, 0, .8);
-}
-
 
 
 
@@ -1022,13 +1036,54 @@
 .text-editor .media-container {
   width: 100%;
   height: fit-content;
-  border-radius: 10px;
   border-radius: 5px;
   overflow: hidden;
   background-color: rgba(0, 0, 0, .1);
   margin: auto;
   position: relative;
   cursor: pointer;
+  display: none;
+}
+
+.text-editor .media-container .header {
+  bottom: auto;
+  z-index: 3;
+}
+
+.text-editor .media-container .header.hide {
+  transform: translate(0%, -100%);
+}
+
+.text-editor .media-container .header .top-bar {
+  height: inherit;
+}
+
+.text-editor .media-container .top-bar .call-to-action-controls {
+  height: inherit;
+  border-radius: 0px 0px 5px 5px;
+  overflow: hidden;
+  padding: 0px 8px;
+}
+
+.text-editor .media-container .call-to-action-controls .blur {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-size: cover;
+  filter: blur(10px) brightness(1.4);
+  margin: unset;
+}
+
+.text-editor .media-container .call-to-action-controls button.icons-b:first-of-type {
+  margin: auto;
+}
+
+.text-editor .media-container .call-to-action-controls .icons-b::before {
+  background-size: auto 68%;
+  background-size: 40%;
+  -webkit-filter: drop-shadow(0px 0px 1px #303030);
+}
+
+.text-editor .media-container .call-to-action-controls .post-link {
   display: none;
 }
 
@@ -1039,96 +1094,48 @@
   display: flex;
 }
 
-.text-editor .media .thumbnail {
+.text-editor .media-container .media .thumbnail {
   width: -webkit-fill-available;
   height: 100%;
   border-radius: inherit;
-  position: absolute;
-  top: 0px;
-  margin: auto;
   z-index: 2;
 }
 
-.text-editor .media video {
+.text-editor .media-container .media .video-loader {
+  width: auto;
+  height: 50%;
+  z-index: 2;
+  visibility: visible;
+}
+
+.text-editor .media-container .media .video-loader.hide {
+  z-index: -1;
+  visibility: hidden;
+}
+
+.text-editor .media-container .media video {
   width: 100%;
   height: 100%;
   border-radius: inherit;
   position: relative;
+  opacity: 1;
+}
+
+.text-editor .media-container .media video.hide {
+  opacity: 0;
 }
 
 
-
-
-/* VIDEO PLAYER - GLOBAL */
-/* .video-player .header, */
-.video-player .parent-container,
-.video-player.media-container {
-  background-color: #111111;
-}
-
-.video-player .header {
-  bottom: auto;
-  position: absolute;
-  z-index: 3;
-}
-
-.video-player .header.hide {
-  transform: translate(0%, -100%);
-}
-
-.video-player .header .top-bar {
-  height: inherit;
-}
-
-.video-player .header .main-controls button {
-  border: unset;
-}
-
-.video-player .header .top-bar .call-to-action-controls {
-  height: inherit;
-  border-radius: 0px 0px 5px 5px;
-  overflow: hidden;
-  padding: 0px 8px;
-  margin: auto; 
-}
-
-.video-player .header .top-bar .call-to-action-controls .blur {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
-  background-size: cover;
-  filter: blur(10px) brightness(1.4);
-/*   filter: blur(10px) saturate(1.4); */
-  margin: unset;
-}
-
-.video-player .header .call-to-action-controls > button.icons-b {
-  border: unset;
-  background: unset;
-}
-
-.video-player .header .call-to-action-controls > button.icons-b:first-of-type {
-  margin: auto;
-}
-
-.video-player .header .call-to-action-controls > .icons-b::before {
-  background-size: 10px;
-  background-size: auto 68%;
-  -webkit-filter: drop-shadow(0px 0px 1px #303030);
-}
 
 
 /* VIDEO PLAYER - TEXT EDITOR */
 .text-editor.video-player {
-  border: unset;
-  box-shadow: 0 0 20px #333;
-}
-
-.text-editor.computer.video-player {
   height: fit-content;
+  box-shadow: unset;
 }
 
-.text-editor.mobile.portrait.video-player {
-  width: 90%;
+.text-editor.dragged.video-player {
+  height: fit-content !important;
 }
 
 .text-editor.video-player > .header {
@@ -1137,50 +1144,12 @@
 
 .text-editor.video-player .parent-container {
   height: fit-content;
-  border: unset;
-  border-radius: 0px 0px 4px 4px;
-  background-color: #111111;
   padding: 0%;
   margin: 0px;
 }
 
 .text-editor.video-player .parent-container .scroll-container {
   display: none;
-}
-
-
-/* VIDEO PLAYER - MEDIA CONTAINER */
-.media-container.video-player {
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.media-container.video-player .header {
-  border-radius: 10px 10px 0px 0px;
-  z-index: 3;
-} 
-
-.media-container.video-player .header .post-link {
-  display: none;
-} 
-
-.media-container.video-player .media {
-  position: relative;
-} 
-
-
-/* VIDEO LOADER */
-.media-container .video-loader {
-  width: auto;
-  height: 50%;
-  z-index: 2;
-  visibility: visible;
-}
-
-.media-container .video-loader.hide {
-  z-index: -1;
-  visibility: hidden;
 }
 
 
@@ -1199,12 +1168,12 @@
   display: none;
 }
 
-.text-editor .tweet-5.show {
-  -webkit-animation: pop-up-image-transition 7s ease-in-out infinite;
+.text-editor .pop-up-image.show {
+  -webkit-animation: pop-up-image-transition 4.5s ease-in-out;
 }
 
-.text-editor .tweet-13.show {
-  -webkit-animation: pop-up-image-transition 4.5s ease-in-out;
+.text-editor .pop-up-image.tweet-5.show {
+  -webkit-animation: pop-up-image-transition 7s ease-in-out infinite;
 }
 
 @-webkit-keyframes pop-up-image-transition {
@@ -1230,11 +1199,11 @@
   background-color: #f6f5f6;
 }
 
-.text-editor.computer.instagram-share {
+.computer .text-editor.instagram-share {
   width: fit-content;
 }
 
-.text-editor.mobile.instagram-share {
+.mobile .text-editor.instagram-share {
   height: auto;
 }
 
@@ -1269,12 +1238,12 @@
   margin: auto;
 }
 
-.text-editor.computer.instagram-share .parent-container .poster {
+.computer .text-editor.instagram-share .parent-container .poster {
   width: auto;
   height: 100%;
 }
 
-.text-editor.mobile.instagram-share .parent-container .poster {
+.mobile .text-editor.instagram-share .parent-container .poster {
   width: 100%;
   height: auto;
 }
@@ -1338,3 +1307,8 @@
 .completed .media-container.video-player .header .post-link {
   display: block;
 } 
+
+.completed .scroll-container p .highlight { 
+  width: fit-content;
+  height: fit-content;
+}

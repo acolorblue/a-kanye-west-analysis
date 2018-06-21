@@ -10,7 +10,7 @@ var article_title = "A Kanye West Analysis",
 function loader() {
   function gta() {
     function addMoveLoop() {
-      if (desktop) {
+      if (computer) {
         $('.gta .character').removeClass('move');
         
         setTimeout(function() {
@@ -25,7 +25,6 @@ function loader() {
           $('.gta .background, .gta .character').addClass('move');
         }, 100);
       }
-      
     }
 
     setTimeout(function() {
@@ -86,12 +85,12 @@ function loader() {
         $('.gta').addClass('hide');
       }, 4500);
 
+      // BLANK 
       setTimeout(function() {
         $('.gta').removeClass('michael');
         addMoveLoop();
         $('.gta').addClass('trevor');
       }, 6500);
-
       setTimeout(function() {
         $('.gta').removeClass('hide');
       }, 7000);
@@ -100,12 +99,12 @@ function loader() {
         $('.gta').addClass('hide');
       }, 10000);
 
+      // BLANK
       setTimeout(function() {
         $('.gta').removeClass('trevor');
         addMoveLoop();
         $('.gta').addClass('franklin');
       }, 12000);
-
       setTimeout(function() {
         $('.gta').removeClass('hide');
       }, 12500);
@@ -114,32 +113,32 @@ function loader() {
         $('.gta').addClass('hide');
       }, 15500);
 
+      // BLANK
       setTimeout(function() {
         $('.gta').removeClass('franklin original');
         addMoveLoop();
         $('.gta').addClass('kanye');
       }, 17500);
-
       setTimeout(function() {
         $('.gta').removeClass('hide');
       }, 18000);
-
+      
       setTimeout(function() {
         $('.gta.kanye .text-logo').text("A Kanye West Analysis");
         automatedText('.kanye .text-logo', 2000, [''], 0, '-break-', 800);
-      }, 24000);
-      
+      }, 22000);
+
       setTimeout(function() {
         $('.loader').addClass('hide');
-      }, 27000);
-      
+      }, 25000);
+
       setTimeout(function() {
         $('.loader').addClass('unremoved');
-      }, 30900);
-      
+      }, 28900);
+
       setTimeout(function() {
         $('.loader').remove();
-      }, 31000);
+      }, 29000);
     }
     transitions();
   }
@@ -151,31 +150,10 @@ function loader() {
 
 // DEVICE SPECIFICATIONS
 function userDeviceSpecifications() {
-  if (mobile) {
-    $('body, .loader, .text-editor').addClass('mobile');
-    
-    function portraitOrLandscape() {
-      if (window.orientation == 0) {
-        $('.text-editor').removeClass('landscape').addClass('portrait');
-        $('.text-editor > .blur').removeClass('cover').addClass('contain');
-      }
-
-      else if (window.orientation == -90 || 90) {
-        $('.text-editor').removeClass('portrait').addClass('landscape');
-        $('.text-editor > .blur').removeClass('contain').addClass('cover');
-      }
-    }
-    portraitOrLandscape();
-    
-    window.addEventListener('orientationchange', function() {
-      portraitOrLandscape();
-    });
-  }
-  
-  if (desktop) {
-    $('body, .loader, .text-editor').addClass('computer');
+  if (computer) {
+    $('body').addClass('computer');
     manuallyCenter('.desktop', '.text-editor');
-    
+
     function draggableApp() {
       $('.text-editor').draggable({
         handle: '.header',
@@ -185,17 +163,38 @@ function userDeviceSpecifications() {
         }
       });
     } 
-    draggableApp();
+    draggableApp(); 
+
+    if (firefox) {
+      var browser_alert = document.createElement('div');
+      browser_alert.className = 'browser-alert ab-mid';
+      browser_alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
+
+      $('.menu-bar').remove();
+      $('.desktop').remove();
+      $('.mac-os').append(browser_alert);
+    }
   }
    
-  if (firefox) {
-    var browser_alert = document.createElement('div');
-        browser_alert.className = 'browser-alert ab-mid';
-        browser_alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
+  if (mobile) {
+    $('body').addClass('mobile');
     
-    $('.menu-bar').remove();
-    $('.desktop').remove();
-    $('.mac-os').append(browser_alert);
+    function portraitOrLandscape() {
+      if (window.orientation == 0) {
+        $('body').removeClass('landscape').addClass('portrait');
+        $('.text-editor > .blur').removeClass('cover').addClass('contain');
+      }
+
+      else if (window.orientation == -90 || 90) {
+        $('body').removeClass('portrait').addClass('landscape');
+        $('.text-editor > .blur').removeClass('contain').addClass('cover');
+      }
+    }
+    portraitOrLandscape();
+    
+    window.addEventListener('orientationchange', function() {
+      portraitOrLandscape();
+    });
   }
 }
 
@@ -205,15 +204,33 @@ function userDeviceSpecifications() {
 // DETECT SIZE CHANGE
 function detectSizeChange() {   
   $('.mac-os, .text-editor').mutate('width height top left', function(el, info) {
-    if (desktop) {
-      function nonDraggableElement() {
-        var element_not_being_dragged = !$('.text-editor').hasClass('ui-draggable-dragging');
+    if (computer) {
+      function menuBarZIndex() {
+        if (!$('.text-editor').hasClass('video-player')) {
+          $('.menu-bar').css('z-index', '3');
+        }
+         
+        else if ($('.text-editor').hasClass('video-player')) {
+          $('.menu-bar').css('z-index', '0');
+        }
+      }
+      menuBarZIndex();
+      
+      function draggableElement() {
+        var element_is_being_dragged = $('.text-editor').hasClass('ui-draggable-dragging');
+        var element_not_being_dragged = !element_is_being_dragged;
 
         if (element_not_being_dragged) {
           manuallyCenter('.desktop', '.text-editor');
         }
+        
+        if (element_is_being_dragged) {
+          if (!$('.text-editor').hasClass('dragged')) {
+            $('.text-editor').addClass('dragged');
+          }
+        }
       }
-      nonDraggableElement();
+      draggableElement();
             
       function windowSizing() {
         if ($('.mac-os').width() < 1000) {
@@ -321,6 +338,10 @@ function backgroundImageBlur(container, element, blur, source) {
   if (not_same_position) {
     $(blur).css('top', blur_top_position);
     $(blur).css('left', blur_left_position);
+    
+    if (container == '.mac-os') {
+      $(blur).css('margin', '0px');
+    }
   }
 }
 
@@ -338,6 +359,10 @@ function closeTextEditor() {
       }
     });
     $('.file').removeClass('selected');
+    
+    if ($('.mac-os').hasClass('dim')) {
+      $('.mac-os').removeClass('dim');
+    }
 
     var screensaver_credits = document.createElement('span');
         screensaver_credits.className = 'screensaver-credits ab-mid';
@@ -708,7 +733,8 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
 
 // MEDIA AFTER PARAGRAPHS
 function mediaAfterParagraphs() {
-  var text_editor = $('.text-editor'),
+  var mac_os = $('.mac-os'),
+      text_editor = $('.text-editor'),
       current_paragraph,
       parent_container = $('.parent-container'),
       media_container,
@@ -824,7 +850,7 @@ function mediaAfterParagraphs() {
       }
       
       
-      if (desktop) {
+      if (computer) {
         media_container.slideDown(500);
         parent_container.append(media_container);
         
@@ -837,6 +863,7 @@ function mediaAfterParagraphs() {
             
             setTimeout(function() {
               videoLoader();
+              mac_os.addClass('dim');
             }, 200);
           }, 300);
         }, 700); 
@@ -851,6 +878,7 @@ function mediaAfterParagraphs() {
                 
                 setTimeout(function() {
                   resizeBlur();
+                  mac_os.removeClass('dim');
                 }, 200);
               }, 1000);
             }
@@ -896,7 +924,7 @@ function mediaAfterParagraphs() {
           video_title = "'Police Precinct' scene from Malcolm X (1992)";
           video_link = "https://www.youtube.com/watch?v=iwGojrTKWvI";
           
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer();
             
             video.bind('ended', function() { 
@@ -944,7 +972,7 @@ function mediaAfterParagraphs() {
           video_title = "Kanye West respondes to Kid Cudi";
           video_link = "https://www.youtube.com/watch?v=wZfZM7_WcJA";
           
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
@@ -992,7 +1020,7 @@ function mediaAfterParagraphs() {
           video_title = "Kanye\'s Sacremento Rant from November 2016";
           video_link = "https://www.youtube.com/watch?v=bkUr99epJh8";
           
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer(); 
 
             video.bind('ended', function() {
@@ -1040,7 +1068,7 @@ function mediaAfterParagraphs() {
           video_title = "Malcolm X On Barry Goldwater, 1964";
           video_link = "https://www.youtube.com/watch?v=ve7g_ibjh3c";
           
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
@@ -1088,7 +1116,7 @@ function mediaAfterParagraphs() {
           video_title = "Malcolm X & Louis Lomax On Martin Luther King, 1963";
           video_link = "https://www.youtube.com/watch?v=X6FEyOziF8s";
           
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
@@ -1156,7 +1184,7 @@ function mediaAfterParagraphs() {
           video_title = "Kanye on the choice of slavery";
           video_link = "https://www.youtube.com/watch?v=s_M4LkYra5k";
           
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer();
             
             video.bind('ended', function() {
@@ -1204,7 +1232,7 @@ function mediaAfterParagraphs() {
           video_title = "Candace Owens on economics over social issues";
           video_link = "https://www.youtube.com/watch?v=BSAoitd1BTQ";
           
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer();
             
             video.bind('ended', function() {
@@ -1252,7 +1280,7 @@ function mediaAfterParagraphs() {
           video_title = "We Make Good Music";
           video_link = "https://www.youtube.com/watch?v=7BxCDysoSxg";
 
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer();
             
             video.bind('ended', function() {
@@ -1300,7 +1328,7 @@ function mediaAfterParagraphs() {
           video_title = "Kanye on the root of his motive";
           video_link = "https://www.youtube.com/watch?v=_cdlFd5-04E";
           
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer();
             
             video.bind('ended', function() {
@@ -1348,7 +1376,7 @@ function mediaAfterParagraphs() {
           video_title = "On the creation of the MacIntosh, 1985";
           video_link = "https://twitter.com/acolorblue/status/850923969846718464";
           
-          if (desktop) {
+          if (computer) {
             buildMediaPlayer();
             
             video.bind('ended', function() {
@@ -1398,8 +1426,13 @@ function mediaAfterParagraphs() {
           disableAutomatedScroll();
           
           function mediaControlsAdjustments() {
-            $('.media-container .blur').each(function() {
-              backgroundImageBlur('.media-container .thumbnail', '.media-container .video.call-to-action-controls', '.media-container .blur', 'image-tag');
+            $('.media-container').each(function() {
+              var media_container = $(this),
+                  thumbnail = media_container.find('.thumbnail'),
+                  video_call_to_action_control = media_container.find('.video.call-to-action-controls'),
+                  blur = media_container.find('.blur');
+              
+              backgroundImageBlur(thumbnail, video_call_to_action_control, blur, 'image-tag');
             })
           }
           mediaControlsAdjustments();
@@ -1473,7 +1506,7 @@ function videoPlayback() {
   }
   
   
-  if (desktop) {
+  if (computer) {
     $(document)
       .on('click', '.video.call-to-action-controls button', function(event) {
       in_text_editor = !$('.text-editor').hasClass('video-player');
@@ -1505,6 +1538,10 @@ function videoPlayback() {
           if (unwatched) {
             videoLoader();
             removeUnwatched();
+          }
+          
+          if ($(video).hasClass('hide')) {
+            $(video).removeClass('hide');
           }
           
           thumbnail.fadeOut(200);
@@ -1540,6 +1577,7 @@ function videoPlayback() {
 
       $(video).bind('ended', function() {
         media_container.removeClass('playing');
+        $(video).addClass('hide');
         thumbnail.fadeIn(200);
         main_controls.remove();
         header.removeClass('hide');
@@ -1623,6 +1661,10 @@ function videoPlayback() {
             removeUnwatched();
           }
           
+          if ($(video).hasClass('hide')) {
+            $(video).removeClass('hide');
+          }
+          
           thumbnail.hide();
           video.play();  
           media_container.addClass('playing');
@@ -1652,15 +1694,15 @@ function videoPlayback() {
 
 
       $(video).bind('ended', function() {
-        thumbnail.show();
+        $(video).addClass('hide');
+        thumbnail.fadeIn(200);
         main_controls.remove();
         header.removeClass('hide');
         blur.fadeIn(200);
         media_container.find('.pause').removeClass('pause').addClass('play');
         setTimeout(function() {
           media_container.removeClass('playing');
-          media_container.addClass('video-player watched');
-          scroll_container.show();
+          media_container.addClass('watched');
         }, 900);
       })
       event.stopPropagation();
@@ -2021,6 +2063,11 @@ function onFileClick() {
       if ($(this).hasClass('text')) {
         $(this).addClass('selected');
         $('.text-editor').removeClass('hide');
+        
+        if ($('.text-editor').hasClass('video-player')) {
+          $('.mac-os').addClass('dim');
+        }
+        
         $('.screensaver-credits').removeClass('show');
       }
     }
@@ -2045,18 +2092,18 @@ window.onload = function() {
   userDeviceSpecifications();
   detectSizeChange();
   
-  var remaining_functions_interval = setInterval(callRemainderFunctions, 28000);
+  var remaining_functions_interval = setInterval(callRemainderFunctions, 26000);
   function callRemainderFunctions() {
     if ($('.loader').hasClass('hide')) {
-      window.clearInterval(remaining_functions_interval);
+      window.clearInterval(remaining_functions_interval); 
       clock(); 
       backgroundImageBlur('.mac-os', '.text-editor', '.text-editor > .blur', 'background-image');
       closeTextEditor();
       searchTextEditor();
       sharePage();
-      setTimeout(function() {
+      setTimeout(function() { 
         automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
-      }, 4500);
+      }, 5000);
       mediaAfterParagraphs();
       videoPlayback();
       twitterEmbed();
@@ -2071,7 +2118,6 @@ window.onload = function() {
 // WINDOW ON ERROR
 window.onerror = function(msg, url, linenumber) {
   // alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
-//   alert('Error message: '+ msg +'\nURL: '+ url +'\nLine Number: '+ linenumber);
   function errorMessageApp() {
     if ($('.text-editor.error').length == 1) {
       return;
@@ -2080,6 +2126,7 @@ window.onerror = function(msg, url, linenumber) {
     $('.text-editor').removeClass('video-player instagram-share');
     $('.call-to-action-controls, .text-editor .scroll-container p, .text-editor .media-container').remove();
     $('.text-editor').addClass('error');
+    $('.text-editor > .header .title').addClass('ab-mid');
     $('.text-editor > .header .title-scroll').text("An Error Has Occured.");
     
     var call_to_action_controls = document.createElement('div');

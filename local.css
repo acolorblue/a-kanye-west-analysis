@@ -14,7 +14,6 @@
   background-color: #111111;
   color: #ffffff;
   z-index: 9;
-  transition: all 2;
 }
 
 .loader::before {
@@ -26,6 +25,7 @@
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   background-color: #111111;
+/*   background-color: red; */
   position: absolute;
   top: inherit;
   right: inherit;
@@ -40,9 +40,10 @@
   opacity: 0; 
 }
 
-/* HIDE - PULL UP */
+/* TRANSITION UP */
 .loader.hide {
-  -webkit-animation: loader-hide 3s linear 1s;
+/*   -webkit-animation: loader-hide 3s linear 1s; */
+  -webkit-animation: loader-hide 3s linear;
 }
 
 @-webkit-keyframes loader-hide {  
@@ -55,9 +56,6 @@
   }
 }
 
-.loader.unremoved {
-  opacity: 0;
-}
 
 
 /* LOADER - GTA */
@@ -68,41 +66,209 @@
   position: inherit;
 }
 
-.loader .gta > div {
+.loader .gta * {
   background-repeat: no-repeat;
 }
 
 
-/* BACKGROUND & CHARACTER */
-.loader .gta .background,
-.loader .gta .character {
+/* FOREGROUND LAYER */
+.loader .gta .foreground-layer {
+  width: inherit;
+  height: inherit;
+  z-index: 1;
+}
+
+.loader .gta .foreground-layer .text-logo.gta-5 {
+  width: 180px;
+  height: 180px;
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Logo%20-%201%20-%20Comp.png');
+  background-size: contain;
+  background-position: bottom;
+  top: auto;
+  right: auto;
+  bottom: 20px;
+  left: 20px;
+}
+
+.loader .gta .foreground-layer .text-logo.kanye-analysis {
+  width: 210px;
+  height: fit-content;
+  font-family: 'Pricedown', sans-serif;
+  font-size: 55px;
+  line-height: 0.85;
+  text-transform: lowercase;
+  text-shadow: none;
+  -webkit-text-stroke: 2.4px black;
+  visibility: hidden;
+}
+
+.loader .gta .foreground-layer .text-logo.kanye-analysis.active::after {
+  color: #eee;
+}
+
+.loader .gta .foreground-layer .icon-logo {
+  width: 40px;
+  height: 40px;
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  background-size: contain;
+  background-position: center;
+}
+
+.loader .gta .foreground-layer .icon-logo.rockstar {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Rockstar/Logo%20-%201%20-%20Comp.png');
+}
+
+.loader .gta .foreground-layer .icon-logo.good-music {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Logo%20-%201%20-%20Comp.png');
+}
+
+/* INFORMATION CONTAINER */
+.loader .gta .foreground-layer .info-container {
+  width: auto;
+  height: auto;
+  border: 4px solid #000000;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: rgba(17, 17, 17, .7);
+  padding: 1%;
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #ffffff;
+  top: auto;
+}
+
+.loader .gta .info-container.low-power-mode-alert,
+.loader .gta .info-container.leave-twitter {
+  width: 200px;
+  display: none;
+}
+
+.loader .gta .info-container.low-power-mode-alert {
+  right: auto;
+  bottom: 200px;
+  left: 20px;
+}
+
+.loader .gta .info-container.leave-twitter {
+  right: 20px;
+  bottom: 116px;
+  left: auto;
+}
+
+.loader .gta .info-container.loading-indicator {
+  background-color: #000000;
+  right: 20px;
+  bottom: 70px;
+  left: auto;
+}
+
+.loader .gta .info-container.skip-loader {
+/*   width: 120px; */
+  top: 20px;
+  right: 20px;
+  bottom: auto;
+  left: auto;
+  display: none;
+}
+
+/* INFORMATION CONTAINER ICONS */
+.loader .gta .foreground-layer .info-container .icons-b {
+  width: 14px;
+  height: 14px;
+/*   background-color: red; */
+  position: relative;
+  display: inline-block;
+  margin-top: auto;
+  margin-right: 4px;
+  margin-bottom: -3px;
+  margin-left: 4px;
+}
+
+.loader .gta .info-container .icons-b.battery.low-power-mode {
+  width: 18px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.loader .gta .info-container .icons-b.play-station-x {
+  margin-left: 0px;
+}
+
+.loader .gta .info-container .icons-b::before {
+  width: inherit;
+  height: inherit;
+  background-size: contain;
+} 
+
+.loader .gta .info-container .icons-b.info::before {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Information/Information%20-%20White%20-%203.png');
+}
+
+.loader .gta .info-container .icons-b.extra-options::before {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Twitter%20Icons/Regular%20Mode%20Icons/Extra%20Options/1.png');
+}
+
+.loader .gta .info-container .icons-b.battery.low-power-mode::before {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/iOS/Battery/Battery%20-%20Low%20Power%20Mode%20-%202.png');
+}
+
+.loader .gta .info-container .icons-b.play-station-x::before {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Play%20Station/X%20Button%20-%202.png');
+}
+
+.loader .gta .info-container .icons-b.loading-circle::before {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Loading%20Indicator/Fading%20Circle%20-%201.gif');
+}
+
+.loader .gta .info-container .active::after {
+  color: #fff;
+}
+
+
+/* BACKGROUND LAYER */
+.loader .gta .background-layer {
+  width: inherit;
+  height: inherit;
+}
+
+.loader .gta .background-and-character-container {
+  width: inherit;
+  height: inherit;
+  opacity: 0;
+/*   transition: opacity 1s ease-in-out; */
+/*   transition: opacity 2s ease-in-out; */
+  transition: opacity 1.5s ease-in-out;
+}
+
+.loader .gta .background-and-character-container.show {
+  opacity: 1;
+}
+
+.loader .gta .background-and-character-container div {
   background-size: cover;
   background-position: center;
-  opacity: 1;
-  transition: opacity 2s ease-in-out;
 }
+ 
 
-.loader .gta.hide .background,
-.loader .gta.hide .character {
-  opacity: 0;
-}
-
-
-/* BACKGROUND */
-.loader .gta .background {
+/* BACKGROUND */ 
+.loader .gta .background-and-character-container .background {
   background-position: center;
 }
 
-.computer .loader .gta .background {
+.computer .loader .gta .background-and-character-container .background {
   width: 80%;
   height: 80%;
   background-size: contain;
   transform: perspective(211px) rotateX(-1deg) rotateY(2deg) rotateZ(1deg);
   transform-origin: center center 0px;
-  -webkit-animation: background-perspective 30s linear;
+  -webkit-animation: computer-background-perspective 22.5s linear;
 }
 
-@-webkit-keyframes background-perspective {  
+@-webkit-keyframes computer-background-perspective {  
   0% {
     transform: perspective(122px) rotateX(-3deg) rotateY(0deg) rotateZ(-2deg);
   }
@@ -112,37 +278,75 @@
   }
 }
 
-.mobile .loader .gta .background {
+.mobile .loader .gta .background-and-character-container .background {
   background-size: cover;
 }
 
-.mobile .loader .gta .background.move {
+/* BACKGROUND - IMAGES */
+.loader .gta .michael.background-and-character-container .background {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Michael%20-%20Comp.jpg');
+}
+
+.loader .gta .franklin.background-and-character-container .background {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Franklin%20And%20Chop%20-%20Comp.jpg');
+}
+
+.loader .gta .trevor.background-and-character-container .background {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Trevor%20-%20Comp.jpg');
+}
+
+.loader .gta .kanye.background-and-character-container .background {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Background%20-%20Room%203%20-%20Comp.jpg');
+}
+
+.mobile .loader .gta .background-and-character-container .background.move {
   background-position-x: 60%;
   -webkit-animation: background-and-character-move 5s linear;
 }
 
+.mobile .loader .gta .kanye.background-and-character-container .background.move {
+  -webkit-animation: background-and-character-move 3s linear;
+} 
 
-/* CHARACTER */
-.loader .gta .character {
+ 
+
+/* CHARACTER */ 
+.loader .gta .background-and-character-container .character {
   background-size: contain;
   background-position: bottom;
 }
 
-.computer .loader .gta .character {
+.computer .loader .gta .background-and-character-container .character {
   background-size: auto 95%;
 }
 
-.mobile .loader .gta .character {
+.mobile .loader .gta .background-and-character-container .character {
   background-size: 90% auto;
 }
 
-.loader .gta .character.move {
+/* CHARACTER - IMAGES */
+.loader .gta .michael.background-and-character-container .character {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Michael%20-%201%20Comp.png');
+}
+
+.loader .gta .franklin.background-and-character-container .character {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Franklin%20-%201%20Comp.png');
+}
+
+.loader .gta .trevor.background-and-character-container .character {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Trevor%20-%202%20Comp.png');
+}
+
+.loader .gta .kanye.background-and-character-container .character {
+  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Character%20-%202%20-%20Comp.png');
+}
+
+.loader .gta .background-and-character-container .character.move {
   background-position-x: 60%;
   -webkit-animation: background-and-character-move 5s linear;
 } 
 
-.loader .gta.kanye .character.move {
-  background-position-x: 60%;
+.loader .gta .kanye.background-and-character-container .character.move {
   -webkit-animation: background-and-character-move 3s linear;
 } 
 
@@ -156,220 +360,19 @@
   }
 }
 
-
-
-/* MICHAEL */
-.loader .gta.michael .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Michael%20-%20Comp.jpg');
-}
-
-.loader .gta.michael .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Michael%20-%201%20Comp.png');
-}
-
-
-/* FRANKLIN */
-.loader .gta.franklin .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Franklin%20And%20Chop%20-%20Comp.jpg');
-}
-
-.loader .gta.franklin .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Franklin%20-%201%20Comp.png');
-}
-
-
-/* TREVOR */
-.loader .gta.trevor .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Trevor%20-%20Comp.jpg');
-}
-
-.loader .gta.trevor .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Trevor%20-%202%20Comp.png');
-}
-
-
-/* KANYE */
-.loader .gta.kanye .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Background%20-%20Room%203%20-%20Comp.jpg');
-}
-
-.loader .gta.kanye .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Character%20-%202%20-%20Comp.png');
-}
-
-.mobile .loader .gta.kanye .character {
+.mobile .loader .kanye.background-and-character-container .character {
   background-size: auto 90%;
 }
 
-.loader .gta.kanye .text-logo {
-  width: 210px;
-  height: fit-content;
-  font-family: 'Pricedown';
-  font-size: 55px;
-  line-height: 0.85;
-  text-transform: lowercase;
-  text-shadow: none;
-  -webkit-text-stroke: 2.4px black;
-  visibility: hidden;
+@-webkit-keyframes skip-loader {  
+  0% {
+    background-position-x: 60%;
+  }
+
+  100% { 
+    background-position-x: 60%;
+  }
 }
-
-.loader .gta.kanye .text-logo.active::after {
-  color: #eee;
-}
-
-.loader .gta.kanye .icon-logo {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Logo%20-%201%20-%20Comp.png');
-}
-
-
-/* LOGOS */
-.loader .gta.original .text-logo {
-  width: 180px;
-  height: 180px;
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Logo%20-%201%20-%20Comp.png');
-  background-size: contain;
-  background-position: bottom;
-  top: auto;
-  right: auto;
-  bottom: 20px;
-  left: 20px;
-}
-
-.loader .gta.original .icon-logo {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Rockstar/Logo%20-%201%20-%20Comp.png');
-}
-
-.loader .gta .icon-logo {
-  width: 40px;
-  height: 40px;
-  top: auto;
-  right: 20px;
-  bottom: 20px;
-  left: auto;
-  background-size: contain;
-  background-position: center;
-}
-
-
-/* INFORMATION CONTAINER */
-.loader .gta .information-container {
-  width: auto;
-  height: auto;
-  border: 4px solid #000000;
-  border-radius: 4px;
-  overflow: hidden;
-  background-color: rgba(17, 17, 17, .7);
-  padding: 1%;
-  font-family: sans-serif;
-  font-size: 13px;
-  line-height: 1.3;
-  color: #ffffff;
-}
-
-.loader .gta .information-container .active::after {
-  color: #fff;
-}
-
-.loader .gta .information-container .icons-b::before {
-  width: 14px;
-  height: 14px;
-  background-size: contain;
-  margin-top: auto;
-  margin-right: 4px;
-  margin-bottom: -2px;
-  margin-left: 4px;
-}
-
-
-/* INFORMATION > INSTRUCTION */
-.loader .gta .information-container.instructions {
-  width: 180px;
-  top: auto;
-  right: auto;
-  left: 20px;
-  visibility: hidden;
-}
-
-.loader .gta.original .information-container.instructions {
-  bottom: 200px;
-}
-
-.loader .gta.kanye .information-container.instructions {
-  bottom: 20px;
-}
-
-.loader .gta .information-container.instructions .info::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Information/Information%20-%20White%20-%202.png');
-}
-
-.loader .gta .information-container.instructions .extra-options::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Twitter%20Icons/Regular%20Mode%20Icons/Extra%20Options/1.png');
-}
-
-
-/* INFORMATION > LOADING INDICATOR */
-.loader .gta .information-container.loading-indicator {
-  width: auto;
-  background-color: #000000;
-  top: auto;
-  right: 20px;
-  bottom: 70px;
-  left: auto;
-}
-
-.loader .gta .information-container.loading-indicator .loading-circle::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Loading%20Indicator/Fading%20Circle%20-%201.gif');
-}
-
-
-
-
-/* LOADER - MEME */
-.loader-container .meme {
-  font-family: ahamonomonospaced;
-  font-size: 30px;
-  color: #f9f9f9;
-  text-shadow: 0px 0px 5px #8e8e8e;
-  text-transform: uppercase;
-  line-height: 1;
-  text-align: center;
-}
-
-
-
-
-/* LOADER TEXS */
-.loader span {
-  height: fit-content;
-}
-
-.loader .countdown {
-  width: fit-content;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.loader .caption {
-  width: 400px;
-}
-
-
-
-
-/* LOADER MEME */
-.loader img.meme {
-  height: 300px;
-  height: 250px;
-  top: auto;
-  bottom: -300px;
-  bottom: -250px;
-/*   transition: bottom 1s ease-in-out; */
-}
-
-.loader img.meme.show {
-  bottom: 0%;
-} 
 
 
 
@@ -1017,12 +1020,42 @@
   color: #707070;
 }
  
-.text-editor .scroll-container .first p:first-of-type {
+.text-editor .scroll-container p.introduction {
   margin-top: 0px;
 }
 
-.text-editor .scroll-container p.kanye-wiz-tweets:first-of-type {
-  padding-right: 0px;
+
+/* IMAGE SLIDE */ 
+.text-editor .scroll-container .image-slide {
+  width: 74%;
+  border-radius: 5px;
+  right: 100%;
+  left: auto;
+  display: none;
+}
+
+.text-editor .scroll-container .image-slide.show {
+  display: inline;
+  z-index: 10;
+  -webkit-animation: image-slide-transition 4.5s ease-in-out;
+}
+
+.text-editor .scroll-container .image-slide.show.i-know-you-mad {
+  -webkit-animation: image-slide-transition 7s ease-in-out infinite;
+}
+ 
+@-webkit-keyframes image-slide-transition {
+  0% {
+    right: -74%;
+  }
+  
+  30%, 70% {
+    right: 5%;
+  }
+  
+  100% {
+    right: 100%;
+  }
 }
 
 .text-editor .scroll-container p.conclusion {
@@ -1150,45 +1183,6 @@
 
 .text-editor.video-player .parent-container .scroll-container {
   display: none;
-}
-
-
-
-
-/* SLIDE ACROSS IMAGE */ 
-.text-editor .pop-up-image {
-  width: 300px;
-  width: 74%;
-  border-radius: 5px;
-  margin: auto;
-  position: absolute;
-  right: -300px;
-  right: -74%;
-  left: auto;
-  display: none;
-}
-
-.text-editor .pop-up-image.show {
-  -webkit-animation: pop-up-image-transition 4.5s ease-in-out;
-}
-
-.text-editor .pop-up-image.tweet-5.show {
-  -webkit-animation: pop-up-image-transition 7s ease-in-out infinite;
-}
-
-@-webkit-keyframes pop-up-image-transition {
-  0% {
-    right: -300px;
-    right: -74%;
-  }
-  
-  30%, 70% {
-    right: 5%;
-  }
-  
-  100% {
-    right: 100%;
-  }
 }
 
 

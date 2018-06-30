@@ -2288,14 +2288,14 @@ function onFileClick() {
 
 // WINDOW ON LOAD
 window.onload = function() {
-  // loader(); 
+  loader(); 
   firstImpressionContainer();
   userDeviceSpecifications();
   detectSizeChange(); 
   userActiveStatus();
   
   
-  callRemainderFunctions();
+//   callRemainderFunctions();
 }
 
 
@@ -2334,7 +2334,7 @@ function callRemainderFunctions() {
 
 // WINDOW ON ERROR
 window.onerror = function(msg, url, linenumber) {
-  // alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
+  alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
   
   function errorMessageApp() {
     if ($('.text-editor.error').length == 1) {

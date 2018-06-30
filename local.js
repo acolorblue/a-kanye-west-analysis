@@ -1,7 +1,105 @@
 // GLOBAL VARIABLES
 var article_title = "A Kanye West Analysis",
-    uncompleted = $('p.unread').length > 0,
+    uncompleted = $('p.unread').length > 0, 
     completed = $('p.unread').length == 0;
+
+
+
+
+// FIRST IMPRESSION 
+function firstImpressionContainer() { 
+  /* firstImpression.js. Copyright (c) 2012 Rob Flaherty (@robflaherty). Licensed under the MIT and GPL licenses. */
+  window.firstImpression = function(cookie, days) {
+    var cookieMachine, getCookie, setCookie, checkUser;
+
+    /* Plain JS port of jquery.cookie plugin. Copyright (c) 2010 Klaus Hartl (stilbuero.de). Dual licensed under the MIT and GPL licenses. */
+    cookieMachine = function(key, value, options) {
+      var expiration, result, time;
+
+      if (arguments.length > 1 && String(value) !== "[object Object]") {
+        options = options || {};
+
+        if (value === null || value === undefined) {
+          options.expires = -1;
+        }
+
+        if (typeof options.expires === "number") {
+          expiration = options.expires;
+          time = options.expires = new Date();
+          time.setTime(time.getTime() + expiration * 24 * 60 * 60 * 1000);
+        }
+
+        // Temporary fix for path problem
+        options.path = "/";
+
+        return (document.cookie = [
+          encodeURIComponent(key),
+          "=",
+          encodeURIComponent(value),
+          options.expires ? "; expires=" + options.expires.toUTCString() : "",
+          options.path ? "; path=" + options.path : "",
+          options.domain ? "; domain=" + options.domain : "",
+          options.secure ? "; secure" : ""
+        ].join(""));
+      }
+
+      result = new RegExp("(?:^|; )" + encodeURIComponent(key) + "=([^;]*)").exec(
+        document.cookie
+      );
+      return result ? decodeURIComponent(result[1]) : null;
+    };
+
+    /* Option defaults */
+    if (cookie === undefined) {
+      cookie = "_firstImpression";
+    }
+
+    if (days === undefined) {
+      days = 730;
+    }
+
+    /* Delete cookie if either option is null */
+    if (cookie === null) {
+      cookieMachine("_firstImpression", null);
+      return;
+    }
+
+    if (days === null) {
+      cookieMachine(cookie, null);
+      return;
+    }
+
+    /* Functions */
+    getCookie = function() {
+      return cookieMachine(cookie);
+    };
+
+    setCookie = function() {
+      cookieMachine(cookie, true, { expires: days });
+    };
+
+    checkUser = function() {
+      var status = getCookie();
+
+      // Set cookie if new user
+      if (!status) {
+        setCookie();
+      }
+
+      return !status;
+    };
+
+    /* Return boolean */
+    return checkUser();
+  };
+  
+  
+  if (firstImpression()) {
+    console.log("New User");
+    $('.loader').addClass('new-user');
+    $('.loader .gta .skip-loader').remove();
+  }
+}
 
 
 
@@ -9,6 +107,43 @@ var article_title = "A Kanye West Analysis",
 // LOADER
 function loader() {
   function gta() {
+    function removeInitialCover() {
+      setTimeout(function() {
+        $('.loader').addClass('uncovered');
+      }, 1000);
+
+      setTimeout(function() {
+        $('.loader').removeClass('covered uncovered');
+        addMoveLoop();
+      }, 2000);
+    }
+    removeInitialCover();
+    
+    function infoContainer() {
+      if (twitterInAppBrowser) {
+        var native_browser;
+        if (ios) {
+          native_browser = "Safari";
+        }
+        if (android) {
+          native_browser = "Chrome";
+        }
+
+        $('.leave-twitter').fadeIn(200);
+        var leave_twitter_text = $('.leave-twitter').html();
+        $('.leave-twitter').html(leave_twitter_text.replace("native browser", native_browser));
+      } 
+       
+      if (ios) {
+        $('.low-power-mode-alert').fadeIn(200);
+      }  
+    } 
+    infoContainer();
+    if (twitterInAppBrowser) {
+      $('.michael.background-and-character-container').addClass('show');
+      return;
+    }
+    
     function addMoveLoop() {
       if (computer) {
         $('.gta .character').removeClass('move');
@@ -26,121 +161,144 @@ function loader() {
         }, 100);
       }
     }
-
-    setTimeout(function() {
-      $('.loader').addClass('uncovered');
-      setTimeout(function() {
-        $('.loader').removeClass('covered uncovered');
-        addMoveLoop();
-      }, 1000);
-    }, 1000);
     
-    function instructionsBuild() {
-      var instructions = document.createElement('div');
-      instructions.className = 'information-container instructions ab-mid';
-
-      var info_icon = document.createElement('span');
-      info_icon.className = 'info white icons-b rel';
-
-      var extra_options = document.createElement('span');
-      extra_options.className = 'extra-options icons-b rel';
-
-      var native_browser;
-      if (twitterInAppBrowser && ios) {
-        native_browser = "Safari.";
-      }
-
-      if (twitterInAppBrowser && android) {
-        native_browser = "Chrome.";
-      }
-
-      $('.gta').append(instructions);
-      instructions.innerHTML +=  "Click the icon in the top right corner and open in " + native_browser;
-
+    function transitions() { 
+      // MICHAEL 
+      $('.gta .michael.background-and-character-container').addClass('show');
       setTimeout(function() {
-        automatedText('.loader .instructions', 2000, [''], 0, '-break-', 800);
-        var instructions_text_interval = setInterval(instructionsText, 20);
-        function instructionsText() {
-          if ($('.loader .instructions').text().includes("")) {
-            $('.loader .instructions').prepend(info_icon);
+        if (!$('.loader').hasClass('skipped')) {
+          if (!twitterInAppBrowser) {
+            $('.loader .gta .skip-loader').fadeIn(200);
           }
-
-          if ($('.loader .instructions').text().includes("Click the")) {
-            window.clearInterval(instructions_text_interval);
-            $('.loader .instructions').append(extra_options);
+          $('.gta .michael.background-and-character-container').removeClass('show');
+        }
+      }, 4150); 
+      setTimeout(function() {
+        if (!$('.loader').hasClass('skipped')) {
+          $('.gta .michael.background-and-character-container').remove();
+          addMoveLoop(); 
+        }
+      }, 5650);
+      
+      // TREVOR
+      setTimeout(function() { 
+        if (!$('.loader').hasClass('skipped')) {
+          $('.gta .trevor.background-and-character-container').addClass('show');
+        }
+      }, 6050);
+      setTimeout(function() {
+        if (!$('.loader').hasClass('skipped')) {
+          $('.gta .trevor.background-and-character-container').removeClass('show');
+        }
+      }, 9200);
+      setTimeout(function() {
+        if (!$('.loader').hasClass('skipped')) {
+          $('.gta .trevor.background-and-character-container').remove();
+          addMoveLoop();
+          if (!twitterInAppBrowser) {
+            $('.loader .gta .skip-loader').fadeOut(200);
+          }
+          
+          if (ios) {
+            $('.gta .low-power-mode-alert').fadeOut(200);
           }
         }
-      }, 2500);
-
-    } 
-    if (twitterInAppBrowser) {
-      setTimeout(function() {
-        instructionsBuild();
-      }, 4500);
-      return;
-    } 
-    
-    function transitions() {
-      setTimeout(function() { 
-        $('.gta').addClass('hide');
-      }, 4500);
-
-      // BLANK 
-      setTimeout(function() {
-        $('.gta').removeClass('michael');
-        addMoveLoop();
-        $('.gta').addClass('trevor');
-      }, 6500);
-      setTimeout(function() {
-        $('.gta').removeClass('hide');
-      }, 7000);
-
-      setTimeout(function() {
-        $('.gta').addClass('hide');
-      }, 10000);
-
-      // BLANK
-      setTimeout(function() {
-        $('.gta').removeClass('trevor');
-        addMoveLoop();
-        $('.gta').addClass('franklin');
-      }, 12000);
-      setTimeout(function() {
-        $('.gta').removeClass('hide');
-      }, 12500);
-
-      setTimeout(function() {
-        $('.gta').addClass('hide');
-      }, 15500);
-
-      // BLANK
-      setTimeout(function() {
-        $('.gta').removeClass('franklin original');
-        addMoveLoop();
-        $('.gta').addClass('kanye');
-      }, 17500);
-      setTimeout(function() {
-        $('.gta').removeClass('hide');
-      }, 18000);
+      }, 10700);
       
+      // FRANKLIN
       setTimeout(function() {
-        $('.gta.kanye .text-logo').text("A Kanye West Analysis");
-        automatedText('.kanye .text-logo', 2000, [''], 0, '-break-', 800);
-      }, 22000);
-
+        if (!$('.loader').hasClass('skipped')) {
+          $('.gta .franklin.background-and-character-container').addClass('show');
+        }
+      }, 11100);
       setTimeout(function() {
-        $('.loader').addClass('hide');
-      }, 25000);
-
+        if (!$('.loader').hasClass('skipped')) {
+          $('.gta .franklin.background-and-character-container').removeClass('show');
+        }
+      }, 14250);
       setTimeout(function() {
-        $('.loader').addClass('unremoved');
-      }, 28900);
-
+        if (!$('.loader').hasClass('skipped')) {
+          callRemainderFunctions();
+          $('.gta').removeClass('original');
+          $('.gta .franklin.background-and-character-container').remove();
+          addMoveLoop();
+        }
+      }, 15750);
+      
+      // KANYE
       setTimeout(function() {
-        $('.loader').remove();
-      }, 29000);
+        if (!$('.loader').hasClass('skipped')) {
+          $('.gta .text-logo').removeClass('gta-5').addClass('kanye-analysis');
+          $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
+          $('.kanye.background-and-character-container').addClass('show');
+        }
+      }, 16150);
+      setTimeout(function() { 
+        if (!$('.loader').hasClass('skipped')) {
+          titleThenRemoveLoader();
+        }
+      }, 19500);
     }
-    transitions();
+    transitions(); 
+    
+    function titleThenRemoveLoader() {
+      $('.gta .text-logo').text("A Kanye West Analysis");
+      automatedText('.gta .text-logo', 2000, [''], 0, '-break-', 800);
+
+      var loader_removal_interval = setInterval(loaderRemoval, 200);
+      function loaderRemoval() {
+        if ($('.gta .text-logo').text().includes("A Kanye West Analysis")) {
+          window.clearInterval(loader_removal_interval);
+
+          setTimeout(function() {
+            $('.loader').addClass('hide');
+          }, 1500); 
+
+          setTimeout(function() {
+            $('.loader').fadeOut(200);
+          }, 4300);
+
+          setTimeout(function() {
+            $('.loader').remove();
+          }, 4500);
+        }
+      }
+    }
+    
+    function skipLoader() {
+      $('.loader .gta .skip-loader').click(function() {
+        $(this).removeClass('not-clicked');
+        $('.loader').addClass('skipped');
+        $('.gta .background-and-character-container').removeClass('show');
+        $('.gta .skip-loader').fadeOut(200);
+        if (ios) {
+          $('.gta .low-power-mode-alert').fadeOut(200);
+        }
+        
+        setTimeout(function() {
+          $('.gta .skip-loader').remove();
+        }, 200);
+        
+        setTimeout(function() {
+          $('.gta .michael.background-and-character-container, .gta .trevor.background-and-character-container, .gta .franklin.background-and-character-container').remove();
+          $('.gta .background, .gta .character').removeClass('move');
+          // setTimeout(function() { 
+            callRemainderFunctions();
+          // }, 2000);
+        }, 1500); 
+        
+        setTimeout(function() {
+          $('.gta .text-logo').removeClass('gta-5').addClass('kanye-analysis');
+          $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
+          $('.kanye.background-and-character-container').addClass('show');
+        }, 1900);
+        
+        setTimeout(function() {
+          titleThenRemoveLoader();
+        }, 3300);
+      })
+    } 
+    skipLoader(); 
   }
   gta();
 }
@@ -198,8 +356,8 @@ function userDeviceSpecifications() {
   }
 }
 
- 
 
+ 
 
 // DETECT SIZE CHANGE
 function detectSizeChange() {   
@@ -248,6 +406,20 @@ function detectSizeChange() {
     automatedScrollAdjustment();
   });
 } 
+
+ 
+
+
+// USER ACTIVE STATUS
+function userActiveStatus() {    
+  $(window).focus(); 
+  
+  $(window).on('blur', function() {
+    if (mobile) {
+      alert("The webpage was paused because you were offline.");
+    }
+  });
+}
 
 
 
@@ -353,9 +525,11 @@ function closeTextEditor() {
   $('.text-editor .close').click(function() {
     $(this).parents('.text-editor').addClass('hide');
     $('video').each(function() {
+      var media_container = $(this).parents('.media-container');
       var video = $(this).get(0);
       if (!video.paused) {
         video.pause(); 
+        media_container.find('.pause').removeClass('pause').addClass('play');
       }
     });
     $('.file').removeClass('selected');
@@ -610,6 +784,16 @@ function sharePage() {
 
 
 
+// PRELOAD CHANGE
+function videoPreloadChange() {
+  $('video').each(function() {
+    $(this).attr('preload', 'auto');
+  })
+}
+
+
+
+
 // AUTOMATED TEXT
 function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, breakWord, breakTime) {
   var original_characters_length = $('.scroll-container p').text().replace(/-break-/g, "").length;
@@ -643,8 +827,8 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
  
     var skip = 0; 
    
-    for (var i = 0; i < lineCount; i++) { 
-      lineContents[i] = $lines[i].textContent;
+    for (var i = 0; i < lineCount; i++) {  
+      lineContents[i] = $lines[i].textContent; 
       $lines[i].textContent = '';
       $lines[i].style.visibility = 'visible';
       $lines[i].style.display = 'block';
@@ -769,6 +953,7 @@ function mediaAfterParagraphs() {
       tenth_block_interval,
       eleventh_block_interval,
       ending_interval;
+      
   
   function buildMediaPlayer() {    
     var call_to_action = document.createElement('button');
@@ -907,6 +1092,25 @@ function mediaAfterParagraphs() {
       } 
     }
     build();
+  } 
+  
+  function imageSlide(image_class, image_link, container, removalTimer) {
+    var image_slide = document.createElement('img');
+        image_slide.className = 'image-slide ab-mid';
+     
+    if ($('img.' + image_class).length == 0 && $('.scroll-container').is(':visible')) {
+      image_slide.className += ' ' + image_class;
+      image_slide.src = image_link;
+      $(container).append(image_slide);
+
+      setTimeout(function() { 
+        $('img.' + image_class).addClass('show');
+      }, 500);  
+      
+      setTimeout(function() { 
+        $('img.' + image_class).removeClass('show');
+      }, removalTimer);
+    }
   }
   
   
@@ -916,10 +1120,18 @@ function mediaAfterParagraphs() {
     $('p.active').each(function() {  
       current_paragraph = $(this).text();
       
+      if (current_paragraph.includes("Damien Hirst, Steve Jobs & Malcolm X.")) {  
+        imageSlide('into-to-wild', "https://static01.nyt.com/images/2018/07/01/arts/01interview/merlin_139917588_dc988cca-e04f-4594-a2f6-e14ea0c47244-superJumbo.jpg", '.scroll-container .first', 5000);
+      }
+      
+      if (current_paragraph.includes("previously show his love for Malcolm X,")) {
+        imageSlide('love-for-malcolm', "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Video%20Thumbnails/5.%20Malcolm%20X%20On%20Martin%20Luther%20King/Malcolm%20X%20-%20Gordon%20Parks.jpg", '.scroll-container .first', 5000);
+      }
+       
       if (current_paragraph.includes("\“That’s too much power for one man to have.\”")) {
         window.clearInterval(first_block_interval);   
 
-        setTimeout(function() {
+        setTimeout(function() { 
           video = $('.malcolm-x-police-predict');
           video_title = "'Police Precinct' scene from Malcolm X (1992)";
           video_link = "https://www.youtube.com/watch?v=iwGojrTKWvI";
@@ -1156,24 +1368,12 @@ function mediaAfterParagraphs() {
     $('p.active').each(function() {
       current_paragraph = $(this).text();
       
-      if ($(this).hasClass('kanye-wiz-tweets')) {
-        $(this).css('display', 'inline');
-      }
-      
       if (current_paragraph.includes("TLOP because it was just too personal,")) {
-        $('.tweet-5').show().addClass('show');
-
+        imageSlide('i-know-you-mad', "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Tweets/5.%20I%20Know%20You%20Mad%20Everytime%20You%20Look%20At%20Your%20Child.jpg", '.scroll-container .sixth', 7500);
+        
         setTimeout(function() {
-          $('.tweet-13').show().addClass('show');
+          imageSlide('you-own-waves', "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Tweets/13.%20I%20Own%20Your%20Child.jpg", '.scroll-container .sixth', 5000);
         }, 6000);
-
-        setTimeout(function() {
-          $('.tweet-5').remove();
-        }, 7000); 
-
-        setTimeout(function() {
-          $('.tweet-13').remove();
-        }, 10500); 
       }
       
       if (current_paragraph.includes("You was there for 400 years and it’s all of y’all??\”")) {
@@ -2088,28 +2288,45 @@ function onFileClick() {
 
 // WINDOW ON LOAD
 window.onload = function() {
-  loader();
+  // loader(); 
+  firstImpressionContainer();
   userDeviceSpecifications();
-  detectSizeChange();
+  detectSizeChange(); 
+  userActiveStatus();
   
-  var remaining_functions_interval = setInterval(callRemainderFunctions, 26000);
-  function callRemainderFunctions() {
-    if ($('.loader').hasClass('hide')) {
-      window.clearInterval(remaining_functions_interval); 
-      clock(); 
-      backgroundImageBlur('.mac-os', '.text-editor', '.text-editor > .blur', 'background-image');
-      closeTextEditor();
-      searchTextEditor();
-      sharePage();
-      setTimeout(function() { 
-        automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
-      }, 5000);
-      mediaAfterParagraphs();
-      videoPlayback();
-      twitterEmbed();
-      onFileClick();
+  
+  callRemainderFunctions();
+}
+
+
+
+
+// CALL REMAINDER FUNCTIONS
+function callRemainderFunctions() {
+  clock(); 
+  backgroundImageBlur('.mac-os', '.text-editor', '.text-editor > .blur', 'background-image');  
+  closeTextEditor();
+  searchTextEditor();  
+  sharePage();
+  videoPreloadChange(); 
+    
+  function callAutomatedText() {
+    var call_essay_interval = setInterval(callEssay, 200);
+    function callEssay() {
+      if ($('.loader').length == 0) {
+        window.clearInterval(call_essay_interval);
+        setTimeout(function() { 
+          automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
+        }, 1800);
+      }
     }
   }
+  callAutomatedText();
+  
+  mediaAfterParagraphs();
+  videoPlayback();
+  twitterEmbed();
+  onFileClick();
 }
 
 
@@ -2118,6 +2335,7 @@ window.onload = function() {
 // WINDOW ON ERROR
 window.onerror = function(msg, url, linenumber) {
   // alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
+  
   function errorMessageApp() {
     if ($('.text-editor.error').length == 1) {
       return;

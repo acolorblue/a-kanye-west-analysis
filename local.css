@@ -1,11 +1,11 @@
 * {
-  transition: all 200ms ease-in-out;
+  -webkit-transition: all 200ms ease-in-out;
 }
- 
+
 .active::after {
   content: "|";
 }
-
+ 
 /* LOADER */
 .loader {
   width: 100%;
@@ -76,6 +76,10 @@
   width: inherit;
   height: inherit;
   z-index: 1;
+}
+
+.computer .loader .gta .foreground-layer {
+  -webkit-transform: translateZ(950px);
 }
 
 .loader .gta .foreground-layer .text-logo.gta-5 {
@@ -239,8 +243,6 @@
   width: inherit;
   height: inherit;
   opacity: 0;
-/*   transition: opacity 1s ease-in-out; */
-/*   transition: opacity 2s ease-in-out; */
   transition: opacity 1.5s ease-in-out;
 }
 
@@ -263,9 +265,10 @@
   width: 80%;
   height: 80%;
   background-size: contain;
-  transform: perspective(211px) rotateX(-1deg) rotateY(2deg) rotateZ(1deg);
+  transform: perspective(211px) rotateX(-1deg) rotateY(2deg) rotateZ(1deg); 
   transform-origin: center center 0px;
   -webkit-animation: computer-background-perspective 22.5s linear;
+/*   z-index: 1; */
 }
 
 @-webkit-keyframes computer-background-perspective {  
@@ -318,7 +321,8 @@
 
 .computer .loader .gta .background-and-character-container .character {
   background-size: auto 95%;
-}
+  -webkit-transform: translateZ(900px);
+} 
 
 .mobile .loader .gta .background-and-character-container .character {
   background-size: 90% auto;
@@ -561,9 +565,10 @@
 }
 
 .mac-os .file.selected .thumbnail-container {
-  outline: #a6a6a6 auto 5px;
+/*   outline: #a6a6a6 auto 5px; */
   border: 1px solid #a6a6a6;
   border-radius: 2px;
+  border-radius: 3px;
   background-color: rgba(0, 0, 0, .5);
 }
 
@@ -599,6 +604,7 @@
 
 .mac-os .file .title-container {
   overflow: hidden;
+  overflow: scroll;
   padding: 2px;
   margin-top: 4px;
 }
@@ -606,19 +612,23 @@
 .mac-os .file .title {
   width: fit-content;
   height: fit-content;
-  max-height: 16px;
+/*   max-height: 16px; */
   display: -webkit-box;
   padding: 2px 4px;
+/*   padding: 1px 4px; */
+/*   padding: 3px 5px; */
   color: #ffffff;
   font-size: 12px;
   line-height: 1;
   text-shadow: 0px 0px 4px #000000;
   text-align: center;
+  white-space: nowrap;
   margin: auto;
 }
 
 .mac-os .file.selected .title {
-  outline: #0168da auto 5px;
+/*   outline: #0168da auto 5px; */
+  border: 1px solid #0168da;
   border-radius: 3px;
   background-color: #0168da;
   text-shadow: unset;
@@ -709,11 +719,16 @@
 }
 
 .computer .text-editor {
-  max-width: 800px;
+/*   max-width: 800px;
   max-height: 650px;
+  min-width: 328px;
+  min-height: 20%; */
+  
   min-width: 328px;
   min-height: 20%;
   right: auto;
+  max-width: 64%;
+  max-width: 55%;
 }
 
 .mobile .text-editor {
@@ -1069,6 +1084,9 @@
 .text-editor .media-container {
   width: 100%;
   height: fit-content;
+
+/*   height: 244px;
+  height: 100%; */
   border-radius: 5px;
   overflow: hidden;
   background-color: rgba(0, 0, 0, .1);
@@ -1163,8 +1181,7 @@
 
 /* VIDEO PLAYER - TEXT EDITOR */
 .text-editor.video-player {
-  height: fit-content;
-  box-shadow: unset;
+  box-shadow: unset; 
 }
 
 .text-editor.dragged.video-player {
@@ -1182,8 +1199,20 @@
 }
 
 .text-editor.video-player .parent-container .scroll-container {
-  display: none;
+  margin-top: 0px !important;
 }
+
+.text-editor.video-player .parent-container .scroll-container p {
+  line-height: 0px;
+  margin: 0px;
+  display: none !important;
+}
+
+.text-editor.video-player .parent-container .scroll-container .media-container.watched {
+  display: none !important;
+}
+
+
 
 
 

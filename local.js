@@ -165,6 +165,7 @@ function loader() {
     function transitions() { 
       // MICHAEL 
       $('.gta .michael.background-and-character-container').addClass('show');
+      // return;
       setTimeout(function() {
         if (!$('.loader').hasClass('skipped')) {
           if (!twitterInAppBrowser) {
@@ -804,7 +805,7 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
 
   timeBetweenText = (timeBetweenText == null ? 0 : timeBetweenText);
   timeBeforeStart = (timeBeforeStart == null ? 0 : timeBeforeStart);
-  let textInfo = {
+  var textInfo = {
     selector: selector,
     timeBetweenText: timeBetweenText,
     exclude: exclude,
@@ -821,7 +822,7 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
   }, textInfo.timeBeforeStart);
 
   function automaticText(objTextInfo) {
-    let $lines = document.querySelectorAll(objTextInfo.selector),
+    var $lines = document.querySelectorAll(objTextInfo.selector),
         lineContents = new Array(), 
         lineCount = $lines.length; 
  
@@ -841,8 +842,8 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
       var content = lineContents[idx];
 
       if (typeof content == "undefined") {
-        let elClassSkip = document.getElementsByClassName('skip');
-        let lengthClassSkip = elClassSkip.length;
+        var elClassSkip = document.getElementsByClassName('skip');
+        var lengthClassSkip = elClassSkip.length;
 
         while (lengthClassSkip--) {
           elClassSkip[lengthClassSkip].style.display = 'none';
@@ -893,6 +894,7 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
             else { 
               element.classList.remove('active');
               element.classList.remove('unread');
+              element.classList.add('read');
               setTimeout(function () {
                 typeLine(++idx);
               }, (!booSkipAutomatedText ? objTextInfo.timeBetweenText : 0));
@@ -956,9 +958,6 @@ function mediaAfterParagraphs() {
       
   
   function buildMediaPlayer() {    
-    var call_to_action = document.createElement('button');
-        call_to_action.className = 'white icons-b abs';
-    
     function preparations() {
       function hideInstagramShare() {
         if ($('.text-editor').hasClass('instagram-share')) {
@@ -985,6 +984,9 @@ function mediaAfterParagraphs() {
     preparations(); 
     
     function build() {
+      var call_to_action = document.createElement('button');
+          call_to_action.className = 'white icons-b abs';
+      
       media_container = video.parents('.media-container');
       media = media_container.find('.media');
       thumbnail = media_container.find('.thumbnail');
@@ -1034,42 +1036,120 @@ function mediaAfterParagraphs() {
         blur.css('left', '-' + video_call_to_action_controls.css('margin-left'));
       }
       
+      function heightInTextEditor() {
+        var parent_container_height = $('.text-editor .parent-container').height();
+        media_container_height = parent_container_height * 0.331;
+
+        console.log(media_container_height);
+
+        text_editor.css('height', media_container_height);
+      }
       
-      if (computer) {
-        media_container.slideDown(500);
-        parent_container.append(media_container);
+      function heightInStandAlone() {
+        // .TEXT-EDITOR.VIDEO-PLAYER
+        var mac_os = $('.mac-os').height(); 
+        media_container_height = mac_os * 0.307622;
+        console.log(media_container_height);
+
+        text_editor.css('height', media_container_height);
+      }
+      
+      function calcMediaContainerHeight(element) {
+        var media_container_width = $('.text-editor .media-container').width();
+            media_container_height = media_container_width * 0.563278;
+        console.log(media_container_height);
         
-        setTimeout(function() {
-          text_editor.addClass('video-player');
+        $(element).css('height', media_container_height);
+      }
+      
+       
+      if (computer) {
+        var text_editor_components = $('.text-editor > .header, .text-editor .scroll-container p.read, .text-editor .media-container.watched');
+        
+        if (chrome) {
+          media_container.slideDown(500);
 
           setTimeout(function() {
+            text_editor.addClass('video-player');
+            text_editor_components.fadeOut(200);
+          }, 700); 
+
+          setTimeout(function() {
+            // text_editor.css('height', media_container.height());
+            backgroundImageBlur(thumbnail, video_call_to_action_controls, blur, 'image-tag');
+            controlsBackgroundColor();
+          }, 950);
+
+          setTimeout(function() {
+            videoLoader();
+            mac_os.addClass('dim');
+          }, 1200);
+
+          function videoEnded() {
+            video.bind('ended', function() { 
+              if (next_paragraph.is(':hidden')) {
+                setTimeout(function() {
+                  // text_editor.css('height', '90%'); 
+                  text_editor.removeClass('video-player');
+                  text_editor_components.fadeIn(200);
+
+                  media_container.addClass('video-player');
+                  postLink();
+
+                  setTimeout(function() {
+                    resizeBlur();
+                    mac_os.removeClass('dim');
+                  }, 200);
+                }, 1000);
+              }
+            })
+          }
+          videoEnded();
+        }
+        
+        if (safari) {
+          media_container.fadeIn(200);
+          
+          setTimeout(function() {
+            text_editor.addClass('video-player');
+            // text_editor_components.fadeOut(200);
+          }, 250); 
+          
+          setTimeout(function() {
+            text_editor.css('height', media_container.height());
             backgroundImageBlur(thumbnail, video_call_to_action_controls, blur, 'image-tag');
             controlsBackgroundColor();
             
-            setTimeout(function() {
-              videoLoader();
-              mac_os.addClass('dim');
-            }, 200);
-          }, 300);
-        }, 700); 
-        
-        function videoEnded() {
-          video.bind('ended', function() { 
-            if (next_paragraph.is(':hidden')) {
-              setTimeout(function() {
-                text_editor.removeClass('video-player');
-                media_container.addClass('video-player');
-                postLink();
-                
+            // videoLoader();
+            // mac_os.addClass('dim');
+          }, 500);
+          
+          setTimeout(function() {
+            videoLoader();
+            mac_os.addClass('dim');
+          }, 600);
+          
+          function videoEnded() {
+            video.bind('ended', function() { 
+              if (next_paragraph.is(':hidden')) {
                 setTimeout(function() {
-                  resizeBlur();
-                  mac_os.removeClass('dim');
-                }, 200);
-              }, 1000);
-            }
-          })
+                  text_editor.removeClass('video-player');
+                  text_editor.css('height', '90%'); 
+                  // text_editor_components.fadeIn(200);
+
+                  media_container.addClass('video-player');
+                  postLink();
+
+                  setTimeout(function() {
+                    resizeBlur();
+                    mac_os.removeClass('dim');
+                  }, 200);
+                }, 1000);
+              }
+            })
+          }
+          videoEnded();
         }
-        videoEnded();
       }
       
       if (mobile) { 
@@ -1093,6 +1173,7 @@ function mediaAfterParagraphs() {
     }
     build();
   } 
+  
   
   function imageSlide(image_class, image_link, container, removalTimer) {
     var image_slide = document.createElement('img');
@@ -2288,14 +2369,13 @@ function onFileClick() {
 
 // WINDOW ON LOAD
 window.onload = function() {
-  loader(); 
+  // loader(); 
   firstImpressionContainer();
   userDeviceSpecifications();
   detectSizeChange(); 
   userActiveStatus();
   
-  
-//   callRemainderFunctions();
+  callRemainderFunctions();
 }
 
 
@@ -2334,7 +2414,7 @@ function callRemainderFunctions() {
 
 // WINDOW ON ERROR
 window.onerror = function(msg, url, linenumber) {
-  alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
+  // alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
   
   function errorMessageApp() {
     if ($('.text-editor.error').length == 1) {

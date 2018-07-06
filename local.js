@@ -6,6 +6,54 @@ var article_title = "A Kanye West Analysis",
 
 
 
+// DEVICE SPECIFICATIONS
+function userDeviceSpecifications() {
+  if (computer) {
+    manuallyCenter('.desktop', '.text-editor');
+
+    function draggableApp() {
+      $('.text-editor').draggable({
+        handle: '.header',
+        cursor: 'move', 
+        drag: function(event, ui) {
+          backgroundImageBlur('.mac-os', '.text-editor', '.text-editor > .blur', 'background-image');
+        }
+      });
+    } 
+    draggableApp(); 
+
+    if (firefox) {
+      var browser_alert = document.createElement('div');
+      browser_alert.className = 'browser-alert ab-mid';
+      browser_alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
+
+      $('.menu-bar').remove();
+      $('.desktop').remove();
+      $('.mac-os').append(browser_alert);
+    }
+  }
+   
+  if (mobile) {
+    function portraitOrLandscape() {
+      if (window.orientation == 0) {
+        $('.text-editor > .blur').removeClass('cover').addClass('contain');
+      }
+
+      else if (window.orientation == -90 || 90) {
+        $('.text-editor > .blur').removeClass('contain').addClass('cover');
+      }
+    }
+    portraitOrLandscape();
+    
+    window.addEventListener('orientationchange', function() {
+      portraitOrLandscape();
+    });
+  }
+}
+
+
+
+
 // FIRST IMPRESSION 
 function firstImpressionContainer() { 
   /* firstImpression.js. Copyright (c) 2012 Rob Flaherty (@robflaherty). Licensed under the MIT and GPL licenses. */
@@ -302,59 +350,6 @@ function loader() {
     skipLoader(); 
   }
   gta();
-}
-
-
-
-
-// DEVICE SPECIFICATIONS
-function userDeviceSpecifications() {
-  if (computer) {
-    $('body').addClass('computer');
-    manuallyCenter('.desktop', '.text-editor');
-
-    function draggableApp() {
-      $('.text-editor').draggable({
-        handle: '.header',
-        cursor: 'move', 
-        drag: function(event, ui) {
-          backgroundImageBlur('.mac-os', '.text-editor', '.text-editor > .blur', 'background-image');
-        }
-      });
-    } 
-    draggableApp(); 
-
-    if (firefox) {
-      var browser_alert = document.createElement('div');
-      browser_alert.className = 'browser-alert ab-mid';
-      browser_alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
-
-      $('.menu-bar').remove();
-      $('.desktop').remove();
-      $('.mac-os').append(browser_alert);
-    }
-  }
-   
-  if (mobile) {
-    $('body').addClass('mobile');
-    
-    function portraitOrLandscape() {
-      if (window.orientation == 0) {
-        $('body').removeClass('landscape').addClass('portrait');
-        $('.text-editor > .blur').removeClass('cover').addClass('contain');
-      }
-
-      else if (window.orientation == -90 || 90) {
-        $('body').removeClass('portrait').addClass('landscape');
-        $('.text-editor > .blur').removeClass('contain').addClass('cover');
-      }
-    }
-    portraitOrLandscape();
-    
-    window.addEventListener('orientationchange', function() {
-      portraitOrLandscape();
-    });
-  }
 }
 
 
@@ -922,7 +917,8 @@ function mediaAfterParagraphs() {
   var mac_os = $('.mac-os'),
       text_editor = $('.text-editor'),
       current_paragraph,
-      parent_container = $('.parent-container'),
+      parent_container = $('.text-editor .parent-container'),
+      scroll_container = $('.text-editor .scroll-container'),
       media_container,
       media_container_height,
       media,
@@ -931,16 +927,16 @@ function mediaAfterParagraphs() {
       header_height,
       main_controls,
       main_controls_buttons,
-      video_call_to_action_controls,
+      video_call_to_action_controls, 
       title_container,
-      title_scroll,
+      title_scroll, 
       video,
-      video_title,
-      video_link,
+      video_title, 
+      video_link, 
       previous_block,
       next_block,
       next_paragraph,
-      next_block_paragraphs,
+      next_block_paragraphs, 
       next_block_interval,
       next_block_function,
       first_block_interval, 
@@ -955,14 +951,17 @@ function mediaAfterParagraphs() {
       tenth_block_interval,
       eleventh_block_interval,
       ending_interval;
-      
+       
   
   function buildMediaPlayer() {    
-    function preparations() {
+    function preparations() {   
       function hideInstagramShare() {
         if ($('.text-editor').hasClass('instagram-share')) {
           $('img.poster').remove();
           $('.share.call-to-action-controls').hide();
+          $('.text.call-to-action-controls').show();
+          $('.text.call-to-action-controls .search').show();
+          $('.text-editor > .header .title-scroll').text("A Kanye West Analysis");
           $('.text-editor').removeClass('instagram-share');
         } 
       }
@@ -1034,29 +1033,11 @@ function mediaAfterParagraphs() {
         blur.css('width', thumbnail.width());
         blur.css('height', thumbnail.height());
         blur.css('left', '-' + video_call_to_action_controls.css('margin-left'));
-      }
-      
-      function heightInTextEditor() {
-        var parent_container_height = $('.text-editor .parent-container').height();
-        media_container_height = parent_container_height * 0.331;
-
-        console.log(media_container_height);
-
-        text_editor.css('height', media_container_height);
-      }
-      
-      function heightInStandAlone() {
-        // .TEXT-EDITOR.VIDEO-PLAYER
-        var mac_os = $('.mac-os').height(); 
-        media_container_height = mac_os * 0.307622;
-        console.log(media_container_height);
-
-        text_editor.css('height', media_container_height);
-      }
-      
-      function calcMediaContainerHeight(element) {
-        var media_container_width = $('.text-editor .media-container').width();
-            media_container_height = media_container_width * 0.563278;
+      } 
+       
+      function calcHeightWithScrollContWidthRatio(element) {
+        var scroll_container_width = $('.scroll-container').width();
+            media_container_height = scroll_container_width * 0.563278;
         console.log(media_container_height);
         
         $(element).css('height', media_container_height);
@@ -1065,93 +1046,45 @@ function mediaAfterParagraphs() {
        
       if (computer) {
         var text_editor_components = $('.text-editor > .header, .text-editor .scroll-container p.read, .text-editor .media-container.watched');
-        
-        if (chrome) {
-          media_container.slideDown(500);
 
-          setTimeout(function() {
-            text_editor.addClass('video-player');
-            text_editor_components.fadeOut(200);
-          }, 700); 
+        calcHeightWithScrollContWidthRatio(media_container);
+        media_container.slideDown(500);
+        parent_container.append(media_container);
 
-          setTimeout(function() {
-            // text_editor.css('height', media_container.height());
-            backgroundImageBlur(thumbnail, video_call_to_action_controls, blur, 'image-tag');
-            controlsBackgroundColor();
-          }, 950);
+        setTimeout(function() {
+          text_editor.addClass('video-player');
+          calcHeightWithScrollContWidthRatio(text_editor);
+          calcHeightWithScrollContWidthRatio(media_container);
+          backgroundImageBlur(thumbnail, video_call_to_action_controls, blur, 'image-tag');
+          controlsBackgroundColor();
+        }, 700);
+ 
+        setTimeout(function() {
+          videoLoader();
+          mac_os.addClass('dim');
+        }, 900);
+ 
+        function videoEnded() {
+          video.bind('ended', function() { 
+            if (next_paragraph.is(':hidden')) {
+              setTimeout(function() {
+                text_editor.css('height', '90%'); 
+                text_editor.removeClass('video-player');
+                media_container.addClass('video-player');
+                media_container.css('height', 'fit-content'); 
+                postLink();
+              }, 1000);
 
-          setTimeout(function() {
-            videoLoader();
-            mac_os.addClass('dim');
-          }, 1200);
-
-          function videoEnded() {
-            video.bind('ended', function() { 
-              if (next_paragraph.is(':hidden')) {
-                setTimeout(function() {
-                  // text_editor.css('height', '90%'); 
-                  text_editor.removeClass('video-player');
-                  text_editor_components.fadeIn(200);
-
-                  media_container.addClass('video-player');
-                  postLink();
-
-                  setTimeout(function() {
-                    resizeBlur();
-                    mac_os.removeClass('dim');
-                  }, 200);
-                }, 1000);
-              }
-            })
-          }
-          videoEnded();
+              setTimeout(function() {
+                resizeBlur();
+                mac_os.removeClass('dim');
+              }, 1200);
+            }
+          })
         }
-        
-        if (safari) {
-          media_container.fadeIn(200);
-          
-          setTimeout(function() {
-            text_editor.addClass('video-player');
-            // text_editor_components.fadeOut(200);
-          }, 250); 
-          
-          setTimeout(function() {
-            text_editor.css('height', media_container.height());
-            backgroundImageBlur(thumbnail, video_call_to_action_controls, blur, 'image-tag');
-            controlsBackgroundColor();
-            
-            // videoLoader();
-            // mac_os.addClass('dim');
-          }, 500);
-          
-          setTimeout(function() {
-            videoLoader();
-            mac_os.addClass('dim');
-          }, 600);
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              if (next_paragraph.is(':hidden')) {
-                setTimeout(function() {
-                  text_editor.removeClass('video-player');
-                  text_editor.css('height', '90%'); 
-                  // text_editor_components.fadeIn(200);
-
-                  media_container.addClass('video-player');
-                  postLink();
-
-                  setTimeout(function() {
-                    resizeBlur();
-                    mac_os.removeClass('dim');
-                  }, 200);
-                }, 1000);
-              }
-            })
-          }
-          videoEnded();
-        }
+        videoEnded();
       }
-      
+          
       if (mobile) { 
         main_controls.remove();
         media_container.fadeIn(200).addClass('video-player');
@@ -1171,9 +1104,8 @@ function mediaAfterParagraphs() {
         videoEnded();
       } 
     }
-    build();
+    build(); 
   } 
-  
   
   function imageSlide(image_class, image_link, container, removalTimer) {
     var image_slide = document.createElement('img');
@@ -1196,7 +1128,7 @@ function mediaAfterParagraphs() {
   
   
   // MALCOLM X POLICE VERDICT
-  first_block_interval = setInterval(firstBlock, 10);
+  first_block_interval = setInterval(firstBlock, 50);
   function firstBlock() { 
     $('p.active').each(function() {  
       current_paragraph = $(this).text();
@@ -1221,15 +1153,15 @@ function mediaAfterParagraphs() {
             buildMediaPlayer();
             
             video.bind('ended', function() { 
-              if ($('.second p:first-child').is(':hidden')) {
+              if ($('.text-editor .second p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.first').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .second p', 2000, [], 0, '-break-', 1000);
-                    second_block_interval = setInterval(secondBlock, 10);
-                  }, 1000);
+                  $('.text-editor .first').after(media_container);
                 }, 1000);
+                
+                setTimeout(function() {
+                  automatedText('.scroll-container .second p', 2000, [], 0, '-break-', 1000);
+                  second_block_interval = setInterval(secondBlock, 50);
+                }, 2000);
               }  
             })
           } 
@@ -1238,10 +1170,10 @@ function mediaAfterParagraphs() {
             buildMediaPlayer(); 
 
             video.bind('ended', function() { 
-              if ($('.second p:first-child').is(':hidden')) {
+              if ($('.text-editor .second p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  automatedText('.scroll-container .second p', 2000, [], 0, '-break-', 1000);
-                  second_block_interval = setInterval(secondBlock, 10);
+                  automatedText('.text-editor .second p', 2000, [], 0, '-break-', 1000);
+                  second_block_interval = setInterval(secondBlock, 50);
                 }, 2000);
               }  
             })
@@ -1251,7 +1183,7 @@ function mediaAfterParagraphs() {
     })
   }
   
-  
+   
   // KANYE TO CUDI
   function secondBlock() {
     $('p.active').each(function() {
@@ -1269,15 +1201,15 @@ function mediaAfterParagraphs() {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
-              if ($('.third p:first-child').is(':hidden')) {
+              if ($('.text-editor .third p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.second').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .third p', 2000, [], 0, '-break-', 1000);
-                    third_block_interval = setInterval(thirdBlock, 10);
-                  }, 1000);
+                  $('.text-editor .second').after(media_container);
                 }, 1000);
+                
+                setTimeout(function() {
+                  automatedText('.text-editor .third p', 2000, [], 0, '-break-', 1000);
+                  third_block_interval = setInterval(thirdBlock, 50);
+                }, 2000);
               }
             })
           } 
@@ -1286,10 +1218,10 @@ function mediaAfterParagraphs() {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
-              if ($('.third p:first-child').is(':hidden')) {
+              if ($('.text-editor .third p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  automatedText('.scroll-container .third p', 2000, [], 0, '-break-', 1000);
-                  third_block_interval = setInterval(thirdBlock, 10);
+                  automatedText('.text-editor .third p', 2000, [], 0, '-break-', 1000);
+                  third_block_interval = setInterval(thirdBlock, 50);
                 }, 2000);
               }
             })
@@ -1297,7 +1229,7 @@ function mediaAfterParagraphs() {
         }, 1000);
       }
     })
-  }
+  } 
   
   
   // RADIO FUCK YOU
@@ -1317,15 +1249,15 @@ function mediaAfterParagraphs() {
             buildMediaPlayer(); 
 
             video.bind('ended', function() {
-              if ($('.fourth p:first-child').is(':hidden')) {
+              if ($('.text-editor .fourth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.third').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .fourth p', 2000, [], 0, '-break-', 1000);
-                    fourth_block_interval = setInterval(fourthBlock, 10);
-                  }, 2000);
+                  $('.text-editor .third').after(media_container);
                 }, 1000); 
+                
+                setTimeout(function() {
+                  automatedText('.text-editor .fourth p', 2000, [], 0, '-break-', 1000);
+                  fourth_block_interval = setInterval(fourthBlock, 50);
+                }, 2000);
               }
             })
           } 
@@ -1334,10 +1266,10 @@ function mediaAfterParagraphs() {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
-              if ($('.fourth p:first-child').is(':hidden')) {
+              if ($('.text-editor .fourth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  automatedText('.scroll-container .fourth p', 2000, [], 0, '-break-', 1000);
-                  fourth_block_interval = setInterval(fourthBlock, 10);
+                  automatedText('.text-editor .fourth p', 2000, [], 0, '-break-', 1000);
+                  fourth_block_interval = setInterval(fourthBlock, 50);
                 }, 2000);
               }
             })
@@ -1365,15 +1297,15 @@ function mediaAfterParagraphs() {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
-              if ($('.fifth p:first-child').is(':hidden')) {
+              if ($('.text-editor .fifth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.fourth').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .fifth p', 2000, [], 0, '-break-', 1000);
-                    fifth_block_interval = setInterval(fifthBlock, 10);
-                  }, 1000);
+                  $('.text-editor .fourth').after(media_container);
                 }, 1000); 
+                
+                setTimeout(function() {
+                  automatedText('.text-editor .fifth p', 2000, [], 0, '-break-', 1000);
+                  fifth_block_interval = setInterval(fifthBlock, 50);
+                }, 2000);
               }
             })
           } 
@@ -1382,10 +1314,10 @@ function mediaAfterParagraphs() {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
-              if ($('.fifth p:first-child').is(':hidden')) {
+              if ($('.text-editor .fifth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  automatedText('.scroll-container .fifth p', 2000, [], 0, '-break-', 1000);
-                  fifth_block_interval = setInterval(fifthBlock, 10);
+                  automatedText('.text-editor .fifth p', 2000, [], 0, '-break-', 1000);
+                  fifth_block_interval = setInterval(fifthBlock, 50);
                 }, 2000);
               }
             })
@@ -1413,15 +1345,15 @@ function mediaAfterParagraphs() {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
-              if ($('.sixth p:first-child').is(':hidden')) {
+              if ($('.text-editor .sixth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.fifth').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .sixth p', 2000, [], 0, '-break-', 1000);
-                    sixth_block_interval = setInterval(sixthBlock, 10);
-                  }, 1000);
+                  $('.text-editor .fifth').after(media_container);
                 }, 1000); 
+                
+                setTimeout(function() {
+                  automatedText('.text-editor .sixth p', 2000, [], 0, '-break-', 1000);
+                  sixth_block_interval = setInterval(sixthBlock, 50);
+                }, 2000);
               }
             })
           } 
@@ -1430,10 +1362,10 @@ function mediaAfterParagraphs() {
             buildMediaPlayer(); 
             
             video.bind('ended', function() {
-              if ($('.sixth p:first-child').is(':hidden')) {
+              if ($('.text-editor .sixth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  automatedText('.scroll-container .sixth p', 2000, [], 0, '-break-', 1000);
-                  sixth_block_interval = setInterval(sixthBlock, 10);
+                  automatedText('.text-editor .sixth p', 2000, [], 0, '-break-', 1000);
+                  sixth_block_interval = setInterval(sixthBlock, 50);
                 }, 2000);
               }
             })
@@ -1469,15 +1401,15 @@ function mediaAfterParagraphs() {
             buildMediaPlayer();
             
             video.bind('ended', function() {
-              if ($('.seventh p:first-child').is(':hidden')) {
+              if ($('.text-editor .seventh p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.sixth').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .seventh p', 2000, [], 0, '-break-', 1000);
-                    seventh_block_interval = setInterval(seventhBlock, 10);
-                  }, 1000);
+                  $('.text-editor .sixth').after(media_container);
                 }, 1000); 
+                
+                setTimeout(function() {
+                  automatedText('.text-editor .seventh p', 2000, [], 0, '-break-', 1000);
+                  seventh_block_interval = setInterval(seventhBlock, 50);
+                }, 2000);
               }
             })
           } 
@@ -1486,10 +1418,10 @@ function mediaAfterParagraphs() {
             buildMediaPlayer();
             
             video.bind('ended', function() {
-              if ($('.seventh p:first-child').is(':hidden')) {
+              if ($('.text-editor .seventh p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  automatedText('.scroll-container .seventh p', 2000, [], 0, '-break-', 1000);
-                  seventh_block_interval = setInterval(seventhBlock, 10);
+                  automatedText('.text-editor .seventh p', 2000, [], 0, '-break-', 1000);
+                  seventh_block_interval = setInterval(seventhBlock, 50);
                 }, 2000);
               }
             })
@@ -1517,15 +1449,15 @@ function mediaAfterParagraphs() {
             buildMediaPlayer();
             
             video.bind('ended', function() {
-              if ($('.eight p:first-child').is(':hidden')) {
+              if ($('.text-editor .eight p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.seventh').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .eight p', 2000, [], 0, '-break-', 1000);
-                    eight_block_interval = setInterval(eightBlock, 10);
-                  }, 1000);
+                  $('.text-editor .seventh').after(media_container);
                 }, 1000);  
+                
+                setTimeout(function() {
+                  automatedText('.text-editor .eight p', 2000, [], 0, '-break-', 1000);
+                  eight_block_interval = setInterval(eightBlock, 50);
+                }, 2000);
               }
             }) 
           } 
@@ -1537,7 +1469,7 @@ function mediaAfterParagraphs() {
               if ($('.eight p:first-child').is(':hidden')) {
                 setTimeout(function() {
                   automatedText('.scroll-container .eight p', 2000, [], 0, '-break-', 1000);
-                  eight_block_interval = setInterval(eightBlock, 10);
+                  eight_block_interval = setInterval(eightBlock, 50);
                 }, 2000);
               }
             }) 
@@ -1565,15 +1497,15 @@ function mediaAfterParagraphs() {
             buildMediaPlayer();
             
             video.bind('ended', function() {
-              if ($('.ninth p:first-child').is(':hidden')) {
+              if ($('.text-editor .ninth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.eight').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .ninth p', 2000, [], 0, '-break-', 1000);
-                    ninth_block_interval = setInterval(ninthBlock, 10);
-                  }, 1000);
+                  $('.text-editor .eight').after(media_container);
                 }, 1000); 
+                
+                setTimeout(function() {
+                  automatedText('.text-editor .ninth p', 2000, [], 0, '-break-', 1000);
+                  ninth_block_interval = setInterval(ninthBlock, 50);
+                }, 2000);
               }
             })
           } 
@@ -1582,10 +1514,10 @@ function mediaAfterParagraphs() {
             buildMediaPlayer();
             
             video.bind('ended', function() {
-              if ($('.ninth p:first-child').is(':hidden')) {
+              if ($('.text-editor .ninth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  automatedText('.scroll-container .ninth p', 2000, [], 0, '-break-', 1000);
-                  ninth_block_interval = setInterval(ninthBlock, 10);
+                  automatedText('.text-editor .ninth p', 2000, [], 0, '-break-', 1000);
+                  ninth_block_interval = setInterval(ninthBlock, 50);
                 }, 2000);
               }
             })
@@ -1613,15 +1545,15 @@ function mediaAfterParagraphs() {
             buildMediaPlayer();
             
             video.bind('ended', function() {
-              if ($('.tenth p:first-child').is(':hidden')) {
+              if ($('.text-editor .tenth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.ninth').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .tenth p', 2000, [], 0, '-break-', 1000);
-                    tenth_block_interval = setInterval(tenthBlock, 10);
-                  }, 2000);
+                  $('.text-editor .ninth').after(media_container);
                 }, 1000); 
+                
+                setTimeout(function() {
+                  automatedText('.text-editor .tenth p', 2000, [], 0, '-break-', 1000);
+                  tenth_block_interval = setInterval(tenthBlock, 50);
+                }, 2000);
               }
             })
           } 
@@ -1630,10 +1562,10 @@ function mediaAfterParagraphs() {
             buildMediaPlayer();
             
             video.bind('ended', function() {
-              if ($('.tenth p:first-child').is(':hidden')) {
+              if ($('.text-editor .tenth p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  automatedText('.scroll-container .tenth p', 2000, [], 0, '-break-', 1000);
-                  tenth_block_interval = setInterval(tenthBlock, 10);
+                  automatedText('.text-editor .tenth p', 2000, [], 0, '-break-', 1000);
+                  tenth_block_interval = setInterval(tenthBlock, 50);
                 }, 2000);
               }
             })
@@ -1661,27 +1593,27 @@ function mediaAfterParagraphs() {
             buildMediaPlayer();
             
             video.bind('ended', function() {
-              if ($('.eleventh p:first-child').is(':hidden')) {
+              if ($('.text-editor .eleventh p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  $('.tenth').after(media_container);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .eleventh p', 2000, [], 0, '-break-', 1000);
-                    ending_interval = setInterval(theEnd, 10);
-                  }, 1000);
+                  $('.text-editor .tenth').after(media_container);
                 }, 1000); 
+                
+                setTimeout(function() {
+                  automatedText('.text-editor .eleventh p', 2000, [], 0, '-break-', 1000);
+                  ending_interval = setInterval(theEnd, 50);
+                }, 2000);
               }
-            })
+            }) 
           } 
           
           if (mobile) {
             buildMediaPlayer();
             
             video.bind('ended', function() {
-              if ($('.eleventh p:first-child').is(':hidden')) {
+              if ($('.text-editor .eleventh p:first-child').is(':hidden')) {
                 setTimeout(function() {
-                  automatedText('.scroll-container .eleventh p', 2000, [], 0, '-break-', 1000);
-                  ending_interval = setInterval(theEnd, 10);
+                  automatedText('.text-editor .eleventh p', 2000, [], 0, '-break-', 1000);
+                  ending_interval = setInterval(theEnd, 50);
                 }, 2000);
               }
             })
@@ -1702,7 +1634,7 @@ function mediaAfterParagraphs() {
         
         setTimeout(function() {
           function disableAutomatedScroll() {
-            $('.scroll-container').addClass('completed');
+            $('.text-editor').addClass('completed');
           }
           disableAutomatedScroll();
           
@@ -1723,7 +1655,7 @@ function mediaAfterParagraphs() {
   } 
 }
 
-
+  
   
 
 // MEDIA PLAYER
@@ -1785,8 +1717,8 @@ function videoPlayback() {
     media_container.removeClass('unwatched');
     header.removeClass('hide');
   }
-  
-  
+   
+   
   if (computer) {
     $(document)
       .on('click', '.video.call-to-action-controls button', function(event) {
@@ -1842,7 +1774,7 @@ function videoPlayback() {
             thumbnail.fadeIn(200);
           }
         }
-      }
+      } 
       
       else if (time_adjustment) {
         current_time = video.currentTime;
@@ -1885,11 +1817,12 @@ function videoPlayback() {
     
       .on('mousemove', '.media-container', function() {
         media_container = $(this);
-        header = media_container.find('.header');
         watched = !media_container.hasClass('unwatched');  
+        header = media_container.find('.header');
+        video = media_container.find('video')[0];
         
-        if (watched) { 
-          $(document)
+        if (watched) {   
+          $(document)    
             .on('mousemove', '.media-container', function() {
               header.removeClass('hide');
             })
@@ -2308,7 +2241,7 @@ function twitterEmbed() {
     } 
     setTimeout(function () {
       $(embed_window).toggleClass('slide-out');
-    }, 10);
+    }, 100);
     
     var number_of_calls = 0;
     var iframe_height_interval = setInterval(iframeMobileHeight, 1);
@@ -2369,9 +2302,10 @@ function onFileClick() {
 
 // WINDOW ON LOAD
 window.onload = function() {
+  specifications();
+  userDeviceSpecifications();
   // loader(); 
   firstImpressionContainer();
-  userDeviceSpecifications();
   detectSizeChange(); 
   userActiveStatus();
   
@@ -2414,9 +2348,9 @@ function callRemainderFunctions() {
 
 // WINDOW ON ERROR
 window.onerror = function(msg, url, linenumber) {
-  // alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
-  
   function errorMessageApp() {
+    alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
+    
     if ($('.text-editor.error').length == 1) {
       return;
     }

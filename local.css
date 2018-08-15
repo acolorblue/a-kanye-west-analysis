@@ -1,9 +1,70 @@
 * {
-  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
+
+body .rotate-to-landscape {
+  width: inherit;
+  height: inherit;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee;
+  display: block;
+  z-index: 10;
+}
+
+body .rotate-to-landscape::before {
+  content: 'Please Rotate Your Device To Landscape Mode';
+  width: 80%;
+  height: fit-content;
+  font-family: "Ahamono Monospaced";
+  font-family: 'Pricedown', sans-serif;
+  color: #f9f9f9;
+  text-shadow: 0px 0px 5px #8e8e8e;
+  font-size: 30px;
+/*   font-size: 34px; */
+  text-transform: uppercase;
+  line-height: 1;
+  text-align: center;
+  display: block;
+  position: absolute;
+  margin: auto;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+/*   z-index: 10; */
+}
+
+body .rotate-to-landscape > .close {
+  width: 12px;
+  height: 12px;
+  
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, .1);
+  background-color: #bababa;
+  margin: 10px 10px auto auto;
+  z-index: 11;
+}
+
+body .rotate-to-landscape > .close::before {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Apple%20Media%20File%20Controls/AMF%20-%20Close%20Icon/Close%20-%20Grey%203.png");
+  background-size: 6.58px;
+  background-size: 8px;
+  -webkit-filter: drop-shadow(0px 0px 1px #303030);
+}
+
+
 
 .active::after {
   content: "|";
+}
+
+button {
+  transition: unset;
 }
  
 /* LOADER */
@@ -78,14 +139,14 @@
   z-index: 1;
 }
 
-.computer .loader .gta .foreground-layer {
+.width-longer .loader .gta .foreground-layer {
   -webkit-transform: translateZ(950px);
 }
 
 .loader .gta .foreground-layer .text-logo.gta-5 {
   width: 180px;
   height: 180px;
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Logo%20-%201%20-%20Comp.png');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Logos/GTA%205%20-%20Comp.png");
   background-size: contain;
   background-position: bottom;
   top: auto;
@@ -122,11 +183,11 @@
 }
 
 .loader .gta .foreground-layer .icon-logo.rockstar {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Rockstar/Logo%20-%201%20-%20Comp.png');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Logos/Rockstar%20-%20Comp.png");
 }
 
 .loader .gta .foreground-layer .icon-logo.good-music {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Logo%20-%201%20-%20Comp.png');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Logos/GOOD%20Music%20-%20Comp.png");
 }
 
 /* INFORMATION CONTAINER */
@@ -146,7 +207,7 @@
 }
 
 .loader .gta .info-container.low-power-mode-alert,
-.loader .gta .info-container.leave-twitter {
+.loader .gta .info-container.open-in-native-browser {
   width: 200px;
   display: none;
 }
@@ -157,7 +218,7 @@
   left: 20px;
 }
 
-.loader .gta .info-container.leave-twitter {
+.loader .gta .info-container.open-in-native-browser {
   right: 20px;
   bottom: 116px;
   left: auto;
@@ -208,26 +269,6 @@
   background-size: contain;
 } 
 
-.loader .gta .info-container .icons-b.info::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Information/Information%20-%20White%20-%203.png');
-}
-
-.loader .gta .info-container .icons-b.extra-options::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Twitter%20Icons/Regular%20Mode%20Icons/Extra%20Options/1.png');
-}
-
-.loader .gta .info-container .icons-b.battery.low-power-mode::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/iOS/Battery/Battery%20-%20Low%20Power%20Mode%20-%202.png');
-}
-
-.loader .gta .info-container .icons-b.play-station-x::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Play%20Station/X%20Button%20-%202.png');
-}
-
-.loader .gta .info-container .icons-b.loading-circle::before {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Loading%20Indicator/Fading%20Circle%20-%201.gif');
-}
-
 .loader .gta .info-container .active::after {
   color: #fff;
 }
@@ -261,7 +302,7 @@
   background-position: center;
 }
 
-.computer .loader .gta .background-and-character-container .background {
+.width-longer .loader .gta .background-and-character-container .background {
   width: 80%;
   height: 80%;
   background-size: contain;
@@ -281,33 +322,33 @@
   }
 }
 
-.mobile .loader .gta .background-and-character-container .background {
+.height-longer .loader .gta .background-and-character-container .background {
   background-size: cover;
 }
 
 /* BACKGROUND - IMAGES */
 .loader .gta .michael.background-and-character-container .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Michael%20-%20Comp.jpg');
-}
-
-.loader .gta .franklin.background-and-character-container .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Franklin%20And%20Chop%20-%20Comp.jpg');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Backgrounds/Michael%20-%20Comp.jpg");
 }
 
 .loader .gta .trevor.background-and-character-container .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Background%20-%20Trevor%20-%20Comp.jpg');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Backgrounds/Trevor%20-%20Comp.jpg");
+}
+
+.loader .gta .franklin-and-chop.background-and-character-container .background {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Backgrounds/Franklin%20And%20Chop%20-%20Comp.jpg");
 }
 
 .loader .gta .kanye.background-and-character-container .background {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Background%20-%20Room%203%20-%20Comp.jpg');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Backgrounds/Kanye%20-%20Comp.jpg");
 }
 
-.mobile .loader .gta .background-and-character-container .background.move {
+.height-longer .loader .gta .background-and-character-container .background.move {
   background-position-x: 60%;
   -webkit-animation: background-and-character-move 5s linear;
 }
 
-.mobile .loader .gta .kanye.background-and-character-container .background.move {
+.height-longer .loader .gta .kanye.background-and-character-container .background.move {
   -webkit-animation: background-and-character-move 3s linear;
 } 
 
@@ -319,30 +360,30 @@
   background-position: bottom;
 }
 
-.computer .loader .gta .background-and-character-container .character {
+.width-longer .loader .gta .background-and-character-container .character {
   background-size: auto 95%;
   -webkit-transform: translateZ(900px);
 } 
 
-.mobile .loader .gta .background-and-character-container .character {
+.height-longer .loader .gta .background-and-character-container .character {
   background-size: 90% auto;
 }
 
 /* CHARACTER - IMAGES */
 .loader .gta .michael.background-and-character-container .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Michael%20-%201%20Comp.png');
-}
-
-.loader .gta .franklin.background-and-character-container .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Franklin%20-%201%20Comp.png');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Characters/Michael%20-%20Comp.png");
 }
 
 .loader .gta .trevor.background-and-character-container .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/5/Trevor%20-%202%20Comp.png');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Characters/Trevor%20-%20Comp.png");
+}
+
+.loader .gta .franklin-and-chop.background-and-character-container .character {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Characters/Franklin%20And%20Chop%20-%20Comp.png");
 }
 
 .loader .gta .kanye.background-and-character-container .character {
-  background-image: url('https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Loader/Gta%20Loader/Kanye/Character%20-%202%20-%20Comp.png');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Characters/Kanye%20-%20Comp.png");
 }
 
 .loader .gta .background-and-character-container .character.move {
@@ -364,7 +405,7 @@
   }
 }
 
-.mobile .loader .kanye.background-and-character-container .character {
+.height-longer .loader .kanye.background-and-character-container .character {
   background-size: auto 90%;
 }
 
@@ -387,7 +428,7 @@
   height: 100%;
   overflow: hidden;
   background-color: #eeeeee;
-  background-image: url('https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Timbuktu%2C%20Mali/Steve%20McCurry%20-%20The%20Sahel%2C%201986.%20A%20group%20of%20young%20men%20pushes%20a%20plane%20out%20of%20the%20mud.jpg');
+  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/2.%20Desktop/1.%20Background/Steve%20McCurry%20-%20A%20group%20of%20young%20men%20push%20a%20plane%20out%20of%20the%20mud%2C%20The%20Sahel%2C%201986.jpg");
   background-size: 100%;
   font-family: sans-serif;
   display: flex;
@@ -405,6 +446,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, .9);
+  z-index: 1;
 }
 
 .mac-os .browser-alert {
@@ -416,7 +458,7 @@
   box-shadow: 0px 0px 5px #c7c6c6;
   background-color: #f6f5f6;
   padding: 4%;
-  font-family: ahamonomonospaced;
+  font-family: "Ahamono Monospaced";
   color: #000;
   text-align: center;
 }
@@ -461,6 +503,8 @@
   z-index: 1;
 }
 
+
+/* PANEL */
 .mac-os .menu-bar .panel {
   width: fit-content;
   height: inherit;
@@ -476,45 +520,342 @@
   right: 10px;
 }
 
-.mac-os .menu-bar .panel > * {
+
+/* CONTAINER */
+.mac-os .menu-bar .panel .section-container {
+  width: fit-content;
+  height: inherit;
+  display: inline-block;
+  position: relative;
+}
+
+
+/* CONTAINER - TITLE BUTTON */
+.mac-os .menu-bar .section-container > button {
   width: inherit;
   height: inherit;
   padding: 0px 10px;
   font-size: unset;
   line-height: 1.6;
-  display: inline-block;
+  display: block;
   position: relative;
 }
 
-.mac-os .menu-bar .panel > span {
-  user-select: none;
-}
-
-.mac-os .menu-bar .panel > .icons-b {
+.mac-os .menu-bar .section-container > .icons-b {
   width: 35px;
 }
 
-.mac-os .menu-bar .panel > .icons-b::before {
+.mac-os .menu-bar .section-container > .icons-b::before {
   width: inherit;
   height: inherit;
   background-size: 15px;
 }
 
-.mac-os .menu-bar .panel .name {
+.mac-os .menu-bar .section-container .name {
   font-weight: bold;
 }
 
-.mac-os .menu-bar .panel .notification-center {
+.mac-os .menu-bar .section-container .notification-center {
   width: 38px;
 }
 
-.mac-os .menu-bar .panel .notification-center.icons-b::before {
+.mac-os .menu-bar .section-container .notification-center.icons-b::before {
   background-size: 18px;
 }
 
-.mac-os .menu-bar .panel .selected {
+.mac-os .menu-bar .section-container.selected > button,
+.mac-os .menu-bar .section-container.selected > .menu .item:hover {
   background-color: #026cea;
   color: #ffffff;
+}
+
+
+/* CONTAINER - MENU */
+.mac-os .menu-bar .section-container .menu {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 0px 0px 5px 5px;
+  box-shadow: 0 6px 10px 2px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, .98);
+  position: absolute;
+  margin-top: 22px;
+  top: 0px;
+  display: none;
+}
+
+.mac-os .menu-bar .panel.left .section-container .menu {
+  left: 0px;
+}
+
+.mac-os .menu-bar .panel.right .section-container .menu {
+  right: 0px;
+}
+
+.mac-os .menu-bar .section-container.selected .menu {
+  display: block;
+}
+
+
+/* ITEM AND SEPERATOR */
+.mac-os .menu-bar .section-container .menu .item {
+  width: -webkit-fill-available;
+  height: 18px;
+  padding: 0px 22px;
+  font-size: unset;
+  color: #434343;
+  text-align: left;
+  margin: 4px 0px;
+  display: block;
+  user-select: none;
+  position: relative;
+}
+
+.mac-os .menu-bar .section-container .menu .item::before {
+  width: 11px;
+  height: 11px;
+  background-size: contain;
+  margin: auto auto auto 5px;
+}
+
+.mac-os .menu-bar .section-container .menu .item:first-child {
+  margin-top: 7px;
+}
+
+.mac-os .menu-bar .section-container .menu .seperator {
+  width: -webkit-fill-available;
+  height: 2px;
+  background-color: #d3d3d399;
+  display: block;
+  margin: 3px 0px;
+}
+
+.mac-os .menu-bar .section-container .menu .item:last-child {
+  margin-bottom: 7px;
+}
+
+
+/* MENU - MAIN MENU */
+.mac-os .menu-bar .section-container.main-menu .menu {
+  height: 250px;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.mac-os .menu-bar .section-container.main-menu .menu img {
+  width: auto;
+  height: 100%;
+  z-index: 2;
+}
+
+
+
+
+/* MENU - DATE AND TIME */
+.mac-os .menu-bar .section-container.date-and-time > button * {
+  transition: inherit;
+}
+
+.mac-os .menu-bar .section-container.date-and-time > .menu {
+  width: 276px;
+  height: fit-content;
+  background-color: rgb(242, 242, 242);
+  background-color: rgba(255, 255, 255, .96);
+}
+
+.mac-os .menu-bar .section-container.date-and-time > .menu .item.full-date,
+.mac-os .menu-bar .section-container.date-and-time > .menu .item.full-date:hover {
+  background-color: transparent;
+  color: #adadad;
+  text-decoration: none; 
+  cursor: default;
+} 
+
+.mac-os .menu-bar .section-container.date-and-time > .menu .item.location-and-time-preferences {
+/*   overflow: hidden; */
+}
+
+.mac-os .menu-bar .section-container.date-and-time > .menu .item.location-and-time-preferences .timezones {
+  display: none;
+}
+
+
+/* MENU - DATE AND TIME - ANALOG */
+.mac-os .menu-bar .section-container.date-and-time > button.analog {
+  width: fit-content;
+  height: inherit;
+}
+
+.mac-os .menu-bar .section-container.date-and-time > button.analog .clock-border {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  position: relative;
+}
+
+.mac-os .menu-bar .section-container.selected.date-and-time > button.analog .clock-border {
+  border: 1px solid #ffffff;
+}
+
+.mac-os .menu-bar .section-container.date-and-time > button.analog .clock-border .hand {
+  width: 1px;
+  background-color: #000;
+} 
+
+.mac-os .menu-bar .section-container.selected.date-and-time > button.analog .clock-border .hand {
+  background-color: #fff;
+}
+
+.mac-os .menu-bar .section-container.date-and-time > button.analog .clock-border .hour {
+  height: 5px;
+  top: auto;
+  right: auto;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+/*   transform: rotate(55deg); */
+}
+
+.mac-os .menu-bar .section-container.date-and-time > button.analog .clock-border .minute {
+  height: 7px;
+  top: auto;
+  right: auto;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+/*   transform: rotate(7deg); */
+}
+
+
+/* MENU - DATE AND TIME - DIGITAL */
+.mac-os .menu-bar .section-container.date-and-time > button.digital {
+  width: fit-content;
+  height: fit-content;
+}
+
+
+
+
+/* MENU - PROFILE */
+.mac-os .menu-bar .section-container.profile .menu {
+  width: 276px;
+  height: 276px;
+  background: -webkit-linear-gradient(top, #f0f0f0, #ddd);
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Images/0.%20Brand%20Documents/1.%20Background/Logo%20-%20Background%20-%20Comp.jpg?token=ARSbo9BA45WSq_OcAJG7kORGw4MRGizfks5bfUGMwA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  padding: 42% 0px;
+  padding: 30% 0px;
+  padding: 20% 0px;
+  padding: 25% 0px;
+}
+
+.mac-os .menu-bar .section-container.selected.profile .menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.mac-os .menu-bar .section-container.profile .menu .avi {
+  width: 80px;
+  height: 80px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, inset rgba(0, 0, 0, 0.4) 0px 3px 2px;
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Images/0.%20Brand%20Documents/2.%20Avi/Logo%20-Foreground%20-%20Comp.jpg?token=ARSbo6bvTp3ny2MOwzTx9BTmiUwO8HeYks5bfUGcwA%3D%3D");
+  background-size: cover;
+  margin: auto;
+}
+
+.mac-os .menu-bar .section-container.profile .menu .username {
+  color: #fff;
+  text-shadow: 0px 0px 4px #000000;
+  margin: auto;
+}
+
+.mac-os .menu-bar .section-container.profile .menu .bio {
+  border-radius: 5px;
+/*   box-shadow: 0 0px 2px 2px rgba(0, 0, 0, 0.15); */
+  box-shadow: 0px 0px 6px #8f8f8f;
+  background-color: #ffffff;
+  padding: 8px;
+  color: #757575;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  margin: auto;
+}
+
+
+
+.mac-os .menu-bar .section-container.profile .menu .accounts {
+/*   width: 80%; */
+/*   border-radius: 45px; */
+  display: inline-flex;
+  margin: auto;
+}
+
+.mac-os .menu-bar .section-container.profile .menu .accounts button.icons-b {
+  width: 30px;
+  height: 30px;
+  width: 18px;
+  height: 18px;
+  border-radius: 8px;
+  margin: auto;
+  position: relative;
+  display: block;
+  background: #000;
+  background: #ababab;
+  background: transparent;
+  margin-right: 40px;
+
+  /*   margin-right: 60px; */
+  margin-right: 56px;
+}
+
+.mac-os .menu-bar .section-container.profile .menu .accounts button.icons-b:last-child {
+  margin-right: 0px;
+}
+
+.mac-os .menu-bar .section-container.profile .menu .accounts button.icons-b::before {
+/*   background-size: 16px; */
+  -webkit-filter: drop-shadow(0px 0px 1px #303030);
+  background-size: 18px;
+}
+
+
+/* MENU - NOTIFICATION */
+.mac-os .menu-bar .panel.right .section-container.notification .menu {
+  width: 248px;
+  background-color: #252525;
+  display: block;
+  right: -258px;
+  overflow: hidden;
+  transition: height 0ms ease-in-out,
+              right 200ms ease-in-out;
+}
+
+.mac-os .menu-bar .panel.right .section-container.notification.selected .menu {
+  right: -10px;
+  border-radius: 0px 0px 0px 0px;
+}
+
+.mac-os .menu-bar .panel.right .section-container.notification.selected .menu.cover::before {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-color: inherit;
+  background-size: 10%;
+  z-index: 1;
+}
+
+.mac-os .menu-bar .panel.right .section-container.notification.selected .menu a.twitter-timeline {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-color: inherit;
+  position: absolute;
+}
+
+.mac-os .menu-bar .panel.right .section-container.notification.selected .menu .timeline-Footer {
+  display: none !important;
 }
 
 
@@ -581,11 +922,12 @@
 
 .mac-os .file .thumbnail-container .file-type-indicator.icons-b {
   width: 40px;
-  height: 40px;
+  height: 40px; 
 }
-
+ 
 .mac-os .file.soundcloud .thumbnail-container .file-type-indicator::before {
   background-size: contain;
+  z-index: 1;
 }
 
 .mac-os .file .thumbnail-container .thumbnail {
@@ -615,8 +957,7 @@
 /*   max-height: 16px; */
   display: -webkit-box;
   padding: 2px 4px;
-/*   padding: 1px 4px; */
-/*   padding: 3px 5px; */
+  padding: 3px 5px;
   color: #ffffff;
   font-size: 12px;
   line-height: 1;
@@ -628,14 +969,16 @@
 
 .mac-os .file.selected .title {
 /*   outline: #0168da auto 5px; */
-  border: 1px solid #0168da;
+/*   border: 1px solid #0168da; */
   border-radius: 3px;
+/*   padding: 1px; */
   background-color: #0168da;
   text-shadow: unset;
 }
 
 .mac-os .file.selected .title:nth-child(2) {
   border-radius: 0px 0px 3px 3px;
+  margin-top: -1px;
 }
 
 
@@ -650,7 +993,7 @@
   box-shadow: 0px 0px 5px #c7c6c6;
   background-color: rgba(255, 255, 255, .9);
   padding: 4px;
-  font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
+  font: 500 12.4px/normal sans-serif, helvetica, '"Ahamono Monospaced"';
   color: #000000;
   letter-spacing: 0.1px;
   line-height: 1;
@@ -661,40 +1004,6 @@
 
 .mac-os .screensaver-credits.show {
   left: 0px;
-}
-
-
-
-
-/* NOTIFICATION CENTER MENU */
-.mac-os .embed-window  {
-  width: 248px;
-  height: -webkit-fill-available;
-  height: 100%;
-  box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-  background-color: #252525;
-  right: -258px;
-  left: auto;
-}
-
-.mac-os .embed-window.cover::before {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
-  background-color: inherit;
-  background-size: 10%;
-  z-index: 1;
-}
-
-.mac-os .embed-window.slide-out {
-  right: 0px;
-}
-
-.mac-os .embed-window a.twitter-timeline {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
-  background-color: inherit;
-  position: absolute;
 }
 
 
@@ -712,42 +1021,30 @@
   flex-direction: column;
   bottom: auto;
   z-index: 2;
-}
-
-.text-editor.dragged {
-  height: 90% !important;
+/*   opacity: 0; */
+  
+/*   font-family: '1942 Report' !important; */
 }
 
 .computer .text-editor {
-/*   max-width: 800px;
-  max-height: 650px;
-  min-width: 328px;
-  min-height: 20%; */
-  
   min-width: 328px;
   min-height: 20%;
+}
+
+.width-longer .text-editor {
+  width: 55%;
   right: auto;
-  max-width: 64%;
-  max-width: 55%;
 }
 
-.mobile .text-editor {
+.height-longer .text-editor {
   width: 80%;
+  top: 10px !important;
+  right: 10px !important;
+  left: auto !important;
 }
 
-.mobile.portrait .text-editor {
-  top: 10px;
-  right: 10px;
-  left: auto;
-}
-
-.mobile.landscape .text-editor,
-.mobile.landscape .text-editor.video-player {
-  width: 70%;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
+.computer .text-editor.dragged {
+  height: 90% !important;
 }
 
 .text-editor.hide {
@@ -765,8 +1062,8 @@
 
 /* BLUR */
 .text-editor > .blur {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
+/*   width: -webkit-fill-available;
+  height: -webkit-fill-available; */
   filter: blur(20px) brightness(.2);
   position: absolute;
   transition: unset;
@@ -802,9 +1099,9 @@
   
   width: 100%; 
   height: fit-content;
-/*   padding: 0px 0.701%;
-  
-  padding: 0px 2%; */
+  /*   padding: 0px 0.701%;
+
+    padding: 0px 2%; */
   display: inline-flex;
 }
 
@@ -832,6 +1129,7 @@
 
 .text-editor .header .main-controls .icons-b::before {
   background-size: 6.58px;
+  background-size: 6px;
 }
 
 .text-editor .header .main-controls .close.grey::before {
@@ -847,7 +1145,7 @@
   height: fit-content;
   max-width: 67%;
   overflow: hidden;
-  font: 500 12.4px/normal sans-serif, helvetica, 'ahamonomonospaced';
+  font: 500 12.4px/normal sans-serif, helvetica, '"Ahamono Monospaced"';
   letter-spacing: 0.1px;
   color: #ffffff;
   text-shadow: 0px 0px 4px #545454;
@@ -873,7 +1171,8 @@
 .text-editor .header .top-bar .title .title-scroll.overflow {
   margin-right: 50%;
   display: inline-block;
-  -webkit-animation: title-overflow 10s linear infinite;
+/*   -webkit-animation: title-overflow 10s linear infinite; */
+  -webkit-animation: title-overflow 9s linear infinite;
 }
 
 @-webkit-keyframes title-overflow {
@@ -882,10 +1181,12 @@
   }
   
   70% {
-    transform: translateX(-145%);  
+/*     transform: translateX(-145%);   */
+    transform: translateX(-140%); 
+    transform: translateX(-135%);
   }
 
-  70.0001% {
+  70.00001% {
     transform: translateX(0%); 
   }
 }
@@ -901,27 +1202,30 @@
   flex-shrink: 0;
 }
 
-.text-editor .header .call-to-action-controls > button {
+.text-editor .header .call-to-action-controls > button,
+.text-editor .header .call-to-action-controls > a {
   width: fit-content;
   height: 20px;
   border-radius: 4px;
   padding: 2px 8px;
   color: #ffffff;
+  line-height: 17px;
   position: relative; 
   margin: auto auto auto 4px;
 } 
 
-.text-editor .header .call-to-action-controls > button.icons-b {
+.text-editor .header .call-to-action-controls > button:first-of-type {
+  margin: auto auto auto auto;
+} 
+
+.text-editor .header .call-to-action-controls > .icons-b {
   width: 36px;
 }
 
 
 /* CALL TO ACTION IN MAIN HEADER */
 .text-editor > .header .call-to-action-controls {
-  margin: auto 4px auto auto;
-  margin: auto 0px auto auto;
   margin: auto 8px auto auto;
-
   position: relative;
 }
 
@@ -933,6 +1237,9 @@
   background-size: 11px;
 }
 
+.text-editor > .header .text.call-to-action-controls button.credits {
+  display: none;
+}  
 
 
 
@@ -1003,7 +1310,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 5%;
-  font-family: ahamonomonospaced;
+  font-family: "Ahamono Monospaced";
   font-size: 14px;
   line-height: 1.4;
   word-break: break-word;
@@ -1015,6 +1322,11 @@
   width: inherit;
   height: fit-content;
   overflow: scroll;
+/*   margin-top: 0px !important; */
+  
+/*   font-family: '1942 Report' !important; */
+/*   font-family: 'Traveling Typewriter' !important;
+  letter-spacing: 0.6px; */
 }
 
 
@@ -1081,7 +1393,7 @@
 
 
 /* MEDIA CONTAINER */
-.text-editor .media-container {
+.text-editor .scroll-container .media-container {
   width: 100%;
   height: fit-content;
 
@@ -1097,6 +1409,10 @@
   display: none;
 }
 
+.media-container {
+  position: relative;
+}
+
 .text-editor .media-container .header {
   bottom: auto;
   z-index: 3;
@@ -1108,6 +1424,10 @@
 
 .text-editor .media-container .header .top-bar {
   height: inherit;
+}
+
+.text-editor .media-container .header .top-bar .main-controls {
+  display: none; 
 }
 
 .text-editor .media-container .header .top-bar .icons-b::before {
@@ -1136,7 +1456,7 @@
 .text-editor .media-container .call-to-action-controls .icons-b::before {
   background-size: auto 68%;
   background-size: 40%;
-}
+} 
 
 .text-editor .media-container .call-to-action-controls .post-link {
   display: none;
@@ -1147,15 +1467,11 @@
   height: inherit;
   border-radius: inherit;
   display: flex;
+  
+/*   position: relative; */
 }
 
 .text-editor .media-container .media .thumbnail {
-  width: -webkit-fill-available;
-  height: 100%;
-  
-  width: 100%;
-  height: auto;
-  
   width: 100%;
   height: 100%;
   border-radius: inherit;
@@ -1192,6 +1508,8 @@
 
 
 
+ 
+ 
 
 /* VIDEO PLAYER - TEXT EDITOR */
 .text-editor.video-player {
@@ -1215,20 +1533,17 @@
   display: none;
 }
 
+.text-editor.video-player .media-container .header .top-bar .main-controls {
+  display: inline-flex; 
+}
+
 
 
 
 /* INSTAGRAM SHARE */
 .text-editor.instagram-share {
-  background-color: #f6f5f6;
-}
-
-.computer .text-editor.instagram-share {
   width: fit-content;
-}
-
-.mobile .text-editor.instagram-share {
-  height: auto;
+  background-color: #f6f5f6;
 }
 
 .text-editor.instagram-share .blur {
@@ -1241,8 +1556,10 @@
 }
 
 .text-editor.instagram-share .header .top-bar .title {
+  padding: auto 2px;
   color: #747374;
   text-shadow: unset;
+  margin: auto 6px;
 }
 
 .text-editor.instagram-share .header .call-to-action-controls > button {
@@ -1257,19 +1574,420 @@
 }
 
 .text-editor.instagram-share .parent-container .poster {
+  width: auto;
+  height: 100%;
   border-radius: inherit;
   display: block;
   margin: auto;
 }
 
-.computer .text-editor.instagram-share .parent-container .poster {
-  width: auto;
-  height: 100%;
+
+
+
+/* WORLD CLOCK */
+.world-clock {
+  background-color: #fff;
+  background-color: #000;
 }
 
-.mobile .text-editor.instagram-share .parent-container .poster {
-  width: 100%;
-  height: auto;
+.mobile.height-longer .world-clock {
+  width: 96%;
+  height: 96%;
+  top: 0px !important;
+  right: 0px !important;
+  bottom: 0px !important;
+  left: 0px !important;
+}
+
+.world-clock .blur {
+  filter: blur(20px) brightness(.0);
+}
+
+.world-clock > .header {
+/*   background-color: rgba(255, 255, 255, 0.1); */
+}
+
+.world-clock > .header button.icons-b {
+  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #111;
+  background: rgba(255, 255, 255, .1);
+}
+
+.world-clock > .header .top-bar .title {
+  padding: 0px 6px;
+/*   color: #111; */
+}
+
+.world-clock > .header .call-to-action-controls > button {
+  background-color: #111;
+  background: linear-gradient(#282828, #000000);
+  background: rgba(255, 255, 255, .1);
+  color: #ddd;
+}
+
+
+
+.world-clock .timezones {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.world-clock .timezones clock {
+  width: 160px;
+  height: 200px;
+  
+/*       width: 180px;
+    height: 220px; */
+  display: block;
+  margin: auto auto 15px auto;  
+} 
+
+.mobile.height-longer .world-clock .timezones clock {
+  width: 190px;
+  height: 230px;
+  
+/*   width: 48%; */
+  
+/*   background-color: grey;
+  background-color: #000000;
+  background-color: red; */
+} 
+
+.width-longer .world-clock .timezones clock {
+  width: 170px;
+  height: 200px;
+  display: block;
+  margin: auto;
+  padding: 0px 5px;
+  margin: auto auto 15px auto;
+} 
+
+
+/* WORLD CLOCK - CLOCK DESIGN */
+.world-clock .timezones clock .border {
+  width: 160px;
+  height: 160px;
+  
+/*   width: 180px;
+  height: 180px; */
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+/*   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 14px #7e7e7e; */
+  background-size: cover;
+  background-position: center;
+  margin: auto;
+  position: relative;
+}
+
+.mobile.height-longer .world-clock .timezones clock .border {
+/*   width: 190px;
+  height: 190px; */
+  
+  width: 95%;
+  
+  width: 185px;
+  height: 185px;
+}
+
+
+/* WORLD CLOCK - BACKGROUND */
+.world-clock .timezones clock.accra-ghana .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Accra%2C%20Ghana/Pieter%20Hugo%20-%20Permanent%20Error%2C%20Ghana%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.addis-ababa-ethiopia .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Addis%20Ababa%2C%20Ethiopia/Danakil%20Desert%2C%20Northern%20Ethiopia%20-%20Compressed.jpg");
+}
+  
+.world-clock .timezones clock.algiers-algeria .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Algiers%2C%20Algeria/A.%20Abbas%20-%20Masked%20ninjas%20of%20the%20Gendarmerie%20search%20youths%20for%20weapons%2C%20Algeria%2C%20Algiers%2C%201995%20-%20Compressed.jpg");
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Algiers%2C%20Algeria/Unidentified%20-%20Algiers%2C%20Algeria%20-%20Compressed.jpg");
+}
+ 
+.world-clock .timezones clock.antananarivo-madagascar .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Antananarivo%2C%20Madagascar/Marsel%20van%20Oosten%20-%20800%20year%20old%20Baobab%20trees%20in%20Madagascar%20-%20Compressed.JPG");
+}
+
+.world-clock .timezones clock.asmara-eritrea .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Asmara%2C%20Eritrea/Unidentified%20-%20Dahlak%20Hotel%2C%20Massawa%2C%20Eritrea%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.bangui-central-african-republic .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Bangui%2C%20Central%20African%20Republic/Unidentified%20-%20Central%20African%20Republic%20-%20Compressed.jpg");
+  background-position: left;
+}
+
+.world-clock .timezones clock.banjul-gambia .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Banjul%2C%20Gambia/Unindentified%20-%20Fighters%20of%20PAIGC%20during%20Guinea%20and%20Cape%20Verde%E2%80%99s%20war%20of%20independence%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.bissau-guinea-bissau .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Bissau%2C%20Guinea-Bissau/Unidentified%20-%20Women%20in%20the%20Guinea%20Bissau%20National%20Liberation%20Struggle%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.brazzaville-congo .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Brazzaville%2C%20Congo/Unidentified%20-%20Patrice%20Lumumba%20arrested%20and%20then%20murdered%20on%20Jan.%2017%2C%201961%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.bujumbura-burundi .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Bujumbura%2C%20Burundi/Spencer%20Platt%20-%20Boys%20play%20at%20a%20beach%20on%20June%2027%2C%202015%2C%20in%20Bujumbura%2C%20Burundi%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.cairo-egypt .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Cairo%2C%20Egypt/Unidentified%20-%20Louis%20Armstrong%20plays%20for%20his%20wife%20Lucille%20in%20front%20of%20the%20Sphinx%20in%20Giza%201961%20-%20Compressed.jpg");
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Cairo%2C%20Egypt/Unidentified%20-%20A%20limonade%20salesman%20in%20the%20souk%2C%20Cairo%2C%20Egypt%2C%202000%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.casablanca-morocco .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Casablanca%2C%20Morocco/Unidentified%20-%20Casablanca%2C%20Morocco%2C%202016%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.conakry-guinea .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Conakry%2C%20Guinea/Alex%20Webb%20-%20Guinea%201%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.dakar-senegal .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Dakar%2C%20Senegal/Bruno%20Barbey%20-%20Saint-Louis%2C%20Senegal%201980%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.djibouti-djibouti .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Djibouti%2C%20Djibouti/Unidentified%20-%20Djibouti%2C%20October%201978%20-%20Compresssed.jpg");
+}
+
+.world-clock .timezones clock.dodoma-tanzania .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Dodoma%2C%20Tanzania/Chris%20Steele-Perkins%20-%20Tanzania%2C1989%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.freetown-sierraleone .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Freetown%2C%20Sierra%20Leone/Michel%20Du%20Cille%20-%20Man%20helped%20with%20cigarette%20from%20his%20grandson%2C%201999%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.gaborone-botswana .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Gaborone%2C%20Botswana/Frans%20Lanting%20-%20Mother%20and%20child%20traverse%20the%20Okavango%20River%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.harare-zimbabwe .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Harare%2C%20Zimbabwe/Alain%20Keler%20-%20Zimbabwe%2C1983%20-%20Compressed.png");
+}
+
+.world-clock .timezones clock.jamestown-sainthelena .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Jamestown%2C%20Saint%20Helena/David%20Stanley%20-%20Jamestown%2C%20Saint%20Helena%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.juba-southsudan .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Juba%2C%20South%20Sudan/Kiden%20-%20South%20Sudan%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.kampala-uganda .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Kampala%2C%20Uganda/Yann%20Gross%20-%20Skatepark%20in%20Kampala%20%2C%20Uganda%2C%202008%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.khartoum-sudan .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Khartoum%2C%20Sudan/Roberto%20Caputo%20-%20Sudan%2C%20Crucible%20Of%20Cultures%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.kigali-rwanda .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Kigali%2C%20Rwanda/Unidentified%20-%20Young%20Tutsi%20boys%20dance%20and%20reenact%20bow-and-arrow%20combat%2C%20Rwanda%2C%201939%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.kinshasa-dem-rep-of-congo .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Kinshasa%2C%20Dem%20Republic%20Of%20Congo/Stuart%20franklin-and-chop%20-%20Street%20life%20in%20Kinshasa%2C%20Dem%20Rep%20Of%20Congo%2C%202004%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.lagos-nigeria .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lagos%2C%20Nigeria/Alex%20Majoli%20-%20Lagos%2C%20Nigeria%2C%202013%20-%20Compressed.jpg");
+/*   background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lagos%2C%20Nigeria/Stuart%20franklin-and-chop%20-%20A%20throughfare%20for%20fisherman%20who%20build%20houses%20above%20it%20waters%2C%20Lagos%2C%20Nigeria%2C%202002%20-%20Compressed.jpg"); */
+}
+
+.world-clock .timezones clock.libreville-gabon .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Libreville%2C%20Gabon/Bruno%20Barbey%20-%20Boys%20ride%20bicycles%20on%20a%20country%20road%20near%20Booue%20-%20Compressed.jpg");
+/*   background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Libreville%2C%20Gabon/Bruno%20Barbey%20-%20Bumper%20cars%20at%20a%20children%E2%80%99s%20funfair%20in%20Libreville%2C%20Gabon.jpg"); */
+}
+
+.world-clock .timezones clock.lilongwe-malawi .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lilongwe%2C%20Malawi/Zach%20Louw%20-%20In%20Cape%20Maclear%2C%20Lake%20Malawi%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.lome-togo .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lome%2C%20Togo/Unidentified%20-%20The%20H%C3%B4tel%20de%20la%20Paix%2C%20Togo%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.luanda-angola .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Luanda%2C%20Angola/John%20Fink%20-%20Students%20having%20class%20in%20a%20destroyed%20school%2C%20Angola%2C%201997%20-%20Compressed.jpg");
+}
+ 
+.world-clock .timezones clock.lusaka-zambia .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lusaka%2C%20Zambia/Annie%20Griffiths%20-%20Looking%20over%20the%20edge%20of%20Victoria%20Falls%20from%20a%20swimming%20hole%2C%20Zambia%20%20-%201%20-%20Compressed.jpg");
+/*   background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lusaka%2C%20Zambia/Annie%20Griffiths%20-%20Looking%20over%20the%20edge%20of%20Victoria%20Falls%20from%20a%20swimming%20hole%2C%20Zambia%20-%202.jpg"); */
+  background-position: left;  
+} 
+ 
+.world-clock .timezones clock.malabo-equatorial-guinea .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Malabo%2C%20Equatorial%20Guinea/Ariel%20Schalit%20-%20A%20child%20carries%20plastic%20tables%20to%20a%20fish%20market%2C%20Bata%2C%20Equatorial%20Guinea%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.maputo-mozambique .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Maputo%2C%20Mozambique/Alex%20Webb%20-%20Scenes%20from%20around%20the%20village%2C%20Moma%2C%20Mozambique%2C%202002%20-%20Compressed.png");
+}
+
+.world-clock .timezones clock.maseru-lesotho .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Maseru%2C%20Lesotho/Ian%20Berry%20-%20Boy%20playing%20oil%20can%20guitar%20in%20the%20burnt%20ruins%20of%20his%20home%20during%20racial%20riot%2C%20Maseru%2C%201961%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.mbabane-swaziland .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Mbabane%2C%20Swaziland/Unidentified%20-%20The%20wedding%20morning%20of%20Princess%20Mantfombi%20in%20KwaZulu%2C%20Swaziland%2C%201978%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.mogadishu-somalia .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Mogadishu%2C%20Somalia/Unidentified%20-%20Jowhar%2C%20Somalia%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.monrovia-liberia .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Monrovia%2C%20Liberia/Tim%20Hetherington%20-%20A%20young%20armed%20fighter%20of%20the%20LURD%20smokes%20a%20cigarette%20on%20the%20hill%20top%20compound%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.moroni-comoros .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Moroni%2C%20%20Comoros/Unidentified%20-%20Moroni%2C%20Comoros%20-%20Compressed.jpg");
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Moroni%2C%20%20Comoros/Jose%20Cendon%20-%20Moroni%2C%20Comoros%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.nairobi-kenya .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Nairobi%2C%20Kenya/Alex%20Webb%20-%20Shella%20in%20Luma%2C%20Kenya%2C%201984%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.ndjamena-chad .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Ndjamena%2C%20Chad/Chris%20Steele-Perkins%20-%20Racetrack%20in%20Chad%2C%201985%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.niamey-niger .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Niamey%2C%20Niger/Steve%20McCurry%20-%20Young%20Wadabi%20men%20taking%20part%20in%20the%20annual%20Garawal%2C%20Niger%2C%201986%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.nouakchott-mauritania .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Nouakchott%2C%20Mauritania/Jody%20MacDonald%20-%20Mauritania%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.ouagadougou-burkina-faso .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Ouagadougou%2C%20Burkina%20Faso/David%20Pace%20-%20Karaba%20brick%20quarry%20in%20Burkina%20Faso%20-%20Compressed.png");
+}
+
+.world-clock .timezones clock.port-louis-mauritius .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Port%20Louis%2C%20Mauritius/A.%20Abbas%20-%20A%20muslim%20bride%E2%80%99s%20hand%20decorated%20with%20henna%20patterns%20in%20Port%20Louis%2C%201992%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.porto-novo-benin .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Porto%20Novo%2C%20Benin/Joseph%20Moise%20Agbodjelou%20-%20Untitled%2C%201960%20-%20Compressed.png");
+}
+
+.world-clock .timezones clock.praia-cabo-verde .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Praia%2C%20Cabo%20Verde/Unidentified%20-%20Praia%2C%20Cabo%20Verde%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.pretoria-south-africa .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Pretoria%2C%20South%20Africa/Greg%20Marinovich%20-%20South%20Africa%2C%201992%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.saint-denis-reunion .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Saint-Denis%2C%20R%C3%A9union/Unidentified%20-%20Saint%20Denis%2C%20Reunion%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.sao-tome-principe .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/S%C3%A3o%20Tom%C3%A9%2C%20Sao%20Tome%20and%20Principe/Alex%20Webb%20-%20Cocoa%20child%20workers%20play%20infront%20of%20a%20ruined%20plantation%20house%2C%20%202002%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.timbuktu-mali .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Timbuktu%2C%20Mali/A.%20Abbas%20-%20Mali%2C%201996%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.tripoli-libya .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Tripoli%2C%20Libya/Unidentified%20-%20Libya%2C%201957%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.tunis-tunisia .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Tunis%2C%20Tunisia/Harry%20Gruyaert%20-%20Nearby%20area%20of%20Sidi%20Bou%2C%20Tunis%2C%201995%20-%20Compressed.png");
+/*   background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Tunis%2C%20Tunisia/Unidentified%20-%20Tunisia%20-%201%20-%20Compressed.jpg"); */
+}
+
+.world-clock .timezones clock.victoria-seychelles .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Victoria%2C%20Seychelles/Unidentified%20-%20Victoria%2C%20Seychelles%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.windhoek-namibia .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Windhoek%2C%20Namibia/Thijs%20Heslenfeld%20-%20Namibia%20-%20Compressed.jpg");
+}
+
+.world-clock .timezones clock.yamoussoukro-ivory-coast .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Yamoussoukro%2C%20Ivory%20Coast/Eliot%20Elisofon%20-%20The%20hands%20of%20Dignitary%20N%E2%80%99Goran%20Koffi%20in%20Village%20Dignitary%2C%20Ivory%20Coast%20-%20Compressed.png");
+}
+
+.world-clock .timezones clock.yaounde-cameroon .border {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Yaounde%2C%20Cameroon/Harry%20Gruyaert%20-%20Training%20feild%20of%20the%20Canon%20of%20Yaound%C3%A9%2C%20from%20which%20many%20famous%20players%20come%20-%20Compressed.jpg");
+}
+
+ 
+ 
+/* WORLDCLOCK - HANDS */
+.world-clock .timezones clock .border .knob {
+  width: 6px;
+  height: 6px;
+/*   width: 8px;
+  height: 8px; */
+/*   width: 7px;
+  height: 7px; */
+  border-radius: 50%;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.world-clock .timezones clock .border .hand {
+  width: 2px;
+  background-color: #fff;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  top: auto;
+  right: auto;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+  transition: unset;
+}
+
+.world-clock .timezones clock .border .hour {
+  height: 45px;
+  height: 40px;
+  height: 50px;
+  width: 4px;
+  width: 3px;
+  width: 2.5px;
+}
+
+.world-clock .timezones clock .border .minute {
+  height: 60px;
+  height: 56px;
+  height: 65px;
+  width: 3px;
+  width: 2.5px;
+}
+
+.world-clock .timezones clock .border .second {
+  height: 65px;
+  height: 70px;
+  width: 2px;
+}
+
+.world-clock .timezones clock .title {
+  width: fit-content;
+  height: fit-content;
+  max-width: 100%;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  display: block;
+  margin: 7px auto auto auto;
 }
 
 
@@ -1323,16 +2041,21 @@
 
 
 /* COMPLETED */
-.completed .scroll-container {
+.text-editor.completed > .header .text.call-to-action-controls button.credits {
+  display: block;
+}  
+
+.text-editor.completed .scroll-container {
   margin-top: 0px !important;
   transition: margin-top 1s ease-in-out !important;
 } 
 
-.completed .media-container.video-player .header .post-link {
+.text-editor.completed .media-container .header .post-link {
+  background-color: unset;
   display: block;
 } 
 
-.completed .scroll-container p .highlight { 
+.text-editor.completed .scroll-container p .highlight { 
   width: fit-content;
   height: fit-content;
 }

@@ -2777,14 +2777,14 @@ function onFileClick() {
 window.onload = function() {
   specifications();
   userDeviceSpecifications();
-  // loader(); 
+  loader(); 
   firstImpressionContainer();
   detectSizeChange(); 
   userActiveStatus();
   menuBar();
   
   // REMOVE IF LOADER PRESENT
-  callRemainderFunctions();
+//   callRemainderFunctions();
 }
 
 

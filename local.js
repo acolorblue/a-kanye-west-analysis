@@ -1012,7 +1012,7 @@ function callAutomatedText() {
     if ($('.loader').length == 0) {
       window.clearInterval(call_essay_interval);
       setTimeout(function() { 
-        // automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
+        automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
       }, 1800);
     }
   } 
@@ -1966,9 +1966,9 @@ function onFileClick() {
 window.onload = function() {
   onFirstImpression();
   userDeviceSpecifications();
-  // userActiveStatus();
+  userActiveStatus();
   detectSizeChange();
-  // loaderGTA();
+  loaderGTA();
   menuBar();
   closeApp();
   searchTextEditor(); 
@@ -1978,7 +1978,7 @@ window.onload = function() {
   onWindowClick();
   
   // IF LOADER NOT PRESENT
-  callRemainderFunctions();
+//   callRemainderFunctions();
 }
 
  

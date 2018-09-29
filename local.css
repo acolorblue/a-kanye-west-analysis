@@ -2,11 +2,7 @@
   transition: all 200ms ease-in-out;
 }
 
-body .rotate-to-landscape {
-  width: inherit;
-  height: inherit;
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
+.rotate-to-landscape {
   width: 100%;
   height: 100%;
   background-color: #eeeeee;
@@ -14,16 +10,22 @@ body .rotate-to-landscape {
   z-index: 10;
 }
 
-body .rotate-to-landscape::before {
-  content: 'Please Rotate Your Device To Landscape Mode';
+.width-longer .rotate-to-landscape {
+  display: none;
+}
+
+.height-longer .rotate-to-landscape {
+  display: block;
+}
+
+.rotate-to-landscape::before {
+  content: "Please Rotate Your Device To Landscape Mode";
   width: 80%;
   height: fit-content;
-  font-family: "Ahamono Monospaced";
-  font-family: 'Pricedown', sans-serif;
+  font-family: Pricedown, Ahamono Monospaced, Sans-Serif;
   color: #f9f9f9;
   text-shadow: 0px 0px 5px #8e8e8e;
   font-size: 30px;
-/*   font-size: 34px; */
   text-transform: uppercase;
   line-height: 1;
   text-align: center;
@@ -37,36 +39,23 @@ body .rotate-to-landscape::before {
 /*   z-index: 10; */
 }
 
-body .rotate-to-landscape > .close {
-  width: 12px;
-  height: 12px;
-  
+.rotate-to-landscape > .close {
   width: 16px;
   height: 16px;
   border-radius: 100%;
-  background-color: rgba(255, 255, 255, .1);
   background-color: #bababa;
   margin: 10px 10px auto auto;
   z-index: 11;
 }
 
-body .rotate-to-landscape > .close::before {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Apple%20Media%20File%20Controls/AMF%20-%20Close%20Icon/Close%20-%20Grey%203.png");
-  background-size: 6.58px;
+.rotate-to-landscape > .close.grey::before {
   background-size: 8px;
   -webkit-filter: drop-shadow(0px 0px 1px #303030);
 }
 
 
 
-.active::after {
-  content: "|";
-}
 
-button {
-  transition: unset;
-}
- 
 /* LOADER */
 .loader {
   width: 100%;
@@ -86,8 +75,7 @@ button {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   background-color: #111111;
-/*   background-color: red; */
-  position: absolute;
+  position: inherit;
   top: inherit;
   right: inherit;
   bottom: inherit;
@@ -101,22 +89,10 @@ button {
   opacity: 0; 
 }
 
-/* TRANSITION UP */
+/* LOADER - REMOVE */
 .loader.hide {
-/*   -webkit-animation: loader-hide 3s linear 1s; */
-  -webkit-animation: loader-hide 3s linear;
+  -webkit-animation: slide-up 3s linear;
 }
-
-@-webkit-keyframes loader-hide {  
-  0% {
-    transform: translate(0%, 0%);
-  }
-
-  100% {
-    transform: translate(0%, -110%);
-  }
-}
-
 
 
 /* LOADER - GTA */
@@ -132,7 +108,7 @@ button {
 }
 
 
-/* FOREGROUND LAYER */
+/* GTA - FOREGROUND LAYER */
 .loader .gta .foreground-layer {
   width: inherit;
   height: inherit;
@@ -143,12 +119,17 @@ button {
   -webkit-transform: translateZ(950px);
 }
 
+.loader .gta .foreground-layer .text-logo {
+  font-family: Pricedown, Ahamono Monospaced;
+}
+
 .loader .gta .foreground-layer .text-logo.gta-5 {
   width: 180px;
   height: 180px;
   background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Logos/GTA%205%20-%20Comp.png");
   background-size: contain;
   background-position: bottom;
+  color: transparent;
   top: auto;
   right: auto;
   bottom: 20px;
@@ -158,7 +139,6 @@ button {
 .loader .gta .foreground-layer .text-logo.kanye-analysis {
   width: 210px;
   height: fit-content;
-  font-family: 'Pricedown', sans-serif;
   font-size: 55px;
   line-height: 0.85;
   text-transform: lowercase;
@@ -190,6 +170,7 @@ button {
   background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Logos/GOOD%20Music%20-%20Comp.png");
 }
 
+
 /* INFORMATION CONTAINER */
 .loader .gta .foreground-layer .info-container {
   width: auto;
@@ -199,29 +180,35 @@ button {
   overflow: hidden;
   background-color: rgba(17, 17, 17, .7);
   padding: 1%;
-  font-family: sans-serif;
+  font-family: Sans-Serif;
   font-size: 13px;
   line-height: 1.3;
   color: #ffffff;
   top: auto;
 }
 
-.loader .gta .info-container.low-power-mode-alert,
-.loader .gta .info-container.open-in-native-browser {
+.loader .gta .info-container.battery-adjustment,
+.loader .gta .info-container.open-in-different-browser {
   width: 200px;
   display: none;
 }
 
-.loader .gta .info-container.low-power-mode-alert {
+.loader .gta .info-container.battery-adjustment {
   right: auto;
   bottom: 200px;
   left: 20px;
 }
 
-.loader .gta .info-container.open-in-native-browser {
+.loader .gta .info-container.open-in-different-browser.twitter {
   right: 20px;
   bottom: 116px;
   left: auto;
+}
+
+.loader .gta .info-container.open-in-different-browser.firefox {
+  right: auto;
+  bottom: 186px;
+  left: 20px;
 }
 
 .loader .gta .info-container.loading-indicator {
@@ -232,7 +219,6 @@ button {
 }
 
 .loader .gta .info-container.skip-loader {
-/*   width: 120px; */
   top: 20px;
   right: 20px;
   bottom: auto;
@@ -240,11 +226,11 @@ button {
   display: none;
 }
 
-/* INFORMATION CONTAINER ICONS */
+
+/* GTA - INFORMATION CONTAINER ICONS */
 .loader .gta .foreground-layer .info-container .icons-b {
   width: 14px;
   height: 14px;
-/*   background-color: red; */
   position: relative;
   display: inline-block;
   margin-top: auto;
@@ -255,8 +241,6 @@ button {
 
 .loader .gta .info-container .icons-b.battery.low-power-mode {
   width: 18px;
-  margin-right: 0px;
-  margin-left: 0px;
 }
 
 .loader .gta .info-container .icons-b.play-station-x {
@@ -274,7 +258,7 @@ button {
 }
 
 
-/* BACKGROUND LAYER */
+/* GTA - BACKGROUND LAYER */
 .loader .gta .background-layer {
   width: inherit;
   height: inherit;
@@ -297,7 +281,7 @@ button {
 }
  
 
-/* BACKGROUND */ 
+/* GTA - BACKGROUND */ 
 .loader .gta .background-and-character-container .background {
   background-position: center;
 }
@@ -309,7 +293,6 @@ button {
   transform: perspective(211px) rotateX(-1deg) rotateY(2deg) rotateZ(1deg); 
   transform-origin: center center 0px;
   -webkit-animation: computer-background-perspective 22.5s linear;
-/*   z-index: 1; */
 }
 
 @-webkit-keyframes computer-background-perspective {  
@@ -326,7 +309,8 @@ button {
   background-size: cover;
 }
 
-/* BACKGROUND - IMAGES */
+
+/* GTA - BACKGROUND IMAGES */
 .loader .gta .michael.background-and-character-container .background {
   background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Backgrounds/Michael%20-%20Comp.jpg");
 }
@@ -351,10 +335,9 @@ button {
 .height-longer .loader .gta .kanye.background-and-character-container .background.move {
   -webkit-animation: background-and-character-move 3s linear;
 } 
-
  
 
-/* CHARACTER */ 
+/* GTA - CHARACTER */ 
 .loader .gta .background-and-character-container .character {
   background-size: contain;
   background-position: bottom;
@@ -369,7 +352,8 @@ button {
   background-size: 90% auto;
 }
 
-/* CHARACTER - IMAGES */
+
+/* GTA - CHARACTER IMAGES */
 .loader .gta .michael.background-and-character-container .character {
   background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Characters/Michael%20-%20Comp.png");
 }
@@ -397,7 +381,7 @@ button {
 
 @-webkit-keyframes background-and-character-move {  
   0% {
-    background-position-x: 50%;
+    background-position-x: 50%; 
   }
 
   100% { 
@@ -430,7 +414,9 @@ button {
   background-color: #eeeeee;
   background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/2.%20Desktop/1.%20Background/Steve%20McCurry%20-%20A%20group%20of%20young%20men%20push%20a%20plane%20out%20of%20the%20mud%2C%20The%20Sahel%2C%201986.jpg");
   background-size: 100%;
-  font-family: sans-serif;
+  background-size: cover;
+  background-position: center;
+  font-family: Helvetica, Sans-Serif;
   display: flex;
   flex-direction: column;
 }
@@ -449,20 +435,6 @@ button {
   z-index: 1;
 }
 
-.mac-os .browser-alert {
-  width: -moz-fit-content;
-  height: 11%;
-  border: 1px solid #cbcbcb;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0px 0px 5px #c7c6c6;
-  background-color: #f6f5f6;
-  padding: 4%;
-  font-family: "Ahamono Monospaced";
-  color: #000;
-  text-align: center;
-}
-
   
 
 
@@ -478,6 +450,10 @@ button {
   position: relative;
   flex-shrink: 0;
   z-index: 3;
+}
+
+.mac-os.dim .menu-bar {
+  z-index: 0;
 }
 
 .mac-os .menu-bar::before {
@@ -504,7 +480,7 @@ button {
 }
 
 
-/* PANEL */
+/* MENU BAR - PANEL */
 .mac-os .menu-bar .panel {
   width: fit-content;
   height: inherit;
@@ -521,7 +497,7 @@ button {
 }
 
 
-/* CONTAINER */
+/* MENU BAR - CONTAINER */
 .mac-os .menu-bar .panel .section-container {
   width: fit-content;
   height: inherit;
@@ -530,7 +506,7 @@ button {
 }
 
 
-/* CONTAINER - TITLE BUTTON */
+/* MENU BAR - CONTAINER - TITLE BUTTON */
 .mac-os .menu-bar .section-container > button {
   width: inherit;
   height: inherit;
@@ -570,17 +546,16 @@ button {
 }
 
 
-/* CONTAINER - MENU */
+/* MENU BAR - CONTAINER - MENU */
 .mac-os .menu-bar .section-container .menu {
   width: fit-content;
   height: fit-content;
   border-radius: 0px 0px 5px 5px;
   box-shadow: 0 6px 10px 2px rgba(0, 0, 0, 0.15);
-  background-color: #ffffff;
   background-color: rgba(255, 255, 255, .98);
   position: absolute;
-  margin-top: 22px;
   top: 0px;
+  margin-top: 22px;
   display: none;
 }
 
@@ -597,7 +572,7 @@ button {
 }
 
 
-/* ITEM AND SEPERATOR */
+/* MENU BAR - CONTAINER - MENU - ITEM AND SEPERATOR */
 .mac-os .menu-bar .section-container .menu .item {
   width: -webkit-fill-available;
   height: 18px;
@@ -605,6 +580,7 @@ button {
   font-size: unset;
   color: #434343;
   text-align: left;
+  white-space: nowrap;
   margin: 4px 0px;
   display: block;
   user-select: none;
@@ -635,23 +611,21 @@ button {
 }
 
 
-/* MENU - MAIN MENU */
-.mac-os .menu-bar .section-container.main-menu .menu {
+/* MENU BAR - APPLE MENU */
+.mac-os .menu-bar .section-container.apple-menu .menu {
   height: 250px;
   background-color: #000000;
   overflow: hidden;
 }
 
-.mac-os .menu-bar .section-container.main-menu .menu img {
+.mac-os .menu-bar .section-container.apple-menu .menu img {
   width: auto;
   height: 100%;
   z-index: 2;
 }
 
 
-
-
-/* MENU - DATE AND TIME */
+/* MENU BAR - DATE AND TIME */
 .mac-os .menu-bar .section-container.date-and-time > button * {
   transition: inherit;
 }
@@ -659,7 +633,6 @@ button {
 .mac-os .menu-bar .section-container.date-and-time > .menu {
   width: 276px;
   height: fit-content;
-  background-color: rgb(242, 242, 242);
   background-color: rgba(255, 255, 255, .96);
 }
 
@@ -671,22 +644,24 @@ button {
   cursor: default;
 } 
 
-.mac-os .menu-bar .section-container.date-and-time > .menu .item.location-and-time-preferences {
-/*   overflow: hidden; */
-}
-
 .mac-os .menu-bar .section-container.date-and-time > .menu .item.location-and-time-preferences .timezones {
   display: none;
 }
 
 
-/* MENU - DATE AND TIME - ANALOG */
+
+
+/* MENU BAR - DATE AND TIME - ANALOG */
 .mac-os .menu-bar .section-container.date-and-time > button.analog {
   width: fit-content;
   height: inherit;
 }
 
-.mac-os .menu-bar .section-container.date-and-time > button.analog .clock-border {
+.mac-os .menu-bar .section-container.date-and-time > button.analog .clock.text {
+  display: none;
+}
+
+.mac-os .menu-bar .section-container.date-and-time > button.analog .clock.border {
   width: 16px;
   height: 16px;
   border: 1px solid #000000;
@@ -694,20 +669,20 @@ button {
   position: relative;
 }
 
-.mac-os .menu-bar .section-container.selected.date-and-time > button.analog .clock-border {
+.mac-os .menu-bar .section-container.selected.date-and-time > button.analog .clock.border {
   border: 1px solid #ffffff;
 }
 
-.mac-os .menu-bar .section-container.date-and-time > button.analog .clock-border .hand {
+.mac-os .menu-bar .section-container.date-and-time > button.analog .clock.border .hand {
   width: 1px;
   background-color: #000;
 } 
 
-.mac-os .menu-bar .section-container.selected.date-and-time > button.analog .clock-border .hand {
+.mac-os .menu-bar .section-container.selected.date-and-time > button.analog .clock.border .hand {
   background-color: #fff;
 }
 
-.mac-os .menu-bar .section-container.date-and-time > button.analog .clock-border .hour {
+.mac-os .menu-bar .section-container.date-and-time > button.analog .clock.border .hour {
   height: 5px;
   top: auto;
   right: auto;
@@ -717,37 +692,38 @@ button {
 /*   transform: rotate(55deg); */
 }
 
-.mac-os .menu-bar .section-container.date-and-time > button.analog .clock-border .minute {
+.mac-os .menu-bar .section-container.date-and-time > button.analog .clock.border .minute {
   height: 7px;
   top: auto;
   right: auto;
   bottom: 50%;
   left: 50%;
   transform-origin: bottom;
-/*   transform: rotate(7deg); */
 }
 
 
-/* MENU - DATE AND TIME - DIGITAL */
+/* MENU BAR - DATE AND TIME - DIGITAL */
 .mac-os .menu-bar .section-container.date-and-time > button.digital {
   width: fit-content;
   height: fit-content;
+  white-space: nowrap;
+}
+
+.mac-os .menu-bar .section-container.date-and-time > button.digital .clock.border {
+  display: none;
 }
 
 
 
 
-/* MENU - PROFILE */
+/* MENU BAR - PROFILE */
 .mac-os .menu-bar .section-container.profile .menu {
   width: 276px;
   height: 276px;
   background: -webkit-linear-gradient(top, #f0f0f0, #ddd);
-  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Images/0.%20Brand%20Documents/1.%20Background/Logo%20-%20Background%20-%20Comp.jpg?token=ARSbo9BA45WSq_OcAJG7kORGw4MRGizfks5bfUGMwA%3D%3D");
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Images/0.%20Brand%20Documents/1.%20Background/Logo%20-%20Background%20-%20Comp.jpg");
   background-size: cover;
   background-position: center;
-  padding: 42% 0px;
-  padding: 30% 0px;
-  padding: 20% 0px;
   padding: 25% 0px;
 }
 
@@ -762,7 +738,7 @@ button {
   border: 3px solid #fff;
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, inset rgba(0, 0, 0, 0.4) 0px 3px 2px;
-  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Images/0.%20Brand%20Documents/2.%20Avi/Logo%20-Foreground%20-%20Comp.jpg?token=ARSbo6bvTp3ny2MOwzTx9BTmiUwO8HeYks5bfUGcwA%3D%3D");
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Images/0.%20Brand%20Documents/2.%20Avi/Logo%20-Foreground%20-%20Comp.jpg");
   background-size: cover;
   margin: auto;
 }
@@ -775,7 +751,6 @@ button {
 
 .mac-os .menu-bar .section-container.profile .menu .bio {
   border-radius: 5px;
-/*   box-shadow: 0 0px 2px 2px rgba(0, 0, 0, 0.15); */
   box-shadow: 0px 0px 6px #8f8f8f;
   background-color: #ffffff;
   padding: 8px;
@@ -785,51 +760,39 @@ button {
   margin: auto;
 }
 
-
-
 .mac-os .menu-bar .section-container.profile .menu .accounts {
-/*   width: 80%; */
-/*   border-radius: 45px; */
   display: inline-flex;
   margin: auto;
 }
 
-.mac-os .menu-bar .section-container.profile .menu .accounts button.icons-b {
-  width: 30px;
-  height: 30px;
+.mac-os .menu-bar .section-container.profile .menu .accounts .icons-b {
   width: 18px;
   height: 18px;
   border-radius: 8px;
   margin: auto;
   position: relative;
   display: block;
-  background: #000;
-  background: #ababab;
   background: transparent;
-  margin-right: 40px;
-
-  /*   margin-right: 60px; */
   margin-right: 56px;
 }
 
-.mac-os .menu-bar .section-container.profile .menu .accounts button.icons-b:last-child {
+.mac-os .menu-bar .section-container.profile .menu .accounts .icons-b:last-child {
   margin-right: 0px;
 }
 
-.mac-os .menu-bar .section-container.profile .menu .accounts button.icons-b::before {
-/*   background-size: 16px; */
-  -webkit-filter: drop-shadow(0px 0px 1px #303030);
+.mac-os .menu-bar .section-container.profile .menu .accounts .icons-b::before {
   background-size: 18px;
+  -webkit-filter: drop-shadow(0px 0px 1px #303030);
 }
 
 
-/* MENU - NOTIFICATION */
+/* MENU BAR - NOTIFICATION */
 .mac-os .menu-bar .panel.right .section-container.notification .menu {
   width: 248px;
+  overflow: hidden;
   background-color: #252525;
   display: block;
   right: -258px;
-  overflow: hidden;
   transition: height 0ms ease-in-out,
               right 200ms ease-in-out;
 }
@@ -839,12 +802,20 @@ button {
   border-radius: 0px 0px 0px 0px;
 }
 
-.mac-os .menu-bar .panel.right .section-container.notification.selected .menu.cover::before {
+/* .mac-os .menu-bar .panel.right .section-container.notification.selected .menu.cover::before {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   background-color: inherit;
   background-size: 10%;
   z-index: 1;
+} */
+
+.mac-os .menu-bar .panel.right .section-container.notification .menu.cover::before {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  background-color: inherit;
+  background-size: 10%;
+  z-index: 2;
 }
 
 .mac-os .menu-bar .panel.right .section-container.notification.selected .menu a.twitter-timeline {
@@ -867,26 +838,30 @@ button {
   height: -webkit-fill-available;
   overflow: hidden;
   position: relative;
-/*   transform: translate(0); */
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .mac-os .desktop .files-row {  
   width: -webkit-fill-available;
+/*   width: fit-content; */
+/*   width: 150px; */
   height: -webkit-fill-available;
   overflow: scroll;
   display: flex;
-  flex-flow: column wrap;
-  align-content: space-evenly;
+  flex-direction: column;
 } 
 
 .mac-os .desktop .file {
   width: 130px;
   height: 130px;
-  display: block;
   margin: 10px;
-/*   z-index: 3; */
+  display: none;
+/*   display: block; */
+}
+
+.mac-os .desktop .file.show {
+  display: block;
 }
 
 .mac-os .desktop .file * {
@@ -897,6 +872,8 @@ button {
   display: block;
 }
 
+
+/* DESKTOP - FILE - THUMBNAIL */
 .mac-os .file .thumbnail-container {
   width: 70px;
   height: 70px;
@@ -906,9 +883,7 @@ button {
 }
 
 .mac-os .file.selected .thumbnail-container {
-/*   outline: #a6a6a6 auto 5px; */
   border: 1px solid #a6a6a6;
-  border-radius: 2px;
   border-radius: 3px;
   background-color: rgba(0, 0, 0, .5);
 }
@@ -925,28 +900,41 @@ button {
   height: 40px; 
 }
  
-.mac-os .file.soundcloud .thumbnail-container .file-type-indicator::before {
+.mac-os .file .thumbnail-container .file-type-indicator::before {
   background-size: contain;
   z-index: 1;
+}
+
+.mac-os .file .thumbnail-container .file-type-indicator.blonded::before,
+.mac-os .file .thumbnail-container .file-type-indicator.gun-2::before {
+  -webkit-filter: drop-shadow(0px 0px 1px #eeeeee);
 }
 
 .mac-os .file .thumbnail-container .thumbnail {
   width: auto;
   height: auto;
-  max-width: 60px;
   max-height: 60px;
+  max-width: 60px;
   border: 2px solid #ffffff;
   box-shadow: 0px 1px 5px #4b4b4b;
   margin: auto;
+}
+
+.mac-os .file.world-clock .thumbnail-container .thumbnail,
+.mac-os .file.error .thumbnail-container .thumbnail {
+  background-color: #111;
+  background-color: #111;
 }
 
 .mac-os .file.audio .thumbnail-container .thumbnail {
   border: none;
 }
 
+
+
+
+/* DESKTOP - FILE - TITLE */
 .mac-os .file .title-container {
-  overflow: hidden;
-  overflow: scroll;
   padding: 2px;
   margin-top: 4px;
 }
@@ -954,9 +942,9 @@ button {
 .mac-os .file .title {
   width: fit-content;
   height: fit-content;
-/*   max-height: 16px; */
+  max-width: 128px;
+  overflow: hidden;
   display: -webkit-box;
-  padding: 2px 4px;
   padding: 3px 5px;
   color: #ffffff;
   font-size: 12px;
@@ -967,25 +955,32 @@ button {
   margin: auto;
 }
 
-.mac-os .file.selected .title {
-/*   outline: #0168da auto 5px; */
-/*   border: 1px solid #0168da; */
+.mac-os .file .title {
   border-radius: 3px;
-/*   padding: 1px; */
+}
+
+.mac-os .file .title:nth-child(2) {
+  max-width: 128px;
+  display: block;
+  border-radius: 0px 0px 3px 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: -1px;
+}
+
+.mac-os .file.selected .title {
+  border-radius: 3px;
   background-color: #0168da;
   text-shadow: unset;
 }
 
-.mac-os .file.selected .title:nth-child(2) {
-  border-radius: 0px 0px 3px 3px;
-  margin-top: -1px;
-}
 
 
 
 
-/* SCREENSAVER CREDITS */
-.mac-os .screensaver-credits {
+/* DESKTOP - SCREENSAVER CREDITS */
+.mac-os .background-credits {
   width: auto;
   height: 20px;
   border-radius: 0px 5px 0px 0px;
@@ -993,7 +988,7 @@ button {
   box-shadow: 0px 0px 5px #c7c6c6;
   background-color: rgba(255, 255, 255, .9);
   padding: 4px;
-  font: 500 12.4px/normal sans-serif, helvetica, '"Ahamono Monospaced"';
+  font: 500 12.4px/normal Helvetica, Ahamono Monospaced;
   color: #000000;
   letter-spacing: 0.1px;
   line-height: 1;
@@ -1002,16 +997,15 @@ button {
   left: -218px;
 }
 
-.mac-os .screensaver-credits.show {
+.mac-os .background-credits.show {
   left: 0px;
 }
 
 
 
  
-/* TEXT EDITOR */
-.text-editor {
-  width: 80%;
+/* DESKTOP - APPLICATION */
+.application {
   height: 90%;
   border-radius: 5px;
   overflow: hidden;
@@ -1019,69 +1013,60 @@ button {
   background: rgba(0, 0, 0, .8);
   display: flex;
   flex-direction: column;
-  bottom: auto;
   z-index: 2;
-/*   opacity: 0; */
-  
-/*   font-family: '1942 Report' !important; */
+/*   display: none; */
+}
+ 
+.width-longer .application {
+  width: 55%;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
 }
 
-.computer .text-editor {
+.height-longer .application {
+  width: 80%;
+  top: 10px;
+  right: 10px;
+  bottom: auto;
+  left: auto;
+}
+
+.computer .application {
   min-width: 328px;
   min-height: 20%;
 }
 
-.width-longer .text-editor {
-  width: 55%;
-  right: auto;
-}
-
-.height-longer .text-editor {
-  width: 80%;
-  top: 10px !important;
-  right: 10px !important;
-  left: auto !important;
-}
-
-.computer .text-editor.dragged {
-  height: 90% !important;
-}
-
-.text-editor.hide {
+.application.hide {
   transform: scale(0); 
 }
 
-.text-editor ::selection,
-.text-editor .highlight { 
+.application ::selection,
+.application .scroll-container .highlight { 
   background-color: rgba(255, 255, 255, .9);
   color: rgba(0, 0, 0, .8);
 }
 
 
-
-
-/* BLUR */
-.text-editor > .blur {
-/*   width: -webkit-fill-available;
-  height: -webkit-fill-available; */
+/* APPLICATION - BLUR */
+.application > .blur {
+  background-size: 100%;
+  background-size: cover;
+  background-position: center;
   filter: blur(20px) brightness(.2);
   position: absolute;
+  margin: -22px 0px 0px 0px;
   transition: unset;
 }
 
-.text-editor > .blur.cover {
-  background-size: cover;
-}
- 
-.text-editor > .blur.contain {
-  background-size: contain;
+.application.ui-draggable-dragging > .blur {
+  display: none;
 }
 
 
-
-
-/* HEADER */
-.text-editor .header {
+/* APPLICATION - HEADER */
+.application .header {
   width: 100%;
   height: 35px;
   border-bottom: none;
@@ -1090,26 +1075,19 @@ button {
   z-index: 3;
 }
 
-.text-editor > .header {
+.application > .header {
   position: relative;
 }
 
-.text-editor .header .top-bar {
-  width: 98.598%;
-  
+.application .header .top-bar {
   width: 100%; 
   height: fit-content;
-  /*   padding: 0px 0.701%;
-
-    padding: 0px 2%; */
   display: inline-flex;
 }
 
 
-
-
-/* MAIN CONTROLS */
-.text-editor .header .top-bar .main-controls {
+/* HEADER - MAIN CONTROLS */
+.application .header .top-bar .main-controls {
   width: fit-content;
   height: fit-content;
   display: inline-flex;
@@ -1118,7 +1096,7 @@ button {
   flex-shrink: 0;
 }
 
-.text-editor .header .main-controls button {
+.application .main-controls button {
   width: 12px;
   height: 12px;
   border-radius: 100%;
@@ -1127,154 +1105,166 @@ button {
   margin: auto auto auto 0px;
 }
 
-.text-editor .header .main-controls .icons-b::before {
-  background-size: 6.58px;
+.application .main-controls .icons-b::before {
   background-size: 6px;
 }
 
-.text-editor .header .main-controls .close.grey::before {
+.application .main-controls .icons-b.close::before {
   opacity: 1;
 }
 
 
-
-
-/* TITLE */
-.text-editor .header .top-bar .title {
+/* HEADER - TITLE */
+.application .header .top-bar .title {
   width: fit-content;
   height: fit-content;
   max-width: 67%;
   overflow: hidden;
-  font: 500 12.4px/normal sans-serif, helvetica, '"Ahamono Monospaced"';
+  font: 500 12.4px/normal Sans-Serif, Helvetica;
   letter-spacing: 0.1px;
-  color: #ffffff;
-  text-shadow: 0px 0px 4px #545454;
   text-align: center;
   margin: auto;
   flex-shrink: 1;
   white-space: nowrap;
 }
 
-.text-editor .header .top-bar .title .title-scroll {
+.application .header .top-bar .title .title-scroll {
   width: fit-content;
   height: fit-content;
   white-space: nowrap;
   display: block;
 }
 
-.text-editor .header .top-bar .title .title-scroll.ellipsis {
+.application .header .top-bar .title .title-scroll.ellipsis {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.text-editor .header .top-bar .title .title-scroll.overflow {
-  margin-right: 50%;
+.application .header .top-bar .title .title-scroll.overflow {
   display: inline-block;
-/*   -webkit-animation: title-overflow 10s linear infinite; */
+  margin-right: 50%;
   -webkit-animation: title-overflow 9s linear infinite;
 }
 
-@-webkit-keyframes title-overflow {
-  0%, 20%, 100% { 
-    transform: translateX(0%); 
-  }
-  
-  70% {
-/*     transform: translateX(-145%);   */
-    transform: translateX(-140%); 
-    transform: translateX(-135%);
-  }
 
-  70.00001% {
-    transform: translateX(0%); 
-  }
-}
-
-
-
-
-/* CALL TO ACTION */
-.text-editor .header .call-to-action-controls {
+/* HEADER - CONTENT CONTROLS */
+.application .header .content-controls {
   width: fit-content;
   height: fit-content;
   display: inline-flex;
   flex-shrink: 0;
 }
 
-.text-editor .header .call-to-action-controls > button,
-.text-editor .header .call-to-action-controls > a {
+.application .header .content-controls > button,
+.application .header .content-controls > a {
   width: fit-content;
   height: 20px;
   border-radius: 4px;
   padding: 2px 8px;
-  color: #ffffff;
+  font-size: 13.33px;
   line-height: 17px;
   position: relative; 
   margin: auto auto auto 4px;
 } 
 
-.text-editor .header .call-to-action-controls > button:first-of-type {
-  margin: auto auto auto auto;
+.application .header .content-controls > *:first-of-type {
+/*   margin: auto auto auto auto; */
 } 
 
-.text-editor .header .call-to-action-controls > .icons-b {
+.application .header .content-controls > .icons-b {
   width: 36px;
 }
 
 
-/* CALL TO ACTION IN MAIN HEADER */
-.text-editor > .header .call-to-action-controls {
+/* HEADER - CONTENT CONTROLS IN MAIN HEADER */
+.application > .header .content-controls {
   margin: auto 8px auto auto;
   position: relative;
 }
 
-.text-editor > .header .call-to-action-controls > button {
+.application > .header .content-controls > button {
   background: rgba(255, 255, 255, .1);
 } 
 
-.text-editor > .header .call-to-action-controls > button.icons-b::before {
+.application > .header .content-controls > button.icons-b::before {
   background-size: 11px;
 }
 
-.text-editor > .header .text.call-to-action-controls button.credits {
+ 
+/* PARENT CONTAINER */
+.application .parent-container {
+  width: -webkit-fill-available;
+  height: 100%;
+  border-radius: 4px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 5%;
+  font-family: Ahamono Monospaced;
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+  position: relative;
+}
+
+
+
+
+/* APPLICATION = TEXT EDITOR */
+/* TEXT EDITOR - TITLE */
+.text-editor .header .top-bar .title {
+  color: #ffffff;
+  text-shadow: 0px 0px 4px #545454;
+}
+
+
+/* TEXT EDITOR - CONTENT CONTROLS */
+.text-editor .header .content-controls > button,
+.text-editor .header .content-controls > a {
+  line-height: 17px;
+  color: #ffffff;
+} 
+
+.text-editor > .header .content-controls.search button.share,
+.text-editor > .header .content-controls.search button.credits,
+.text-editor > .header .content-controls.share button.search,
+.text-editor > .header .content-controls.share button.credits {
   display: none;
-}  
+}
 
 
-
-/* SEARCH BAR */
-.text-editor .search-bar {
+/* TEXT EDITOR - CONTENT CONTROLS - SEARCH BAR */
+.text-editor > .header .search-bar {
   width: 50%;
+  width: 140px;
   height: 26px;
   max-width: 240px;
-  outline: none;
-/*   border: 2px solid #ffffff; */
-  border-radius: 5px;
   border: unset;
-  /* box-shadow: 0px 0px 5px #c7c6c6; */
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
   background-color: rgba(255, 255, 255, .1);
+  padding: 2%;
+  font: 500 12.4px/normal Sans-Serif, Helvetica;
   color: #ffffff;
   text-align: center;
+  line-height: 26px;
   display: flex;
   margin: auto;
-  -webkit-appearance: none;
   z-index: 2;
 }
 
-.text-editor .search-bar.hide {
+.text-editor > .header .search-bar.hide {
   transform: translate(0px, -120%);
 }
 
-.text-editor .search-bar::-webkit-input-placeholder {
+.text-editor > .header .search-bar::-webkit-input-placeholder {
   color: white;
 }
 
 
-
-
-/* SOCIAL SHARE */
-.text-editor .social-share-container {
+/* TEXT EDITOR - CONTENT CONTROLS - SOCIAL PLATFORMS */
+.text-editor > .header .social-platforms {
   width: 104px;
   height: 30px;
   border-radius: 5px;
@@ -1285,11 +1275,11 @@ button {
   z-index: 1;
 }
 
-.text-editor .social-share-container.hide {
+.text-editor > .header .social-platforms.hide {
   transform: translate(0px, -110%);
 }
 
-.text-editor .social-share-container button {
+.text-editor > .header .social-platforms button {
   width: 18px;
   height: 18px;
   border-radius: 5px;
@@ -1300,63 +1290,53 @@ button {
 }
 
 
- 
- 
-/* CONTENT CONTAINER */
-.text-editor .parent-container {
-  width: -webkit-fill-available;
-  height: 100%;
-  border-radius: 4px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding: 5%;
-  font-family: "Ahamono Monospaced";
-  font-size: 14px;
-  line-height: 1.4;
-  word-break: break-word;
-  position: relative;
-  margin: 2px;
-}
-
-.text-editor .parent-container .scroll-container {
+/* TEXT EDITOR - SCROLL CONTAINER */
+.parent-container .scroll-container {
   width: inherit;
   height: fit-content;
   overflow: scroll;
-/*   margin-top: 0px !important; */
-  
-/*   font-family: '1942 Report' !important; */
-/*   font-family: 'Traveling Typewriter' !important;
-  letter-spacing: 0.6px; */
+  display: none;
 }
 
+.text-editor .parent-container .scroll-container {
+  display: block;
+}
 
-
-
-/* PARAGRAPH */
-.text-editor .scroll-container p {
+.parent-container .scroll-container p {
   padding: 0px 2px;
   font-size: 14px;
   line-height: 19px;
-  color: #ffffff;
+  color: #ffffff; 
   text-shadow: 0px 0px 4px #000000;
   visibility: hidden;
   display: none;
 }
 
-.text-editor .scroll-container p.active::after {
+.parent-container .scroll-container p.hide,
+.parent-container .scroll-container .media-container.hide {
+  height: 0px !important;
+  overflow: hidden;
+  margin: 0px;
+}
+
+.parent-container .scroll-container p.active::after {
   color: #707070;
 }
  
-.text-editor .scroll-container p.introduction {
+.parent-container .scroll-container p.introduction {
   margin-top: 0px;
 }
 
+.parent-container .scroll-container p.conclusion {
+  margin-bottom: 0px;
+}
 
-/* IMAGE SLIDE */ 
+
+/* TEXT EDITOR - IMAGE SLIDE */ 
 .text-editor .scroll-container .image-slide {
   width: 74%;
   border-radius: 5px;
-  right: 100%;
+  right: 100%; 
   left: auto;
   display: none;
 }
@@ -1385,112 +1365,131 @@ button {
   }
 }
 
-.text-editor .scroll-container p.conclusion {
-  margin-bottom: 0px;
+
+/* TEXT EDITOR - MEDIA CONTAINER */
+.parent-container .media-container {
+  position: relative;
 }
-
-
-
-
-/* MEDIA CONTAINER */
-.text-editor .scroll-container .media-container {
+ 
+.scroll-container .media-container {
   width: 100%;
   height: fit-content;
-
-/*   height: 244px;
-  height: 100%; */
   border-radius: 5px;
   overflow: hidden;
   background-color: rgba(0, 0, 0, .1);
-  
   margin: auto;
-  position: relative;
   cursor: pointer;
   display: none;
 }
 
-.media-container {
-  position: relative;
+.scroll-container.preview .media-container {
+  display: block;
 }
 
-.text-editor .media-container .header {
+
+/* TEXT EDITOR - MEDIA CONTAINER - HEADER */
+.media-container .header {
   bottom: auto;
   z-index: 3;
 }
 
-.text-editor .media-container .header.hide {
+.media-container.covered .header.hide {
+  transform: translate(0%, 0%);
+}
+
+.media-container .header.hide {
   transform: translate(0%, -100%);
 }
 
-.text-editor .media-container .header .top-bar {
+.media-container .header .top-bar {
   height: inherit;
 }
 
-.text-editor .media-container .header .top-bar .main-controls {
+.media-container .header .top-bar .main-controls {
   display: none; 
 }
 
-.text-editor .media-container .header .top-bar .icons-b::before {
+.media-container .header .top-bar .icons-b::before {
   -webkit-filter: drop-shadow(0px 0px 1px #303030);
 }
 
-.text-editor .media-container .top-bar .call-to-action-controls {
+.media-container .top-bar .content-controls {
   height: inherit;
   border-radius: 0px 0px 5px 5px;
   overflow: hidden;
   padding: 0px 8px;
 }
 
-.text-editor .media-container .call-to-action-controls .blur {
+.media-container .content-controls .blur {
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   background-size: cover;
   filter: blur(10px) brightness(1.4);
   margin: unset;
+  opacity: 1;
 }
 
-.text-editor .media-container .call-to-action-controls button.icons-b:first-of-type {
+.media-container.uncompleted .content-controls .blur {
+  opacity: 0;
+}
+
+.media-container .content-controls button.icons-b:first-of-type {
   margin: auto;
 }
 
-.text-editor .media-container .call-to-action-controls .icons-b::before {
-  background-size: auto 68%;
-  background-size: 40%;
-} 
+.media-container .content-controls .icons-b::before {
+  background-size: 50%;
+}
 
-.text-editor .media-container .call-to-action-controls .post-link {
+.media-container .content-controls .post-link {
   display: none;
 }
 
-.text-editor .media-container .media {
+.scroll-container.completed .media-container.watched .header .post-link {
+  background-color: unset;
+  display: block;
+} 
+
+
+/* TEXT EDITOR - MEDIA CONTAINER - MEDIA */
+.media-container .media {
   width: -webkit-fill-available;
   height: inherit;
   border-radius: inherit;
   display: flex;
-  
-/*   position: relative; */
 }
 
-.text-editor .media-container .media .thumbnail {
+.media-container .media .thumbnail {
   width: 100%;
   height: 100%;
   border-radius: inherit;
   z-index: 2;
+  opacity: 1;
 }
 
-.text-editor .media-container .media .video-loader {
+.media-container.uncompleted .media .thumbnail {
+  opacity: 0;
+}
+
+
+
+
+/* VIDEO LOADER */
+.media-container .media .video-loader {
   width: auto;
   height: 50%;
   z-index: 2;
   visibility: visible;
 }
 
-.text-editor .media-container .media .video-loader.hide {
+.media-container .media .video-loader.hide {
   z-index: -1;
   visibility: hidden;
 }
 
-.text-editor .media-container .media video {
+
+/* VIDEO */
+.media-container .media video {
   width: 100%;
   height: 100%;
   border-radius: inherit;
@@ -1498,82 +1497,85 @@ button {
   opacity: 1;
 }
 
-.text-editor .media-container .media video:hover {
-  pointer-events: none;
-}
-
-.text-editor .media-container .media video.hide {
+.media-container.covered .media video {
   opacity: 0;
 }
 
+.media-container .media video:hover {
+  pointer-events: none;
+}
 
 
- 
- 
 
-/* VIDEO PLAYER - TEXT EDITOR */
-.text-editor.video-player {
+
+/* APPLICATION = VIDEO PLAYER */
+.application.video-player {
   box-shadow: unset; 
 }
 
-.text-editor.dragged.video-player {
-  height: fit-content !important;
+.application.video-player > .blur {
+  filter: blur(20px) brightness(.2);
 }
 
-.text-editor.video-player > .header {
+.application.video-player > .header {
   display: none;
 }
 
-.text-editor.video-player .parent-container {
+.application.video-player .parent-container {
   padding: 0%;
   margin: 0px;
 }
 
-.text-editor.video-player .scroll-container {
+.application.video-player .scroll-container {
   display: none;
 }
 
-.text-editor.video-player .media-container .header .top-bar .main-controls {
+.application.video-player .media-container .header .top-bar .main-controls {
   display: inline-flex; 
 }
 
 
 
 
-/* INSTAGRAM SHARE */
-.text-editor.instagram-share {
+/* APPLICATION = IMAGE PREVIEW */
+.application.image-preview {
   width: fit-content;
   background-color: #f6f5f6;
 }
 
-.text-editor.instagram-share .blur {
-  background-image: unset !important;
+.image-preview .blur {
+  display: none;
 }
 
-.text-editor.instagram-share .header .main-controls button {
-  background-color: #acabac;
+.image-preview .header .main-controls button {
   border: unset;
+  background-color: #acabac;
 }
 
-.text-editor.instagram-share .header .top-bar .title {
+.image-preview .header .top-bar .title {
   padding: auto 2px;
   color: #747374;
   text-shadow: unset;
   margin: auto 6px;
 }
-
-.text-editor.instagram-share .header .call-to-action-controls > button {
+ 
+.image-preview .header .content-controls > button {
   border: 1px solid #ccc;
   background: linear-gradient(#fcfcfc, #f1f1f1);
+/*   line-height: 16px; */
+  line-height: 13px;
   color: #000;
 }
 
-.text-editor.instagram-share .parent-container {
+
+/* IMAGE PREVIEW - PARENT CONTAINER  */
+.image-preview .parent-container {
   border: 1px solid #cbcbcb;
   padding: 0%;
+  margin: 2px;
 }
 
-.text-editor.instagram-share .parent-container .poster {
+.image-preview .parent-container .poster {
   width: auto;
   height: 100%;
   border-radius: inherit;
@@ -1581,481 +1583,213 @@ button {
   margin: auto;
 }
 
-
-
-
-/* WORLD CLOCK */
-.world-clock {
-  background-color: #fff;
-  background-color: #000;
+.image-preview .parent-container .scroll-container {
+  display: none;
 }
 
-.mobile.height-longer .world-clock {
+
+
+
+/* APPLICATION = WORLD CLOCK */
+.application.world-clock {
+  background-color: #0f0f0f;
+  background-color: #000000;
+}
+
+.mobile.height-longer .application.world-clock {
   width: 96%;
   height: 96%;
-  top: 0px !important;
-  right: 0px !important;
-  bottom: 0px !important;
-  left: 0px !important;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
 }
 
 .world-clock .blur {
-  filter: blur(20px) brightness(.0);
+  display: none;
 }
 
+
+/* WORLD CLOCK - HEADER */
 .world-clock > .header {
-/*   background-color: rgba(255, 255, 255, 0.1); */
+  background-color: #141414;
 }
-
+ 
 .world-clock > .header button.icons-b {
-  background-color: rgba(0, 0, 0, 0.4);
-  background-color: #111;
   background: rgba(255, 255, 255, .1);
 }
 
 .world-clock > .header .top-bar .title {
   padding: 0px 6px;
-/*   color: #111; */
+  color: #ffffff;
+  text-shadow: 0px 0px 4px #545454;
 }
 
-.world-clock > .header .call-to-action-controls > button {
-  background-color: #111;
-  background: linear-gradient(#282828, #000000);
+
+/* CONTENT CONTROLS */
+.world-clock > .header .content-controls {
+  display: inline-flex;
+}
+
+.world-clock > .header .content-controls > * {
   background: rgba(255, 255, 255, .1);
   color: #ddd;
 }
 
 
 
+
+.mobile.height-longer .world-clock .parent-container {
+  padding: 5% 2%;
+}
+
+.world-clock .scroll-container {
+  display: none;
+}
+
+
+/* WORLD CLOCK - TIMEZONES */ 
 .world-clock .timezones {
   display: flex;
   flex-wrap: wrap;
 }
 
 .world-clock .timezones clock {
-  width: 160px;
-  height: 200px;
-  
-/*       width: 180px;
-    height: 220px; */
-  display: block;
-  margin: auto auto 15px auto;  
+  width: 186px;
+  height: 186px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;  
+  position: relative;
+  margin: auto auto 5% auto;  
 } 
 
 .mobile.height-longer .world-clock .timezones clock {
-  width: 190px;
-  height: 230px;
-  
-/*   width: 48%; */
-  
-/*   background-color: grey;
-  background-color: #000000;
-  background-color: red; */
-} 
-
-.width-longer .world-clock .timezones clock {
-  width: 170px;
-  height: 200px;
-  display: block;
-  margin: auto;
-  padding: 0px 5px;
-  margin: auto auto 15px auto;
+  width: 204px;
+  height: 204px;
 } 
 
 
-/* WORLD CLOCK - CLOCK DESIGN */
-.world-clock .timezones clock .border {
-  width: 160px;
-  height: 160px;
-  
-/*   width: 180px;
-  height: 180px; */
-  border: 2px solid #ffffff;
-  border-radius: 50%;
-/*   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-  
-  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
-  box-shadow: 0 0 14px #7e7e7e; */
+/* WORLD CLOCK - LOCATION */
+.world-clock .timezones clock::before {
+  content: '';
+  width: inherit;
+  height: inherit;
   background-size: cover;
   background-position: center;
-  margin: auto;
-  position: relative;
-}
-
-.mobile.height-longer .world-clock .timezones clock .border {
-/*   width: 190px;
-  height: 190px; */
-  
-  width: 95%;
-  
-  width: 185px;
-  height: 185px;
-}
-
-
-/* WORLD CLOCK - BACKGROUND */
-.world-clock .timezones clock.accra-ghana .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Accra%2C%20Ghana/Pieter%20Hugo%20-%20Permanent%20Error%2C%20Ghana%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.addis-ababa-ethiopia .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Addis%20Ababa%2C%20Ethiopia/Danakil%20Desert%2C%20Northern%20Ethiopia%20-%20Compressed.jpg");
-}
-  
-.world-clock .timezones clock.algiers-algeria .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Algiers%2C%20Algeria/A.%20Abbas%20-%20Masked%20ninjas%20of%20the%20Gendarmerie%20search%20youths%20for%20weapons%2C%20Algeria%2C%20Algiers%2C%201995%20-%20Compressed.jpg");
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Algiers%2C%20Algeria/Unidentified%20-%20Algiers%2C%20Algeria%20-%20Compressed.jpg");
-}
- 
-.world-clock .timezones clock.antananarivo-madagascar .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Antananarivo%2C%20Madagascar/Marsel%20van%20Oosten%20-%20800%20year%20old%20Baobab%20trees%20in%20Madagascar%20-%20Compressed.JPG");
-}
-
-.world-clock .timezones clock.asmara-eritrea .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Asmara%2C%20Eritrea/Unidentified%20-%20Dahlak%20Hotel%2C%20Massawa%2C%20Eritrea%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.bangui-central-african-republic .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Bangui%2C%20Central%20African%20Republic/Unidentified%20-%20Central%20African%20Republic%20-%20Compressed.jpg");
-  background-position: left;
-}
-
-.world-clock .timezones clock.banjul-gambia .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Banjul%2C%20Gambia/Unindentified%20-%20Fighters%20of%20PAIGC%20during%20Guinea%20and%20Cape%20Verde%E2%80%99s%20war%20of%20independence%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.bissau-guinea-bissau .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Bissau%2C%20Guinea-Bissau/Unidentified%20-%20Women%20in%20the%20Guinea%20Bissau%20National%20Liberation%20Struggle%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.brazzaville-congo .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Brazzaville%2C%20Congo/Unidentified%20-%20Patrice%20Lumumba%20arrested%20and%20then%20murdered%20on%20Jan.%2017%2C%201961%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.bujumbura-burundi .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Bujumbura%2C%20Burundi/Spencer%20Platt%20-%20Boys%20play%20at%20a%20beach%20on%20June%2027%2C%202015%2C%20in%20Bujumbura%2C%20Burundi%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.cairo-egypt .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Cairo%2C%20Egypt/Unidentified%20-%20Louis%20Armstrong%20plays%20for%20his%20wife%20Lucille%20in%20front%20of%20the%20Sphinx%20in%20Giza%201961%20-%20Compressed.jpg");
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Cairo%2C%20Egypt/Unidentified%20-%20A%20limonade%20salesman%20in%20the%20souk%2C%20Cairo%2C%20Egypt%2C%202000%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.casablanca-morocco .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Casablanca%2C%20Morocco/Unidentified%20-%20Casablanca%2C%20Morocco%2C%202016%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.conakry-guinea .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Conakry%2C%20Guinea/Alex%20Webb%20-%20Guinea%201%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.dakar-senegal .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Dakar%2C%20Senegal/Bruno%20Barbey%20-%20Saint-Louis%2C%20Senegal%201980%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.djibouti-djibouti .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Djibouti%2C%20Djibouti/Unidentified%20-%20Djibouti%2C%20October%201978%20-%20Compresssed.jpg");
-}
-
-.world-clock .timezones clock.dodoma-tanzania .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Dodoma%2C%20Tanzania/Chris%20Steele-Perkins%20-%20Tanzania%2C1989%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.freetown-sierraleone .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Freetown%2C%20Sierra%20Leone/Michel%20Du%20Cille%20-%20Man%20helped%20with%20cigarette%20from%20his%20grandson%2C%201999%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.gaborone-botswana .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Gaborone%2C%20Botswana/Frans%20Lanting%20-%20Mother%20and%20child%20traverse%20the%20Okavango%20River%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.harare-zimbabwe .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Harare%2C%20Zimbabwe/Alain%20Keler%20-%20Zimbabwe%2C1983%20-%20Compressed.png");
-}
-
-.world-clock .timezones clock.jamestown-sainthelena .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Jamestown%2C%20Saint%20Helena/David%20Stanley%20-%20Jamestown%2C%20Saint%20Helena%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.juba-southsudan .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Juba%2C%20South%20Sudan/Kiden%20-%20South%20Sudan%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.kampala-uganda .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Kampala%2C%20Uganda/Yann%20Gross%20-%20Skatepark%20in%20Kampala%20%2C%20Uganda%2C%202008%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.khartoum-sudan .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Khartoum%2C%20Sudan/Roberto%20Caputo%20-%20Sudan%2C%20Crucible%20Of%20Cultures%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.kigali-rwanda .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Kigali%2C%20Rwanda/Unidentified%20-%20Young%20Tutsi%20boys%20dance%20and%20reenact%20bow-and-arrow%20combat%2C%20Rwanda%2C%201939%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.kinshasa-dem-rep-of-congo .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Kinshasa%2C%20Dem%20Republic%20Of%20Congo/Stuart%20franklin-and-chop%20-%20Street%20life%20in%20Kinshasa%2C%20Dem%20Rep%20Of%20Congo%2C%202004%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.lagos-nigeria .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lagos%2C%20Nigeria/Alex%20Majoli%20-%20Lagos%2C%20Nigeria%2C%202013%20-%20Compressed.jpg");
-/*   background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lagos%2C%20Nigeria/Stuart%20franklin-and-chop%20-%20A%20throughfare%20for%20fisherman%20who%20build%20houses%20above%20it%20waters%2C%20Lagos%2C%20Nigeria%2C%202002%20-%20Compressed.jpg"); */
-}
-
-.world-clock .timezones clock.libreville-gabon .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Libreville%2C%20Gabon/Bruno%20Barbey%20-%20Boys%20ride%20bicycles%20on%20a%20country%20road%20near%20Booue%20-%20Compressed.jpg");
-/*   background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Libreville%2C%20Gabon/Bruno%20Barbey%20-%20Bumper%20cars%20at%20a%20children%E2%80%99s%20funfair%20in%20Libreville%2C%20Gabon.jpg"); */
-}
-
-.world-clock .timezones clock.lilongwe-malawi .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lilongwe%2C%20Malawi/Zach%20Louw%20-%20In%20Cape%20Maclear%2C%20Lake%20Malawi%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.lome-togo .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lome%2C%20Togo/Unidentified%20-%20The%20H%C3%B4tel%20de%20la%20Paix%2C%20Togo%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.luanda-angola .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Luanda%2C%20Angola/John%20Fink%20-%20Students%20having%20class%20in%20a%20destroyed%20school%2C%20Angola%2C%201997%20-%20Compressed.jpg");
-}
- 
-.world-clock .timezones clock.lusaka-zambia .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lusaka%2C%20Zambia/Annie%20Griffiths%20-%20Looking%20over%20the%20edge%20of%20Victoria%20Falls%20from%20a%20swimming%20hole%2C%20Zambia%20%20-%201%20-%20Compressed.jpg");
-/*   background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Lusaka%2C%20Zambia/Annie%20Griffiths%20-%20Looking%20over%20the%20edge%20of%20Victoria%20Falls%20from%20a%20swimming%20hole%2C%20Zambia%20-%202.jpg"); */
-  background-position: left;  
+  background-repeat: no-repeat;
+  filter: brightness(1.5);
+  display: block;  
+  position: absolute;
+  z-index: 2;
 } 
- 
-.world-clock .timezones clock.malabo-equatorial-guinea .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Malabo%2C%20Equatorial%20Guinea/Ariel%20Schalit%20-%20A%20child%20carries%20plastic%20tables%20to%20a%20fish%20market%2C%20Bata%2C%20Equatorial%20Guinea%20-%20Compressed.jpg");
-}
 
-.world-clock .timezones clock.maputo-mozambique .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Maputo%2C%20Mozambique/Alex%20Webb%20-%20Scenes%20from%20around%20the%20village%2C%20Moma%2C%20Mozambique%2C%202002%20-%20Compressed.png");
-}
+.mobile .world-clock .timezones clock::before {
+  background-size: 101%;
+} 
 
-.world-clock .timezones clock.maseru-lesotho .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Maseru%2C%20Lesotho/Ian%20Berry%20-%20Boy%20playing%20oil%20can%20guitar%20in%20the%20burnt%20ruins%20of%20his%20home%20during%20racial%20riot%2C%20Maseru%2C%201961%20-%20Compressed.jpg");
-}
 
-.world-clock .timezones clock.mbabane-swaziland .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Mbabane%2C%20Swaziland/Unidentified%20-%20The%20wedding%20morning%20of%20Princess%20Mantfombi%20in%20KwaZulu%2C%20Swaziland%2C%201978%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.mogadishu-somalia .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Mogadishu%2C%20Somalia/Unidentified%20-%20Jowhar%2C%20Somalia%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.monrovia-liberia .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Monrovia%2C%20Liberia/Tim%20Hetherington%20-%20A%20young%20armed%20fighter%20of%20the%20LURD%20smokes%20a%20cigarette%20on%20the%20hill%20top%20compound%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.moroni-comoros .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Moroni%2C%20%20Comoros/Unidentified%20-%20Moroni%2C%20Comoros%20-%20Compressed.jpg");
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Moroni%2C%20%20Comoros/Jose%20Cendon%20-%20Moroni%2C%20Comoros%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.nairobi-kenya .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Nairobi%2C%20Kenya/Alex%20Webb%20-%20Shella%20in%20Luma%2C%20Kenya%2C%201984%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.ndjamena-chad .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Ndjamena%2C%20Chad/Chris%20Steele-Perkins%20-%20Racetrack%20in%20Chad%2C%201985%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.niamey-niger .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Niamey%2C%20Niger/Steve%20McCurry%20-%20Young%20Wadabi%20men%20taking%20part%20in%20the%20annual%20Garawal%2C%20Niger%2C%201986%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.nouakchott-mauritania .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Nouakchott%2C%20Mauritania/Jody%20MacDonald%20-%20Mauritania%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.ouagadougou-burkina-faso .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Ouagadougou%2C%20Burkina%20Faso/David%20Pace%20-%20Karaba%20brick%20quarry%20in%20Burkina%20Faso%20-%20Compressed.png");
-}
-
-.world-clock .timezones clock.port-louis-mauritius .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Port%20Louis%2C%20Mauritius/A.%20Abbas%20-%20A%20muslim%20bride%E2%80%99s%20hand%20decorated%20with%20henna%20patterns%20in%20Port%20Louis%2C%201992%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.porto-novo-benin .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Porto%20Novo%2C%20Benin/Joseph%20Moise%20Agbodjelou%20-%20Untitled%2C%201960%20-%20Compressed.png");
-}
-
-.world-clock .timezones clock.praia-cabo-verde .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Praia%2C%20Cabo%20Verde/Unidentified%20-%20Praia%2C%20Cabo%20Verde%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.pretoria-south-africa .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Pretoria%2C%20South%20Africa/Greg%20Marinovich%20-%20South%20Africa%2C%201992%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.saint-denis-reunion .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Saint-Denis%2C%20R%C3%A9union/Unidentified%20-%20Saint%20Denis%2C%20Reunion%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.sao-tome-principe .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/S%C3%A3o%20Tom%C3%A9%2C%20Sao%20Tome%20and%20Principe/Alex%20Webb%20-%20Cocoa%20child%20workers%20play%20infront%20of%20a%20ruined%20plantation%20house%2C%20%202002%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.timbuktu-mali .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Timbuktu%2C%20Mali/A.%20Abbas%20-%20Mali%2C%201996%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.tripoli-libya .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Tripoli%2C%20Libya/Unidentified%20-%20Libya%2C%201957%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.tunis-tunisia .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Tunis%2C%20Tunisia/Harry%20Gruyaert%20-%20Nearby%20area%20of%20Sidi%20Bou%2C%20Tunis%2C%201995%20-%20Compressed.png");
-/*   background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Tunis%2C%20Tunisia/Unidentified%20-%20Tunisia%20-%201%20-%20Compressed.jpg"); */
-}
-
-.world-clock .timezones clock.victoria-seychelles .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Victoria%2C%20Seychelles/Unidentified%20-%20Victoria%2C%20Seychelles%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.windhoek-namibia .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Windhoek%2C%20Namibia/Thijs%20Heslenfeld%20-%20Namibia%20-%20Compressed.jpg");
-}
-
-.world-clock .timezones clock.yamoussoukro-ivory-coast .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Yamoussoukro%2C%20Ivory%20Coast/Eliot%20Elisofon%20-%20The%20hands%20of%20Dignitary%20N%E2%80%99Goran%20Koffi%20in%20Village%20Dignitary%2C%20Ivory%20Coast%20-%20Compressed.png");
-}
-
-.world-clock .timezones clock.yaounde-cameroon .border {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/worldclock/master/Africa/Yaounde%2C%20Cameroon/Harry%20Gruyaert%20-%20Training%20feild%20of%20the%20Canon%20of%20Yaound%C3%A9%2C%20from%20which%20many%20famous%20players%20come%20-%20Compressed.jpg");
-}
-
- 
- 
-/* WORLDCLOCK - HANDS */
-.world-clock .timezones clock .border .knob {
-  width: 6px;
-  height: 6px;
-/*   width: 8px;
-  height: 8px; */
-/*   width: 7px;
-  height: 7px; */
+/* WORLD CLOCK - BORDER */
+.world-clock .timezones clock .border { 
+  width: inherit;
+  height: inherit;
+  border: 17px solid #141414;
   border-radius: 50%;
-  background-color: #fff;
-  z-index: 1;
+  background-size: cover;
+  background-size: auto 100%;
+  background-position: center;
+  position: relative;
+  margin: auto;
+  transition: background-size 200ms ease-in-out;
 }
 
-.world-clock .timezones clock .border .hand {
-  width: 2px;
-  background-color: #fff;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-  top: auto;
-  right: auto;
-  bottom: 50%;
-  left: 50%;
-  transform-origin: bottom;
+.world-clock .timezones clock.zoomed .border { 
+  background-size: auto 200%;
+  background-position: center;
+}
+
+
+/* WORLDCLOCK - INDICATORS */
+.world-clock .timezones clock .border .numeric-indicators {
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+} 
+
+.world-clock .timezones clock .border .numeric-indicators > div {
+  width: inherit;
+  height: inherit;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-filter: drop-shadow(0px 0px 1px #303030);
   transition: unset;
 }
 
-.world-clock .timezones clock .border .hour {
-  height: 45px;
-  height: 40px;
-  height: 50px;
-  width: 4px;
-  width: 3px;
-  width: 2.5px;
+
+
+
+/* APPLICATION = ERROR */
+.application.error .header {
+/*   background-color: rgba(0, 0, 0, .2); */
 }
 
-.world-clock .timezones clock .border .minute {
-  height: 60px;
-  height: 56px;
-  height: 65px;
-  width: 3px;
-  width: 2.5px;
+.application.error .header .title {
+  color: #ffffff;
+  text-shadow: 0px 0px 4px #545454;
 }
 
-.world-clock .timezones clock .border .second {
-  height: 65px;
-  height: 70px;
-  width: 2px;
+.error .header .content-controls button {
+  color: #ffffff;
+  text-shadow: 0px 0px 4px #545454;
 }
 
-.world-clock .timezones clock .title {
-  width: fit-content;
-  height: fit-content;
-  max-width: 100%;
-  font-size: 12px;
-  color: #fff;
-  text-align: center;
-  display: block;
-  margin: 7px auto auto auto;
+.error .parent-container .scroll-container {
+  display: none;
 }
 
-
-
-
-/* ERROR EMAIL */
-.text-editor.error .scroll-container p {
-  visibility: visible;
-  display: block;
+.error .parent-container .section {
+  color: #ffffff;
 }
 
-.text-editor.error .scroll-container .section-title {
-  width: fit-content;
-  font-size: 18px;
-  text-transform: uppercase;
-  margin: auto;
-}
-
-.text-editor.error .scroll-container .section-title.experience {
+.error .parent-container .section.user-experience {
   margin-top: 40px; 
 }
 
-.text-editor.error .scroll-container .code-error span {
+
+.error .parent-container .section .title {
+  width: fit-content;
+  font-size: 18px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin: auto;
+}
+
+
+.error .parent-container .section.code .content span {
   width: fit-content;
   height: fit-content;
   display: block;
   margin: 10px 0px;
 }
  
-.text-editor.error .scroll-container .user-experience {
+
+.error .parent-container .section.user-experience .content {
   width: 100%;
   border: 1px solid #ffffff;
   border-radius: 6px;
   background-color: transparent;
   padding: 2%;
-  display: block;
-  position: relative;
   outline: none;
   cursor: text;
+  display: block;
+  position: relative;
   margin: 14px auto;
 }
 
-.text-editor.error .scroll-container .user-experience.empty::before {
+.error .parent-container .section.user-experience .content.empty::before {
   content: "What happened slime?";
   width: fit-content;
   height: fit-content;
   position: absolute;
-}
-
-
-
-
-/* COMPLETED */
-.text-editor.completed > .header .text.call-to-action-controls button.credits {
-  display: block;
-}  
-
-.text-editor.completed .scroll-container {
-  margin-top: 0px !important;
-  transition: margin-top 1s ease-in-out !important;
-} 
-
-.text-editor.completed .media-container .header .post-link {
-  background-color: unset;
-  display: block;
-} 
-
-.text-editor.completed .scroll-container p .highlight { 
-  width: fit-content;
-  height: fit-content;
 }

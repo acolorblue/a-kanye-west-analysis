@@ -1253,19 +1253,26 @@ function mediaAfterParagraphs() {
             if (unwatched) {
               checkDeviceLength();
               if (device_width_longer) {
-                setTimeout(function() {
-                  $(window).off('resize');
-                  main_controls.remove();
-                  media_container.removeClass('visible').css('height', '').addClass('watched covered video-player');
-                  application.removeClass('video-player').css('height', '').addClass('text-editor');
-                  previous_block.after(media_container);
-                  main_file.removeClass('show selected');
-                  $('.file.text').addClass('show selected');
-                }, 1000);
+//                 setTimeout(function() {
+//                   $(window).off('resize');
+//                   main_controls.remove();
+//                   media_container.removeClass('visible').css('height', '').addClass('watched covered video-player');
+//                   application.removeClass('video-player').css('height', '').addClass('text-editor');
+//                   previous_block.after(media_container);
+//                   main_file.removeClass('show selected');
+//                   $('.file.text').addClass('show selected');
+//                 }, 1000);
 
-                setTimeout(function() {
-                  mac_os.removeClass('dim');
-                }, 1200);
+//                 setTimeout(function() {
+//                   mac_os.removeClass('dim');
+//                 }, 1200);
+                  
+                  media_container.removeClass('visible').css('height', '').addClass('watched covered video-player');
+                 applicationRemove();
+                 application.addClass('text-editor');
+                  applicationChange();
+                  previous_block.after(media_container);
+                  $(window).off('resize');
 
                 setTimeout(function() {
                   automatedText(next_block_paragraphs, 2000, [], 0, '-break-', 1000);

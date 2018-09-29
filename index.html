@@ -30,9 +30,12 @@
   
   <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Fonts/Ahamono%20Monospaced/stylesheet.css">
   <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Fonts/Pricedown/stylesheet.css">
-  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Code/CSS/global.css">
-  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Code/CSS/icons.css">
-  <link rel='stylesheet' type='text/css' href="local.css?81">
+  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Fonts/DJB%20Get%20Digital/stylesheet.css">
+  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Code/CSS/icons.css?16">
+  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Code/CSS/global.css?9">
+  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/worldclock/0.%20Design/Numeric%20Indicators/stylesheet.css?3">
+  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/worldclock/Africa/stylesheet.css?2">
+  <link rel='stylesheet' type='text/css' href="local.css?85">
 </head>
 
 
@@ -42,18 +45,18 @@
 <div class='loader covered ab-mid'>
   <div class='gta original ab-mid'>
     <div class='foreground-layer ab-mid'>
-      <div class='gta-5 text-logo ab-mid'></div>
-      <div class='rockstar icon-logo ab-mid'></div> 
-      <div class='leave-twitter open-in-native-browser twitter info-container ab-mid'>
-        <span class='info white icons-b abs'></span> Click the <span class='extra-options icons-b abs'></span> icon in the top right corner and open in native browser.
+      <div class='gta-5 text-logo ab-mid'>Pricedown</div>
+      <div class='rockstar icon-logo ab-mid'></div>
+      
+      <div class='battery-adjustment info-container ab-mid'>
+        <span class='info white icons-b abs'></span> If 'Low Power Mode'<span class='battery low-power-mode icons-b abs'></span>is turned on, turn it off for peak performance.
       </div>
-      <div class='low-power-mode-alert info-container ab-mid'>
-        <span class='info white icons-b abs'></span> If 'Low Power Mode' (<span class='battery low-power-mode icons-b abs'></span>) is turned on, turn it off for peak performance.
-      </div>
+      <div class='open-in-different-browser info-container ab-mid'></div>
+      
       <button class='skip-loader info-container playstation not-clicked ab-mid'>
         <span class='x icons-b abs'></span>Skip Loader
       </button>
-      <div class='loading-indicator info-container ab-mid'>Loading Story Mode<span class='loading-circle icons-b abs'></span></div>
+      <div class='loading-indicator info-container ab-mid'>Loading Essay Mode<span class='loading-circle icons-b abs'></span></div>
     </div>
     
     <div class='background-layer ab-mid'>
@@ -86,7 +89,7 @@
 <div class='mac-os ab-mid'>
   <div class='menu-bar'>  
     <div class='left panel'>
-      <div class='main-menu section-container'>
+      <div class='apple-menu section-container'>
         <button class='apple-logo icons-b abs'></button>
         
         <div class='menu'>
@@ -98,7 +101,11 @@
     <div class='right panel'>
       <div class='date-and-time section-container'>
         <button class='time digital'>
-          <span class='text'></span>
+          <span class='clock text'></span>
+          <div class='clock border'>
+            <div class='hour hand ab-mid'></div>
+            <div class='minute hand ab-mid'></div>
+          </div>
         </button>
         
         <div class='menu'>
@@ -109,597 +116,678 @@
           <b class="seperator"></b>
           <button class="item location-and-time-preferences">Open Location & Time Preferences..
            
-            <div class='timezones time analog'>
-              <clock class='city accra-ghana' timezone-offset='0'>
+            <div class='timezones'>
+              <clock class='city abuja-nigeria' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty-six'></div>  
+                    
+                    <div class='second ab-mid twenty-six'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Accra, Ghana</span>
               </clock>
               
+              <clock class='city accra-ghana' timezone-offset='0'>
+                <div class='border'>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid one'></div> 
+                     
+                    <div class='minute ab-mid zero'></div> 
+                    
+                    <div class='second ab-mid zero'></div> 
+                  </div>    
+                </div>
+              </clock>
+               
               <clock class='city addis-ababa-ethiopia' timezone-offset='3'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid two'></div> 
+                     
+                    <div class='minute ab-mid one'></div> 
+                    
+                    <div class='second ab-mid one'></div> 
+                  </div>    
                 </div>
-                <span class='title'>Addis Ababa, Ethiopia</span>
               </clock>
               
               <clock class='city algiers-algeria' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid three'></div> 
+                     
+                    <div class='minute ab-mid two'></div>  
+                    
+                    <div class='second ab-mid two'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Algiers, Algeria</span>
               </clock>
               
               <clock class='city antananarivo-madagascar' timezone-offset='3'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid four'></div> 
+                     
+                    <div class='minute ab-mid three'></div>  
+                    
+                    <div class='second ab-mid three'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Antananarivo, Madagascar</span>
               </clock>
               
               <clock class='city asmara-eritrea' timezone-offset='3'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid five'></div> 
+                     
+                    <div class='minute ab-mid four'></div>  
+                    
+                    <div class='second ab-mid four'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Asmara, Eritrea</span>
+              </clock>
+              
+              <clock class='city bamako-mali' timezone-offset='0'>
+                <div class='border'>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid fifty'></div>  
+                    
+                    <div class='second ab-mid fifty'></div> 
+                  </div> 
+                </div>
               </clock>
               
               <clock class='city bangui-central-african-republic' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid six'></div> 
+                     
+                    <div class='minute ab-mid five'></div>  
+                    
+                    <div class='second ab-mid five'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Bangui, Central African Republic</span>
               </clock>
               
               <clock class='city banjul-gambia' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid seven'></div> 
+                     
+                    <div class='minute ab-mid six seven'></div>  
+                    
+                    <div class='second ab-mid six seven'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Banjul, Gambia</span>
               </clock>
               
               <clock class='city bissau-guinea-bissau' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid eight'></div> 
+                     
+                    <div class='minute ab-mid eight'></div>  
+                    
+                    <div class='second ab-mid eight'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Bissau, Guinea-Bissau</span>
               </clock>
               
               <clock class='city brazzaville-congo' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid nine'></div> 
+                     
+                    <div class='minute ab-mid nine'></div>  
+                    
+                    <div class='second ab-mid nine'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Brazzaville, Congo</span>
               </clock>
               
               <clock class='city bujumbura-burundi' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid ten'></div> 
+                     
+                    <div class='minute ab-mid ten'></div>  
+                    
+                    <div class='second ab-mid ten'></div> 
+                  </div>
                 </div>
-                <span class='title'>Bujumbura, Burundi</span>
               </clock>
               
               <clock class='city cairo-egypt' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid eleven'></div> 
+                     
+                    <div class='minute ab-mid eleven'></div>  
+                    
+                    <div class='second ab-mid eleven'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Cairo, Egypt</span>
-              </clock>
-              
-              <clock class='city casablanca-morocco' timezone-offset='1'>
-                <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
-                </div>
-                <span class='title'>Casablanca, Morocco</span>
               </clock>
               
               <clock class='city conakry-guinea' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirteen'></div>  
+                    
+                    <div class='second ab-mid thirteen'></div> 
+                  </div>
                 </div>
-                <span class='title'>Conakry, Guinea</span>
               </clock>
               
               <clock class='city dakar-senegal' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid fourteen'></div>  
+                    
+                    <div class='second ab-mid fourteen'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Dakar, Senegal</span>
               </clock>
               
               <clock class='city djibouti-djibouti' timezone-offset='3'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid fifteen'></div>  
+                    
+                    <div class='second ab-mid fifteen'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Djibouti, Djibouti</span>
               </clock>
               
               <clock class='city dodoma-tanzania' timezone-offset='3'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid sixteen'></div>  
+                    
+                    <div class='second ab-mid sixteen'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Dodoma, Tanzania</span>
               </clock>
               
               <clock class='city freetown-sierraleone' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid seventeen'></div>  
+                    
+                    <div class='second ab-mid seventeen'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Freetown, Sierra Leone</span>
               </clock>
               
               <clock class='city gaborone-botswana' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid eighteen'></div>  
+                    
+                    <div class='second ab-mid eighteen'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Gaborone, Botswana</span>
               </clock>
               
               <clock class='city harare-zimbabwe' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid nineteen'></div>  
+                    
+                    <div class='second ab-mid nineteen'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Harare, Zimbabwe</span>
               </clock>
               
               <clock class='city jamestown-sainthelena' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty'></div>  
+                    
+                    <div class='second ab-mid twenty'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Jamestown, Saint Helena</span>
               </clock>
               
               <clock class='city juba-southsudan' timezone-offset='3'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty-one'></div>  
+                    
+                    <div class='second ab-mid twenty-one'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Juba, South Sudan</span>
               </clock>
               
               <clock class='city kampala-uganda' timezone-offset='3'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty-two'></div>  
+                    
+                    <div class='second ab-mid twenty-two'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Kampala, Uganda</span>
               </clock>
               
               <clock class='city khartoum-sudan' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty-three'></div>  
+                    
+                    <div class='second ab-mid twenty-three'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Khartoum, Sudan</span>
               </clock>
               
               <clock class='city kigali-rwanda' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty-four'></div>  
+                    
+                    <div class='second ab-mid twenty-four'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Kigali, Rwanda</span>
               </clock>
               
               <clock class='city kinshasa-dem-rep-of-congo' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty-five'></div>  
+                    
+                    <div class='second ab-mid twenty-five'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Kinshasa, Democratic Republic of Congo</span>
-              </clock>
-              
-              <clock class='city lagos-nigeria' timezone-offset='1'>
-                <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
-                </div>
-                <span class='title'>Lagos, Nigeria</span>
               </clock>
               
               <clock class='city libreville-gabon' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty-seven'></div>  
+                    
+                    <div class='second ab-mid twenty-seven'></div> 
+                  </div>
                 </div>
-                <span class='title'>Libreville, Gabon</span>
               </clock>
               
               <clock class='city lilongwe-malawi' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty-eight'></div>  
+                    
+                    <div class='second ab-mid twenty-eight'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Lilongwe, Malawi</span>
               </clock>
               
               <clock class='city lome-togo' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid twenty-nine'></div>  
+                    
+                    <div class='second ab-mid twenty-nine'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Lomé, Togo</span>
               </clock>
               
               <clock class='city luanda-angola' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty'></div>  
+                    
+                    <div class='second ab-mid thirty'></div> 
+                  </div>
                 </div>
-                <span class='title'>Luanda, Angola</span>
               </clock>
               
               <clock class='city lusaka-zambia' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty-one'></div>  
+                    
+                    <div class='second ab-mid thirty-one'></div> 
+                  </div>
                 </div>
-                <span class='title'>Lusaka, Zambia</span>
               </clock>
               
               <clock class='city malabo-equatorial-guinea' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty-two'></div>  
+                    
+                    <div class='second ab-mid thirty-two'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Malabo, Equatorial Guinea</span>
               </clock>
               
               <clock class='city maputo-mozambique' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty-three'></div>  
+                    
+                    <div class='second ab-mid thirty-three'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Maputo, Mozambique</span>
               </clock>
               
               <clock class='city maseru-lesotho' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty-four'></div>  
+                    
+                    <div class='second ab-mid thirty-four'></div> 
+                  </div>
                 </div>
-                <span class='title'>Maseru, Lesotho</span>
               </clock>
               
-              <clock class='city mbabane-swaziland' timezone-offset='2'>
+              <clock class='city mbabane-eswatini' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty-five'></div>  
+                    
+                    <div class='second ab-mid thirty-five'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Mbabane, Swaziland</span>
               </clock>
               
               <clock class='city mogadishu-somalia' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty-six'></div>  
+                    
+                    <div class='second ab-mid thirty-six'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Mogadishu, Somalia</span>
               </clock>
               
               <clock class='city monrovia-liberia' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty-seven'></div>  
+                    
+                    <div class='second ab-mid thirty-seven'></div> 
+                  </div>
                 </div>
-                <span class='title'>Monrovia, Liberia</span>
               </clock>
               
               <clock class='city moroni-comoros' timezone-offset='3'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty-eight'></div>  
+                    
+                    <div class='second ab-mid thirty-eight'></div> 
+                  </div>
                 </div>
-                <span class='title'>Moroni, Comoros</span>
               </clock>
               
               <clock class='city nairobi-kenya' timezone-offset='3'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid thirty-nine'></div>  
+                    
+                    <div class='second ab-mid thirty-nine'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Nairobi, Kenya</span>
               </clock>
               
               <clock class='city ndjamena-chad' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty'></div>  
+                    
+                    <div class='second ab-mid forty'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Ndjamena, Chad</span>
               </clock>
               
               <clock class='city niamey-niger' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty-one'></div>  
+                    
+                    <div class='second ab-mid forty-one'></div> 
+                  </div>
                 </div>
-                <span class='title'>Niamey, Niger</span>
               </clock>
               
               <clock class='city nouakchott-mauritania' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty-two'></div>  
+                    
+                    <div class='second ab-mid forty-two'></div> 
+                  </div>
                 </div>
-                <span class='title'>Nouakchott, Mauritania</span>
               </clock>
               
               <clock class='city ouagadougou-burkina-faso' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty-three'></div>  
+                    
+                    <div class='second ab-mid forty-three'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Ouagadougou, Burkina Faso</span>
               </clock>
               
               <clock class='city port-louis-mauritius' timezone-offset='4'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty-four'></div>  
+                    
+                    <div class='second ab-mid forty-four'></div> 
+                  </div>
                 </div>
-                <span class='title'>Port Louis, Mauritius</span>
               </clock>
               
               <clock class='city porto-novo-benin' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty-five'></div>  
+                    
+                    <div class='second ab-mid forty-five'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Porto Novo, Benin</span>
               </clock>
               
               <clock class='city praia-cabo-verde' timezone-offset='-1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty-six'></div>  
+                    
+                    <div class='second ab-mid forty-six'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Praia, Cabo Verde</span>
               </clock>
               
               <clock class='city pretoria-south-africa' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty-seven'></div>  
+                    
+                    <div class='second ab-mid forty-seven'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Pretoria, South Africa</span>
+              </clock>
+              
+              <clock class='city rabat-morocco' timezone-offset='1'>
+                <div class='border'>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid twelve'></div> 
+                     
+                    <div class='minute ab-mid twelve'></div>  
+                    
+                    <div class='second ab-mid twelve'></div> 
+                  </div>  
+                </div>
               </clock>
               
               <clock class='city saint-denis-reunion' timezone-offset='4'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty-eight'></div>  
+                    
+                    <div class='second ab-mid forty-eight'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Saint Denis, Réunion</span>
               </clock>
               
               <clock class='city sao-tome-principe' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid forty-nine'></div>  
+                    
+                    <div class='second ab-mid forty-nine'></div> 
+                  </div>   
                 </div>
-                <span class='title'>São Tomé, Sao Tome and Principe</span>
-              </clock>
-              
-              <clock class='city timbuktu-mali' timezone-offset='0'>
-                <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
-                </div>
-                <span class='title'>Timbuktu, Mali</span>
               </clock>
               
               <clock class='city tripoli-libya' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid fifty-one'></div>  
+                    
+                    <div class='second ab-mid fifty-one'></div> 
+                  </div> 
                 </div>
-                <span class='title'>Tripoli, Libya</span>
               </clock>
               
               <clock class='city tunis-tunisia' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid fifty-two'></div>  
+                    
+                    <div class='second ab-mid fifty-two'></div> 
+                  </div>  
                 </div>
-                <span class='title'>Tunis, Tunisia</span>
               </clock>
               
               <clock class='city victoria-seychelles' timezone-offset='4'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid fifty-three'></div>  
+                    
+                    <div class='second ab-mid fifty-three'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Victoria, Seychelles</span>
               </clock>
               
               <clock class='city windhoek-namibia' timezone-offset='2'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid fifty-four'></div>  
+                    
+                    <div class='second ab-mid fifty-four'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Windhoek, Namibia</span>
               </clock>
               
               <clock class='city yamoussoukro-ivory-coast' timezone-offset='0'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid fifty-five'></div>  
+                    
+                    <div class='second ab-mid fifty-five'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Yamoussoukro, Ivory Coast</span>
               </clock>
               
               <clock class='city yaounde-cameroon' timezone-offset='1'>
                 <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
+                  <div class='numeric-indicators ab-mid'>
+                    <div class='hour ab-mid'></div> 
+                     
+                    <div class='minute ab-mid fifty-six fifty-seven fifty-eight fifty-nine'></div>  
+                    
+                    <div class='second ab-mid fifty-six fifty-seven fifty-eight fifty-nine'></div> 
+                  </div>   
                 </div>
-                <span class='title'>Yaoundé, Cameroon</span>
-              </clock>
-              
-<!--               <clock class='city '>
-                <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
-                </div>
-                <span class='title'> </span>
-              </clock>
-              
-              <clock class='city '>
-                <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
-                </div>
-                <span class='title'> </span>
-              </clock>
-              
-              <clock class='city '>
-                <div class='border'>
-                  <div class='knob ab-mid'></div>
-                  <div class='hour hand ab-mid'></div>
-                  <div class='minute hand ab-mid'></div>
-                  <div class='second hand ab-mid'></div>
-                </div>
-                <span class='title'> </span>
-              </clock> -->
-              
+              </clock>   
               
             </div>
           </button>
@@ -707,7 +795,7 @@
       </div>
       
       <div class='profile section-container'>
-        <button class='name'>ACOLORBLUE</button>
+        <button class='name'>***********</button> 
         
         <div class='menu'>
           <div class='avi'></div>
@@ -715,9 +803,9 @@
           <p class='bio'>A synthesis of great things.</p>
           
           <div class='accounts'>
-            <button class="twitter-b icons-b abs"></button>
-            <button class="instagram-b icons-b abs"></button>
-            <button class="tumblr-b icons-b abs"></button>
+            <a class='twitter-b icons-b abs' href="https://twitter.com/acolorblue" target='_blank'></a>
+            <a class='instagram-b icons-b abs' href="https://instagram.com/acolorblue" target='_blank'></a>
+            <a class='tumblr-b icons-b abs' href="https://acolorblue.tumblr.com" target='_blank'></a>
           </div>
         </div>
       </div>
@@ -734,7 +822,7 @@
 
   <div class='desktop'>
     <div class='files-row'>
-      <button class='file text selected'>
+      <button class='text file main selected show'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/2.%20Desktop/3.%20File%20Thumbnails/Text%20Editor/Young%20Kanye%20-%201%20-%20Comp.jpg"/>
@@ -744,11 +832,176 @@
           <span class='title'>Analysis</span>
         </div>
       </button> 
+      
+      <!-- MALCOLM X POLICE PRECINCT -->
+      <button class='video-player malcolm-x-police-predict file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/1.%20Malcolm%20X%20Police%20Predict%20Scene/1%20-%20Comp.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>'Police Precinct'</span>
+          <span class='title'>scene from Malcolm X (1992)</span>  
+        </div>
+      </button> 
+       
+      <!-- KANYE TO CUDI -->
+      <button class='video-player kanye-to-cudi file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/2.%20Kanye%20Respond%20To%20Kid%20Cudi/1%20-%20Comp.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>Kanye West </span>
+          <span class='title'>respondes to Kid Cudi</span>  
+        </div>
+      </button> 
+      
+      <!-- RADIO FUCK YOU -->
+      <button class='video-player radio-fuck-you file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/3.%20Radio%20Fuck%20You/1%20-%20Comp.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>Kanye Sacremento </span>
+          <span class='title'>Rant</span>  
+        </div>
+      </button> 
+      
+      <!-- MALCOLM X ON BARRY GOLDWATER -->
+      <button class='video-player malcolm-x-on-goldwater file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/4.%20Malcolm%20X%20On%20Barry%20Goldwater/1%20-%20Comp.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>Malcolm X On </span>
+          <span class='title'>Barry Goldwater</span>  
+        </div>
+      </button> 
+      
+      <!-- MALCOLM X ON MLK -->
+      <button class='video-player malcolm-x-on-mlk file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/5.%20Malcolm%20X%20On%20Martin%20Luther%20King/1%20-%20Comp.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>Malcolm X On Martin</span>
+          <span class='title'> Luther King Jr</span>  
+        </div>
+      </button> 
+      
+      <!-- SLAVERY WAS A CHOICE -->
+      <button class='video-player slavery-was-a-choice file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/6.%20Kanye%20On%20The%20Choice%20Of%20Slavery/1%20-%20Comp.PNG"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>Kanye On The Choice </span>
+          <span class='title'>Of Slavery</span>  
+        </div>
+      </button> 
+      
+      <!-- CANDACE OWENS ECONOMICS -->
+      <button class='video-player candace-owens-economics file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/7.%20Candace%20Owens%20Economics%20Before%20Social%20Issues/1%20-%20Comp.PNG"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>Candace Owens On </span>
+          <span class='title'>Economics Over Social Issues</span>  
+        </div>
+      </button> 
+      
+      <!-- WE MAKE GOOD MUSIC -->
+      <button class='video-player we-make-good-music file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/8.%20We%20Make%20Good%20Music/1%20-%20Comp.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>We Make Good Music</span>
+        </div>
+      </button> 
+      
+      <!-- GEORGE BUSH EXPLANATION -->
+      <button class='video-player george-bush-explanation file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/9.%20George%20Bush%20Explanation/3%20-%20Comp.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>Kanye On The George</span>
+          <span class='title'> Bush Incident</span>  
+        </div>
+      </button> 
+      
+      <!-- MACINTOSH TEAM -->
+      <button class='video-player macintosh-team file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/10.%20MacIntosh%20Team/1%20-%20Comp.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>On The Creation Of</span>
+          <span class='title'> The MacIntosh, 1985</span>  
+        </div>
+      </button> 
+      
+      <!-- CREDITS -->
+      <button class='video-player credits file main'>
+        <span class='thumbnail-container'>
+          <span class="file-type ab-mid"></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/0.%20Credits/1%20-%20Comp.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>Credits</span>
+        </div>
+      </button> 
 
-      <button class='file soundcloud audio'>
+      <!-- WORLD CLOCK -->
+      <button class='world-clock file main'>
+        <span class='thumbnail-container'>
+          <span class='file-type-indicator ab-mid blonded icons-b abs'></span>
+          <span class='thumbnail ab-mid'></span>
+        </span>
+        <div class='title-container'>
+          <span class='title'>World Clock</span>
+        </div>
+      </button> 
+      
+      <!-- IMAGE PREVIEW -->
+      <button class='image-preview file main'>
+        <span class='thumbnail-container'>
+          <span class='file-type-indicator ab-mid'></span>
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Portrait.jpg"/>
+        </span>
+        <div class='title-container'>
+          <span class='title'>Instagram Share</span>
+        </div>
+      </button>
+      
+      <!-- ERROR -->
+      <button class='error file main'>
+        <span class='thumbnail-container'>
+          <span class='file-type-indicator ab-mid gun-2 icons-b abs'></span>
+          <span class='thumbnail ab-mid'></span>
+        </span>
+        <div class='title-container'>
+          <span class='title'>An Error Has</span>
+          <span class='title'>Occured</span>
+        </div>
+      </button> 
+      
+      <!-- AUDIO -->
+      <button class='audio file show'>
         <a href='https://soundcloud.com/acolorblue/sets/a-synthesis-of-kanye-west/s-Tm0L7' target='_blank'>
           <span class='thumbnail-container'>
-            <span class='file-type-indicator ab-mid icons-b abs'></span>
+            <span class='file-type-indicator ab-mid soundcloud icons-b abs'></span>
             <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/2.%20Desktop/3.%20File%20Thumbnails/Sermons/Kanye%20And%20Cudi%20Hugging%20-%201%20-%20Comp.jpg"/>
           </span>
           <div class='title-container'>
@@ -759,8 +1012,7 @@
       </button> 
     </div>
 
-
-    <div class='text-editor apple-media-file ab-mid' >
+    <div class='text-editor application ab-mid'>
       <div class='blur ab-mid'></div>
       <div class='header'>
         <div class='top-bar ab-mid'>
@@ -768,12 +1020,11 @@
             <button class='close grey icons-b abs'></button>
           </div>
 
-          <span class='title'>
-            <span class='title-scroll'>A Kanye West Analysis</span>
+          <span class='title'> 
+            <span class='title-scroll'>A ***** **** Analysis</span>
           </span>
 
-          <div class='call-to-action-controls text'>
-            <button class='credits'>Credits</button>
+          <div class='content-controls'>
             <button class='search white icons-b abs'></button>
             <button class='share white icons-b abs'></button>
           </div>
@@ -781,370 +1032,22 @@
       </div>
 
       <div class='parent-container'>
-        <div class='scroll-container'> 
+        <div class='scroll-container preview'> 
 
-          <div class='first block'>
-            <p class='introduction unread'>remarks “That’s too much power for one man to have.”</p>
-          </div>
-
-
-          <!-- MALCOLM X POLICE PRECINCT -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=iwGojrTKWvI" target='_blank'></a>
-</div>
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/1.%20Malcolm%20X%20Police%20Predict%20Scene/1%20-%20Comp.jpg" />
-               
-<!--               <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Video%20Thumbnails/1.%20Malcolm%20X%20Police%20Predict%20Scene/Thumbnail/Thumbnail%20-%201.jpg" /> -->
-
-              <video class='malcolm-x-police-predict hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Malcolm X Police Precinct Scene"></video>
-
-<!--               <video class='malcolm-x-police-predict hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/1.2.mp4' title="Malcolm X Police Precinct Scene"></video> -->
-            </div>
-          </div>
- 
-
-          <div class='second block'>
-            <p class='unread'>the ending of the Malcolm X movie!! I’m out here fighting for y’all!!”</p>
-          </div>
-
-
-          <!-- KANYE TO CUDI -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=wZfZM7_WcJA" target='_blank'></a>
-                </div>
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/2.%20Kanye%20Respond%20To%20Kid%20Cudi/1%20-%20Comp.jpg">
-
-<!--                               <video class='kanye-to-cudi hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/2.mp4' title="Kanye Responds To Cudi"></video> -->
-
-              <video class='kanye-to-cudi hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Kanye Responds To Cudi"></video>
-            </div>
-          </div>
-
-
-          <div class='third block'>
-            <p class='unread'> Yeah i’m taking his lead! Imma just say how I say — Imma just say — Imma just be Ye and win! Imma take his lead! Radio fuck you!!!”</p>
-          </div>
-
-
-          <!-- RADIO FUCK YOU -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=bkUr99epJh8" target='_blank'></a>
-                </div>
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/3.%20Radio%20Fuck%20You/1%20-%20Comp.jpg" />
-
-<!--                               <video class='radio-fuck-you hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/3.mp4' title="Kanye Sacremento Rant"></video>  -->
-
-              <video class='radio-fuck-you hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Kanye Sacremento Rant"></video>
-            </div>
-          </div>
-
-
-          <div class='fourth block'>
-            <p class='unread'> Trump's policies and I don't believe he truly has the desire to become familiar with them.</p>
-            <p class='unread'> position to be mislead, misused, exploited by the whites who pose as liberals only for the purpose of getting the support of the negro.”</p>
-          </div> 
-
-
-          <!-- MALCOLM X ON BARRY GOLDWATER -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=ve7g_ibjh3c" target='_blank'></a>
-                </div>
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/4.%20Malcolm%20X%20On%20Barry%20Goldwater/1%20-%20Comp.jpg" />
-
-<!--          <video class='malcolm-x-on-goldwater hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/4.mp4' title="Malcolm X On Barry Goldwater"></video>  -->
-
-              <video class='malcolm-x-on-goldwater hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Malcolm X On Barry Goldwater"></video>
-            </div>
-          </div>
-
-
-          <div class='fifth block'>
-            <p class='unread'> out the condescending “lowest unemployment” like we all just a whole buncha boot-licking-lazy-watermelon-eating negros waiting for massa to give us something to do.</p>
-
-            <p class='unread'>liberty of his own people, which was often a critique Martin Luther King received from Malcolm X.</p>
-          </div>
-
-
-          <!-- MALCOLM X ON MLK -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=X6FEyOziF8s" target='_blank'></a>
-</div>
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/5.%20Malcolm%20X%20On%20Martin%20Luther%20King/1%20-%20Comp.jpg" />
-
-<!--          <video class='malcolm-x-on-mlk hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/5.2.mp4' title="Malcolm X On Martin Luther King Jr."></video>            -->
-
-              <video class='malcolm-x-on-mlk hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Malcolm X On Martin Luther King Jr."></video>
-            </div>
-          </div> 
-
-
-          <div class='sixth block'>
-            <p class='unread'> becomes a problem when it threatens the actual psychological and physical well-being of other human beings.</p>
-
-            <p class='unread'>Kate and Billy opening up their laced cupcake business for. We can agree to disagree on your best album, not on my survival.</p> 
-
-            <p class='unread'>I actually don’t think he ever has. Due mainly to his ego threatened, I believe he meant what he said about Wiz & Amber prior to the release of TLOP because it was just too personal,-break- -break- -break- -break- -break- -break- it leaves us right back at the initial devastating reaction which is that he believes in this.</p>
-
-            <p class='unread'>That sound like a choice! You was there for 400 years and it’s all of y’all??”</p>
-          </div>
-
-
-          <!-- SLAVERY WAS A CHOICE -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=s_M4LkYra5k" target='_blank'></a>
-                </div>
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/6.%20Kanye%20On%20The%20Choice%20Of%20Slavery/1%20-%20Comp.PNG" />
-
-       <!--   <video class='slavery-was-a-choice hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/6.mp4' title="Kanye On The Choice Of Slavery"></video>  -->
-
-              <video class='slavery-was-a-choice hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Kanye On The Choice Of Slavery"></video>
-            </div>
-          </div> 
-
-
-          <div class='seventh block'>
-            <p class='unread'>in terror of losing her children, perhaps the only thing that might have provided her some comfort in the cancerous system of slavery.</p>
-
-            <p class='unread'>choke. This is someone who condescendingly said economics should obviously always come first before social issues because “We don’t want to become a third world country while screaming about pronouns”</p>
-          </div>
-
-
-          <!-- CANDACE OWENS ECONOMICS -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=BSAoitd1BTQ" target='_blank'></a>
-                </div>
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/7.%20Candace%20Owens%20Economics%20Before%20Social%20Issues/1%20-%20Comp.PNG" />
-
-   <!--       <video class='candace-owens-economics hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/7.mp4' title="Candace Owens On Economics Over Social Issues"></video>    -->
-
-              <video class='candace-owens-economics hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Candace Owens On Economics Over Social Issues"></video>
-            </div>
-          </div>
-
-
-          <div class='eight block'>
-            <p class='unread'>out of trash cans every time I walk down the street. They are in the third world. Are you aware these people are broken?</p>
-
-            <p class='unread'>The Taylor Swift VMAs incident was a clear example of right motive, wrong approach. Kanye had the right motive which was about actual great art and quality of work,</p>
-          </div>
-
-
-          <!-- WE MAKE GOOD MUSIC -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=7BxCDysoSxg" target='_blank'></a>
-                </div>
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class ='thumbnail  ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/8.%20We%20Make%20Good%20Music/1%20-%20Comp.jpg">
-
-              <!-- <video class='we-make-good-music hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/8.mp4' title="We Make Good Music"></video>  -->
-
-              <video class='we-make-good-music hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="We Make Good Music"></video>
-            </div>
-          </div>
-
-
-          <div class='ninth block'>
-            <p class='unread'>  was considered to have done something so wrong, my motivation was from a good place.”</p>
-          </div>
-
-
-          <!-- GEORGE BUSH EXPLANATION -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=_cdlFd5-04E" target='_blank'></a>
-</div>        
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/9.%20George%20Bush%20Explanation/3%20-%20Comp.jpg">
-
-       <!--   <video class='george-bush-explanation hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/9.mp4' title="Kanye On The George Bush Incident"></video>  -->
-
-              <video class='george-bush-explanation hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Kanye On The George Bush Incident"></video>
-            </div>
-          </div>
-
-
-          <div class='tenth block'>
-            <p class='unread'>(Full love, respect and support to all grassroots organizations currently existing)</p>
-
-            <p class='unread'> people believe in the same vision they will follow, just show them clearly where they are going.</p>
-          </div>
-
-          
-          <!-- MACINTOSH TEAM -->
-          <div class='media-container unwatched'>
-            <div class='header ab-mid'>
-              <div class='top-bar ab-mid'>
-                <div class="main-controls">
-                  <button class="close grey icons-b abs"></button>
-                </div>
-
-                <div class="call-to-action-controls video ab-mid">
-                  <div class='blur ab-mid'></div>
-                  <button class="rewind white icons-b abs"></button>
-                  <button class="play play-pause white icons-b abs"></button>
-                  <button class="forward white icons-b abs"></button>
-                  <a class='post-link twitter-b icons-b abs white' href="https://twitter.com/acolorblue/status/850923969846718464" target='_blank'></a>
-                </div>             
-              </div>
-            </div>
-
-            <div class='media'>
-              <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/10.%20MacIntosh%20Team/1%20-%20Comp.jpg">
-
-      <!-- <video class='macintosh-team hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/10.mp4' title="On The Building Of The MacIntosh, 1985"></video>  -->
-
-              <video class='macintosh-team hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="On The Building Of The MacIntosh, 1985"></video>
-            </div>
-          </div>
-          
-          
           <div class='eleventh block'>
-            <p class='unread'>Will a part of Kanye always live in us due to everything he gave us and the tremendous influence he’s had on our culture? Do black women still fight against the dehumanization of black men?</p>
+            <p class='unread'>Do black women still fight against the dehumanization of black men?</p>
           </div>
-
+  
           
-          <!-- ALL CREDITS -->
-          <div class='media-container unwatched'>
+          <!-- CREDITS -->
+          <div class='media-container unwatched covered'>
             <div class='header ab-mid'>
               <div class='top-bar ab-mid'>
                 <div class="main-controls">
                   <button class="close grey icons-b abs"></button>
                 </div>
 
-                <div class="call-to-action-controls video ab-mid">
+                <div class="content-controls video ab-mid">
                   <div class='blur ab-mid'></div>
                   <button class='rewind white icons-b abs'></button>
                   <button class='play play-pause white icons-b abs'></button>
@@ -1157,27 +1060,30 @@
             <div class='media'>
               <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/0.%20Credits/1%20-%20Comp.jpg">
 
-<!--               <video class='all-credits hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Credits%20Of%20A%20Kanye%20West%20Analysis.mp4' title="Credits Of A Kanye West Analysis"></video> -->
-<!--               <video class='all-credits hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Credits Of A Kanye West Analysis"></video> -->
-              <video class='all-credits hide' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Credits%20Of%20A%20Kanye%20West%20Analysis%20-%209.mp4' title="Credits Of A Kanye West Analysis"></video>
+<!--               <video class='credits' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Credits%20Of%20A%20Kanye%20West%20Analysis.mp4' title="Credits"></video> -->
+              <video class='credits' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Credits"></video>
+<!--               <video class='credits' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Credits%20Of%20A%20Kanye%20West%20Analysis%20-%209.mp4' title="Credits"></video> -->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>  
+  
+  <span class='background-credits ab-mid'>Sahel, Mali by Steve McCurry, 1986.</span>
+</div>
 
   
   
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+  <script src='https://acolorblue.co/libraries/Code/Javascript/mutate.js'></script>
+  <script src='https://acolorblue.co/libraries/Code/Javascript/global.js?106'></script>
+  <script src='https://acolorblue.co/libraries/Code/Javascript/automated-text.js?56'></script>
   <script src='https://rawgit.com/rythgs/jquery.primarycolor.js/master/jquery.primarycolor.min.js'></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
-  <script src="https://acolorblue.co/libraries/Code/Javascript/global.js"></script>
   <script src="https://acolorblue.co/libraries/Code/Javascript/inline-video.js"></script>
-  <script src="https://acolorblue.co/libraries/Code/Javascript/mutate.js"></script>
-  <script src="local.js?81"></script>
+  <script src="https://acolorblue.co/worldclock/0.%20Design/Numeric%20Indicators/functions.js?4"></script>
+  <script src="local.js?85"></script>
 </body>
 </html>

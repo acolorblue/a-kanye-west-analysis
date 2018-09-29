@@ -1,12 +1,60 @@
 // GLOBAL VARIABLES
-var mac_os = $('.mac-os'),
-    apple_media_file = $('.apple-media-file'),
-    text_editor = $('.text-editor'),
-    essay_title = "A Kanye West Analysis",
-    parent_container = $('.text-editor .parent-container'),
-    scroll_container = $('.text-editor .parent-container .scroll-container'),
-    uncompleted = $('p.unread').length > 0, 
-    completed = $('.text-editor').hasClass('completed');
+var body = $('body'),
+    mac_os = $('.mac-os'),
+    main_file = $('.main.file'),
+    current_file,
+    application = $('.application'),
+    text_editor = $('.application.text-editor'),
+    text_editor_title = "A ***** **** Analysis",
+    uncompleted = !$('.scroll-container').hasClass('completed'),
+    completed = $('.scroll-container').hasClass('completed'),
+    video_player = $('.application.video-player'),
+    image_preview = $('.application.image-preview'),
+    image_preview_title = "Save Image Then Confirm",  
+    world_clock = $('.application.world-clock'),
+    world_clock_title = "World Clock",
+    error_title = "An Error Has Occured",
+    top_bar = $('.application > .header .top-bar'),
+    title_scroll = $('.application > .header .title-scroll'),
+    content_controls = $('.application > .header .content-controls'),
+    parent_container = $('.application .parent-container'),
+    scroll_container = $('.application .parent-container .scroll-container'),
+    media_container,
+    media_container_height,
+    header,
+    main_controls,
+    blur,
+    media,
+    thumbnail,
+    video,
+    video_class,
+    check_idle_state;
+
+
+
+
+// NODES
+var div = document.createElement('div'),
+    button = document.createElement('button'),
+    image = document.createElement('img'),
+    paragraph = document.createElement('p'),
+    span = document.createElement('span'),
+    input = document.createElement('input'),
+    link = document.createElement('a');
+    link.target = '_blank';
+    
+
+
+
+
+// FIRST IMPRESSION 
+function onFirstImpression() {
+  if (firstImpression()) {
+    console.log("New User");
+    $('.loader').addClass('new-user');
+    $('.loader .gta .skip-loader').remove();
+  }
+}
 
  
 
@@ -15,342 +63,20 @@ var mac_os = $('.mac-os'),
 function userDeviceSpecifications() {
   if (computer) {
     function draggableApp() {
-      $('.text-editor').draggable({
+      $('.application').draggable({
         handle: '.header',
         cursor: 'move', 
         drag: function(event, ui) {
-          backgroundImageBlur('.mac-os', '.text-editor', '.text-editor > .blur', 'background-image');
+          backgroundImageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
         }
       });
     } 
     draggableApp(); 
 
     if (firefox) {
-      var browser_alert = document.createElement('div');
-      browser_alert.className = 'browser-alert ab-mid';
-      browser_alert.innerHTML = "Please use Chrome or Safari. Firefox has ugly scrollbars.";
-
-      $('.menu-bar').remove();
-      $('.desktop').remove();
-      $('.mac-os').append(browser_alert);
+      $('.menu-bar, .desktop').remove();
     }
   }
-  
-  checkDeviceLength();
-  
-  if (device_width_longer) {
-    manuallyCenter('.desktop', '.text-editor');
-    $('.text-editor > .blur').removeClass('contain').addClass('cover');
-  }
-  
-  if (device_height_longer) {
-    $('.text-editor > .blur').removeClass('cover').addClass('contain');
-  }
-}
-  
-  
-  
- 
-// FIRST IMPRESSION 
-function firstImpressionContainer() { 
-  /* firstImpression.js. Copyright (c) 2012 Rob Flaherty (@robflaherty). Licensed under the MIT and GPL licenses. */
-  window.firstImpression = function(cookie, days) {
-    var cookieMachine, getCookie, setCookie, checkUser;
-
-    /* Plain JS port of jquery.cookie plugin. Copyright (c) 2010 Klaus Hartl (stilbuero.de). Dual licensed under the MIT and GPL licenses. */
-    cookieMachine = function(key, value, options) {
-      var expiration, result, time;
-
-      if (arguments.length > 1 && String(value) !== "[object Object]") {
-        options = options || {};
-
-        if (value === null || value === undefined) {
-          options.expires = -1;
-        }
-
-        if (typeof options.expires === "number") {
-          expiration = options.expires;
-          time = options.expires = new Date();
-          time.setTime(time.getTime() + expiration * 24 * 60 * 60 * 1000);
-        }
-
-        // Temporary fix for path problem
-        options.path = "/";
-
-        return (document.cookie = [
-          encodeURIComponent(key),
-          "=",
-          encodeURIComponent(value),
-          options.expires ? "; expires=" + options.expires.toUTCString() : "",
-          options.path ? "; path=" + options.path : "",
-          options.domain ? "; domain=" + options.domain : "",
-          options.secure ? "; secure" : ""
-        ].join(""));
-      }
-
-      result = new RegExp("(?:^|; )" + encodeURIComponent(key) + "=([^;]*)").exec(
-        document.cookie
-      );
-      return result ? decodeURIComponent(result[1]) : null;
-    };
-
-    /* Option defaults */
-    if (cookie === undefined) {
-      cookie = "_firstImpression";
-    }
-
-    if (days === undefined) {
-      days = 730;
-    }
-
-    /* Delete cookie if either option is null */
-    if (cookie === null) {
-      cookieMachine("_firstImpression", null);
-      return;
-    }
-
-    if (days === null) {
-      cookieMachine(cookie, null);
-      return;
-    }
-
-    /* Functions */
-    getCookie = function() {
-      return cookieMachine(cookie);
-    };
-
-    setCookie = function() {
-      cookieMachine(cookie, true, { expires: days });
-    };
-
-    checkUser = function() {
-      var status = getCookie();
-
-      // Set cookie if new user
-      if (!status) {
-        setCookie();
-      }
-
-      return !status;
-    };
-
-    /* Return boolean */
-    return checkUser();
-  };
-  
-  
-  if (firstImpression()) {
-    console.log("New User");
-    $('.loader').addClass('new-user');
-    $('.loader .gta .skip-loader').remove();
-  }
-}
-
-
-
-
-// LOADER
-function loader() {
-  function gta() {
-    function removeInitialCover() {
-      setTimeout(function() {
-        $('.loader').addClass('uncovered');
-      }, 1000);
-
-      setTimeout(function() {
-        $('.loader').removeClass('covered uncovered');
-        addMoveLoop();
-      }, 2000);
-    }
-    removeInitialCover();
-    
-    function infoContainer() {
-      if (twitterInAppBrowser) {
-        var native_browser;
-        if (ios) {
-          native_browser = "Safari";
-        }
-        if (android) {
-          native_browser = "Chrome";
-        }
-
-        $('.open-in-native-browser').fadeIn(200);
-        var leave_twitter_text = $('.open-in-native-browser').html();
-        $('.open-in-native-browser').html(leave_twitter_text.replace("native browser", native_browser));
-      } 
-       
-      if (ios) {
-        $('.low-power-mode-alert').fadeIn(200);
-      }  
-    } 
-    infoContainer();
-    if (twitterInAppBrowser) {
-      $('.michael.background-and-character-container').addClass('show');
-      return;
-    }
-    
-    function addMoveLoop() {
-      checkDeviceLength();
-      
-      if (device_width_longer) {
-        $('.gta .character').removeClass('move');
-        
-        setTimeout(function() {
-          $('.gta .character').addClass('move'); 
-        }, 100);
-      }
-
-      if (device_height_longer) {
-        $('.gta .background, .gta .character').removeClass('move');
-        
-        setTimeout(function() {
-          $('.gta .background, .gta .character').addClass('move');
-        }, 100);
-      }
-    }
-    
-    function transitions() { 
-      // MICHAEL 
-      $('.gta .michael.background-and-character-container').addClass('show');
-      // return;
-      setTimeout(function() {
-        if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
-          if (!twitterInAppBrowser) {
-            $('.loader .gta .skip-loader').fadeIn(200);
-          }
-          $('.gta .michael.background-and-character-container').removeClass('show');
-        }
-      }, 4150); 
-      setTimeout(function() {
-        if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
-          $('.gta .michael.background-and-character-container').remove();
-          addMoveLoop(); 
-        }
-      }, 5650);
-      
-      // TREVOR
-      setTimeout(function() { 
-        if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
-          $('.gta .trevor.background-and-character-container').addClass('show');
-        }
-      }, 6050);
-      setTimeout(function() {
-        if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
-          $('.gta .trevor.background-and-character-container').removeClass('show');
-        }
-      }, 9200);
-      setTimeout(function() {
-        if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
-          $('.gta .trevor.background-and-character-container').remove();
-          addMoveLoop();
-          if (!twitterInAppBrowser) {
-            $('.loader .gta .skip-loader').fadeOut(200);
-          }
-          
-          if (ios) {
-            $('.gta .low-power-mode-alert').fadeOut(200);
-          }
-        }
-      }, 10700);
-      
-      // FRANKLIN AND CHOP
-      setTimeout(function() {
-        if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
-          $('.gta .franklin-and-chop.background-and-character-container').addClass('show');
-        }
-      }, 11100);
-      setTimeout(function() {
-        if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
-          $('.gta .franklin-and-chop.background-and-character-container').removeClass('show');
-        }
-      }, 14250);
-      setTimeout(function() {
-        if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
-          callRemainderFunctions();
-          console.log("NOT SKIPPED ==  callRemainderFunctions();"); 
-          $('.gta').removeClass('original');
-          $('.gta .franklin-and-chop.background-and-character-container').remove();
-          addMoveLoop();
-        }
-      }, 15750);
-      
-      // KANYE
-      setTimeout(function() {
-        if (!$('.loader').hasClass('skipped')) {
-          $('.gta .text-logo').removeClass('gta-5').addClass('kanye-analysis');
-          $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
-          $('.kanye.background-and-character-container').addClass('show');
-        }
-      }, 16150);
-      setTimeout(function() { 
-        if (!$('.loader').hasClass('skipped')) {
-          titleThenRemoveLoader();
-        }
-      }, 19500);
-    }
-    transitions(); 
-    
-    function titleThenRemoveLoader() {
-      $('.gta .text-logo').text("A Kanye West Analysis");
-      automatedText('.gta .text-logo', 2000, [''], 0, '-break-', 800);
-
-      var loader_removal_interval = setInterval(loaderRemoval, 200);
-      function loaderRemoval() {
-        if ($('.gta .text-logo').text().includes("A Kanye West Analysis")) {
-          window.clearInterval(loader_removal_interval);
-
-          setTimeout(function() {
-            $('.loader').addClass('hide');
-          }, 1500); 
-
-          setTimeout(function() {
-            $('.loader').fadeOut(200);
-          }, 4300);
-
-          setTimeout(function() {
-            $('.loader').remove();
-          }, 4500);
-        }
-      }
-    }
-    
-    function skipLoader() {
-      $('.loader .gta .skip-loader').click(function() {
-        $(this).removeClass('not-clicked');
-        $('.loader').addClass('skipped');
-        $('.gta .background-and-character-container').removeClass('show');
-        $('.gta .skip-loader').fadeOut(200);
-        if (ios) {
-          $('.gta .low-power-mode-alert').fadeOut(200);
-        }
-        
-        setTimeout(function() {
-          $('.gta .skip-loader').remove();
-        }, 200);
-        
-        setTimeout(function() {
-          $('.gta .michael.background-and-character-container, .gta .trevor.background-and-character-container, .gta .franklin-and-chop.background-and-character-container').remove();
-          $('.gta .background, .gta .character').removeClass('move');
-          // setTimeout(function() { 
-          callRemainderFunctions();
-          console.log("SKIPPED ==  callRemainderFunctions();"); 
-          // }, 2000);
-        }, 1500); 
-        
-        setTimeout(function() {
-          $('.gta .text-logo').removeClass('gta-5').addClass('kanye-analysis');
-          $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
-          $('.kanye.background-and-character-container').addClass('show');
-        }, 1900);
-        
-        setTimeout(function() {
-          titleThenRemoveLoader();
-        }, 3300);
-      })
-    } 
-    skipLoader(); 
-  }
-  gta();
 }
 
 
@@ -358,151 +84,528 @@ function loader() {
 
 // DETECT SIZE CHANGE
 function detectSizeChange() {    
-  $('.mac-os, .text-editor').mutate('width height top left', function(el, info) {
+  $('.mac-os, .application').mutate('width height top left', function(el, info) {
     if (computer) {
-      function draggableElement() {
-        var element_is_being_dragged = $('.text-editor').hasClass('ui-draggable-dragging');
-        var element_not_being_dragged = !element_is_being_dragged;
-
-        if (element_not_being_dragged) {
-          manuallyCenter('.desktop', '.text-editor');
-        }
-        
-        if (element_is_being_dragged) {
-          if (!$('.text-editor').hasClass('dragged')) {
-            $('.text-editor').addClass('dragged');
-          }
-        }
-      }
-      draggableElement();
-      
-      function backgroundImageSizing() {
-        if ($('.mac-os').width() < 1000) {
-          $('.text-editor > .blur').removeClass('cover').addClass('contain');
-        }
-
-        if ($('.mac-os').width() >= 1000) {
-          $('.text-editor > .blur').removeClass('contain').addClass('cover');
-        }
-      }
-      backgroundImageSizing();
+      repositionDraggable();
     }
     
     function deviceCurrentSize() {
+      var previous_block;
+      
       checkDeviceLength();
       
       if (device_width_longer) {
-        $('body').removeClass('height-longer').addClass('width-longer');
-        manuallyCenter('.desktop', '.text-editor');
+        body.removeClass('height-longer').addClass('width-longer');
         
-        if ($('.apple-media-file').hasClass('world-clock')) {
+        if ($('.application').hasClass('image-preview')) {
+          titleOverflow('.application.image-preview .title', '.application.image-preview .title-scroll');
+        } 
+        
+        if ($('.application').hasClass('world-clock')) {
           return;
         }
-        
-        if ($('.apple-media-file').hasClass('instagram-share')) {
-          titleOverflow('.text-editor.instagram-share .title', '.text-editor.instagram-share .title-scroll');
-        } 
          
         function ifVideoPlayerInTextEditor() {
-          if ($('.scroll-container .media-container.visible').length == 1) {
-            if ($('.text-editor').hasClass('instagram-share')) {
+          var unwatched_video_present = $('.scroll-container .media-container.visible').length == 1;
+          if (unwatched_video_present) {
+            if ($('.application').hasClass('image-preview')) {
               return;
             } 
             
-            var previous_block = $('.scroll-container .media-container.visible').prev('.block'),
-                media_container = $('.scroll-container .media-container.visible'),
-                media_container_height,
-                main_controls = $('.text-editor .media-container .main-controls');
+                previous_block = $('.scroll-container .media-container.visible').prev('.block');
+                media_container = $('.scroll-container .media-container.visible');
+                video = media_container.find('video');
+            
+            video.remove();
  
             setTimeout(function() {
               media_container_height = scroll_container.width() * 0.563278;
               media_container.removeClass('video-player').css('height', media_container_height);
+              if ($('.application').hasClass('hide')) {
+                $('.application').removeClass('hide');
+                $('.background-credits').removeClass('show');
+              }
               parent_container.append(media_container);
-              text_editor.addClass('video-player').css('height', media_container_height);
+              application.removeClass('text-editor').addClass('video-player').css('height', media_container_height);       
               mac_os.addClass('dim');
-              // main_controls.show();
+              video_class = video.attr('class').replace(' hide', '');
+              current_file = '.file.' + video_class;
+              main_file.removeClass('show selected');
+              $(current_file).addClass('show selected');
               
               $(window).on('resize', function() {
                 media_container_height = scroll_container.width() * 0.563278;
                 media_container.css('height', media_container_height);
-                text_editor.css('height', media_container_height);
+                application.css('height', media_container_height);
               });
             }, 250);
           }
         }
         ifVideoPlayerInTextEditor();
-        
-        if (mobile) {
-          $('.text-editor > .blur').removeClass('contain').addClass('cover');
-        }
       }  
       
       if (device_height_longer) {
-        $('body').removeClass('width-longer').addClass('height-longer');
-        
-        if ($('.text-editor').hasClass('instagram-share')) {
+        body.removeClass('width-longer').addClass('height-longer');
+
+        if ($('.application').hasClass('image-preview')) {
           setTimeout(function() {
-            titleOverflow('.text-editor.instagram-share .title', '.text-editor.instagram-share .title-scroll');
+            titleOverflow('.application.image-preview .title', '.application.image-preview .title-scroll');
           }, 1000);
         } 
- 
-        function ifVideoPlayerIsTextEditor() {
-          if ($('.text-editor').hasClass('video-player')) {
-            // if (scroll_container.is(':hidden')) {
-            //   scroll_container.show();
-            // }
-            
-            var text_editor_video_player = $('.text-editor.video-player'),
-                main_controls = $('.text-editor .media-container .main-controls'),
-                previous_block = $('.scroll-container p.read').last().parent('.block'),
-                media_container = $('.media-container.visible');
-            
-            $(window).off('resize');
-            text_editor_video_player.css('height', '90%');
-            media_container.css('height', 'fit-content');
-            previous_block.after(media_container);
-            // main_controls.hide();
-            text_editor_video_player.removeClass('video-player');
-            mac_os.removeClass('dim');
-          }
-        }
-        ifVideoPlayerIsTextEditor();
-        
-        if (mobile) {
-          $('.text-editor > .blur').removeClass('cover').addClass('contain');
+
+        if ($('.application').hasClass('video-player')) {
+          $(window).off('resize');
+          previous_block = $('.scroll-container p.read').last().parent('.block');
+          media_container = $('.media-container.visible');
+
+          applicationRemove();
+          application.addClass('text-editor');
+          applicationChange();
+          previous_block.after(media_container);
         }
       }
     }
     deviceCurrentSize();
-      
-    function menuBarZIndex() {
-      if (!$('.text-editor').hasClass('video-player')) {
-        $('.menu-bar').css('z-index', '3');
-      }
-
-      else if ($('.text-editor').hasClass('video-player')) {
-        $('.menu-bar').css('z-index', '0');
-      }
-    }
-    menuBarZIndex();
     
-    backgroundImageBlur('.mac-os', '.text-editor', '.text-editor > .blur', 'background-image');
+    backgroundImageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
     automatedScrollAdjustment();
   });
 }
 
- 
 
 
-// USER ACTIVE STATUS
-function userActiveStatus() {    
-  $(window).focus(); 
-  
-  $(window).on('blur', function() {
-    if (mobile) {
-      // alert("The webpage was paused because you were offline.");
+
+// LOADER
+function loaderGTA() {
+  function removeInitialCover() {
+    setTimeout(function() {
+      $('.loader').addClass('uncovered');
+    }, 1000);
+
+    setTimeout(function() {
+      $('.loader').removeClass('covered uncovered');
+      addMoveLoop();
+    }, 2000);
+  }
+  removeInitialCover();
+
+  function infoContainer() {
+    if (ios) {
+      $('.battery-adjustment').fadeIn(200);
+    }  
+
+    function leaveBrowser() {
+      if (twitterInAppBrowser) {
+        var native_browser,
+            leave_twitter_text;
+
+        function determineNativeBrowser() {
+
+          if (ios) {
+            native_browser = "Safari";
+          }
+          if (android) {
+            native_browser = "Chrome";
+          }
+        }
+        determineNativeBrowser();
+
+        $('.open-in-different-browser').addClass(' twitter').fadeIn(200).html("<span class='info white icons-b abs'></span> Click the 'Extra Options' button <span class='extra-options icons-b abs'></span> in the top right corner and open in native browser.");
+        $('.open-in-different-browser').html($('.open-in-different-browser').html().replace("native browser", native_browser));
+      } 
+
+      if (firefox && computer) {
+        $('.open-in-different-browser').addClass(' firefox').fadeIn(200).html("<span class='info white icons-b abs'></span>Please use Chrome or Safari. Firefox has ugly scrollbars.");
+        $('.menu-bar, .desktop').remove();
+      } 
     }
-  });
+    leaveBrowser();
+  } 
+  infoContainer();
+  if (firefox && computer || twitterInAppBrowser) {
+    $('.michael.background-and-character-container').addClass('show');
+    return;
+  }
+
+  function addMoveLoop() {
+    checkDeviceLength();
+
+    if (device_width_longer) {
+      $('.gta .character').removeClass('move');
+
+      setTimeout(function() {
+        $('.gta .character').addClass('move'); 
+      }, 100);
+    }
+
+    if (device_height_longer) {
+      $('.gta .background, .gta .character').removeClass('move');
+
+      setTimeout(function() {
+        $('.gta .background, .gta .character').addClass('move');
+      }, 100);
+    }
+  }
+
+  function transitions() { 
+    // MICHAEL
+    $('.gta .michael.background-and-character-container').addClass('show');
+    setTimeout(function() {
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        if (!twitterInAppBrowser) {
+          $('.loader .gta .skip-loader').fadeIn(200);
+        }
+        $('.gta .michael.background-and-character-container').removeClass('show');
+        $('.gta .text-logo.gta-5').text("");
+      }
+    }, 4150); 
+    setTimeout(function() {
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        $('.gta .michael.background-and-character-container').remove();
+        addMoveLoop(); 
+      }
+    }, 5650);
+
+    // TREVOR
+    setTimeout(function() { 
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        $('.gta .trevor.background-and-character-container').addClass('show');
+      }
+    }, 6050);
+    setTimeout(function() {
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        $('.gta .trevor.background-and-character-container').removeClass('show');
+      }
+    }, 9200);
+    setTimeout(function() {
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        $('.gta .trevor.background-and-character-container').remove();
+        addMoveLoop();
+        if (!twitterInAppBrowser) {
+          $('.loader .gta .skip-loader').fadeOut(200);
+        }
+
+        if (ios) {
+          $('.gta .battery-adjustment').fadeOut(200);
+        } 
+
+        // callRemainderFunctions();
+        // console.log("NOT SKIPPED ==  callRemainderFunctions();");
+      }
+    }, 10700);
+
+    // FRANKLIN AND CHOP
+    setTimeout(function() {
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        $('.gta .franklin-and-chop.background-and-character-container').addClass('show');
+      }
+    }, 11100);
+    setTimeout(function() {
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        $('.gta .franklin-and-chop.background-and-character-container').removeClass('show');
+      }
+    }, 14250);
+    setTimeout(function() {
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        $('.gta').removeClass('original');
+        $('.gta .franklin-and-chop.background-and-character-container').remove();
+        addMoveLoop();
+      }
+    }, 15750);
+
+    // KANYE
+    setTimeout(function() {
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        $('.gta .text-logo').removeClass('gta-5').addClass('kanye-analysis');
+        $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
+        $('.kanye.background-and-character-container').addClass('show');
+      }
+    }, 16150);
+    setTimeout(function() {
+      if ($('.loader').length == 1 && !$('.loader').hasClass('skipped')) {
+        titleThenRemoveLoader();
+        // console.log("Not Skipped"); 
+      }
+    }, 19500); 
+  }
+  transitions(); 
+
+  function skipLoader() {
+    $('.loader .gta .skip-loader').click(function() {
+      $(this).removeClass('not-clicked');
+      $('.loader').addClass('skipped');
+      $('.gta .background-and-character-container').removeClass('show');
+      $('.gta .skip-loader').fadeOut(200);
+      if (ios) {
+        $('.gta .battery-adjustment').fadeOut(200);
+      }
+
+      setTimeout(function() {
+        $('.gta .skip-loader').remove();
+      }, 200);
+
+      setTimeout(function() {
+        $('.gta .michael.background-and-character-container, .gta .trevor.background-and-character-container, .gta .franklin-and-chop.background-and-character-container').remove();
+        $('.gta .background, .gta .character').removeClass('move');
+      }, 1500);
+
+      setTimeout(function() {
+        $('.gta .text-logo').removeClass('gta-5').addClass('kanye-analysis');
+        $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
+        $('.kanye.background-and-character-container').addClass('show');
+      }, 1900); 
+
+      setTimeout(function() { 
+        titleThenRemoveLoader();
+        // console.log("Skipped"); 
+      }, 3300); 
+    })
+  } 
+  skipLoader(); 
+
+  function titleThenRemoveLoader() {
+    $('.gta .text-logo').text("A Kanye West Analysis");
+    automatedText('.gta .text-logo', 2000, [''], 0, '-break-', 800);
+
+    var end_of_title_interval = setInterval(endOfTitle, 200);
+    function endOfTitle() {
+      if ($('.gta .text-logo').text().includes("A Kanye West Analysis")) {
+        window.clearInterval(end_of_title_interval); 
+
+        setTimeout(function() {
+          callRemainderFunctions();
+        }, 100);
+        
+        var remove_loader_interval;
+
+        setTimeout(function() {
+          remove_loader_interval = setInterval(removeLoader, 200);
+        }, 1800); 
+
+        function removeLoader() {
+          if (typeof mediaAfterParagraphs === 'function') {
+            // console.log("Loaded");
+            window.clearInterval(remove_loader_interval);
+
+            $('.loader').addClass('hide');
+
+            setTimeout(function() {
+              $('.loader').fadeOut(200);
+            }, 2800);
+
+            setTimeout(function() {
+              $('.loader').remove();
+            }, 2900);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+// APPLICATION REMOVE
+function applicationRemove() { 
+  function file() {
+    main_file.removeClass('show selected');
+  }
+  file();
+  
+  function hiden() {
+    if ($('.application').hasClass('hide')) {
+      $('.application').removeClass('hide');
+      $('.background-credits').removeClass('show');
+    }
+  }
+  hiden();
+  
+  function title() {
+    title_scroll.empty();
+  }
+  title();
+   
+  function contentControls() {
+    $('.content-controls .social-platforms').empty();
+    $('.content-controls button, .content-controls a').text('');
+    content_controls.empty();
+  }
+  contentControls();
+  
+  function pauseAllVideos() {
+    $('.media-container video').each(function() {
+      var video = $(this).get(0);
+
+      if (!video.paused) {
+        video.pause(); 
+      }
+    });
+  }
+  pauseAllVideos();
+  
+  if ($('.application').hasClass('text-editor')) { 
+    if ($('.content-controls').hasClass('search')) {
+      $('.content-controls').removeClass('search');
+    }
+    
+    if ($('.content-controls').hasClass('share')) {
+      $('.content-controls .social-platforms').empty();
+      $('.content-controls').removeClass('share');
+    }
+    
+    application.removeClass('text-editor');
+  }
+  
+  if ($('.application').hasClass('video-player')) {
+    media_container.css('height', '');
+    application.css('height', '');
+    application.removeClass('video-player');
+    mac_os.removeClass('dim');
+  }
+
+  if ($('.application').hasClass('image-preview')) {
+    if ($('.image-preview > .header .title-scroll').hasClass('overflow')) {
+      $('.image-preview > .header .title-scroll')[1].remove();
+      $('.image-preview > .header .title-scroll').removeClass('overflow');
+    }
+    $('.image-preview > .header .content-controls .social-platforms').empty().remove(); 
+    $('.image-preview .parent-container .poster').remove();
+    application.removeClass('image-preview');
+  }
+
+  if ($('.application').hasClass('world-clock')) {
+    $('.item.location-and-time-preferences').append($('.timezones'));
+    application.removeClass('world-clock')
+  }
+}
+
+
+
+
+// APPLICATION CHANGE
+function applicationChange() {  
+  if ($('.application').hasClass('text-editor')) { 
+    $('.file.text').addClass('show selected');
+
+    title_scroll.text(text_editor_title);
+
+    function credits() {
+      if ($('.scroll-container').hasClass('completed')) { 
+        video = $('video.credits');
+        media_container = video.parents('.media-container');
+
+        if (media_container.hasClass('unwatched')) {
+        button.className = 'credits';
+        button.innerHTML = "Credits";
+        $('.application > .header .content-controls').append(button.cloneNode(true));
+        }
+      }
+    }
+    credits();
+
+    button.className = 'search white icons-b abs';
+    $('.application > .header .content-controls').append(button.cloneNode());
+
+    button.className = 'share white icons-b abs';
+    $('.application > .header .content-controls').append(button.cloneNode());
+    
+    automatedScrollAdjustment();
+  }
+
+  if ($('.application').hasClass('video-player')) {
+    return;
+  }
+  
+  if ($('.application').hasClass('image-preview')) {
+    $('.file.image-preview').addClass('show selected');
+
+    title_scroll.text(image_preview_title);
+
+    button.className = 'confirm'; 
+    button.innerHTML = "Confirm";  
+    $('.application > .header .content-controls').append(button.cloneNode(true));
+
+    button.className = 'cancel';
+    button.innerHTML = "Cancel";
+    $('.application > .header .content-controls').append(button.cloneNode(true));
+
+    image.className = 'poster';
+    image.src = "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Portrait.jpg";
+    parent_container.prepend(image);
+
+    function actions() {
+      $('.content-controls .confirm').click(function() {
+        function windowLink() {
+          var window_link = 'instagram://camera';
+          if (mobile && android) {
+            window_link = 'https://www.instagram.com/_u/acolorblue';
+          }
+          window.location.href = window_link;
+        }
+        windowLink();
+
+        applicationRemove();
+        application.addClass('text-editor');
+        applicationChange();
+      });
+
+      $('.content-controls .cancel').click(function() {
+        applicationRemove();
+        application.addClass('text-editor');
+        applicationChange();
+      });
+    }
+    actions();
+
+    setTimeout(function() {
+      titleOverflow('.application.image-preview .title', 'application.image-preview .title-scroll');
+    }, 1000);
+  }
+
+  if ($('.application').hasClass('world-clock')) {
+    $('.file.world-clock').addClass('show selected');
+
+    title_scroll.text(world_clock_title);
+
+    link.className = 'sources';
+    link.href = "https://github.com/acolorblue/worldclock/tree/master/Africa";
+    link.innerHTML = "Sources";
+    $('.application > .header .content-controls').append(link);
+
+    button.className = 'exit';
+    button.innerHTML = "Exit";
+    $('.application > .header .content-controls').append(button);
+
+    parent_container.prepend($('.timezones'));
+    indicatorsContainer();
+
+    function actions() {
+      function imageZoom() {
+        $('.computer .world-clock .timezones clock .numeric-indicators')
+          .on('mouseover', function() {
+          $(this).parents('clock').addClass('zoomed');
+        })
+
+          .on('mouseleave', function() {
+          $(this).parents('clock').removeClass('zoomed');
+        })
+      }
+      imageZoom();
+
+      function exit() {
+        $('.content-controls .exit').click(function() {
+          window.clearInterval(indicators_interval);
+          applicationRemove();
+          application.addClass('text-editor');
+          applicationChange();
+          automatedScrollAdjustment();
+        });
+      }
+      exit();
+    }
+    actions();
+  }
 }
 
 
@@ -534,7 +637,7 @@ function menuBar() {
     // APPLE MENU 
     if (apple_menu) {
       function appleMenu() {
-
+        return;
       }
       appleMenu();
     }
@@ -553,86 +656,33 @@ function menuBar() {
 
           
           function analogOrDigital() {
-            var digital_text = title_button.find('.text');
-            
             if (analog_clock || digital_clock) {
               if ($('.date-and-time .menu .item').hasClass('checked icons-b abs')) {
                 $('.date-and-time .menu .item').removeClass('checked icons-b abs');
               }
+              
+              this_item.addClass('checked icons-b abs');
             }
             
             if (analog_clock) {
-              $('.mac-os .digital .text').hide();
-              this_item.addClass('checked icons-b abs');
               title_button.removeClass('digital').addClass('analog');
-              $('.mac-os .analog .clock-border').show();
-              
-              var clock_border = document.createElement('div');
-                  clock_border.className = 'clock-border';
-              
-              var hour = document.createElement('div');
-                  hour.className = 'hour hand ab-mid';
-              
-              var minute = document.createElement('div');
-                  minute.className = 'minute hand ab-mid';
-
-              if ($('.analog .clock-border').length == 0) {
-                title_button.append(clock_border);
-                clock_border.append(hour);
-                clock_border.append(minute);
-              }
             }
 
             if (digital_clock) {
-              $('.mac-os .analog .clock-border').hide();
-              this_item.addClass('checked icons-b abs');
               title_button.removeClass('analog').addClass('digital');
-              $('.mac-os .digital .text').show();
             }
           }
           analogOrDigital();
           
-          
           function worldClock() {
             if (location_and_time_preferences) {
-              function removeAllOtherApps() {
-                if ($('.text-editor').hasClass('instagram-share')) {
-                  $('.text-editor img.poster').remove();
-                  $('.share.call-to-action-controls').hide();
-                  $('.text.call-to-action-controls').show();
-                  $('.text.call-to-action-controls .search, .text.call-to-action-controls .credits').show();
-                  if ($('.text-editor > .header .title-scroll').hasClass('overflow')) {
-                    $('.text-editor > .header .title-scroll')[1].remove();
-                    $('.text-editor > .header .title-scroll').removeClass('overflow');
-                  }
-                  $('.text-editor > .header .title-scroll').text(essay_title);
-                  $('.text-editor').removeClass('instagram-share');
-                } 
+              if ($('.application').hasClass('video-player') || $('.application').hasClass('error')) {
+                return;
               }
-              removeAllOtherApps();
               
-              function buildWorldClock() {
-                apple_media_file.addClass('world-clock');
-                scroll_container.hide();
-                $('.clock.call-to-action-controls').show();
-                parent_container.prepend($('.timezones'));
-                $('.apple-media-file > .header .title-scroll').text("World Clock");
-                $('.apple-media-file .text.call-to-action-controls').hide();
-              }
-              buildWorldClock();
-               
-              $('.world-clock .exit').click(function() {
-                function exitFunction() {
-                  $('.item.location-and-time-preferences').append($('.timezones'));
-                  $('.clock.call-to-action-controls').hide();
-                  $('.apple-media-file > .header .title-scroll').text(essay_title);
-                  apple_media_file.removeClass('world-clock');
-                  $('.apple-media-file .text.call-to-action-controls').show();
-                  scroll_container.show();
-                  automatedScrollAdjustment();
-                }
-                exitFunction();
-              });
+              applicationRemove();
+              application.addClass('world-clock');
+              applicationChange();
             }
           }
           worldClock();
@@ -645,23 +695,7 @@ function menuBar() {
     // PROFILE
     if (profile) {
       function profile() {
-        $('.accounts button').click(function() {
-          var twitter = $(this).hasClass('twitter-b'),
-              instagram = $(this).hasClass('instagram-b'),
-              tumblr = $(this).hasClass('tumblr-b');
-
-          if (twitter) {
-            window.open("https://twitter.com/acolorblue");
-          }
-
-          if (instagram) {
-            window.open("https://instagram.com/acolorblue");
-          }
-
-          if (tumblr) {
-            window.open("https://acolorblue.tumblr.com");
-          }
-        })
+        return;
       }
       profile();
     }
@@ -675,16 +709,12 @@ function menuBar() {
           function dimensionsAdjust() {
             var iframe_height_interval = setInterval(iframeHeight, 1),
                 desktop_height,
-                header_height,
                 twitter_timeline,
                 timeline_height,
                 heights_are_equal;
             
             function iframeHeight() {
-              // console.log("YEER");
-              
               desktop_height = $('.mac-os .desktop').height();
-              // console.log("desktop_height = " + desktop_height);
               menu.css('height', desktop_height);
               $('.twitter-timeline').css('height', desktop_height);
               heights_are_equal = $('iframe.twitter-timeline').height() == $('.mac-os .desktop').height();
@@ -732,223 +762,124 @@ function menuBar() {
 
 
 
- 
-// BACKGROUND IMAGE BLUR
-function backgroundImageBlur(container, element, blur, source) {
-  var container_image_source;
-  
-  if (source == 'background-image') {
-    container_image_source = $(container).css('background-image');
-  }
-  
-  if (source == 'image-tag') {
-    container_image_source = $(container).prop('src');
-  }
-  
-  var css_centered = $(element).css('top') == $(element).css('bottom') && $(element).css('right') == $(element).css('left');
-  var not_css_centered = $(element).css('top') != $(element).css('bottom') && $(element).css('right') != $(element).css('left');
-  
-  var container_width = $(container).width(),
-      container_height = $(container).height(),
-      blur_width = $(blur).width(),
-      blur_height = $(blur).height();
-      
-  var element_top_position,
-      element_right_position,
-      element_bottom_position,
-      element_left_position,
-      draggable = $(element).hasClass('ui-draggable'),
-      not_draggable = !draggable;
 
-  if (not_css_centered || draggable) {
-    element_top_position = $(element).css('top');
-    element_right_position = $(element).css('right');
-    element_bottom_position = $(element).css('bottom');
-    element_left_position = $(element).css('left');
-    
-    element_top_position = parseInt(element_top_position) + 'px';
-    element_right_position = parseInt(element_right_position) + 'px';
-    element_bottom_position = parseInt(element_bottom_position) + 'px';
-    element_left_position = parseInt(element_left_position) + 'px';
-  } 
-  
-  else if (css_centered || not_draggable) {
-    element_top_position = $(element).css('margin-top');
-    element_right_position = $(element).css('margin-right');
-    element_bottom_position = $(element).css('margin-bottom');
-    element_left_position = $(element).css('margin-left');
-    
-    element_top_position = parseInt(element_top_position) + 'px';
-    element_right_position = parseInt(element_right_position) + 'px';
-    element_bottom_position = parseInt(element_bottom_position) + 'px';
-    element_left_position = parseInt(element_left_position) + 'px';
-  }
-  
-  if (container == '.mac-os') { 
-    var menu_bar_height = $('.menu-bar').height();
-    element_top_position = parseInt(element_top_position) + parseInt(menu_bar_height) + 'px';
-  }
-
-  var blur_top_position = '-' + element_top_position,
-      blur_left_position = '-' + element_left_position,
-      blur_background_image = $(blur).css('background-image');
-  
-  var centered = Math.round(element_top_position) == Math.round(element_bottom_position) && Math.round(element_right_position) == Math.round(element_left_position);
-  
-  var not_centered = Math.round(element_top_position) != Math.round(element_bottom_position) && Math.round(element_right_position) != Math.round(element_left_position);
-  
-  var not_same_image = blur_background_image != container_image_source,
-      not_same_size = blur_width != container_width || blur_height != container_height,
-      not_same_position = '+' + blur_top_position != element_top_position  || '+' + blur_left_position != element_left_position;
-  
-  if (not_same_image) {
-    if (source == 'background-image') {
-      $(blur).css('background-image', container_image_source);
+// CLOSE APP
+function closeApp() {
+  $('.application .header .close').click(function() { 
+    function pauseAnyVideosPlaying() {
+      $('video').each(function() {
+        var media_container = $(this).parents('.media-container'),
+            video = $(this).get(0);
+        if (!video.paused) {
+          video.pause(); 
+          media_container.find('.pause').removeClass('pause').addClass('play');
+        }
+      });
     }
     
-    if (source == 'image-tag') {
-      $(blur).css('background-image', "url(" + container_image_source + ")");
+    function desktopBackgroundCredits() {
+      setTimeout(function() {
+        $('.background-credits').addClass('show');
+      }, 100);
     }
-  }
-  
-  if (not_same_size) {
-    $(blur).css('width', container_width);
-    $(blur).css('height', container_height);
-  }
-  
-  if (not_same_position) {
-    $(blur).css('top', blur_top_position);
-    $(blur).css('left', blur_left_position);
     
-    if (container == '.mac-os') {
-      $(blur).css('margin', '0px');
+    if ($('.application').hasClass('error')) {
+      return;
     }
-  }
-}
-
-
-
-
-// CLOSE TEXT EDITOR
-function closeTextEditor() {
-  $('.text-editor .close').click(function() {
-    $(this).parents('.text-editor').addClass('hide');
-    $('video').each(function() {
-      var media_container = $(this).parents('.media-container');
-      var video = $(this).get(0);
-      if (!video.paused) {
-        video.pause(); 
-        media_container.find('.pause').removeClass('pause').addClass('play');
-      }
-    });
-    $('.file').removeClass('selected');
     
-    if ($('.mac-os').hasClass('dim')) {
+    if ($('.application').hasClass('text-editor')) {
+      pauseAnyVideosPlaying();
+    }
+    
+    if ($('.application').hasClass('video-player')) {
+      pauseAnyVideosPlaying();
       $('.mac-os').removeClass('dim');
-    }
-
-    var screensaver_credits = document.createElement('span');
-        screensaver_credits.className = 'screensaver-credits ab-mid';
-        screensaver_credits.innerHTML = "Sahel, Mali by Steve McCurry, 1986.";
+    }  
     
-    if ($('.screensaver-credits').length == 0) {
-      $('.mac-os').append(screensaver_credits);
-    }
-    
-    setTimeout(function () {
-      $('.screensaver-credits').addClass('show');
-    }, 100);
+    application.addClass('hide');
+    main_file.removeClass('selected');
+    desktopBackgroundCredits();
   })
 }
 
- 
+
 
 
 // SEARCH TEXT EDITOR
 function searchTextEditor() {
-  $('.text-editor .search').click(function() {
-    var search_bar = document.createElement('input');
-        search_bar.className = 'search-bar hide';
-        search_bar.placeholder = "Spotlight Search";
-
-    var original_content = $('.text-editor .parent-container').html(),
-        original_children = $('.text-editor .parent-container').children();
-
-    if ($('.search-bar').length == 1) {
-      $('.search-bar').val("");
-      $('.text-editor p').show();
-      $('.text-editor .media-container.watched').show();
-      $('.search-bar').addClass('hide');
-      setTimeout(function() {
-        $('.search-bar').remove();
-        $('.text-editor > .header .title').show();
-        return; 
-      }, 100); 
-    }
-
-    if ($('.search-bar').length == 0) {
-      uncompleted = $('p.unread').length > 0, 
-        completed = $('.text-editor').hasClass('completed');
-      
-      if (uncompleted) {
-        $('.text-editor > .header .title-scroll').text("Damn Finish Reading First");
-        
+  $(document).on('click', '.text-editor > .header .content-controls .search', function() {
+    uncompleted = $('p.unread').length > 0; 
+    completed = $('.scroll-container').hasClass('completed');
+    
+    function searchBarShown() {
+      if ($('.text-editor > .header .search-bar').length == 1) {
+        $('.text-editor > .header .search-bar').val("").keyup().addClass('hide');
+        $('.scroll-container p.read, .scroll-container .media-container.watched').removeClass('hide');
         setTimeout(function() {
-          if ($('.text-editor > .header .title-scroll').text() != "Damn Finish Reading First") {
-            return;   
-          } 
-          
-          else if (!$('.text-editor').hasClass('video-player')) {
-            $('.text-editor > .header .title-scroll').text(essay_title);
-          }
-        }, 2500);
-      } 
-      
-      if (completed) {
-        $('.text-editor > .header .main-controls').after(search_bar);
-        $('.text-editor > .header .title').hide();
-        setTimeout(function() {
-          $('.search-bar').removeClass('hide');
-        }, 100);
+          $('.text-editor > .header .search-bar').empty().remove(); 
+          content_controls.removeClass('search');
+        }, 200);  
       }
     }
+    searchBarShown();
+    
+    function searchBarHidden() {
+      if ($('.text-editor > .header .search-bar').length == 0) {
+        if (uncompleted) {
+          var return_text = "Can You Finish Reading First";
+          
+          title_scroll.text(return_text);
+          setTimeout(function() {
+            if (title_scroll.text() != return_text) {
+              return;   
+            } 
 
+            title_scroll.text(text_editor_title);
+          }, 2500);
+        }
+
+        if (completed) {
+          input.className = 'search-bar hide';
+          input.placeholder = "Search Essay";
+          content_controls.prepend(input).addClass('search');
+          setTimeout(function() {
+            $('.text-editor > .header .search-bar').removeClass('hide');
+          }, 200);
+        }
+      }
+    }
+    searchBarHidden();
  
     // SEARCH FUNCTION
-    $('.search-bar').keyup(function() {
-      var entered_value = $(this).val().toLowerCase();
-      var entered_value_global = new RegExp(entered_value, "g");
-      var no_value = entered_value == '';
-      
+    $('.text-editor > .header .search-bar').keyup(function() {
+      var entered_value = $(this).val(),
+          entered_value_global = new RegExp(entered_value, "ig"),
+          no_value = entered_value == '';   
 
-      $('.text-editor p').each(function() {
-        var paragraph_original = $(this).text();
-        var paragraph_lowercase = paragraph_original.toLowerCase();
-        var paragraph_highlight = paragraph_lowercase.replace(entered_value_global, '<span class=\'highlight\'>' + entered_value + '</span>');
+      $('.text-editor .scroll-container p.read').each(function() { 
+        var paragraph_original = $(this).text();    
+        var paragraph_highlight = paragraph_original.replace(entered_value_global, '<span class=\'highlight\'>' + entered_value + '</span>'); 
 
-        if (!paragraph_lowercase.includes(entered_value)) {
-          $(this).hide();
+        if (!paragraph_original.includes(entered_value)) {
+          $(this).addClass('hide');
         }
 
-        if (paragraph_lowercase.includes(entered_value)) {
-          $(this).show();
-          $(this).html(paragraph_highlight);
+        if (paragraph_original.includes(entered_value)) {
+          $(this).removeClass('hide');
         }
-
+ 
         if (no_value) {
-          $('.text-editor .parent-container').html(original_content);
+          $('.text-editor .scroll-container p, .text-editor .scroll-container .media-container').removeClass('hide');
         }
       });
       
-      $('.media-container').each(function() {
-        if ($(this).is(':visible')) {
-          if (entered_value.length > 0) {
-            $(this).hide();
-          }
+      $('.text-editor .media-container.watched').each(function() {
+        if (entered_value.length > 0) {
+          $(this).addClass('hide');
+        }
 
-          if (no_value) {
-            $(this).show();
-          }
+        if (no_value) {
+          $(this).removeClass('hide');
         }
       });
     })
@@ -960,69 +891,48 @@ function searchTextEditor() {
 
 // SHARE PAGE
 function sharePage() {
-  $('.text-editor .share').click(function(event) {
-    var social_share_container = document.createElement('div');
-        social_share_container.className = 'social-share-container hide';
+  $(document).on('click', '.text-editor > .header .content-controls .share', function() {
 
-    var social_share = document.createElement('button');
-
-    if ($('.social-share-container').length == 1) {
-      $('.social-share-container').addClass('hide');
-      
-      setTimeout(function() {
-        $('.social-share-container').remove();
-        $('button.search').show();
-        if ($('button.credits').is(':hidden') && $('.text-editor').hasClass('completed')) {
-          $('button.credits').show();
-        }
-        return; 
-      }, 100);
-    }
-
-    if ($('.social-share-container').length == 0) {
-      if ($('.search-bar').length == 1) {
-        $('.search-bar').addClass('hide');
+    function socialPlatformsShown() {
+      if ($('.text-editor > .header .social-platforms').length == 1) {
+        $('.text-editor > .header .social-platforms').addClass('hide');
+        
         setTimeout(function() {
-          $('.search-bar').remove();
-          $('.text-editor .title').show();
-        }, 100); 
+          $('.text-editor > .header .social-platforms').empty().remove(); 
+          content_controls.removeClass('share');
+        }, 200);
       }
-     
-      $('button.search').hide();
-      if ($('button.credits').is(':visible')) {
-        $('button.credits').hide();
-      }
-      $('.text.call-to-action-controls').prepend(social_share_container);
-      setTimeout(function() {
-        $('.social-share-container').removeClass('hide');
-      }, 100);
-
-      social_share.className = 'twitter-b icons-b abs';
-      social_share_container.append(social_share.cloneNode(true));
-
-      social_share.className = 'instagram-b icons-b abs';
-      social_share_container.append(social_share.cloneNode(true));
-
-      social_share.className = 'tumblr-b icons-b abs';
-      social_share_container.append(social_share.cloneNode(true));
     }
+    socialPlatformsShown();
+    
+    function socialPlatformsHidden() {
+      if ($('.text-editor > .header .social-platforms').length == 0) {
+        button.className = 'twitter-b icons-b abs';
+        div.append(button.cloneNode());
 
+        button.className = 'instagram-b icons-b abs';
+        div.append(button.cloneNode());
 
-    // SOCIAL SHARE FUNCTION
-    $('.social-share-container button').click(function(event) {
-      var poster_link = "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/0.%20Poster/Portrait%20-%201%20-%20Comp.jpg", 
+        button.className = 'tumblr-b icons-b abs';
+        div.append(button.cloneNode());
+
+        div.className = 'social-platforms hide';
+        content_controls.prepend(div).addClass('share');
+        setTimeout(function() {
+          $('.social-platforms').removeClass('hide');
+        }, 100);
+      }
+    }
+    socialPlatformsHidden();
+
+    // SOCIAL PLATFORMS
+    $('.text-editor > .header .social-platforms button').click(function() {
+      var poster_link = "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Portrait.jpg", 
           webpage = 'https://acolorblue.co/a-kanye-west-analysis',
           line_break = '%0A',
-          caption = "A Kanye West Analysis, by @acolorblue.",
-          window_link;
-
-      var poster = document.createElement('img');
-          poster.className = 'poster';
-          poster.src = poster_link;
-
-      var call_to_action = document.createElement('button');
-      
-      var twitter = $(this).hasClass('twitter-b'),
+          window_link,
+          caption = text_editor_title + ", by @acolorblue.",
+          twitter = $(this).hasClass('twitter-b'),
           instagram = $(this).hasClass('instagram-b'),
           tumblr = $(this).hasClass('tumblr-b');
 
@@ -1031,90 +941,25 @@ function sharePage() {
         window.open(window_link);
       }
 
-      if (instagram) {
-        window_link = 'instagram://camera';
-        if (android) {
-          window_link = 'https://www.instagram.com/_u/acolorblue';
-        }
-  
-        function removeSearchBar() {
-          if ($('.search-bar').length == 1) {
-            $('.search-bar').addClass('hide');
-            setTimeout(function() {
-              $('.search-bar').remove();
-              $('.text-editor .title').show();
-            }, 100);
-          } 
-        }
-        removeSearchBar();
-
-        function closeInstagramShare() {
-          poster.remove();
-          $('.share.call-to-action-controls').hide();
-          if ($('.text-editor > .header .title-scroll').hasClass('overflow')) {
-            $('.text-editor > .header .title-scroll')[1].remove();
-            $('.text-editor > .header .title-scroll').removeClass('overflow');
-          }
-          $('.text-editor > .header .title-scroll').text(essay_title);
-          $('.text-editor').removeClass('instagram-share');
-          $('.text.call-to-action-controls, .text.call-to-action-controls .search').show();
-          if ($('button.credits').is(':hidden') && $('.text-editor').hasClass('completed')) {
-            $('button.credits').show();
-          }
-          $('.text-editor .scroll-container').show();
-          automatedScrollAdjustment();
-        }
-
-        function imagePreviewApp() {
-          $('.text-editor').addClass('instagram-share');
-          $('.text-editor .scroll-container').hide();
-          $('.text-editor .parent-container').prepend(poster);
-          $('.text-editor > .header .title-scroll').text("Save Image Then Confirm");
-          $('.text.call-to-action-controls').hide();
-
-          var call_to_action_controls = document.createElement('div');
-              call_to_action_controls.className = 'call-to-action-controls share';
-
-          var call_to_action = document.createElement('button');
-
-          $('.text-editor > .header .top-bar').append(call_to_action_controls);
-          call_to_action.className = 'confirm-action';
-          call_to_action.innerHTML = "Confirm";
-          call_to_action_controls.prepend(call_to_action.cloneNode(true));
-          $('.share .confirm-action').click(function() {
-            window.location.href = window_link;
-            closeInstagramShare();
-          });
-
-          call_to_action.className = 'cancel-action';
-          call_to_action.innerHTML = "Cancel";
-          call_to_action_controls.append(call_to_action.cloneNode(true));
-          $('.share .cancel-action').click(function() {
-            closeInstagramShare();
-          });
-        }
-        imagePreviewApp(); 
-        
-        setTimeout(function() {
-          titleOverflow('.text-editor.instagram-share .title', '.text-editor.instagram-share .title-scroll');
-        }, 1000);
+      if (instagram) {  
+        applicationRemove();
+        application.addClass('image-preview');
+        applicationChange();
       }
 
       if (tumblr) {
-        window_link = 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=' + poster_link + '&caption=' + '<a href=\''+  webpage + '\'>' + '<i>' + caption.slice(0, 21) + '</i></a>' + caption.slice(21);
-        
+        window_link = 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=' + poster_link + '&caption=' + '<a href=\'' +  webpage + '\'>' + '<i>' + caption.slice(0, 21) + '</i></a>' + caption.slice(21);
         window.open(window_link);
       }
 
-      $('.social-share-container').remove();
-      $('button.search').show();
+      socialPlatformsShown();
     })
-  })
+  });
 }
 
 
- 
-
+    
+   
 // MEDIA PRELOADS
 function mediaPreloads() {
   function menuSections() {
@@ -1123,188 +968,54 @@ function mediaPreloads() {
 
       setTimeout(function() {
         $('.panel .section-container').removeClass('selected');
-      }, 1000);
+      }, 400);
     })
   }
   menuSections();
   
   function essayContent() {
-    // scroll_container.addClass('show');
+    setTimeout(function() {
+      $('video').each(function() {
+        $(this).attr('preload', 'auto');
+      });
+    }, 500);
     
-    $('video').each(function() {
-      $(this).attr('preload', 'auto');
-    })
-    
-    // setTimeout(function() {
-    //   scroll_container.removeClass('show');
-    // }, 1000);
+    setTimeout(function() {
+      scroll_container.removeClass('preview');
+    }, 900);
   }
   essayContent();
   
-  
-  
   function worldClock() {
-    function build() {
-      apple_media_file.addClass('world-clock');
-      scroll_container.hide();
-      $('.clock.call-to-action-controls').show();
-      parent_container.prepend($('.timezones'));
-      $('.apple-media-file > .header .title-scroll').text("World Clock");
-      $('.apple-media-file .text.call-to-action-controls').hide();
-      
-      function exit() {
-        var call_to_action_controls = document.createElement('div');
-            call_to_action_controls.className = 'call-to-action-controls clock';
-
-        var call_to_action = document.createElement('button');
-
-        $('.apple-media-file > .header .top-bar').append(call_to_action_controls);
-        call_to_action.className += ' exit';
-        call_to_action.innerHTML = "Exit";
-        call_to_action_controls.prepend(call_to_action);
-      }
-      exit();
-    }
-    build();
+    setTimeout(function() {
+      applicationRemove();
+      application.addClass('world-clock');
+      applicationChange();
+    }, 1000);
     
     setTimeout(function() {
-      $('.item.location-and-time-preferences').append($('.timezones'));
-      $('.clock.call-to-action-controls').hide();
-      $('.apple-media-file > .header .title-scroll').text(essay_title);
-      apple_media_file.removeClass('world-clock');
-      $('.apple-media-file .text.call-to-action-controls').show();
-      scroll_container.show();
-      automatedScrollAdjustment();
-    }, 1000);
+      applicationRemove();
+      application.addClass('text-editor');
+      applicationChange();
+    }, 1500);
   }
   worldClock();
-} 
+}
 
-
-
-
-// AUTOMATED TEXT
-function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, breakWord, breakTime) {
-  var booSkipAutomatedText = false;
-
-  if (selector == null || selector.trim() == '') {
-    return;
-  }
-    
-  timeBetweenText = (timeBetweenText == null ? 0 : timeBetweenText);
-  timeBeforeStart = (timeBeforeStart == null ? 0 : timeBeforeStart);
-  let textInfo = {
-    selector: selector,
-    timeBetweenText: timeBetweenText,
-    exclude: exclude,
-    timeBeforeStart, timeBeforeStart
-  }
- 
-  if (breakWord != null) {
-    textInfo['breakWord'] = breakWord;
-    textInfo['breakTime'] = (breakTime == null ? 0 : breakTime);
-  }
- 
-  setTimeout(function() {
-    automaticText(textInfo);
-  }, textInfo.timeBeforeStart);
-
-  function automaticText(objTextInfo) {
-    // let $lines = document.querySelectorAll(objTextInfo.selector),
-    let $lines = $(objTextInfo.selector),
-        lineContents = new Array(), 
-        lineCount = $lines.length; 
- 
-    var skip = 0; 
-   
-    for (var i = 0; i < lineCount; i++) {  
-      lineContents[i] = $($lines[i]).text(); 
-      $($lines[i]).text('');
-      $($lines[i]).css('visibility', 'visible');
-      $($lines[i]).css('display', 'block');
-    }
-    typeLine();
-
-    function typeLine(idx) { 
-      idx == null && (idx = 0);
-      var element = $lines[idx];
-      var content = lineContents[idx];
-
-      if (typeof content == "undefined") {
-        let elClassSkip = $('.skip');
-        let lengthClassSkip = elClassSkip.length;
-
-        while (lengthClassSkip--) {
-          $(elClassSkip[lengthClassSkip]).css('display', 'none');
-        }
-        return;
-      }
-
-      var booExclude = false;
-
-      if (objTextInfo.exclude != null) {
-        $(element).each(function(elementClass) {
-          if (!booExclude) { 
-            booExclude = objTextInfo.exclude.includes(elementClass); 
-          }
-        });
-
-        booExclude = (booExclude || !booExclude && objTextInfo.exclude.includes(element.tagName.toLowerCase()));
-      }
-
-      var charIdx = 0; 
-
-      if (booExclude || booSkipAutomatedText) {
-        $(element).text(content);
-        typeLine(++idx);
-      } 
-      else {
-        content = '' + content + '';
-        element.appendChild(document.createTextNode(' '));
-        element.className += ' active opened';
-        typeChar();
-      }
-
-      function typeChar() {
-        var rand = (!booSkipAutomatedText ? Math.round(Math.random() * 60) + 25 : 0);
-
-        setTimeout(function () {
-          var char = content[charIdx++],
-              booBreak = false;
-
-          if (objTextInfo.breakWord != null && char == objTextInfo.breakWord.charAt(0) && content.substring(charIdx - 1, charIdx + objTextInfo.breakWord.length - 1) == objTextInfo.breakWord) {
-            content = content.replace(objTextInfo.breakWord, '');
-            char = content[charIdx - 1];
-            booBreak = true;
-          }
-          setTimeout(function () {
-            if (typeof char !== "undefined") {
-              element.appendChild(document.createTextNode(char));
-              typeChar();
-            }
-            else { 
-              $(element).removeClass('active unread').addClass('read');
-              
-              setTimeout(function () {
-                typeLine(++idx);
-              }, (!booSkipAutomatedText ? objTextInfo.timeBetweenText : 0));
-            }
-          }, (booBreak && !booSkipAutomatedText ? objTextInfo.breakTime : 0))
-        }, rand);
-      }
-    }
-  }
   
-  function detectHeightChange() {
-    $('.scroll-container').mutate('height', function(el, info) {
-      automatedScrollAdjustment();
-    });
-  }
-  detectHeightChange();
-  
-  $('button.search').click(function() {
-    booSkipAutomatedText = true;
-  })
+
+
+// CALL AUTOMATED TEXT
+function callAutomatedText() {
+  var call_essay_interval = setInterval(callEssay, 200);
+  function callEssay() {
+    if ($('.loader').length == 0) {
+      window.clearInterval(call_essay_interval);
+      setTimeout(function() { 
+        // automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
+      }, 1800);
+    }
+  } 
 }
 
 
@@ -1312,26 +1023,24 @@ function automatedText(selector, timeBetweenText, exclude, timeBeforeStart, brea
 
 // MEDIA AFTER PARAGRAPHS
 function mediaAfterParagraphs() {
-  var current_paragraph,
-      media_container,
-      media_container_height,
-      media,
-      blur,
-      thumbnail,
-      header_height,
-      main_controls,
+  var scroll_container_class,
+      current_paragraph,
+      unwatched,
       main_controls_buttons,
-      video_call_to_action_controls, 
+      video_content_controls, 
+      play_pause,
       post_link,
-      title_container,
-      title_scroll, 
       video,
+      video_class,
       video_title, 
       video_link, 
       previous_block,
       next_block,
-      next_paragraph,
-      next_block_paragraphs, 
+      next_block_class,
+      next_block_number,
+      next_paragraph, 
+      next_block_paragraphs,
+      next_block_paragraphs_class,
       next_block_interval,
       next_block_function,
       first_block_interval, 
@@ -1341,97 +1050,45 @@ function mediaAfterParagraphs() {
       fifth_block_interval,
       sixth_block_interval,
       seventh_block_interval,
-      eight_block_interval,
+      eighth_block_interval,
       ninth_block_interval,
       tenth_block_interval,
       eleventh_block_interval,
       ending_interval;
         
-  
   function videoPlayer() {    
     function preparations() { 
-      function ifHidden() {
-        if ($('.text-editor').hasClass('hide')) {
-          $('.text-editor').removeClass('hide');
-          $('.screensaver-credits').removeClass('show');
-        }
+      checkDeviceLength();
+      if (device_width_longer) {
+        applicationRemove();
+        application.addClass('video-player');
       }
-      ifHidden();
-      
-      function removeAllOtherApps() {
-        if ($('.text-editor').hasClass('instagram-share') && $('body').hasClass('width-longer')) {
-          $('.text-editor img.poster').remove();
-          $('.share.call-to-action-controls').hide();
-          $('.text.call-to-action-controls').show();
-          $('.text.call-to-action-controls .search').show();
-          if ($('.text-editor > .header .title-scroll').hasClass('overflow')) {
-            $('.text-editor > .header .title-scroll')[1].remove();
-            $('.text-editor > .header .title-scroll').removeClass('overflow');
-          }
-          $('.text-editor > .header .title-scroll').text(essay_title);
-          $('.text-editor').removeClass('instagram-share');
-        } 
-        
-        
-        if ($('.apple-media-file').hasClass('world-clock') && $('body').hasClass('width-longer')) {
-          $('.item.location-and-time-preferences').append($('.timezones'));
-          $('.clock.call-to-action-controls').hide();
-          $('.apple-media-file > .header .title-scroll').text(essay_title);
-          apple_media_file.removeClass('world-clock');
-          $('.apple-media-file .text.call-to-action-controls').show();
-          scroll_container.show();
-          automatedScrollAdjustment();
-        } 
-      }
-      removeAllOtherApps();
-      
-      function pauseAllessayContent() {
-        $('video').each(function() {
-          var video = $(this).get(0),
-              thumbnail = $(this).prev('.thumbnail');
-
-          if (!video.paused) {
-            video.pause(); 
-            thumbnail.fadeIn(200);
-          }
-        });
-      }
-      pauseAllessayContent();
     }
     preparations(); 
     
-    function build() {
-      var call_to_action = document.createElement('button');
-          call_to_action.className = 'white icons-b abs';
-      
-      media_container = video.parents('.media-container');
+    function build() { 
+      scroll_container_class = '.' + scroll_container.attr('class');
+      media_container = video.parents('.media-container'); 
+      header = media_container.find('.header');
       media = media_container.find('.media');
       thumbnail = media_container.find('.thumbnail');
       main_controls = media_container.find('.main-controls');
       main_controls_buttons = main_controls.children('button');
-      video_call_to_action_controls = media_container.find('.video.call-to-action-controls');
-      post_link = video_call_to_action_controls.find('.post-link');
+      video_content_controls = media_container.find('.video.content-controls');
+      play_pause = video_content_controls.find('.play-pause');
+      post_link = video_content_controls.find('.post-link');
       blur = media_container.find('.blur');
       previous_block = media_container.prev('.block');
       next_block = media_container.next('.block');
-      next_paragraph = next_block.find('p:first-child');
-      
-      function controlsBackgroundColor() {
-        thumbnail.primaryColor(function(color) {
-          $(main_controls_buttons).css('background-color', 'rgb('+ color +', 0.7)');
-          $(video_call_to_action_controls).css('background-color', 'rgb('+ color +', 0.7)');
-        });
+      if (next_block.length == 1) {
+        next_block_class = ' .' + next_block.attr('class').replace(' block', '');
+        next_block_number = next_block_class.replace('.', '');
+        next_block_paragraphs = next_block.find('p');
+        next_block_paragraphs_class = ' .' + next_block_paragraphs.attr('class');
+        next_block_paragraphs = scroll_container_class + next_block_class + next_block_paragraphs_class;
+        next_paragraph = next_block.find('p:first-child');
       }
       
-      function videoLoader() {
-        var video_loader = document.createElement('img');
-            video_loader.className = 'video-loader ab-mid hide'; 
-            video_loader.src = "https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif";
-        
-        if ($('.video-loader').length == 0) {
-          media.prepend(video_loader);
-        }
-      }
       
       function calcHeightWithScrollContWidthRatio(element) {
         var scroll_container_width = $('.scroll-container').width();
@@ -1440,156 +1097,241 @@ function mediaAfterParagraphs() {
         $(element).css('height', media_container_height);
       }
       
+      function controlsBackgroundColor() {
+        thumbnail.primaryColor(function(color) {
+          $(main_controls_buttons).css('background-color', 'rgb('+ color +', 0.7)');
+          $(video_content_controls).css('background-color', 'rgb('+ color +', 0.7)');
+        });
+      }
+
       function blurAdjust() {
         $(media_container).mutate('width height', function(el, info) {
-          backgroundImageBlur(thumbnail, video_call_to_action_controls, blur, 'image-tag');
+          backgroundImageBlur(thumbnail, video_content_controls, blur, 'image-tag');
         });
       }
       
-      function displayMediaPlayer() {
+      function videoLoader() {
+        var loader = document.createElement('img');
+            loader.className = 'video-loader ab-mid hide'; 
+            loader.src = "https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif";
+        
+        if ($('.video-loader').length == 0) {
+          media.prepend(loader);
+        }
+        
+        
+//         var can_play_through_interval = setInterval(checkLoaded, 100);
+//         function canPlayThrough() {
+// //           var completeloaded = false;
+// //           video.on('canplaythrough', function() {
+// //             completeloaded = true;
+// //           });
+
+// //           console.log(completeloaded);
+
+// //           if (completeloaded == true) {
+// //             window.clearInterval(can_play_through_interval);
+// //             console.log("Can play through video without stopping");
+// //           }
+          
+          
+          
+//           var vid = document.getElementById("myVideo");
+//           vid.oncanplaythrough = function() {
+//             alert("Can play through video without stopping");
+//           };
+//         }
+      }
+      
+      function fileChange() {
+        video_class = video.attr('class').replace(' hide', '');
+        current_file = '.file.' + video_class;
+        main_file.removeClass('show selected');
+        $(current_file).addClass('show selected');
+      }
+      
+      function callNextBlock() {
+        if (next_block.length == 1) {
+          // console.log(next_block_number);
+
+          if (next_block_number.includes('second')) {
+            second_block_interval = setInterval(secondBlock, 250);
+            // console.log("second_block_interval = setInterval(secondBlock, 250);");
+          }
+
+          if (next_block_number.includes('third')) {
+            third_block_interval = setInterval(thirdBlock, 250);
+            // console.log("third_block_interval = setInterval(thirdBlock, 250);");
+          }
+
+          if (next_block_number.includes('fourth')) {
+            fourth_block_interval = setInterval(fourthBlock, 250);
+            // console.log("fourth_block_interval = setInterval(fourthBlock, 250);");
+          }
+
+          if (next_block_number.includes('fifth')) {
+            fifth_block_interval = setInterval(fifthBlock, 250);
+            // console.log("fifth_block_interval = setInterval(fifthBlock, 250);");
+          }
+
+          if (next_block_number.includes('sixth')) {
+            sixth_block_interval = setInterval(sixthBlock, 250);
+            // console.log("sixth_block_interval = setInterval(sixthBlock, 250);");
+          }
+
+          if (next_block_number.includes('seventh')) {
+            seventh_block_interval = setInterval(seventhBlock, 250);
+            // console.log("seventh_block_interval = setInterval(seventhBlock, 250);");
+          }
+
+          if (next_block_number.includes('eighth')) {
+            eighth_block_interval = setInterval(eighthBlock, 250);
+            // console.log("eighth_block_interval = setInterval(eighthBlock, 250);");
+          }
+
+          if (next_block_number.includes('ninth')) {
+            ninth_block_interval = setInterval(ninthBlock, 250);
+            // console.log("ninth_block_interval = setInterval(ninthBlock, 250);");
+          }
+
+          if (next_block_number.includes('tenth')) {
+            tenth_block_interval = setInterval(tenthBlock, 250);
+            // console.log("tenth_block_interval = setInterval(tenthBlock, 250);");
+          }
+
+          if (next_block_number.includes('eleventh')) {
+            ending_interval = setInterval(theEnd, 250);
+            // console.log("ending_interval = setInterval(theEnd, 250);");
+          }
+        }
+      }
+      
+      function arragements() {
         checkDeviceLength();
- 
-        if (device_width_longer) {
+        if (device_width_longer) { 
           calcHeightWithScrollContWidthRatio(media_container);
           media_container.slideDown(500).addClass('visible');
-          // media_container.show(500).addClass('visible');
           parent_container.append(media_container);
-  
+          
           setTimeout(function() {
-            text_editor.addClass('video-player');
-            calcHeightWithScrollContWidthRatio(text_editor);
-            calcHeightWithScrollContWidthRatio(media_container);
-            backgroundImageBlur(thumbnail, video_call_to_action_controls, blur, 'image-tag');
-            blurAdjust();
-            controlsBackgroundColor();
-          }, 700);
-
+            calcHeightWithScrollContWidthRatio(application); 
+            calcHeightWithScrollContWidthRatio(media_container); 
+            backgroundImageBlur(thumbnail, video_content_controls, blur, 'image-tag'); 
+            blurAdjust(); 
+            controlsBackgroundColor(); 
+          }, 600);
+           
           setTimeout(function() {
             videoLoader();
             mac_os.addClass('dim');
+            fileChange();
             
             $(window).on('resize', function() {
-              calcHeightWithScrollContWidthRatio(text_editor);
+              calcHeightWithScrollContWidthRatio(application);
               calcHeightWithScrollContWidthRatio(media_container);
             });
-          }, 900);
+          }, 800);
         } 
 
         if (device_height_longer) { 
-          // main_controls.hide();
           media_container.fadeIn(200).addClass('video-player visible');
-          backgroundImageBlur(thumbnail, video_call_to_action_controls, blur, 'image-tag');
+          backgroundImageBlur(thumbnail, video_content_controls, blur, 'image-tag');
           blurAdjust();
           controlsBackgroundColor();
           videoLoader();
         } 
         
         function videoEnded() {
-          video.bind('ended', function() { 
-            device_width_longer = $('body').width() > $('body').height();
-            device_height_longer = $('body').height() > $('body').width();
+          video.bind('ended', function() {
+            unwatched = !media_container.hasClass('watched');
             
-            if (device_width_longer) {
-              if (next_paragraph.is(':hidden') || !media_container.hasClass('watched')) {
+            header.removeClass('hide');
+            play_pause.removeClass('pause').addClass('play');
+            media_container.removeClass('playing uncompleted').addClass('covered');
+            
+            if (unwatched) {
+              checkDeviceLength();
+              if (device_width_longer) {
                 setTimeout(function() {
-                  text_editor.css('height', '90%'); 
-                  text_editor.removeClass('video-player');
-                  media_container.addClass('video-player');
-                  media_container.css('height', 'fit-content'); 
+                  $(window).off('resize');
+                  main_controls.remove();
+                  media_container.removeClass('visible').css('height', '').addClass('watched covered video-player');
+                  application.removeClass('video-player').css('height', '').addClass('text-editor');
+                  previous_block.after(media_container);
+                  main_file.removeClass('show selected');
+                  $('.file.text').addClass('show selected');
                 }, 1000);
 
                 setTimeout(function() {
                   mac_os.removeClass('dim');
                 }, 1200);
-              }
-            }
 
-            if (device_height_longer) {
-              if (next_paragraph.is(':hidden') || !media_container.hasClass('watched')) {
-                return;
+                setTimeout(function() {
+                  automatedText(next_block_paragraphs, 2000, [], 0, '-break-', 1000);
+                  callNextBlock();
+                }, 2000);
+              }
+
+              if (device_height_longer) { 
+                $(window).off('resize');
+                media_container.removeClass('visible').addClass('watched covered');
+
+                setTimeout(function() {
+                  automatedText(next_block_paragraphs, 2000, [], 0, '-break-', 1000);
+                  callNextBlock();
+                }, 2000);
               }
             }
           })
         }
         videoEnded();
       }
-      displayMediaPlayer();
+      arragements();
     } 
     build(); 
-  } 
+  }
   
-  function imageSlide(image_class, image_link, container, removalTimer) {
+  function imageSlider(imageClass, imageLink, container, removalTimer) {
     var image_slide = document.createElement('img');
         image_slide.className = 'image-slide ab-mid';
      
-    if ($('img.' + image_class).length == 0 && $('.scroll-container').is(':visible')) {
-      image_slide.className += ' ' + image_class;
-      image_slide.src = image_link;
+    if ($('img.' + imageClass).length == 0 && $('.scroll-container').is(':visible')) {
+      image_slide.className += ' ' + imageClass;
+      image_slide.src = imageLink;
       $(container).append(image_slide);
 
       setTimeout(function() { 
-        $('img.' + image_class).addClass('show');
+        $('img.' + imageClass).addClass('show');
       }, 500);  
       
       setTimeout(function() { 
-        $('img.' + image_class).removeClass('show');
+        $('img.' + imageClass).removeClass('show');
       }, removalTimer);
     }
   }
   
   
   // MALCOLM X POLICE VERDICT
-  first_block_interval = setInterval(firstBlock, 250);
-  function firstBlock() { 
+  // first_block_interval = setInterval(firstBlock, 250);
+  function firstBlock() {
     $('p.opened').last().each(function() {  
       current_paragraph = $(this).text();
       
       if (current_paragraph.includes("Damien Hirst, Steve Jobs & Malcolm X.")) {  
-        imageSlide('into-to-wild', "https://static01.nyt.com/images/2018/07/01/arts/01interview/merlin_139917588_dc988cca-e04f-4594-a2f6-e14ea0c47244-superJumbo.jpg", '.scroll-container .first', 5000);
+        imageSlider('into-to-wild', "https://static01.nyt.com/images/2018/07/01/arts/01interview/merlin_139917588_dc988cca-e04f-4594-a2f6-e14ea0c47244-superJumbo.jpg", '.scroll-container .first', 5000);
       }
       
       if (current_paragraph.includes("previously show his love for Malcolm X,")) {
-        imageSlide('love-for-malcolm', "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Video%20Thumbnails/5.%20Malcolm%20X%20On%20Martin%20Luther%20King/Malcolm%20X%20-%20Gordon%20Parks.jpg", '.scroll-container .first', 5000);
+        imageSlider('love-for-malcolm', "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Video%20Thumbnails/5.%20Malcolm%20X%20On%20Martin%20Luther%20King/Malcolm%20X%20-%20Gordon%20Parks.jpg", '.scroll-container .first', 5000);
       }
-       
+      
       if (current_paragraph.includes("\“That’s too much power for one man to have.\”")) {
         window.clearInterval(first_block_interval);   
 
         setTimeout(function() { 
-          video = $('.malcolm-x-police-predict');
+          video = $('video.malcolm-x-police-predict');
           video_title = "'Police Precinct' scene from Malcolm X (1992)";
-          video_link = "https://www.youtube.com/watch?v=iwGojrTKWvI";
           videoPlayer(); 
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              device_width_longer = $('body').width() > $('body').height();
-              device_height_longer = $('body').height() > $('body').width();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .second p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .first').after(media_container);
-                  }, 1000);
-
-                  setTimeout(function() {
-                    automatedText('.scroll-container .second p', 2000, [], 0, '-break-', 1000);
-                    second_block_interval = setInterval(secondBlock, 250);
-                  }, 2000);
-                }  
-              }
-
-              if (device_height_longer) {
-                if ($('.text-editor .second p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.text-editor .second p', 2000, [], 0, '-break-', 1000);
-                    second_block_interval = setInterval(secondBlock, 250);
-                  }, 2000);
-                }  
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
@@ -1605,39 +1347,9 @@ function mediaAfterParagraphs() {
         window.clearInterval(second_block_interval);
 
         setTimeout(function() { 
-          video = $('.kanye-to-cudi');
+          video = $('video.kanye-to-cudi');
           video_title = "Kanye West respondes to Kid Cudi";
-          video_link = "https://www.youtube.com/watch?v=wZfZM7_WcJA";
           videoPlayer(); 
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              checkDeviceLength();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .third p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .second').after(media_container);
-                  }, 1000);
-
-                  setTimeout(function() {
-                    automatedText('.text-editor .third p', 2000, [], 0, '-break-', 1000);
-                    third_block_interval = setInterval(thirdBlock, 250);
-                  }, 2000);
-                }
-              }
-
-              if (device_height_longer) {
-                if ($('.text-editor .third p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.text-editor .third p', 2000, [], 0, '-break-', 1000);
-                    third_block_interval = setInterval(thirdBlock, 250);
-                  }, 2000);
-                }
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
@@ -1653,39 +1365,9 @@ function mediaAfterParagraphs() {
         window.clearInterval(third_block_interval);
 
         setTimeout(function() {
-          video = $('.radio-fuck-you');
+          video = $('video.radio-fuck-you');
           video_title = "Kanye\'s Sacremento Rant from November 2016";
-          video_link = "https://www.youtube.com/watch?v=bkUr99epJh8";
           videoPlayer();
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              checkDeviceLength();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .fourth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .third').after(media_container);
-                  }, 1000); 
-
-                  setTimeout(function() {
-                    automatedText('.text-editor .fourth p', 2000, [], 0, '-break-', 1000);
-                    fourth_block_interval = setInterval(fourthBlock, 250);
-                  }, 2000);
-                }
-              }
-
-              if (device_height_longer) {
-                if ($('.text-editor .fourth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.text-editor .fourth p', 2000, [], 0, '-break-', 1000);
-                    fourth_block_interval = setInterval(fourthBlock, 250);
-                  }, 2000);
-                }
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
@@ -1701,39 +1383,9 @@ function mediaAfterParagraphs() {
         window.clearInterval(fourth_block_interval);
         
         setTimeout(function() {
-          video = $('.malcolm-x-on-goldwater');
+          video = $('video.malcolm-x-on-goldwater');
           video_title = "Malcolm X On Barry Goldwater, 1964";
-          video_link = "https://www.youtube.com/watch?v=ve7g_ibjh3c";
           videoPlayer();
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              checkDeviceLength();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .fifth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .fourth').after(media_container);
-                  }, 1000); 
-
-                  setTimeout(function() {
-                    automatedText('.text-editor .fifth p', 2000, [], 0, '-break-', 1000);
-                    fifth_block_interval = setInterval(fifthBlock, 250);
-                  }, 2000);
-                }
-              }
-
-              if (device_height_longer) {
-                if ($('.text-editor .fifth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.text-editor .fifth p', 2000, [], 0, '-break-', 1000);
-                    fifth_block_interval = setInterval(fifthBlock, 250);
-                  }, 2000);
-                }
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
@@ -1749,39 +1401,9 @@ function mediaAfterParagraphs() {
         window.clearInterval(fifth_block_interval);
         
         setTimeout(function() {
-          video = $('.malcolm-x-on-mlk');
+          video = $('video.malcolm-x-on-mlk');
           video_title = "Malcolm X & Louis Lomax On Martin Luther King, 1963";
-          video_link = "https://www.youtube.com/watch?v=X6FEyOziF8s";
           videoPlayer();
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              checkDeviceLength();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .sixth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .fifth').after(media_container);
-                  }, 1000); 
-
-                  setTimeout(function() {
-                    automatedText('.text-editor .sixth p', 2000, [], 0, '-break-', 1000);
-                    sixth_block_interval = setInterval(sixthBlock, 250);
-                  }, 2000);
-                }
-              }
-
-              if (device_height_longer) {
-                if ($('.text-editor .sixth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.text-editor .sixth p', 2000, [], 0, '-break-', 1000);
-                    sixth_block_interval = setInterval(sixthBlock, 250);
-                  }, 2000);
-                }
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
@@ -1794,10 +1416,10 @@ function mediaAfterParagraphs() {
       current_paragraph = $(this).text();
       
       if (current_paragraph.includes("TLOP because it was just too personal,")) {
-        imageSlide('i-know-you-mad', "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Sliding%20Images/5.%20I%20Know%20You%20Mad%20Everytime%20You%20Look%20At%20Your%20Child.jpg", '.scroll-container .sixth', 7500);
+        imageSlider('i-know-you-mad', "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Sliding%20Images/5.%20I%20Know%20You%20Mad%20Everytime%20You%20Look%20At%20Your%20Child.jpg", '.scroll-container .sixth', 7500);
         
         setTimeout(function() {
-          imageSlide('you-own-waves', "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Sliding%20Images/13.%20I%20Own%20Your%20Child.jpg", '.scroll-container .sixth', 5000);
+          imageSlider('you-own-waves', "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Sliding%20Images/13.%20I%20Own%20Your%20Child.jpg", '.scroll-container .sixth', 5000);
         }, 6000);
       }
       
@@ -1805,39 +1427,9 @@ function mediaAfterParagraphs() {
         window.clearInterval(sixth_block_interval);
         
         setTimeout(function() {
-          video = $('.slavery-was-a-choice');
+          video = $('video.slavery-was-a-choice');
           video_title = "Kanye on the choice of slavery";
-          video_link = "https://www.youtube.com/watch?v=s_M4LkYra5k";
           videoPlayer();
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              checkDeviceLength();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .seventh p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .sixth').after(media_container);
-                  }, 1000); 
-
-                  setTimeout(function() {
-                    automatedText('.text-editor .seventh p', 2000, [], 0, '-break-', 1000);
-                    seventh_block_interval = setInterval(seventhBlock, 250);
-                  }, 2000);
-                }
-              }
-
-              if (device_height_longer) {
-                if ($('.text-editor .seventh p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.text-editor .seventh p', 2000, [], 0, '-break-', 1000);
-                    seventh_block_interval = setInterval(seventhBlock, 250);
-                  }, 2000);
-                }
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
@@ -1853,39 +1445,9 @@ function mediaAfterParagraphs() {
         window.clearInterval(seventh_block_interval);
         
         setTimeout(function() {
-          video = $('.candace-owens-economics');
+          video = $('video.candace-owens-economics');
           video_title = "Candace Owens on economics over social issues";
-          video_link = "https://www.youtube.com/watch?v=BSAoitd1BTQ";
           videoPlayer();
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              checkDeviceLength();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .eight p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .seventh').after(media_container);
-                  }, 1000);  
-
-                  setTimeout(function() {
-                    automatedText('.text-editor .eight p', 2000, [], 0, '-break-', 1000);
-                    eight_block_interval = setInterval(eightBlock, 250);
-                  }, 2000);
-                }
-              }
-
-              if (device_height_longer) {
-                if ($('.eight p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.scroll-container .eight p', 2000, [], 0, '-break-', 1000);
-                    eight_block_interval = setInterval(eightBlock, 250);
-                  }, 2000);
-                }
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
@@ -1893,47 +1455,17 @@ function mediaAfterParagraphs() {
   
   
   // WE MAKE GOOD MUSIC
-  function eightBlock() {
+  function eighthBlock() {
     $('p.opened').last().each(function() {
       current_paragraph = $(this).text();
       
       if (current_paragraph.includes("about actual great art and quality of work,")) {
-        window.clearInterval(eight_block_interval);
+        window.clearInterval(eighth_block_interval);
           
         setTimeout(function() {
-          video = $('.we-make-good-music');
+          video = $('video.we-make-good-music');
           video_title = "We Make Good Music";
-          video_link = "https://www.youtube.com/watch?v=7BxCDysoSxg";
           videoPlayer();
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              checkDeviceLength();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .ninth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .eight').after(media_container);
-                  }, 1000); 
-
-                  setTimeout(function() {
-                    automatedText('.text-editor .ninth p', 2000, [], 0, '-break-', 1000);
-                    ninth_block_interval = setInterval(ninthBlock, 250);
-                  }, 2000);
-                }
-              }
-
-              if (device_height_longer) {
-                if ($('.text-editor .ninth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.text-editor .ninth p', 2000, [], 0, '-break-', 1000);
-                    ninth_block_interval = setInterval(ninthBlock, 250);
-                  }, 2000);
-                }
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
@@ -1949,39 +1481,9 @@ function mediaAfterParagraphs() {
         window.clearInterval(ninth_block_interval);
         
         setTimeout(function() {
-          video = $('.george-bush-explanation');
+          video = $('video.george-bush-explanation');
           video_title = "Kanye on the root of his motive";
-          video_link = "https://www.youtube.com/watch?v=_cdlFd5-04E";
           videoPlayer();
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              checkDeviceLength();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .tenth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .ninth').after(media_container);
-                  }, 1000); 
-
-                  setTimeout(function() {
-                    automatedText('.text-editor .tenth p', 2000, [], 0, '-break-', 1000);
-                    tenth_block_interval = setInterval(tenthBlock, 250);
-                  }, 2000);
-                }
-              }
-
-              if (device_height_longer) {
-                if ($('.text-editor .tenth p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.text-editor .tenth p', 2000, [], 0, '-break-', 1000);
-                    tenth_block_interval = setInterval(tenthBlock, 250);
-                  }, 2000);
-                }
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
@@ -1997,48 +1499,17 @@ function mediaAfterParagraphs() {
         window.clearInterval(tenth_block_interval);
        
         setTimeout(function() {
-          video = $('.macintosh-team');
+          video = $('video.macintosh-team');
           video_title = "On the creation of the MacIntosh, 1985";
-          video_link = "https://twitter.com/acolorblue/status/850923969846718464";
           videoPlayer();
-          
-          function videoEnded() {
-            video.bind('ended', function() { 
-              checkDeviceLength();
-              
-              if (device_width_longer) {
-                if ($('.text-editor .eleventh p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    $('.text-editor .tenth').after(media_container);
-                  }, 1000); 
-
-                  setTimeout(function() {
-                    automatedText('.text-editor .eleventh p', 2000, [], 0, '-break-', 1000);
-                    ending_interval = setInterval(theEnd, 250);
-                  }, 2000);
-                }
-              }
-
-              if (device_height_longer) {
-                if ($('.text-editor .eleventh p:first-child').is(':hidden')) {
-                  setTimeout(function() {
-                    automatedText('.text-editor .eleventh p', 2000, [], 0, '-break-', 1000);
-                    ending_interval = setInterval(theEnd, 250);
-                  }, 2000);
-                }
-              }
-            })
-          }
-          videoEnded();
         }, 750);
       }
     })
   }
-   
-   
-  // automatedText('.text-editor .eleventh p', 2000, [], 0, '-break-', 1000);
-  //                   ending_interval = setInterval(theEnd, 250);
-   
+  
+  automatedText('.scroll-container .eleventh p', 2000, [''], 0, '-break-', 800);
+  ending_interval = setInterval(theEnd, 250);
+  
   // END OF ESSAY
   function theEnd() {
     $('p.opened').last().each(function() {
@@ -2047,170 +1518,207 @@ function mediaAfterParagraphs() {
       if (current_paragraph.includes("fight against the dehumanization of black men?")) {
         window.clearInterval(ending_interval);
         
-        // setTimeout(function() {
-        function completed() {
-          $('.text-editor').addClass('completed');
-        }
-        completed();
-        
-        function mediaControlsAdjustments() {
-          $('.media-container').each(function() {
-            var media_container = $(this),
-                thumbnail = media_container.find('.thumbnail'),
-                video_call_to_action_control = media_container.find('.video.call-to-action-controls'),
-                blur = media_container.find('.blur');
+        setTimeout(function() {
+          function completed() {
+            scroll_container.addClass('completed');
+            scroll_container.css('margin-top', '');
+          }
+          completed();
 
-            backgroundImageBlur(thumbnail, video_call_to_action_control, blur, 'image-tag');
-          })
-        }
-        mediaControlsAdjustments();
+          function mediaControlsAdjustments() {
+            $('.media-container').each(function() {
+              var media_container = $(this),
+                  thumbnail = media_container.find('.thumbnail'),
+                  content_controls = media_container.find('.video.content-controls'),
+                  blur = media_container.find('.blur');
+
+              backgroundImageBlur(thumbnail, content_controls, blur, 'image-tag');
+            })
+          }
+          mediaControlsAdjustments();
         
-        function credits() {
-          $('.text-editor .credits').click(function() {
-            media_container = $('video.all-credits').parents('.media-container');
-            post_link = media_container.find('.post-link');
+          function credits() {
+            function build() {
+              button.className = 'credits';
+              button.innerHTML = "Credits";
+              $('.text-editor > .header .content-controls').prepend(button.cloneNode(true));
+            }
+            build();
             
-            if (media_container.hasClass('unwatched') || !media_container.hasClass('watched')) {
-              text_editor.removeClass('completed');
-              
-              if (mobile) {
+            function actions() {
+              $(document).on('click', '.text-editor > .header .content-controls .credits', function() { 
+                media_container = $('video.credits').parents('.media-container');
+                post_link = media_container.find('.post-link');
+                unwatched = media_container.hasClass('unwatched') || !media_container.hasClass('watched');
+                previous_block = media_container.prev('.block');
+                
                 function buildRotateToLandscape() {
-                  var rotate_to_landscape = document.createElement('div');
-                      rotate_to_landscape.className = 'rotate-to-landscape ab-mid';
-
-                  var close = document.createElement('button');
-                      close.className = 'close grey ab-mid icons-b abs';
-
                   if ($('.rotate-to-landscape').length == 0) {
-                    $('body').prepend(rotate_to_landscape);
-                    rotate_to_landscape.prepend(close);
-                    
+                    div.className = 'rotate-to-landscape ab-mid';
+                    body.prepend(div.cloneNode(true));
+
+                    button.className = 'close grey ab-mid icons-b abs';
+                    $('.rotate-to-landscape').append(button.cloneNode());
+
                     $('.rotate-to-landscape .close').click(function() {
-                      $('.rotate-to-landscape').remove();
                       media_container.removeClass('visible').hide();
-                      text_editor.addClass('completed');
+                      build();
+                      $('.rotate-to-landscape').remove();
                     })
                   }
                 }
                 
-                if ($('body').hasClass('portrait')) {
+                if (mobile) {
+                  $(window).on('orientationchange', function() {
+                    // checkDeviceLength();
+                    // if (device_height_longer) {
+                    //   if (media_container.hasClass('visible')) {
+                    //     buildRotateToLandscape();
+                    //   }
+                    // }
+                    // build();
+                  });
+                }
+
+                checkDeviceLength();
+                if (device_height_longer) {
                   buildRotateToLandscape();
                 }
 
-                $(window).on('orientationchange', function() {
-                  if ($('body').hasClass('portrait')) {
-                    if ($('.all-credits').parents('.media-container').hasClass('visible')) {
-                      buildRotateToLandscape();
-                      $('.rotate-to-landscape').show();
-                    }
+                setTimeout(function() {
+                  $('.text-editor > .header .credits').remove();
+                  video = $('video.credits');
+                  video_title = "Credits";
+                  videoPlayer();
+                  
+                  function videoEnded() {
+                    video.bind('ended', function() { 
+                      $('.rotate-to-landscape').remove();
+                    })
                   }
-
-                  if ($('body').hasClass('landscape')) {
-                    if ($('.all-credits').parents('.media-container').hasClass('visible')) {
-                      $('.rotate-to-landscape').hide();
-                    }
-                  }
-                });
-              }
-
-              setTimeout(function() {
-                video = $('video.all-credits');
-                video_title = "Credits Of A Kanye West Analysis";
-                video_link = "https://www.youtube.com/watch?v=y3FpS-63Pbs";
-                videoPlayer();
-                
-                post_link.hide();
-
-                function videoEnded() {
-                  video.bind('ended', function() { 
-                    checkDeviceLength();
-
-                    if (device_width_longer) {
-                      // if (!media_container.hasClass('watched')) {
-                        setTimeout(function() {
-                          $('.text-editor .eleventh').after(media_container);
-                        }, 1000); 
-                      // }
-                    }
-                    
-                    setTimeout(function() {
-                      text_editor.addClass('completed');
-                      // $('.text-editor .credits').hide();
-                      $('.text-editor .credits').remove();
-                    }, 2500); 
-                    
-                    post_link.show();
-                  })
-                }
-                videoEnded();
-              }, 750);
-            } 
-          });
-        }
-        credits();
-        // }, 3750);
+                  videoEnded();
+                }, 750);
+              });
+            }
+            actions();
+          }
+          credits();
+        }, 3000);
       }
     })
   } 
 }
 
-  
-  
-  
-// MEDIA PLAYER
-function videoPlayback() { 
-  var text_editor_title = $('.text-editor > .header .title-scroll'),
-      text_call_to_action_controls = $('.text.call-to-action-controls'),
-      video_call_to_action_controls,
-      video_call_to_action_controls_button,
-      search_button = $('.search'),
-      parent_content_container = $('.parent-container'),
-      title,
-      title_scroll,
-      media_container,
-      header,
-      main_controls,
+
+
+
+// VIDEO PLAYER CONTROLS
+function videoPlayback() {
+  var covered,
+      video,
+      video_hidden,
       close,
+      video_controls,
+      this_button,
       play_pause,
       rewind,
       forward,
       time_adjustment, 
-      blur,
-      media,
-      video_loader,
-      slider,
-      thumbnail,
-      video,
+      loader,
       current_time,
-      controls,
-      post_link,
       paused,
       playing,
       unwatched,
       clicked,
-      watched,
-      in_text_editor; 
+      watched;
   
-  function hideControls() {
-    if (unwatched) {
-      setTimeout(function() {
-        header.addClass('hide');
-      }, 4000);
+  function variableAssignments() {
+    media_container = this_button.closest('.media-container');
+    covered = media_container.hasClass('covered');
+    unwatched = media_container.hasClass('unwatched');
+    clicked = !media_container.hasClass('unwatched');
+    watched = media_container.hasClass('watched');
+    header = media_container.find('.header');
+    close = media_container.find('.close');
+    video_controls = media_container.find('.content-controls');
+    play_pause = media_container.find('.play-pause');
+    rewind = media_container.find('.rewind');
+    forward = media_container.find('.forward');  
+    time_adjustment = rewind || forward;
+    blur =  media_container.find('.blur');
+    media = media_container.find('.media');
+    loader = media_container.find('.video-loader');
+    thumbnail = media_container.find('.thumbnail');
+    video = media_container.find('video')[0];
+    video_hidden = $(video).hasClass('hide');
+    paused =  video.paused;
+    playing = !video.paused;
+    current_time = video.currentTime;
+  }
+  
+  function checkIdleState() {
+    var video_idle_state = false,
+        first_video_position,
+        second_video_position;
+    
+    function firstCheck() {
+      first_video_position = video.currentTime;
+      console.log('first_video_position = ' + first_video_position);
     }
+    firstCheck();
+    
+    function secondCheck() {
+      setTimeout(function() {
+        second_video_position = video.currentTime;
+        
+        if (first_video_position != second_video_position) {
+          video_idle_state = false;
+
+          if (video_controls.hasClass('over')) {
+            console.log("returned");
+            return;
+          }
+
+          if (!video_controls.hasClass('over')) {
+            header.addClass('hide');
+          }
+        }
+        console.log(video_idle_state);
+      }, 3000);
+
+      setTimeout(function() {
+        second_video_position = video.currentTime;
+        
+        if (first_video_position == second_video_position) {
+          video_idle_state = true;
+          
+          header.removeClass('hide');
+
+          if (loader.length == 1) {
+            console.log("return");
+            return;
+          }
+          
+          media_container.removeClass('uncompleted').addClass('covered');
+        }
+        console.log(video_idle_state);
+      }, 8000);
+    }
+    secondCheck();
   }
   
   function videoLoader() {
-    video_loader.removeClass('hide');
+    loader.removeClass('hide');
     
     var remove_loader_interval = setInterval(removeLoader, 100);
     function removeLoader() {
       if (video.currentTime > 0) {
         window.clearInterval(remove_loader_interval);
-        video_loader.remove();
+        loader.remove();
       }
-    } 
+    }
     
-    function incaseVideoDoesntPlay() {
+    function videoPlaySafetyNet() {
       setTimeout(function() {
         if (video.currentTime == 0 && $('.video-loader').length == 1) {
           video.pause(); 
@@ -2218,13 +1726,13 @@ function videoPlayback() {
 
           setTimeout(function() {
             video.play();  
-            media_container.addClass('playing');
+            media_container.addClass('playing uncompleted');
             media_container.find('.play').removeClass('play').addClass('pause');
           }, 1000);
         }
       }, 3000);
     }
-    incaseVideoDoesntPlay();
+    videoPlaySafetyNet();
   }
   
   function removeUnwatched() {
@@ -2232,530 +1740,211 @@ function videoPlayback() {
     header.removeClass('hide');
   }
   
-  function videoEnded() {
-    $(video).bind('ended', function() { 
-      $(window).off('resize');
-      $(video).addClass('hide');
-      thumbnail.fadeIn(200);
-      header.removeClass('hide');
-      blur.fadeIn(200);
-      media_container.find('.pause').removeClass('pause').addClass('play');
-      
-      if ($('body').width() > $('body').height()) {
+  function playPause() {
+    if (play_pause) {
+      if (paused) {
+        if (covered) {
+          media_container.removeClass('covered');
+        }
+        
+        if (unwatched) {
+          videoLoader();
+          removeUnwatched();
+        } 
+
+        video.play();  
+        window.clearInterval(check_idle_state);
+        media_container.addClass('playing uncompleted');
+        media_container.find('.play').removeClass('play').addClass('pause');
+        checkIdleState();
+      }
+
+      else if (playing) {
+        video.pause(); 
         media_container.removeClass('playing');
-        main_controls.remove();
-        setTimeout(function() {
-          text_editor.removeClass('video-player');
-          media_container.addClass('video-player watched');
-          scroll_container.show();
-        }, 900);
+        header.removeClass('hide');
+        media_container.find('.pause').removeClass('pause').addClass('play');
+        checkIdleState();
       }
-
-      if ($('body').height() > $('body').width()) {
-        setTimeout(function() {
-          media_container.removeClass('playing');
-          media_container.addClass('watched');
-        }, 900);
-      }
-      
-      media_container.removeClass('visible');
-    })
+    }
   }
+  
+  function timeAdjustment() {
+    if (rewind) {
+      video.currentTime = current_time - 4;
+    }
 
-   
+    if (forward) {
+      video.currentTime = current_time + 4;
+    }
+  }
+  
+  
   if (computer) {
     $(document)
-      .on('click', '.video.call-to-action-controls button', function(event) {
-      in_text_editor = !$('.text-editor').hasClass('video-player');
-      media_container = $(this).parents('.media-container');
-      unwatched = media_container.hasClass('unwatched');
-      clicked = !media_container.hasClass('unwatched');
-      watched = media_container.hasClass('watched');
-      header = media_container.find('.header');
-      main_controls = media_container.find('.main-controls');
-      close = media_container.find('.close');
-      video_call_to_action_controls = media_container.find('.video.call-to-action-controls');
-      video_call_to_action_controls_button =  media_container.find('.video.call-to-action-controls button');
-      play_pause = $(this).hasClass('play-pause');
-      rewind = $(this).hasClass('rewind');
-      forward = $(this).hasClass('forward');
-      time_adjustment = rewind || forward;
-      blur =  media_container.find('.blur');
-      media = media_container.find('.media');
-      video_loader = media_container.find('.video-loader');
-      thumbnail = media_container.find('.thumbnail');
-      video = media_container.find('video')[0];
-      post_link = media_container.find('.controls .post-link');
-      paused =  video.paused;
-      playing = !video.paused;
- 
-      hideControls();
-
-      if (play_pause) {
-        if (paused) {
-          if (unwatched) {
-            videoLoader();
-            removeUnwatched();
-          }
-          
-          if ($(video).hasClass('hide')) {
-            $(video).removeClass('hide');
-          }
-          
-          thumbnail.fadeOut(200);
-          blur.fadeOut(200);
-          video.play();  
-          media_container.addClass('playing');
-          media_container.find('.play').removeClass('play').addClass('pause');
-        }
-
-        else if (playing) {
-          video.pause(); 
-          media_container.removeClass('playing');
-          header.removeClass('hide');
-          media_container.find('.pause').removeClass('pause').addClass('play');
-          
-          if (watched) {
-            thumbnail.fadeIn(200);
-          }
-        }
-      }
+      .on('click', '.media-container', function() {
+      this_button = $(this);
+      variableAssignments();
       
-      else if (time_adjustment) {
-        current_time = video.currentTime;
-
-        if (rewind) {
-          video.currentTime = current_time - 4;
-        }
-
-        if (forward) {
-          video.currentTime = current_time + 4;
-        }
-      }
-      
-      videoEnded();
-      event.stopPropagation();
+      play_pause.click();  
+      })
+    
+      .on('click', '.media-container .close, .video.content-controls', function(event) {
+        event.stopPropagation();
       }) 
     
-      .on('click', '.video.call-to-action-controls', function(event) {
-        event.stopPropagation();
-      })
-      
-      .on('click', '.media-container', function() {
-        media_container = $(this);
-        play_pause = media_container.find('.play-pause');
-        play_pause.click();  
-      })
-    
-      .on('mousemove', '.media-container', function() {
-        media_container = $(this);
-        unwatched = media_container.hasClass('unwatched');
-        clicked = !media_container.hasClass('unwatched');
-        watched = media_container.hasClass('watched');
-        header = media_container.find('.header');
-        video = media_container.find('video')[0];
-        
-        if (clicked) { 
-          $(document)    
-            .on('mousemove', '.media-container', function() {
-              header.removeClass('hide');
-            })
+      .on('mouseover', '.video.content-controls', function() {
+      this_button = $(this);
+      variableAssignments();
 
-            .on('mouseleave', '.media-container', function() {
-              header.addClass('hide');
-            })
-        }
-        })
+      if (unwatched) {
+        // console.log("unwatched");
+        return;
+      }
+
+      if (!video_controls.hasClass('over')) {
+        video_controls.addClass('over');
+      }
+    })  
     
-      .on('click', '.media-container .close', function(event) {
-        media_container = $(this);
-        play_pause = media_container.find('.play-pause');
-        event.stopPropagation();
+      .on('mouseout', '.video.content-controls', function() {
+      this_button = $(this);
+      variableAssignments();
+
+      if (unwatched) {
+        // console.log("unwatched");
+        return;
+      }
+
+      video_controls.removeClass('over');
+    })  
+    
+      .on('click', '.video.content-controls button', function(event) {
+      this_button = $(this);
+      variableAssignments();
+      play_pause = this_button.hasClass('play-pause');
+      rewind = this_button.hasClass('rewind');
+      forward = this_button.hasClass('forward');
+
+      playPause();
+      timeAdjustment(); 
+      event.stopPropagation();
       })
+    
+      .on('mouseover mousemove', '.media-container', function() {
+      this_button = $(this);
+      variableAssignments();
+      
+      if (unwatched) {
+        // console.log("unwatched");
+        return;
+      }
+
+      header.removeClass('hide');
+    })
+    
+      .on('mouseleave', '.media-container', function() {
+      this_button = $(this);
+      variableAssignments();
+      
+      if (unwatched) {
+        // console.log("unwatched");
+        return;
+      }
+      
+      if (!video_controls.hasClass('over')) {
+        header.addClass('hide');
+        console.log("'mouseleave', '.media-container'");
+      }
+    })
   }
   
   if (mobile) {
     $(document)
-      .on('touchstart', '.video.call-to-action-controls button', function(event) {
-      in_text_editor = !$('.text-editor').hasClass('video-player');
-      media_container = $(this).parents('.media-container');
-      unwatched = media_container.hasClass('unwatched');
-      clicked = !media_container.hasClass('unwatched');
-      watched = media_container.hasClass('watched');
-      header = media_container.find('.header');
-      main_controls = media_container.find('.main-controls');
-      close = media_container.find('.close'); 
-      video_call_to_action_controls = media_container.find('.video.call-to-action-controls');
-      video_call_to_action_controls_button =  media_container.find('.video.call-to-action-controls button');
-      play_pause = $(this).hasClass('play-pause');
-      rewind = $(this).hasClass('rewind');
-      forward = $(this).hasClass('forward');
-      time_adjustment = rewind || forward;
-      blur =  media_container.find('.blur');
-      media = media_container.find('.media');
-      video_loader = media_container.find('.video-loader');
-      thumbnail = media_container.find('.thumbnail');
-      video = media_container.find('video')[0];
-      post_link = media_container.find('.controls .post-link');
-      paused =  video.paused;
-      playing = !video.paused;
+      .on('touchstart', '.media-container', function(event) {
+      this_button = $(this);
+      variableAssignments();
 
-      enableInlineVideo(video);
-      hideControls();
-
-      if (play_pause) {
-        if (paused) {
-          if (unwatched) {
-            videoLoader();
-            removeUnwatched();
-          }
-          
-          if ($(video).hasClass('hide')) {
-            $(video).removeClass('hide');
-          }
-          
-          thumbnail.hide();
-          video.play();  
-          media_container.addClass('playing');
-          blur.fadeOut(200);
-          media_container.find('.play').removeClass('play').addClass('pause');
-        }
-
-        else if (playing) {
-          video.pause(); 
-          media_container.removeClass('playing');
-          media_container.find('.pause').removeClass('pause').addClass('play');
-          header.removeClass('hide');
-        }
+      if (unwatched) {
+        // console.log("unwatched");
+        return;
       }
-
-      else if (time_adjustment) {
-        current_time = video.currentTime;
-
-        if (rewind) {
-          video.currentTime = current_time - 4;
-        }
-
-        if (forward) {
-          video.currentTime = current_time + 4;
-        }
-      }
-  
-      videoEnded();
+      
+      header.toggleClass('hide');
       event.stopPropagation();
       })
     
-      .on('touchstart', '.video.call-to-action-controls', function(event) {
-        event.stopPropagation();
-      })
-    
-      .on('touchstart', '.media-container', function(event) {
-        media_container = $(this);
-        unwatched = media_container.hasClass('unwatched');
-        clicked = !media_container.hasClass('unwatched');
-        watched = media_container.hasClass('watched');
-        header = media_container.find('.header');
-        
-        if (clicked) {
-          header.toggleClass('hide');
-        }
-        event.stopPropagation();
-      })
-    
       .on('touchstart', '.media-container .close', function(event) {
-        media_container = $(this);
-        play_pause = media_container.find('.play-pause');
         event.stopPropagation();
       })
-  }
-}
-
-
-
-
-// AUTOMATED SCROLL READJUSTMENT
-function automatedScrollAdjustment() {
-  var parent_container_height = $('.parent-container').height();
-
-  if (uncompleted) {
-    var margin_top = 0;
-    var current_scroll_container_height = $('.scroll-container').height();
-
-    if (current_scroll_container_height <= parent_container_height) {
-      $('.scroll-container').css('margin-top', margin_top);
-    } 
     
-    if (current_scroll_container_height >= parent_container_height) { 
-      if (current_scroll_container_height >= parent_container_height * 1) {
-        margin_top = -parent_container_height / 2;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 1.5) {
-        margin_top = -parent_container_height;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 2) {
-        margin_top = -parent_container_height * 1.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 2.5) {
-        margin_top = -parent_container_height * 2;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 3) {
-        margin_top = -parent_container_height * 2.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 3.5) {
-        margin_top = -parent_container_height * 3;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 4) {
-        margin_top = -parent_container_height * 3.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
+      .on('touchstart', '.video.content-controls', function() {
+        if (!video_controls.hasClass('over')) {
+          video_controls.addClass('over');
+        }
+        // event.stopPropagation();
+      }) 
     
-      if (current_scroll_container_height >= parent_container_height * 4.5) {
-        margin_top = -parent_container_height * 4;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
+      .on('touchend', '.video.content-controls', function() {
+        setTimeout(function() {
+          video_controls.removeClass('over');
+        }, 2000);
+      }) 
+    
+      .on('touchstart', '.video.content-controls button', function(event) {
+      this_button = $(this);
+      variableAssignments();
+      play_pause = this_button.hasClass('play-pause');
+      rewind = this_button.hasClass('rewind');
+      forward = this_button.hasClass('forward');
+      enableInlineVideo(video);
       
-      if (current_scroll_container_height >= parent_container_height * 5) {
-        margin_top = -parent_container_height * 4.5;
-        $('.scroll-container').css('margin-top', margin_top);
+      if (!video_controls.hasClass('over')) {
+        video_controls.addClass('over');
       }
 
-      if (current_scroll_container_height >= parent_container_height * 5.5) {
-        margin_top = -parent_container_height * 5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-  
-      if (current_scroll_container_height >= parent_container_height * 6) {
-        margin_top = -parent_container_height * 5.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-
-      if (current_scroll_container_height >= parent_container_height * 6.5) {
-        margin_top = -parent_container_height * 6;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 7) {
-        margin_top = -parent_container_height * 6.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 7.5) {
-        margin_top = -parent_container_height * 7;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 8) {
-        margin_top = -parent_container_height * 7.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 8.5) {
-        margin_top = -parent_container_height * 8;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 9) {
-        margin_top = -parent_container_height * 8.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 9.5) {
-        margin_top = -parent_container_height * 9;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 10) {
-        margin_top = -parent_container_height * 9.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 10.5) {
-        margin_top = -parent_container_height * 10;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 11) {
-        margin_top = -parent_container_height * 10.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 11.5) {
-        margin_top = -parent_container_height * 11;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 12) {
-        margin_top = -parent_container_height * 11.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 12.5) {
-        margin_top = -parent_container_height * 12;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 13) {
-        margin_top = -parent_container_height * 12.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 13.5) {
-        margin_top = -parent_container_height * 13;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 14) {
-        margin_top = -parent_container_height * 13.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 14.5) {
-        margin_top = -parent_container_height * 14;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-
-      if (current_scroll_container_height >= parent_container_height * 15) {
-        margin_top = -parent_container_height * 14.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 15.5) {
-        margin_top = -parent_container_height * 15;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 16) {
-        margin_top = -parent_container_height * 15.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-    
-      if (current_scroll_container_height >= parent_container_height * 16.5) {
-        margin_top = -parent_container_height * 16;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 17) {
-        margin_top = -parent_container_height * 16.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 17.5) {
-        margin_top = -parent_container_height * 17;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 18) {
-        margin_top = -parent_container_height * 17.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-    
-      if (current_scroll_container_height >= parent_container_height * 18.5) {
-        margin_top = -parent_container_height * 18;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-  
-      if (current_scroll_container_height >= parent_container_height * 19) {
-        margin_top = -parent_container_height * 18.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 19.5) {
-        margin_top = -parent_container_height * 19;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 20) {
-        margin_top = -parent_container_height * 19.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 20.5) {
-        margin_top = -parent_container_height * 20;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 21) {
-        margin_top = -parent_container_height * 20.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 21.5) {
-        margin_top = -parent_container_height * 21;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 22) {
-        margin_top = -parent_container_height * 21.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 22.5) {
-        margin_top = -parent_container_height * 22;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 23) {
-        margin_top = -parent_container_height * 22.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 23.5) {
-        margin_top = -parent_container_height * 23;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 24) {
-        margin_top = -parent_container_height * 23.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 24.5) {
-        margin_top = -parent_container_height * 24;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-      if (current_scroll_container_height >= parent_container_height * 25) {
-        margin_top = -parent_container_height * 24.5;
-        $('.scroll-container').css('margin-top', margin_top);
-      }
-      
-    }
+      playPause();
+      timeAdjustment();
+      event.stopPropagation();
+      })
   }
 }
 
 
  
-
+ 
 // FILE CLICK 
 function onFileClick() {
   $('.file')  
+    .mutate('top left', function(el, info) {
+    setTimeout(function() {
+      repositionDraggable();
+    }, 1000);
+  })
+  
     .on('click', function() {
-    if ($(this).hasClass('selected')) {
+    var file = $(this),
+        selected = $(this).hasClass('selected'),
+        not_selected = !$(this).hasClass('selected'),
+        main_file = $(this).hasClass('main'),
+        text_editor = $('.application').hasClass('text-editor'),
+        video_player = $('.application').hasClass('video-player'),
+        world_clock = $('.application').hasClass('world-clock'),
+        image_preview = $('.application').hasClass('image-preview');
+    
+    if (selected) {
       return;
     }
 
-    if (!$(this).hasClass('selected')) {
-      if ($(this).hasClass('text')) {
-        $(this).addClass('selected');
-        $('.text-editor').removeClass('hide');
+    if (not_selected) {
+      if (main_file) {
+        file.addClass('selected');
+        application.removeClass('hide');
+        $('.background-credits').removeClass('show');
         
-        if ($('.text-editor').hasClass('video-player')) {
+        if (video_player) {
           $('.mac-os').addClass('dim');
         }
-        
-        $('.screensaver-credits').removeClass('show');
       }
     }
   })
@@ -2764,7 +1953,7 @@ function onFileClick() {
     return false;
   })
   
-    $('.file').draggable({
+    .draggable({
       cancel: false,
       cursor: 'move'
     });
@@ -2775,47 +1964,33 @@ function onFileClick() {
 
 // WINDOW ON LOAD
 window.onload = function() {
-  specifications();
+  onFirstImpression();
   userDeviceSpecifications();
-  loader(); 
-  firstImpressionContainer();
-  detectSizeChange(); 
-  userActiveStatus();
+  // userActiveStatus();
+  detectSizeChange();
+  // loaderGTA();
   menuBar();
+  closeApp();
+  searchTextEditor(); 
+  sharePage();
+  videoPlayback(); 
+  onFileClick();
+  onWindowClick();
   
-  // REMOVE IF LOADER PRESENT
-//   callRemainderFunctions();
+  // IF LOADER NOT PRESENT
+  callRemainderFunctions();
 }
 
-
+ 
 
 
 // CALL REMAINDER FUNCTIONS
 function callRemainderFunctions() {
-  clock(); 
-  backgroundImageBlur('.mac-os', '.text-editor', '.text-editor > .blur', 'background-image');  
-  closeTextEditor();
-  searchTextEditor();    
-  sharePage();
+  clock();
+  backgroundImageBlur('.mac-os', '.text-editor', '.text-editor > .blur', 'background-image');
   mediaPreloads();
-    
-  function callAutomatedText() {
-    var call_essay_interval = setInterval(callEssay, 200);
-    function callEssay() {
-      if ($('.loader').length == 0) {
-        window.clearInterval(call_essay_interval);
-        setTimeout(function() { 
-          automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
-        }, 1800);
-      }
-    }
-  }
   callAutomatedText();
-  
   mediaAfterParagraphs();
-  videoPlayback();
-  onFileClick();
-  onWindowClick();
 }
 
 
@@ -2837,76 +2012,79 @@ function onWindowClick() {
 
 // WINDOW ON ERROR
 window.onerror = function(msg, url, linenumber) {
-  function errorMessageApp() {
-    // alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
-    
-    if ($('.text-editor.error').length == 1) {
-      return;
-    }
-     
-    $('.text-editor').removeClass('video-player instagram-share');
-    $('.call-to-action-controls, .text-editor .scroll-container p, .text-editor .media-container').remove();
-    $('.text-editor').addClass('error');
-    $('.text-editor > .header .title').addClass('ab-mid');
-    $('.text-editor > .header .title-scroll').text("An Error Has Occured.");
-    
-    var call_to_action_controls = document.createElement('div');
-        call_to_action_controls.className = 'call-to-action-controls error';
+  // alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
+  
+  applicationRemove();
+  application.addClass('error');
 
-    var call_to_action = document.createElement('button');
-    
-    var section_title = document.createElement('p');
-        section_title.className = 'section-title';
-    
-    var code_error = document.createElement('p');
-        code_error.className = 'code-error';
-        code_error.innerHTML = "<span>" + msg + ".</span> " +
-          "<span>Line Number: " + linenumber + ".</span> ";
-    
-    var user_experience = document.createElement('p');
-        user_experience.className = 'user-experience empty';
-        user_experience.contentEditable = true;
-     
-    $('.text-editor > .header .top-bar').append(call_to_action_controls);
-    call_to_action.className += ' confirm-action';
-    call_to_action.innerHTML = "Send Email";
-    call_to_action_controls.prepend(call_to_action.cloneNode(true));
-    $('.error .confirm-action').click(function() {
-      var email_address = 'mailto:info@acolorblue.co'; 
-      var subject = "?subject=Error on " + url;
-      var body = "&body=" + 
+  function file() {
+    $('.file.error').addClass('show selected');
+  }
+  file();
+
+  function header() {
+    title_scroll.text(error_title);
+
+    button.className = 'send-email';
+    button.innerHTML = "Send Email";
+    $('.application > .header .content-controls').append(button);
+  }
+  header();
+
+  function body() {
+    // SECTION - CODE      
+    div.className = 'section code';
+    parent_container.append(div.cloneNode(true));
+
+    paragraph.className = 'title';
+    paragraph.innerHTML = "Code";
+    $('div.section.code').append(paragraph.cloneNode(true));
+
+    paragraph.className = 'content';
+    paragraph.innerHTML = "<span>" + msg + ".</span> " +
+      "<span>Line Number: " + linenumber + ".</span> ";
+    $('div.section.code').append(paragraph.cloneNode(true));
+
+
+    // SECTION - USER-EXPERIENCE
+    div.className = 'section user-experience';
+    parent_container.append(div.cloneNode());
+
+    paragraph.className = 'title';
+    paragraph.innerHTML = "User Experience";
+    $('div.section.user-experience').append(paragraph.cloneNode(true));
+
+    paragraph.className = 'content empty';
+    paragraph.contentEditable = true;
+    $('div.section.user-experience').append(paragraph.cloneNode());
+  }
+  body();
+
+  function actions() {
+    $('.content-controls .send-email').click(function() {
+      var email_address = 'mailto:info@acolorblue.co',
+          subject = "?subject=Error on " + url,
+          body = "&body=" + 
           "CODE ERROR: " + "%0A" + 
-          $('.code-error').text().replace(". ", ". %0A") + "%0A %0A" + 
+          $('.error .code .content').text().replace(". ", ". %0A") + "%0A %0A" + 
           "USER EXPERIENCE: " + "%0A" + 
-          $('.user-experience').text();
-      
+          $('.error .user-experience .content').text();
+
       window.location.href = email_address + subject + body;
-      
       setTimeout(function() {
         location.reload();
       }, 2000);
-    }); 
-      
-    section_title.innerHTML = "Code Error";
-    $('.text-editor .scroll-container').append(section_title.cloneNode(true));
-    $('.text-editor .scroll-container').append(code_error);
-    
-    section_title.className += ' experience';
-    section_title.innerHTML = "User Experience";
-    $('.text-editor .scroll-container').append(section_title.cloneNode(true));
-    $('.text-editor .scroll-container').append(user_experience);
-    
-    $('.user-experience').keyup(function() {
+    });
+
+    $('.error .user-experience .content').keyup(function() {
       if ($(this).length > 0) {
         $(this).removeClass('empty');
       }
-       
+
       if ($(this).text() == "") {
         $(this).addClass('empty');
       }
     })
   }
-  errorMessageApp();
-  
-  return true;
+  actions();
 }

@@ -1012,7 +1012,8 @@ function callAutomatedText() {
     if ($('.loader').length == 0) {
       window.clearInterval(call_essay_interval);
       setTimeout(function() { 
-        automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
+//         automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
+          automatedText('.scroll-container .ninth p', 2000, [''], 0, '-break-', 800);
       }, 1800);
     }
   } 
@@ -1470,6 +1471,8 @@ function mediaAfterParagraphs() {
       }
     })
   }
+    
+  ninth_block_interval = setInterval(ninthBlock, 250);
   
   
   // GEORGE BUSH EXPLANATION
@@ -1507,8 +1510,7 @@ function mediaAfterParagraphs() {
     })
   }
   
-  automatedText('.scroll-container .eleventh p', 2000, [''], 0, '-break-', 800);
-  ending_interval = setInterval(theEnd, 250);
+  
   
   // END OF ESSAY
   function theEnd() {

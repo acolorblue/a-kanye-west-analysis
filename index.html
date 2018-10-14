@@ -31,11 +31,11 @@
   <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Fonts/Ahamono%20Monospaced/stylesheet.css">
   <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Fonts/Pricedown/stylesheet.css">
   <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Fonts/DJB%20Get%20Digital/stylesheet.css">
-  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Code/CSS/icons.css?16">
-  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Code/CSS/global.css?9">
+  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Code/CSS/icons.css?19">
+  <link rel='stylesheet' type='text/css' href="https://acolorblue.co/libraries/Code/CSS/global.css?28">
   <link rel='stylesheet' type='text/css' href="https://acolorblue.co/worldclock/0.%20Design/Numeric%20Indicators/stylesheet.css?3">
   <link rel='stylesheet' type='text/css' href="https://acolorblue.co/worldclock/Africa/stylesheet.css?2">
-  <link rel='stylesheet' type='text/css' href="local.css?85">
+  <link rel='stylesheet' type='text/css' href="local.css?95">
 </head>
 
 
@@ -60,22 +60,22 @@
     </div>
     
     <div class='background-layer ab-mid'>
-      <div class='michael background-and-character-container'>
+      <div class='michael animations-container'>
         <div class='background ab-mid'></div>
         <div class='character ab-mid'></div>
       </div>
       
-      <div class='trevor background-and-character-container'>
+      <div class='trevor animations-container'>
         <div class='background ab-mid'></div>
         <div class='character ab-mid'></div>
       </div>
         
-      <div class='franklin-and-chop background-and-character-container'>
+      <div class='franklin-and-chop animations-container'>
         <div class='background ab-mid'></div>
         <div class='character ab-mid'></div>
       </div>
       
-      <div class='kanye background-and-character-container'>
+      <div class='kanye animations-container'>
         <div class='background ab-mid'></div>
         <div class='character ab-mid'></div>
       </div>
@@ -88,8 +88,11 @@
 
 <div class='mac-os ab-mid'>
   <div class='menu-bar'>  
+    <div class='blur-container ab-mid'>
+      <div class='blur ab-mid'></div>
+    </div>
     <div class='left panel'>
-      <div class='apple-menu section-container'>
+      <div class='apple-menu section-container selected'>
         <button class='apple-logo icons-b abs'></button>
         
         <div class='menu'>
@@ -99,7 +102,7 @@
     </div>
 
     <div class='right panel'>
-      <div class='date-and-time section-container'>
+      <div class='date-and-time section-container selected'>
         <button class='time digital'>
           <span class='clock text'></span>
           <div class='clock border'>
@@ -109,12 +112,13 @@
         </button>
         
         <div class='menu'>
+          <div class='blur ab-mid'></div>
           <span class="item full-date">Full Date</span>
           <b class="seperator"></b>
           <button class="item analog-clock">View As Analog</button>
           <button class="item digital-clock checked icons-b abs">View As Digital</button>
           <b class="seperator"></b>
-          <button class="item location-and-time-preferences">Open Location & Time Preferences..
+          <button class="item location-and-time-preferences">Open Location & Time Preferences...
            
             <div class='timezones'>
               <clock class='city abuja-nigeria' timezone-offset='1'>
@@ -794,7 +798,7 @@
         </div>
       </div>
       
-      <div class='profile section-container'>
+      <div class='profile section-container selected'>
         <button class='name'>***********</button> 
         
         <div class='menu'>
@@ -803,57 +807,63 @@
           <p class='bio'>A synthesis of great things.</p>
           
           <div class='accounts'>
-            <a class='twitter-b icons-b abs' href="https://twitter.com/acolorblue" target='_blank'></a>
-            <a class='instagram-b icons-b abs' href="https://instagram.com/acolorblue" target='_blank'></a>
-            <a class='tumblr-b icons-b abs' href="https://acolorblue.tumblr.com" target='_blank'></a>
+            <a class='twitter icons-b abs' href="https://twitter.com/acolorblue" target='_blank'></a>
+            <a class='instagram icons-b abs' href="https://instagram.com/acolorblue" target='_blank'></a>
+            <a class='tumblr icons-b abs' href="https://acolorblue.tumblr.com" target='_blank'></a>
           </div>
         </div>
       </div>
       
-      <div class='notification section-container'>
+      <div class='notification section-container selected'>
         <button class='notification-center icons-b abs'></button>
         
-        <div class='menu cover twitter-b icons-b abs'>
-          <a class='twitter-timeline' href='https://twitter.com/search?q=acolorblue' data-widget-id='993524740462600192' data-chrome='noheader nofooter noscrollbar'></a>
+        <div class='menu cover twitter icons-b abs'>
+          
+<!--           <a class='twitter-timeline' data-theme='dark' href="https://twitter.com/acolorblue?ref_src=twsrc%5Etfw" data-chrome='noheader nofooter noscrollbar'></a> -->
+          
+          <a class='twitter-timeline' data-height='600' data-partner='tweetdeck' data-theme='dark' data-chrome='noheader nofooter noscrollbar' href="https://twitter.com/acolourblue/timelines/1048885985033895936?ref_src=twsrc%5Etfw"></a>
         </div>
       </div>
     </div>
   </div>
-
+  
   <div class='desktop'>
     <div class='files-row'>
       <button class='text file main selected show'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
-          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/2.%20Desktop/3.%20File%20Thumbnails/Text%20Editor/Young%20Kanye%20-%201%20-%20Comp.jpg"/>
+<!--           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/2.%20Desktop/3.%20File%20Thumbnails/Text%20Editor/Young%20Kanye%20-%201%20-%20Comp.jpg"/> -->
+          
+<!--           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/2.%20Desktop/3.%20File%20Thumbnails/Text%20Editor/Say%20No%20To%20New%20Nazis%20America.png"/> -->
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/2.%20Desktop/3.%20File%20Thumbnails/Text%20Editor/2%20-%20Comp.png"/>
         </span>
         <div class='title-container'>
-          <span class='title'>A Kanye West </span>
+          <span class='title'>A ***** **** </span>
           <span class='title'>Analysis</span>
         </div>
       </button> 
       
       <!-- MALCOLM X POLICE PRECINCT -->
-      <button class='video-player malcolm-x-police-predict file main'>
+      <button class='video-player malcolm-x-police-precinct file main'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/1.%20Malcolm%20X%20Police%20Predict%20Scene/1%20-%20Comp.jpg"/>
         </span>
         <div class='title-container'>
-          <span class='title'>'Police Precinct'</span>
-          <span class='title'>scene from Malcolm X (1992)</span>  
+          <span class='title'>Police Precinct</span>
+          <span class='title'>scene from 'Malcolm X' (1992)</span>  
         </div>
       </button> 
        
-      <!-- KANYE TO CUDI -->
-      <button class='video-player kanye-to-cudi file main'>
+      <!-- KANYE RESPONDS TO CUDI -->
+      <button class='video-player kanye-responds-to-cudi file main'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/2.%20Kanye%20Respond%20To%20Kid%20Cudi/1%20-%20Comp.jpg"/>
         </span>
         <div class='title-container'>
-          <span class='title'>Kanye West </span>
-          <span class='title'>respondes to Kid Cudi</span>  
+          <span class='title'>Kanye Responds to</span>
+          <span class='title'>Cudi</span>  
         </div>
       </button> 
       
@@ -864,12 +874,11 @@
           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/3.%20Radio%20Fuck%20You/1%20-%20Comp.jpg"/>
         </span>
         <div class='title-container'>
-          <span class='title'>Kanye Sacremento </span>
-          <span class='title'>Rant</span>  
+          <span class='title'>Radio Fuck You</span>
         </div>
       </button> 
       
-      <!-- MALCOLM X ON BARRY GOLDWATER -->
+      <!-- MALCOLM X ON GOLDWATER -->
       <button class='video-player malcolm-x-on-goldwater file main'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
@@ -877,11 +886,11 @@
         </span>
         <div class='title-container'>
           <span class='title'>Malcolm X On </span>
-          <span class='title'>Barry Goldwater</span>  
+          <span class='title'>Goldwater</span>  
         </div>
       </button> 
       
-      <!-- MALCOLM X ON MLK -->
+      <!-- MALCOLM X ON MARTIN LUTHER KING JR -->
       <button class='video-player malcolm-x-on-mlk file main'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
@@ -889,31 +898,31 @@
         </span>
         <div class='title-container'>
           <span class='title'>Malcolm X On Martin</span>
-          <span class='title'> Luther King Jr</span>  
+          <span class='title'>Luther King Jr</span>  
         </div>
       </button> 
       
-      <!-- SLAVERY WAS A CHOICE -->
+      <!-- KANYE ON THE CHOICE OF SLAVERY -->
       <button class='video-player slavery-was-a-choice file main'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/6.%20Kanye%20On%20The%20Choice%20Of%20Slavery/1%20-%20Comp.PNG"/>
         </span>
         <div class='title-container'>
-          <span class='title'>Kanye On The Choice </span>
-          <span class='title'>Of Slavery</span>  
+          <span class='title'>Kanye On The Choice</span>
+          <span class='title'> Of Slavery</span>  
         </div>
       </button> 
       
-      <!-- CANDACE OWENS ECONOMICS -->
+      <!-- CANDACE OWENS ON ECONOMICS OVER SOCIAL ISSUES -->
       <button class='video-player candace-owens-economics file main'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/7.%20Candace%20Owens%20Economics%20Before%20Social%20Issues/1%20-%20Comp.PNG"/>
         </span>
         <div class='title-container'>
-          <span class='title'>Candace Owens On </span>
-          <span class='title'>Economics Over Social Issues</span>  
+          <span class='title'>Candace Owens On</span>
+          <span class='title'> Economics Over Social Issues</span>  
         </div>
       </button> 
       
@@ -928,7 +937,7 @@
         </div>
       </button> 
       
-      <!-- GEORGE BUSH EXPLANATION -->
+      <!-- KANYE ON THE GEORGE BUSH INCIDENT -->
       <button class='video-player george-bush-explanation file main'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
@@ -940,15 +949,15 @@
         </div>
       </button> 
       
-      <!-- MACINTOSH TEAM -->
-      <button class='video-player macintosh-team file main'>
+      <!-- BUILDING THE MACINTOSH, 1985 -->
+      <button class='video-player building-the-macintosh file main'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/10.%20MacIntosh%20Team/1%20-%20Comp.jpg"/>
         </span>
         <div class='title-container'>
-          <span class='title'>On The Creation Of</span>
-          <span class='title'> The MacIntosh, 1985</span>  
+          <span class='title'>Building The </span>
+          <span class='title'>MacIntosh, 1985</span>  
         </div>
       </button> 
       
@@ -956,7 +965,8 @@
       <button class='video-player credits file main'>
         <span class='thumbnail-container'>
           <span class="file-type ab-mid"></span>
-          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/0.%20Credits/1%20-%20Comp.jpg"/>
+<!--           <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/0.%20Credits/1%20-%20Comp.jpg"/> -->
+          <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/11.%20Credits/1%20-%20Comp.jpg"/>
         </span>
         <div class='title-container'>
           <span class='title'>Credits</span>
@@ -988,7 +998,7 @@
       <!-- ERROR -->
       <button class='error file main'>
         <span class='thumbnail-container'>
-          <span class='file-type-indicator ab-mid gun-2 icons-b abs'></span>
+          <span class='file-type-indicator ab-mid gun-in-hand-filled icons-b abs'></span>
           <span class='thumbnail ab-mid'></span>
         </span>
         <div class='title-container'>
@@ -1006,7 +1016,7 @@
           </span>
           <div class='title-container'>
             <span class='title'>A Synthesis Of</span>
-            <span class='title'>Kanye West Sermons</span>
+            <span class='title'>***** **** Sermons</span>
           </div>
         </a>
       </button> 
@@ -1016,7 +1026,7 @@
       <div class='blur ab-mid'></div>
       <div class='header'>
         <div class='top-bar ab-mid'>
-          <div class='main-controls'>
+          <div class='window-controls'>
             <button class='close grey icons-b abs'></button>
           </div>
 
@@ -1032,129 +1042,433 @@
       </div>
 
       <div class='parent-container'>
-        <div class='scroll-container preview'> 
-
-
-
-  <div class='ninth block'>
-    <p class='unread'>  was considered to have done something so wrong, my motivation was from a good place.”</p>
-  </div>
-
-
-  <!-- GEORGE BUSH EXPLANATION -->
-  <div class='media-container unwatched covered'>
-    <div class='header ab-mid'>
-      <div class='top-bar ab-mid'>
-        <div class="main-controls">
-          <button class="close grey icons-b abs"></button>
-        </div>
-
-        <div class="content-controls video ab-mid">
-          <div class='blur ab-mid'></div>
-          <button class="rewind white icons-b abs"></button>
-          <button class="play play-pause white icons-b abs"></button>
-          <button class="forward white icons-b abs"></button>
-          <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=_cdlFd5-04E" target='_blank'></a>
-        </div>        
-      </div>
-    </div>
-
-    <div class='media'>
-      <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/9.%20George%20Bush%20Explanation/3%20-%20Comp.jpg">
-
-      <!--   <video class='george-bush-explanation' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/9.mp4' title="Kanye On The George Bush Incident"></video>  -->
-
-      <video class='george-bush-explanation' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Kanye On The George Bush Incident"></video>
-    </div>
-  </div>
-
-
-  <div class='tenth block'>
-    <p class='unread'> people believe in the same vision they will follow, just show them clearly where they are going.</p>
-  </div>
-
-
-  <!-- MACINTOSH TEAM -->
-  <div class='media-container unwatched covered'>
-    <div class='header ab-mid'>
-      <div class='top-bar ab-mid'>
-        <div class="main-controls">
-          <button class="close grey icons-b abs"></button>
-        </div>
-
-        <div class="content-controls video ab-mid">
-          <div class='blur ab-mid'></div>
-          <button class="rewind white icons-b abs"></button>
-          <button class="play play-pause white icons-b abs"></button>
-          <button class="forward white icons-b abs"></button>
-          <a class='post-link twitter-b icons-b abs white' href="https://twitter.com/acolorblue/status/850923969846718464" target='_blank'></a>
-        </div>             
-      </div>
-    </div>
-
-    <div class='media'>
-      <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/10.%20MacIntosh%20Team/1%20-%20Comp.jpg">
-
-      <!-- <video class='macintosh-team' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/10.mp4' title="On The Building Of The MacIntosh, 1985"></video>  -->
-
-      <video class='macintosh-team' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="On The Creation Of The MacIntosh, 1985"></video>
-    </div>
-  </div>
-
-
-  <div class='eleventh block'>
-    <p class='unread'>Do black women still fight against the dehumanization of black men?</p>
-  </div>
-
-
-  <!-- CREDITS -->
-  <div class='media-container unwatched covered'>
-    <div class='header ab-mid'>
-      <div class='top-bar ab-mid'>
-        <div class="main-controls">
-          <button class="close grey icons-b abs"></button>
-        </div>
-
-        <div class="content-controls video ab-mid">
-          <div class='blur ab-mid'></div>
-          <button class='rewind white icons-b abs'></button>
-          <button class='play play-pause white icons-b abs'></button>
-          <button class='forward white icons-b abs'></button>
-          <a class='post-link youtube-b icons-b abs white' href="https://www.youtube.com/watch?v=y3FpS-63Pbs" target='_blank'></a>
-        </div>
-      </div>
-    </div>
-
-    <div class='media'>
-      <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/0.%20Credits/1%20-%20Comp.jpg">
-
-      <!--               <video class='credits' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Credits%20Of%20A%20Kanye%20West%20Analysis.mp4' title="Credits"></video> -->
-<!--       <video class='credits' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4' title="Credits"></video> -->
-                    <video class='credits' preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Credits%20Of%20A%20Kanye%20West%20Analysis%20-%209.mp4' title="Credits"></video>
-    </div>
-  </div>
+        <div class='scroll-container'> 
           
+          <div class='first block'>
+            <p class='introduction unread'>in which he silenced them by raising his hand, pointed in a direction which they all proceeded to follow, then the white police officer remarks “That’s too much power for one man to have.”</p>
+            
+<!--             
+            <p class='introduction unread'>My study of Kanye runs parallel to my study of Stanley Kubrick, the photographer Jeff Wall, the industrial designer Jony Ive, the sculptor Damien Hirst, Steve Jobs & Malcolm X.-break- I mean literally these people damn near raised me as I found strong kinship in them from an understanding of and relation to a shared motive.-break- What we see partaking with Kanye is the amplification of right motive, wrong approach.-break- Wrong approach also goes into the context of lack of proper information, and also a lack of care to receive proper information, which plays a bit into our culture of desensitization.-break- We've all seen Kanye previously show his love for Malcolm X, “Power” is linked to being inspired from the scene in the Spike Lee film where Denzel was outside the hospital with a mob of black people, in which he silenced them by raising his hand, pointed in a direction which they all proceeded to follow, then the white police officer remarks “That’s too much power for one man to have.” We’re aware of the occasional name dropping in his other songs, this also happens during his sermons at concerts with one of the last taking place in September 2016 when he felt disrespected by Kid Cudi he stopped the show to rant “Why y’all gotta be coming at me?? This ain’t the ending of the Malcolm X movie!! I’m out here fighting for y’all!!”</p> -->
+          </div>
+
+
+          <!-- POLICE PRECINCT SCENE FROM 'MALCOLM X' (1992)  -->
+          <div class='malcolm-x-police-precinct media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls video ab-mid">
+                  <div class='blur ab-mid'></div>
+
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=iwGojrTKWvI" target='_blank'></a>
+                </div>
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/1.%20Malcolm%20X%20Police%20Predict%20Scene/1%20-%20Comp.jpg" />
+
+<!--               <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/11.%20Credits/1%20-%20Comp.jpg"> -->
+              
+<!--               <video title="Police Precinct Scene from Malcolm X (1992)" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/1.%20Police%20Precinct%20Scene%20From%20Malcolm%20X.mp4"></video> -->
+              
+              <video title="Police Precinct Scene from Malcolm X (1992)" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video>
+              
+<!--               <video title="Police Precinct Scene from Malcolm X (1992)" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/11.%20Credits.mp4"></video> -->
+            </div>
+          </div>
+
+
+          <div class='second block'>
+            <p class='unread'>the ending of the Malcolm X movie!! I’m out here fighting for y’all!!”</p>
+          </div>
+
+
+          <!-- KANYE RESPONDS TO CUDI -->
+          <div class='kanye-responds-to-cudi media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls video ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=wZfZM7_WcJA" target='_blank'></a>
+                </div>
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/2.%20Kanye%20Respond%20To%20Kid%20Cudi/1%20-%20Comp.jpg">
+
+              <!-- <video title="Kanye Responds To Cudi" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/2.%20Kanye%20Responds%20To%20Cudi.mp4"></video> -->
+              
+              <video title="Kanye Responds To Cudi" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video>
+            </div>
+          </div>
+
+
+          <div class='third block'>
+            <p class='unread'> Yeah i’m taking his lead! Imma just say how I say — Imma just say — Imma just be Ye and win! Imma take his lead! Radio fuck you!!!”</p>
+          </div>
+
+
+          <!-- RADIO FUCK YOU -->
+          <div class='radio-fuck-you media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls video ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=bkUr99epJh8" target='_blank'></a>
+                </div>
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/3.%20Radio%20Fuck%20You/1%20-%20Comp.jpg" />
+
+              <!-- <video title="Radio Fuck You" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/3.%20Radio%20Fuck%20You.mp4"></video> -->
+
+              <video title="Radio Fuck You" preload='none' playsinline src='https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4'></video>
+            </div>
+          </div>
+
+
+          <div class='fourth block'>
+            <!--             <p class='unread'> Trump's policies and I don't believe he truly has the desire to become familiar with them.</p> -->
+            <p class='unread'> position to be mislead, misused, exploited by the whites who pose as liberals only for the purpose of getting the support of the negro.”</p>
+          </div> 
+
+
+          <!-- MALCOLM X ON GOLDWATER -->
+          <div class='malcolm-x-on-goldwater media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls video ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=ve7g_ibjh3c" target='_blank'></a>
+                </div>
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/4.%20Malcolm%20X%20On%20Barry%20Goldwater/1%20-%20Comp.jpg" />
+
+              <!-- <video title="Malcolm X On Goldwater" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/4.%20Malcolm%20X%20On%20Goldwater.mp4"></video>  -->
+
+              <video title="Malcolm X On Goldwater" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video>
+            </div>
+          </div>
+
+
+          <div class='fifth block'>
+            <!--  <p class='unread'> out the condescending “lowest unemployment” like we all just a whole buncha boot-licking-lazy-watermelon-eating negros waiting for massa to give us something to do.</p> -->
+
+            <p class='unread'>liberty of his own people, which was often a critique Martin Luther King received from Malcolm X.</p>
+          </div>
+
+
+          <!-- MALCOLM X ON MARTIN LUTHER KING JR -->
+          <div class='malcolm-x-on-mlk media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls video ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=X6FEyOziF8s" target='_blank'></a>
+                </div>
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/5.%20Malcolm%20X%20On%20Martin%20Luther%20King/1%20-%20Comp.jpg" />
+
+              <!-- <video title="Malcolm X On Martin Luther King Jr" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/5.%20Malcolm%20X%20On%20Martin%20Luther%20King%20Jr.mp4"></video> -->
+
+              <video title="Malcolm X On Martin Luther King Jr" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video>
+            </div>
+          </div> 
+
+
+          <div class='sixth block'>
+            <!-- <p class='unread'> becomes a problem when it threatens the actual psychological and physical well-being of other human beings.</p>
+
+<p class='unread'>Kate and Billy opening up their laced cupcake business for. We can agree to disagree on your best album, not on my survival.</p>  -->
+
+            <p class='unread'>Due mainly to his ego threatened, I believe he meant what he said about Wiz & Amber prior to the release of TLOP because it was just too personal,-break- -break- -break- -break- -break- -break- it leaves us right back at the initial devastating reaction which is that he believes in this.</p>
+
+            <p class='unread'>That sound like a choice! You was there for 400 years and it’s all of y’all??”</p>
+          </div>
+
+
+          <!-- KANYE ON THE CHOICE OF SLAVERY -->
+          <div class='slavery-was-a-choice media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls video ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=s_M4LkYra5k" target='_blank'></a>
+                </div>
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/6.%20Kanye%20On%20The%20Choice%20Of%20Slavery/1%20-%20Comp.PNG" />
+
+              <!-- <video title="Kanye On The Choice Of Slavery" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/6.%20Kanye%20On%20The%20Choice%20Of%20Slavery.mp4"></video> -->
+
+              <video title="Kanye On The Choice Of Slavery" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video>
+            </div>
+          </div> 
+
+
+          <div class='seventh block'>
+            <!-- <p class='unread'>in terror of losing her children, perhaps the only thing that might have provided her some comfort in the cancerous system of slavery.</p> -->
+
+            <p class='unread'>social issues because “We don’t want to become a third world country while screaming about pronouns”</p>
+          </div>
+
+
+          <!-- CANDACE OWENS ON ECONOMICS OVER SOCIAL ISSUES -->
+          <div class='candace-owens-economics media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls video ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=BSAoitd1BTQ" target='_blank'></a>
+                </div>
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/7.%20Candace%20Owens%20Economics%20Before%20Social%20Issues/1%20-%20Comp.PNG" />
+
+              <!-- <video title="Candace Owens On Economics Over Social Issues" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/7.%20Candace%20Owens%20On%20Economics.mp4"></video> -->
+
+              <video title="Candace Owens On Economics Over Social Issues" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video>
+            </div>
+          </div>
+
+
+          <div class='eighth block'>
+            <p class='unread'>The Taylor Swift VMAs incident was a clear example of right motive, wrong approach. Kanye had the right motive which was about actual great art and quality of work,</p>
+          </div>
+
+
+          <!-- WE MAKE GOOD MUSIC -->
+          <div class='we-make-good-music media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls video ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=7BxCDysoSxg" target='_blank'></a>
+                </div>
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/8.%20We%20Make%20Good%20Music/1%20-%20Comp.jpg">
+
+              <!-- <video title="We Make Good Music" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/8.%20We%20Make%20Good%20Music.mp4"></video> -->
+
+              <video title="We Make Good Music" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video>
+            </div>
+          </div>
           
-          
+
+          <div class='ninth block'>
+            <p class='unread'>  was considered to have done something so wrong, my motivation was from a good place.”</p>
+          </div>
+
+
+          <!-- KANYE ON THE GEORGE BUSH INCIDENT -->
+          <div class='george-bush-explanation media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=_cdlFd5-04E" target='_blank'></a>
+                </div>        
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class ='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/9.%20George%20Bush%20Explanation/3%20-%20Comp.jpg">
+
+              <!-- <video title="Kanye On The George Bush Incident" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/9.%20Kanye%20On%20The%20George%20Bush%20Incident.mp4"></video> -->
+
+              <video title="Kanye On The George Bush Incident" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video>
+            </div>
+          </div>
+
+
+          <div class='tenth block'>
+            <p class='unread'> people believe in the same vision they will follow, just show them clearly where they are going.</p>
+          </div>
+
+
+          <!-- BUILDING THE MACINTOSH, 1985 -->
+          <div class='building-the-macintosh media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class="rewind white icons-b abs"></button>
+                  <button class="play play-pause white icons-b abs"></button>
+                  <button class="forward white icons-b abs"></button>
+                  <a class='post-link twitter icons-b abs white' href="https://twitter.com/acolorblue/status/850923969846718464" target='_blank'></a>
+                </div>             
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/10.%20MacIntosh%20Team/1%20-%20Comp.jpg">
+
+              <!-- <video title="Building The MacIntosh, 1985" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/10.%20Building%20The%20MacIntosh.mp4"></video> -->
+
+              <video title="Building The MacIntosh, 1985" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video>
+            </div>
+          </div>
+
+
+          <div class='eleventh block'>
+            <p class='unread'>Do black women still fight against the dehumanization of black men?</p>
+          </div>
+
+
+          <!-- CREDITS -->
+          <div class='credits media video-player unwatched covered'>
+            <div class='header ab-mid'>
+              <div class='top-bar ab-mid'>
+                <div class="window-controls">
+                  <button class="close grey icons-b abs"></button>
+                </div>
+
+                <div class="content-controls ab-mid">
+                  <div class='blur ab-mid'></div>
+                  <button class='rewind white icons-b abs'></button>
+                  <button class='play play-pause white icons-b abs'></button>
+                  <button class='forward white icons-b abs'></button>
+                  <a class='post-link youtube icons-b abs white' href="https://www.youtube.com/watch?v=y3FpS-63Pbs" target='_blank'></a>
+                </div>
+              </div>
+            </div>
+
+            <div class='content'>
+              <img class='buffering-indicator ab-mid' src="https://raw.githubusercontent.com/acolorblue/acolorblue.github.io/gh-pages/Design%20Icons/Video%20Loader/1.gif">
+              
+<!--               <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/0.%20Credits/1%20-%20Comp.jpg"> -->
+              <img class='thumbnail ab-mid' src="https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/3.%20Text%20Editor/Video%20Thumbnails/11.%20Credits/1%20-%20Comp.jpg">
+
+              <video title="Credits" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/11.%20Credits.mp4"></video>
+              
+              <!-- <video title="Credits" preload='none' playsinline src="https://acolorblue.nyc3.digitaloceanspaces.com/Boat.mp4"></video> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   
-  <span class='background-credits ab-mid'>Sahel, Mali by Steve McCurry, 1986.</span>
+  <div class='background-credits ab-mid'>
+    <div class='blur ab-mid'></div>
+    <span class='title ab-mid'>Sahel, Mali by Steve McCurry, 1986.</span>
+  </div>
 </div>
 
   
   
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
-  <script src='https://acolorblue.co/libraries/Code/Javascript/mutate.js'></script>
-  <script src='https://acolorblue.co/libraries/Code/Javascript/global.js?106'></script>
-  <script src='https://acolorblue.co/libraries/Code/Javascript/automated-text.js?56'></script>
-  <script src='https://rawgit.com/rythgs/jquery.primarycolor.js/master/jquery.primarycolor.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script src="https://acolorblue.co/libraries/Code/Javascript/mutate.js"></script>
+  <script src="https://acolorblue.co/libraries/Code/Javascript/global.js?187"></script>
+  <script src="https://acolorblue.co/libraries/Code/Javascript/automated-text.js?65"></script>
+  <script src="https://rawgit.com/rythgs/jquery.primarycolor.js/master/jquery.primarycolor.min.js"></script>
   <script src="https://acolorblue.co/libraries/Code/Javascript/inline-video.js"></script>
   <script src="https://acolorblue.co/worldclock/0.%20Design/Numeric%20Indicators/functions.js?4"></script>
-  <script src="local.js?91"></script>
+  <script src="local.js?95"></script>
 </body>
 </html>

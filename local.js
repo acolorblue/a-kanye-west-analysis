@@ -1778,7 +1778,7 @@ function onFileClick() {
 window.onload = function() {
   onFirstImpression();
   userDeviceSpecifications();
-  // userActiveStatus();
+  userActiveStatus();
   detectSizeChange();
   loaderGTA();
   menuBar();

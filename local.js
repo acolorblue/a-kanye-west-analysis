@@ -1774,9 +1774,9 @@ function onFileClick() {
 window.onload = function() {
   onFirstImpression();
   userDeviceSpecifications();
-  // userActiveStatus();
+  userActiveStatus();
   detectSizeChange();
-  // loaderGTA();
+  loaderGTA();
   menuBar();
   closeApp();
   searchTextEditor(); 
@@ -1786,7 +1786,7 @@ window.onload = function() {
   onWindowClick();
   
   // IF LOADER NOT PRESENT
-  callRemainderFunctions();
+//   callRemainderFunctions();
 }
 
  

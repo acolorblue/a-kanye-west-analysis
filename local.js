@@ -106,7 +106,7 @@ function detectSizeChange() {
     function deviceCurrentSize() {
       checkDeviceLength();
       if (device_width_longer) {
-        body.removeClass('height-longer').addClass('width-longer');
+        html.removeClass('height-longer').addClass('width-longer');
         
         if ($('.application').hasClass('image-preview')) {
           titleOverflow('.application.image-preview .title', '.application.image-preview .title-scroll');
@@ -128,7 +128,7 @@ function detectSizeChange() {
       }  
       
       if (device_height_longer) {
-        body.removeClass('width-longer').addClass('height-longer');
+        html.removeClass('width-longer').addClass('height-longer');
 
         if ($('.application').hasClass('image-preview')) {
           setTimeout(function() {
@@ -411,7 +411,9 @@ function applicationRemove() {
   }
   contentControls();
   
-  
+  if ($('.application').hasClass('error')) {
+    return;
+  }
   
   if ($('.application').hasClass('text-editor')) { 
     pauseAnyVideosPlaying('.application');
@@ -953,8 +955,10 @@ function sharePage() {
         button.className = 'twitter icons-b abs';
         div.append(button.cloneNode());
 
-        button.className = 'instagram icons-b abs';
-        div.append(button.cloneNode());
+        if (mobile) {
+          button.className = 'instagram icons-b abs';
+          div.append(button.cloneNode());
+        }
 
         button.className = 'tumblr icons-b abs';
         div.append(button.cloneNode());
@@ -1067,7 +1071,6 @@ function mediaAfterParagraphs() {
       eighth_block_interval,
       ninth_block_interval,
       tenth_block_interval,
-      eleventh_block_interval,
       eleventh_block_interval;
         
   function videoPlayer() {
@@ -1175,7 +1178,7 @@ function mediaAfterParagraphs() {
             
             if (media.hasClass('credits')) {
               $('.text-editor > .header .credits').remove();
-              $('.rotate-to-landscape').remove();
+              $('body .rotate-to-landscape').remove();
               return;
             }
 
@@ -1412,20 +1415,13 @@ function mediaAfterParagraphs() {
                 videoPlayer();
 
                 if (mobile) {
-                  function buildRotateToLandscape() {
-                    if ($('.rotate-to-landscape').length == 0) {
-                      div.className = 'rotate-to-landscape ab-mid';
-                      body.prepend(div.cloneNode(true));
-
-                      button.className = 'close grey ab-mid icons-b abs';
-                      $('.rotate-to-landscape').append(button.cloneNode());
-                      $('.rotate-to-landscape .close').click(function() {
-                        $('.media.credits').removeClass('visible').css('display', '').addClass('hide');
-                        $('.rotate-to-landscape').remove();
-                      })
-                    }
-                  }
-                  buildRotateToLandscape();
+                  rotateToLandscape();
+                  button.className = 'close grey ab-mid icons-b abs';
+                  $('body .rotate-to-landscape').append(button.cloneNode());
+                  $('.rotate-to-landscape .close').click(function() {
+                    $('.media.credits').removeClass('visible').css('display', '').addClass('hide');
+                    $('body .rotate-to-landscape').remove();
+                  })
                 }
               });
             }
@@ -1778,9 +1774,9 @@ function onFileClick() {
 window.onload = function() {
   onFirstImpression();
   userDeviceSpecifications();
-  userActiveStatus();
+  // userActiveStatus();
   detectSizeChange();
-  loaderGTA();
+  // loaderGTA();
   menuBar();
   closeApp();
   searchTextEditor(); 
@@ -1790,7 +1786,7 @@ window.onload = function() {
   onWindowClick();
   
   // IF LOADER NOT PRESENT
-  // callRemainderFunctions();
+  callRemainderFunctions();
 }
 
  
@@ -1824,8 +1820,8 @@ function onWindowClick() {
 
 // WINDOW ON ERROR
 window.onerror = function(msg, url, linenumber) {
-  if ($('.application').hasClass('error')) {
-    return;
+  if ($('body .rotate-to-landscape')) {
+    $('body .rotate-to-landscape').remove();
   }
   
   alert("An error has occured, please throw your device away immediately. lol nah i'm fucking with you but tell me what happened though.");
@@ -1851,7 +1847,7 @@ window.onerror = function(msg, url, linenumber) {
   }
   header();
 
-  function body() {
+  function content() {
     // SECTION - CODE      
     div.className = 'section code';
     parent_container.append(div.cloneNode(true));
@@ -1878,19 +1874,19 @@ window.onerror = function(msg, url, linenumber) {
     paragraph.contentEditable = true;
     $('div.section.user-experience').append(paragraph.cloneNode());
   }
-  body();
+  content();
 
   function actions() {
     $('.content-controls .send-email').click(function() {
       var email_address = 'mailto:info@acolorblue.co',
           subject = "?subject=Error on " + url,
-          body = "&body=" + 
+          content = "&body=" + 
           "CODE ERROR: " + "%0A" + 
           $('.error .code .content').text().replace(". ", ". %0A") + "%0A %0A" + 
           "USER EXPERIENCE: " + "%0A" + 
           $('.error .user-experience .content').text();
 
-      window.location.href = email_address + subject + body;
+      window.location.href = email_address + subject + content;
       setTimeout(function() {
         location.reload();
       }, 2000);

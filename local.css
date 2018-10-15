@@ -83,8 +83,7 @@
 
 .loader .gta .foreground-layer .text-logo.kanye-analysis {
   width: 210px;
-  height: fit-content;
-  height: -moz-fit-content;
+  height: 145px;
   font-size: 55px;
   line-height: 0.85;
   text-transform: lowercase;
@@ -1122,10 +1121,11 @@
 /* PARENT CONTAINER */
 .application .parent-container {
   width: -webkit-fill-available;
-  width: 100%;
   height: 100%;
-  border-radius: 4px;
-  overflow: scroll;
+/*   border-radius: 4px; */
+  border-radius: 0px 0px 4px 4px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   padding: 5%;
   font-family: Ahamono Monospaced;
   font-size: 14px;
@@ -1199,13 +1199,20 @@
 
 /* TEXT EDITOR - CONTENT CONTROLS - SOCIAL PLATFORMS */
 .application.text-editor > .header .social-platforms {
-  width: 104px;
   height: 30px;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.1);
   display: inline-flex;
   position: relative;
   z-index: 1;
+}
+
+.computer .application.text-editor > .header .social-platforms {
+  width: 70px;
+}
+
+.mobile .application.text-editor > .header .social-platforms {
+  width: 104px;
 }
 
 .application.text-editor > .header .social-platforms button {
@@ -1225,6 +1232,10 @@
   height: -moz-fit-content;
   overflow: scroll;
   display: block;
+}
+
+.application.text-editor .parent-container .scroll-container > div {
+  margin-bottom: 14px;
 }
 
 .application.text-editor .scroll-container p {
@@ -1424,11 +1435,14 @@
 .application.image-preview {
   width: fit-content;
   width: -moz-fit-content;
-  background-color: #f6f5f6;
 }
 
 .application.image-preview .blur {
-  display: none;
+  filter: blur(20px) brightness(1.2);
+}
+
+.application.image-preview .header {
+  background-color: rgba(246, 245, 246, 0.57);
 }
 
 .application.image-preview .header .window-controls button {
@@ -1454,15 +1468,14 @@
 }
 
 .mobile .application.image-preview .header .content-controls > button {
-  line-height: 16px;
+  line-height: 13px;
 }
 
 
 /* IMAGE PREVIEW - PARENT CONTAINER  */
 .application.image-preview .parent-container {
-  border: 1px solid #cbcbcb;
-  padding: 0%;
-  margin: 2px;
+  background-color: rgba(246, 245, 246, 0.57);
+  padding: 2px;
 }
 
 .application.image-preview .parent-container .scroll-container {
@@ -1471,10 +1484,11 @@
 
 .application.image-preview .parent-container .poster {
   width: auto;
+  width: -moz-available;
   height: 100%;
-  border-radius: inherit;
+  border: 1px solid #cbcbcb;
+  border-radius: 4px;
   display: block;
-  margin: auto;
 }
 
 

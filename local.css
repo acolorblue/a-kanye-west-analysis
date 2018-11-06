@@ -417,7 +417,7 @@
 }
 
 .android .mac-os > .menu-bar .panel {
-  font-size: 22px;
+/*   font-size: 22px; */
 }
 
 .mac-os .menu-bar .panel.left {
@@ -705,7 +705,7 @@
 }
 
 .android .mac-os .menu-bar .section-container.profile .menu .bio {
-  font-size: 16px;
+/*   font-size: 16px; */
 }
 
 .mac-os .menu-bar .section-container.profile .menu .accounts {
@@ -901,7 +901,7 @@
 }
 
 .android .mac-os .file .title {
-  font-size: 16px;
+/*   font-size: 16px; */
 }
 
 .mac-os .file .title:nth-child(2) {
@@ -1070,7 +1070,7 @@
 }
 
 .android .application .header .top-bar .title .title-scroll {
-  font-size: 16.4px;
+/*   font-size: 16.4px; */
 }
 
 .application .header .top-bar .title .title-scroll.ellipsis {
@@ -1269,7 +1269,7 @@
 }
 
 .android .application.text-editor .scroll-container p {
-  font-size: 18px;
+/*   font-size: 18px; */
 }
 
 .application.text-editor .scroll-container p.reading::after {
@@ -1505,6 +1505,8 @@
 /* IMAGE PREVIEW - PARENT CONTAINER  */
 .application.image-preview .parent-container {
   width: fit-content;
+/*   width: 100%; */
+/*   width: inherit; */
   width: -moz-fit-content;
   background-color: rgba(246, 245, 246, 0.57);
   padding: 2px;
@@ -1756,7 +1758,7 @@
 }
 
 .android .mac-os .background-credits {
-  font-size: 16.4px;
+/*   font-size: 16.4px; */
 }
 
 .mac-os .background-credits.show {

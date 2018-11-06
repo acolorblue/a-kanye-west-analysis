@@ -1072,14 +1072,14 @@ function sharePage() {
 // MEDIA PRELOADS
 function mediaPreloads() {
   function videosToAuto() {
-    var the_choice_of_slavery = $('.media.kanye-on-the-choice-of-slavery').find('video'),
-      candace_owens_social_issues = $('.media.candace-owens-on-social-issues').find('video'),
+    var slavery_was_a_choice = $('.media.slavery-was-a-choice').find('video'),
+      candace_owens_economics = $('.media.candace-owens-economics').find('video'),
       we_make_good_music = $('.media.we-make-good-music').find('video'),
-      george_bush_incident = $('.media.kanye-on-the-george-bush-incident').find('video'),
+      george_bush_explanation = $('.media.george-bush-explanation').find('video'),
       building_the_macintosh = $('.media.building-the-macintosh').find('video'),
       credits = $('.media.credits').find('video');
   
-  $(the_choice_of_slavery, candace_owens_social_issues, we_make_good_music, george_bush_incident, building_the_macintosh, credits).attr('preload', 'auto');
+  $(slavery_was_a_choice, candace_owens_economics, we_make_good_music, george_bush_explanation, building_the_macintosh, credits).attr('preload', 'auto');
   }
   videosToAuto();
   
@@ -1272,7 +1272,8 @@ function mediaAfterParagraphs() {
         window.clearInterval(first_block_interval);   
 
         setTimeout(function() { 
-          $('.media.police-precinct-scene').addClass('visible');
+          $('.media.malcolm-x-police-precinct').addClass('visible');
+          // $('.media.credits').addClass('visible');
           videoPlayer(); 
         }, 750);
       }
@@ -1330,8 +1331,8 @@ function mediaAfterParagraphs() {
     })
   }
   
-  
-  // MALCOLM X & KENNETH CLARK ON MLK
+   
+  // MALCOLM X & DR KENNETH CLARK ON MARTIN LUTHER KING JR
   function fifthBlock() {
     $('.scroll-container .fifth p.reading, .scroll-container .fifth p.read').last().each(function() { 
       current_paragraph = $(this).text();
@@ -1365,7 +1366,7 @@ function mediaAfterParagraphs() {
         window.clearInterval(sixth_block_interval);
         
         setTimeout(function() {
-          $('.media.kanye-on-the-choice-of-slavery').addClass('visible');
+          $('.media.slavery-was-a-choice').addClass('visible');
           videoPlayer();
         }, 750);
       }
@@ -1373,7 +1374,7 @@ function mediaAfterParagraphs() {
   }
   
   
-  // CANDACE OWENS ON SOCIAL ISSUES
+  // CANDACE OWENS ON ECONOMICS OVER SOCIAL ISSUES
   function seventhBlock() {
     $('.scroll-container .seventh p.reading, .scroll-container .seventh p.read').last().each(function() {
       current_paragraph = $(this).text();
@@ -1382,7 +1383,7 @@ function mediaAfterParagraphs() {
         window.clearInterval(seventh_block_interval);
         
         setTimeout(function() {
-          $('.media.candace-owens-on-social-issues').addClass('visible');
+          $('.media.candace-owens-economics').addClass('visible');
           videoPlayer();
         }, 750);
       }
@@ -1416,7 +1417,7 @@ function mediaAfterParagraphs() {
         window.clearInterval(ninth_block_interval);
         
         setTimeout(function() {
-          $('.media.kanye-on-the-george-bush-incident').addClass('visible');
+          $('.media.george-bush-explanation').addClass('visible');
           videoPlayer();
         }, 750);
       }
@@ -1424,7 +1425,7 @@ function mediaAfterParagraphs() {
   }
   
   
-  // BUILDING THE MACINTOSH
+  // BUILDING THE MACINTOSH, 1985
   function tenthBlock() {
     $('.scroll-container .tenth p.reading, .scroll-container .tenth p.read').last().each(function() {
       current_paragraph = $(this).text();
@@ -1611,6 +1612,7 @@ function videoPlayback() {
             media.addClass('playing uncompleted');
             play_pause = media.find('.play-pause');
             play_pause.removeClass('play').addClass('pause');
+            header.addClass('hide');
           }, 1000);
         }
       }, 3000);
@@ -1698,7 +1700,7 @@ function videoPlayback() {
             media.removeClass('uncompleted').addClass('covered');
           }
           // console.log(video_idle_state);
-        }, 16000);
+        }, 20000);
       }
     }
     secondCheck();
@@ -1895,13 +1897,10 @@ window.onload = function() {
   videoPlayback(); 
   onFileClick();
   onWindowClick();
-  
-  // imageBlur('.mac-os', '.mac-os > .menu-bar', '.mac-os > .menu-bar > .blur-container .blur', 'background-image');
-  // imageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
   mediaPreloads();
   
   // IF LOADER NOT PRESENT
-  // callRemainderFunctions();
+//   callRemainderFunctions();
 }
 
  
@@ -1913,7 +1912,6 @@ function callRemainderFunctions() {
   clock();
   imageBlur('.mac-os', '.mac-os > .menu-bar', '.mac-os > .menu-bar > .blur-container .blur', 'background-image');
   imageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
-  // mediaPreloads();
   callAutomatedText();
   mediaAfterParagraphs();
 }

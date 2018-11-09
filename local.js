@@ -389,12 +389,12 @@ function loaderGTA() {
   }
 
   function titleThenRemoveLoader() {
-    $('.gta .text-logo').text("A Kanye West Analysis");
+    $('.gta .text-logo').text("A ***** **** Analysis");
     automatedText('.gta .text-logo', 2000, [''], 0, '-break-', 800);
 
     end_of_title_interval = setInterval(endOfTitle, 200);
     function endOfTitle() {
-      if ($('.gta .text-logo').text().includes("A Kanye West Analysis")) {
+      if ($('.gta .text-logo').text().includes("A ***** **** Analysis")) {
         window.clearInterval(end_of_title_interval); 
 
         setTimeout(function() {
@@ -402,18 +402,8 @@ function loaderGTA() {
         }, 100);
         
         setTimeout(function() {
-          remove_loader_interval = setInterval(removeLoader, 200);
-        }, 3400); 
-        function removeLoader() {
-          if (typeof mediaAfterParagraphs === 'function') {
-            window.clearInterval(remove_loader_interval);
-
-            $('.loader').addClass('hide');
-            setTimeout(function() {
-              $('.loader').remove();
-            }, 2990);
-          }
-        }
+          removeLoader('.loader', 'slide-up', 0, 3000);
+        }, 3600); 
       }
     }
   }
@@ -667,18 +657,8 @@ function applicationChange() {
     indicatorsContainer();
 
     function actions() {
-      function imageZoom() {
-        $('.computer .world-clock .timezones clock .numeric-indicators')
-          .on('mouseover', function() {
-          $(this).parents('clock').addClass('zoomed');
-        })
-
-          .on('mouseleave', function() {
-          $(this).parents('clock').removeClass('zoomed');
-        })
-      }
-      imageZoom();
-
+      computerImageZoom('.computer .world-clock .timezones clock .border');
+      
       function exit() {
         $('.content-controls .exit').click(function() {
           window.clearInterval(indicators_interval);
@@ -701,15 +681,15 @@ function applicationChange() {
 function menuBar() {
   $('.menu-bar .section-container > button').click(function(event) {
     var section_container = $(this).parent(),
-        this_button = $(this),
+        this_element = $(this),
         menu = $(this).next('.menu'),
         this_is_selected = section_container.hasClass('selected'),
         this_is_not_selected = !this_is_selected,
         selected_exists = $('.menu-bar .section-container.selected').length == 1,
-        apple_menu = this_button.hasClass('apple-logo'),
-        date_and_time = this_button.hasClass('time'),
-        profile = this_button.hasClass('name'),
-        notification_center = this_button.hasClass('notification-center');
+        apple_menu = this_element.hasClass('apple-logo'),
+        date_and_time = this_element.hasClass('time'),
+        profile = this_element.hasClass('name'),
+        notification_center = this_element.hasClass('notification-center');
     
     if (selected_exists) {
       $('.menu-bar .section-container').removeClass('selected');
@@ -1073,18 +1053,19 @@ function sharePage() {
 function mediaPreloads() {
   function videosToAuto() {
     var slavery_was_a_choice = $('.media.slavery-was-a-choice').find('video'),
-      candace_owens_economics = $('.media.candace-owens-economics').find('video'),
+      candace_owens_social_issues = $('.media.candace-owens-social-issues').find('video'),
       we_make_good_music = $('.media.we-make-good-music').find('video'),
       george_bush_explanation = $('.media.george-bush-explanation').find('video'),
       building_the_macintosh = $('.media.building-the-macintosh').find('video'),
       credits = $('.media.credits').find('video');
   
-  $(slavery_was_a_choice, candace_owens_economics, we_make_good_music, george_bush_explanation, building_the_macintosh, credits).attr('preload', 'auto');
+  $(slavery_was_a_choice, candace_owens_social_issues, we_make_good_music, george_bush_explanation, building_the_macintosh, credits).attr('preload', 'auto');
   }
   videosToAuto();
   
   setTimeout(function() {
     $('.scroll-container .media').addClass('hide');
+    $('.media.malcolm-x-police-precinct .play-pause').removeClass('pause').addClass('play');
   }, 400);
 
   setTimeout(function() {
@@ -1383,7 +1364,7 @@ function mediaAfterParagraphs() {
         window.clearInterval(seventh_block_interval);
         
         setTimeout(function() {
-          $('.media.candace-owens-economics').addClass('visible');
+          $('.media.candace-owens-social-issues').addClass('visible');
           videoPlayer();
         }, 750);
       }
@@ -1501,7 +1482,7 @@ function mediaAfterParagraphs() {
 // VIDEO PLAYER CONTROLS
 function videoPlayback() {
   function callVariables() {
-    media = this_button.closest('.media');
+    media = this_element.closest('.media');
     video = media.find('video')[0];
     mediaVariableAssignments();
   }
@@ -1710,7 +1691,7 @@ function videoPlayback() {
   if (computer) {
     $(document)
       .on('click', '.media', function() {
-      this_button = $(this);
+      this_element = $(this);
       callVariables();
       
       play_pause.click();  
@@ -1721,7 +1702,7 @@ function videoPlayback() {
       }) 
     
       .on('mouseover', '.media .content-controls', function() {
-      this_button = $(this);
+      this_element = $(this);
       callVariables();
 
       if (unwatched) {
@@ -1734,7 +1715,7 @@ function videoPlayback() {
     })  
     
       .on('mouseout', '.media .content-controls', function() {
-      this_button = $(this);
+      this_element = $(this);
       callVariables();
 
       if (unwatched) {
@@ -1745,11 +1726,11 @@ function videoPlayback() {
     })  
     
       .on('click', '.media .content-controls button', function(event) {
-      this_button = $(this);
+      this_element = $(this);
       callVariables();
-      play_pause = this_button.hasClass('play-pause');
-      rewind = this_button.hasClass('rewind');
-      forward = this_button.hasClass('forward');
+      play_pause = this_element.hasClass('play-pause');
+      rewind = this_element.hasClass('rewind');
+      forward = this_element.hasClass('forward');
 
       playPause();
       timeAdjustment(); 
@@ -1757,7 +1738,7 @@ function videoPlayback() {
       })
     
       .on('mouseover mousemove', '.media', function() {
-      this_button = $(this);
+      this_element = $(this);
       callVariables();
       
       if (unwatched) {
@@ -1768,7 +1749,7 @@ function videoPlayback() {
     })
     
       .on('mouseleave', '.media', function() {
-      this_button = $(this);
+      this_element = $(this);
       callVariables();
       
       if (unwatched) {
@@ -1785,7 +1766,7 @@ function videoPlayback() {
   if (mobile) {
     $(document)
       .on('touchstart', '.media', function(event) {
-      this_button = $(this);
+      this_element = $(this);
       callVariables();
 
       if (unwatched) {
@@ -1814,11 +1795,11 @@ function videoPlayback() {
       }) 
     
       .on('touchstart', '.media .content-controls button', function(event) {
-      this_button = $(this);
+      this_element = $(this);
       callVariables();
-      play_pause = this_button.hasClass('play-pause');
-      rewind = this_button.hasClass('rewind');
-      forward = this_button.hasClass('forward');
+      play_pause = this_element.hasClass('play-pause');
+      rewind = this_element.hasClass('rewind');
+      forward = this_element.hasClass('forward');
       
       if (!content_controls.hasClass('over')) {
         content_controls.addClass('over');
@@ -1887,7 +1868,7 @@ function onFileClick() {
 window.onload = function() {
   onFirstImpression();
   userDeviceSpecifications();
-  userActiveStatus();
+  // userActiveStatus();
   detectSizeChange();
   loaderGTA();
   menuBar();
@@ -1897,10 +1878,10 @@ window.onload = function() {
   videoPlayback(); 
   onFileClick();
   onWindowClick();
-  mediaPreloads();
+  // mediaPreloads();
   
   // IF LOADER NOT PRESENT
-//   callRemainderFunctions();
+  // callRemainderFunctions();
 }
 
  
@@ -1914,6 +1895,8 @@ function callRemainderFunctions() {
   imageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
   callAutomatedText();
   mediaAfterParagraphs();
+  
+  mediaPreloads();
 }
 
 

@@ -79,12 +79,6 @@ function userDeviceSpecifications() {
       });
     } 
     draggableApp(); 
-    
-    if (macintosh) {
-    }
-    
-    if (windows) {
-    }
   }
   
   if (mobile) {
@@ -498,7 +492,7 @@ function applicationRemove() {
 
 
 
-// MEDIA VARIABLE ADJUSTMENTS
+// MEDIA VARIABLE ADJUSTMENTS 
 function mediaVariableAssignments() {
   covered = media.hasClass('covered');
   unwatched = media.hasClass('unwatched');
@@ -591,6 +585,10 @@ function applicationChange() {
       heightFromWidthRatio(media, '.scroll-container', '0.563278');
       heightFromWidthRatio(thumbnail, '.scroll-container', '0.563278');
     }, 1100);
+        
+    setTimeout(function() {
+      media.find('video')[0].load();
+    }, 1400);
   }
   
   if ($('.application').hasClass('image-preview')) {
@@ -895,17 +893,18 @@ function closeApp() {
 
 // SEARCH TEXT EDITOR
 function searchTextEditor() {
-  $(document).on('click', '.text-editor > .header .content-controls .search', function() {
+  $(document).on('click', '.application.text-editor > .header .content-controls .search', function() {
     uncompleted = !$('.scroll-container').hasClass('completed');
     completed = $('.scroll-container').hasClass('completed');
     
     function searchBarShown() {
-      if ($('.text-editor > .header .search-bar').length == 1) {
-        $('.text-editor > .header .search-bar').val("").keyup().addClass('hide');
-        $('.text-editor .scroll-container p.read, .text-editor .scroll-container .media.watched').removeClass('hide');
+      if ($('.application.text-editor > .header .search-bar').length == 1) {
+        $('.application.text-editor > .header .search-bar').val("").keyup().addClass('hide');
+        $('.application.text-editor .scroll-container p.read, .application.text-editor .scroll-container .media.watched').removeClass('hide');
         setTimeout(function() {
-          $('.text-editor > .header .search-bar').empty().remove(); 
-          $('.text-editor > .header .content-controls').removeClass('search');
+          $('.application.text-editor > .header .search-bar').empty().remove(); 
+          $('.application.text-editor > .header .content-controls').removeClass('search');
+          $('.application.text-editor').removeClass('searching');
         }, 200);  
       }
     }
@@ -931,7 +930,8 @@ function searchTextEditor() {
           input.placeholder = "Search Essay";
           $('.application > .header .content-controls').prepend(input).addClass('search');
           setTimeout(function() {
-            $('.text-editor > .header .search-bar').removeClass('hide');
+            $('.application.text-editor > .header .search-bar').removeClass('hide');
+            $('.application.text-editor').addClass('searching');
           }, 200);
         }
       }
@@ -939,13 +939,14 @@ function searchTextEditor() {
     searchBarHidden();
  
     // SEARCH FUNCTION
-    $('.text-editor > .header .search-bar').keyup(function() {
+    $('.application.text-editor > .header .search-bar').keyup(function() {
       var entered_value = $(this).val(),
           entered_value_global = new RegExp(entered_value, "ig"),
-          no_value = entered_value == '';   
+          no_value = entered_value == '',
+          paragraph_original;   
 
-      $('.text-editor .scroll-container p.read').each(function() { 
-        var paragraph_original = $(this).text();
+      $('.application.text-editor .scroll-container p.read').each(function() { 
+        paragraph_original = $(this).text();
 
         if (!paragraph_original.includes(entered_value)) {
           $(this).addClass('hide');
@@ -960,7 +961,7 @@ function searchTextEditor() {
         }
       });
       
-      $('.text-editor .media.watched').each(function() {
+      $('.application.text-editor .media.watched').each(function() {
         if (entered_value.length > 0) {
           $(this).addClass('hide');
         }
@@ -1064,25 +1065,30 @@ function mediaPreloads() {
   videosToAuto();
   
   setTimeout(function() {
-    $('.scroll-container .media').addClass('hide');
     $('.media.malcolm-x-police-precinct .play-pause').removeClass('pause').addClass('play');
+    $('.media.malcolm-x-police-precinct, .media.kanye-responds-to-cudi').addClass('hide');
   }, 400);
 
   setTimeout(function() {
-    applicationRemove();
-    application.addClass('world-clock');
-    applicationChange();
+    // applicationRemove();
+    // application.addClass('world-clock');
+    // applicationChange();
   }, 600);
 
   setTimeout(function() {
-    applicationRemove();
-    application.addClass('text-editor');
-    applicationChange();
+    // applicationRemove();
+    // application.addClass('text-editor');
+    // applicationChange();
   }, 1200);
   
   setTimeout(function() {
     $('.panel .section-container').removeClass('selected');
   }, 1600);
+  
+  setTimeout(function() {
+    // $(window).trigger('resize');
+    imageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
+  }, 6000);
 }
 
   
@@ -1174,9 +1180,11 @@ function mediaAfterParagraphs() {
 
       if (device_height_longer) {
         media.fadeIn(200);
+        media.find('video')[0].load();
         imageBlur(thumbnail, content_controls, blur, 'image-tag'); 
         imageBlurReposition(thumbnail, content_controls, blur, 'image-tag'); 
         primaryColor(thumbnail, top_bar_children, '0.6');
+        media.find('video')[0].load();
       }
       
       $(content_controls).mutate('width height', function(el, info) {
@@ -1499,6 +1507,7 @@ function videoPlayback() {
           removeUnwatched();
         } 
 
+        pauseAnyVideosPlaying('.application');
         video.play();  
         media.addClass('playing uncompleted');
         play_pause = media.find('.play-pause');
@@ -1524,18 +1533,6 @@ function videoPlayback() {
   
   function bufferingActions() {
     function reloadButton() {
-//       if ($('.media.visible .content-controls .reload').length == 0) {
-//         button.className = 'reload icons-b abs'; 
-//         content_controls.append(button.cloneNode(true));
-//         $('.content-controls .reload').click(function() {
-//           video.load();
-//           play_pause = media.find('.play-pause');
-//           play_pause.removeClass('pause').addClass('play');
-//         });
-        
-//         alert("An issue occured with the video. Click the reload button to reload it.");
-//       }
-      
       if (content_controls.hasClass('reloader')) {
         return;
       }
@@ -1556,13 +1553,10 @@ function videoPlayback() {
     }
     
     $(video).on('error', function() {
-      // console.log("Error! Something went wrong");
-      // reloadContainer();
       reloadButton();
     });
     
     $(video).on('waiting', function() {
-      // console.log("Wait! I need to buffer the next frame");
       buffering_indicator.addClass('show');
     });
     
@@ -1577,7 +1571,6 @@ function videoPlayback() {
     });
     
     $(video).on('playing', function() {
-     // console.log("The video is now playing");
       buffering_indicator.removeClass('show');
     });
     
@@ -1587,14 +1580,19 @@ function videoPlayback() {
           video.pause(); 
           play_pause = media.find('.play-pause');
           play_pause.removeClass('pause').addClass('play');
-
           setTimeout(function() {
             video.play();  
-            media.addClass('playing uncompleted');
+            media.addClass('playing uncompleted safety-net');
             play_pause = media.find('.play-pause');
             play_pause.removeClass('play').addClass('pause');
             header.addClass('hide');
           }, 1000);
+          
+          setTimeout(function() {
+            if (video.currentTime == 0 && buffering_indicator.hasClass('show') && media.hasClass('safety-net')) {
+              reloadButton();
+            }
+          }, 5000);
         }
       }, 3000);
     }
@@ -1774,7 +1772,7 @@ function videoPlayback() {
       }
       
       header.toggleClass('hide');
-      event.stopPropagation();
+      // event.stopPropagation();
       })
     
       .on('touchstart', '.media .close', function(event) {

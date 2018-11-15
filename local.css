@@ -941,7 +941,6 @@
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 0 20px #333;
-/*   background: rgba(0, 0, 0, .8); */
   display: flex;
   flex-direction: column;
   z-index: 2;
@@ -955,7 +954,8 @@
   left: 0px;
 }
 
-.height-longer .application {
+.height-longer .application,
+.mobile.android.width-longer.portrait.keyboard-out .application {
   width: 80%;
   top: 10px;
   right: 10px;
@@ -1167,10 +1167,6 @@
 /* APPLICATION = TEXT EDITOR */
 .application.text-editor {
   background: rgba(0, 0, 0, .8);
-}
-
-.mobile.android.height-longer .application.text-editor.searching {
-  width: 95% !important;
 }
 
 /* TEXT EDITOR - TITLE */

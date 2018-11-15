@@ -57,7 +57,6 @@ var mac_os = $('.mac-os'),
 // FIRST IMPRESSION 
 function onFirstImpression() {
   if (firstImpression()) {
-    console.log("New User");
     html.addClass('new-user');
     $('.loader .gta .skip-loader').remove();
   }
@@ -95,18 +94,12 @@ function userDeviceSpecifications() {
 
  
 
-// DETECT SIZE CHANGE
-function detectSizeChange() {    
+// DETECT ELEMENT CHANGE
+function detectElementPropertiesChange() {    
   $('.mac-os, .application').mutate('width height top left', function(el, info) {
-    if (computer) {
-      repositionDraggable();
-    }
-    
     function deviceCurrentSize() {
       checkDeviceLength();
       if (device_width_longer) {
-        html.removeClass('height-longer').addClass('width-longer');
-        
         if ($('.application').hasClass('image-preview')) {
           titleOverflow('.application.image-preview .title', '.application.image-preview .title-scroll');
           return;
@@ -127,8 +120,6 @@ function detectSizeChange() {
       }  
       
       if (device_height_longer) {
-        html.removeClass('width-longer').addClass('height-longer');
-
         if ($('.application').hasClass('image-preview')) {
           setTimeout(function() {
             titleOverflow('.application.image-preview .title', '.application.image-preview .title-scroll');
@@ -154,6 +145,10 @@ function detectSizeChange() {
     imageBlur('.mac-os', '.mac-os > .menu-bar', '.mac-os > .menu-bar > .blur-container .blur', 'background-image');
     imageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
     automatedScrollAdjustment();
+    
+    if (computer) {
+      repositionDraggable();
+    }
   });
 }
 
@@ -349,17 +344,13 @@ function loaderGTA() {
         function checkAnimationCompletion() {
           background = $('.gta .animations-container.kanye .background').css('transform');
           character = $('.gta .animations-container.kanye .character').css('background-position-x');
-          console.log("checkAnimationCompletion called");
           
           checkDeviceLength();
           if (device_width_longer) {
             background = $('.gta .animations-container.kanye .background').css('transform');
-            console.log("background = " + background);
-            console.log("character = " +character);
             if (character == '60%') {
               window.clearInterval(check_animation_completion_interval);
               setTimeout(function() {
-                console.log("background == 'perspective(211px) rotateX(-1deg) rotateY(2deg) rotateZ(1deg)' && character == '60%'");
                 titleThenRemoveLoader();
               }, 1000);
             }
@@ -367,12 +358,9 @@ function loaderGTA() {
           
           if (device_height_longer) {
             background = $('.gta .animations-container.kanye .background').css('background-position-x');
-            console.log("background = " + background);
-            console.log("character = " + character);
             if (background == '60%' && character == '50%') {
               window.clearInterval(check_animation_completion_interval); 
               setTimeout(function() {
-                console.log("background == '60%' && character == '50%'");
                 titleThenRemoveLoader();
               }, 1000);
             }
@@ -797,7 +785,6 @@ function menuBar() {
           
           menu.css('height', desktop_height);
           twitter_timeline.css('height', desktop_height);
-         // console.log(twitter_timeline.height());
           
           
           if (android) {
@@ -807,7 +794,6 @@ function menuBar() {
         
         function updateOnResize() {
           $(window).on('resize', function() {
-           // console.log("resized");
             heightPlacement();
           });
         }
@@ -931,7 +917,7 @@ function searchTextEditor() {
           $('.application > .header .content-controls').prepend(input).addClass('search');
           setTimeout(function() {
             $('.application.text-editor > .header .search-bar').removeClass('hide');
-            $('.application.text-editor').addClass('searching');
+            keyboardOut();
           }, 200);
         }
       }
@@ -944,7 +930,8 @@ function searchTextEditor() {
           entered_value_global = new RegExp(entered_value, "ig"),
           no_value = entered_value == '',
           paragraph_original;   
-
+      
+      $('.application.text-editor').addClass('searching');
       $('.application.text-editor .scroll-container p.read').each(function() { 
         paragraph_original = $(this).text();
 
@@ -980,7 +967,6 @@ function searchTextEditor() {
 // SHARE PAGE
 function sharePage() {
   $(document).on('click', '.text-editor > .header .content-controls .share', function() {
-
     function socialPlatformsShown() {
       if ($('.text-editor > .header .social-platforms').length == 1) {
         $('.text-editor > .header .social-platforms').addClass('hide');
@@ -1070,15 +1056,15 @@ function mediaPreloads() {
   }, 400);
 
   setTimeout(function() {
-    // applicationRemove();
-    // application.addClass('world-clock');
-    // applicationChange();
+    applicationRemove();
+    application.addClass('world-clock');
+    applicationChange();
   }, 600);
 
   setTimeout(function() {
-    // applicationRemove();
-    // application.addClass('text-editor');
-    // applicationChange();
+    applicationRemove();
+    application.addClass('text-editor');
+    applicationChange();
   }, 1200);
   
   setTimeout(function() {
@@ -1086,7 +1072,6 @@ function mediaPreloads() {
   }, 1600);
   
   setTimeout(function() {
-    // $(window).trigger('resize');
     imageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
   }, 6000);
 }
@@ -1243,8 +1228,8 @@ function mediaAfterParagraphs() {
   }
   
   
-  // POLICE PRECINCT SCENE FROM 'MALCOLM X' (1992)
   first_block_interval = setInterval(firstBlock, 250);
+   // POLICE PRECINCT SCENE FROM 'MALCOLM X' (1992);
   function firstBlock() {
     $('.scroll-container .first p.reading, .scroll-container .first p.read').last().each(function() {  
       current_paragraph = $(this).text();
@@ -1262,7 +1247,6 @@ function mediaAfterParagraphs() {
 
         setTimeout(function() { 
           $('.media.malcolm-x-police-precinct').addClass('visible');
-          // $('.media.credits').addClass('visible');
           videoPlayer(); 
         }, 750);
       }
@@ -1444,7 +1428,6 @@ function mediaAfterParagraphs() {
             scroll_container.css('transition', 'margin-top 1s ease-in-out');
             scroll_container.css('margin-top', '');
             scroll_container.addClass('completed');
-
             setTimeout(function() {
               scroll_container.css('transition', '');
             }, 2000);
@@ -1566,7 +1549,6 @@ function videoPlayback() {
     
     $(video).on('stalled', function() {
       // console.log("Media data is not available");
-      // reloadContainer();
       reloadButton();
     });
     
@@ -1618,7 +1600,6 @@ function videoPlayback() {
     
     function firstCheck() {
       first_video_position = video.currentTime;
-      // console.log('first_video_position = ' + first_video_position);
     }
     firstCheck();
     
@@ -1630,7 +1611,6 @@ function videoPlayback() {
           video_idle_state = false;
 
           if (content_controls.hasClass('over')) {
-            // console.log("returned");
             return;
           }
 
@@ -1638,27 +1618,24 @@ function videoPlayback() {
             header.addClass('hide');
           }
         }
-       // console.log(video_idle_state);
       }, 3000);
       
       if (not_credits) {
         setTimeout(function() {
-        second_video_position = video.currentTime;
-        
-        if (first_video_position == second_video_position) {
-          video_idle_state = true;
-          
-          header.removeClass('hide');
+          second_video_position = video.currentTime;
 
-          if (buffering_indicator.hasClass('show') || second_video_position == 0) {
-            // console.log("return");
-            return;
+          if (first_video_position == second_video_position) {
+            video_idle_state = true;
+
+            header.removeClass('hide');
+
+            if (buffering_indicator.hasClass('show') || second_video_position == 0) {
+              return;
+            }
+
+            media.removeClass('uncompleted').addClass('covered');
           }
-          
-          media.removeClass('uncompleted').addClass('covered');
-        }
-        // console.log(video_idle_state);
-      }, 8000);
+        }, 8000);
         return;
       }
       
@@ -1672,13 +1649,11 @@ function videoPlayback() {
             header.removeClass('hide');
 
             if (buffering_indicator.hasClass('show') || second_video_position == 0) {
-              // console.log("return");
               return;
             }
 
             media.removeClass('uncompleted').addClass('covered');
           }
-          // console.log(video_idle_state);
         }, 20000);
       }
     }
@@ -1751,7 +1726,6 @@ function videoPlayback() {
       callVariables();
       
       if (unwatched) {
-        // console.log("unwatched");
         return;
       }
       
@@ -1866,8 +1840,8 @@ function onFileClick() {
 window.onload = function() {
   onFirstImpression();
   userDeviceSpecifications();
-  // userActiveStatus();
-  detectSizeChange();
+  userActiveStatus();
+  detectElementPropertiesChange();
   loaderGTA();
   menuBar();
   closeApp();
@@ -1876,7 +1850,6 @@ window.onload = function() {
   videoPlayback(); 
   onFileClick();
   onWindowClick();
-  // mediaPreloads();
   
   // IF LOADER NOT PRESENT
   // callRemainderFunctions();
@@ -1893,7 +1866,6 @@ function callRemainderFunctions() {
   imageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
   callAutomatedText();
   mediaAfterParagraphs();
-  
   mediaPreloads();
 }
 
@@ -1971,6 +1943,7 @@ window.onerror = function(msg, url, linenumber) {
     paragraph.className = 'content empty';
     paragraph.contentEditable = true;
     $('div.section.user-experience').append(paragraph.cloneNode());
+    keyboardOut();
   }
   content();
 

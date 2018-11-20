@@ -1,3 +1,14 @@
+body > .loader {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #111111;
+  z-index: 9;
+}
+
+
+
+
 /* LOADER - GTA */
 .loader .gta {
   width: inherit;
@@ -96,7 +107,8 @@
 }
 
 .loader .gta .info-container.battery-adjustment,
-.loader .gta .info-container.open-in-different-browser {
+.loader .gta .info-container.open-in-different-browser,
+.loader .gta .info-container.fast-forward-automated-text {
   width: 200px;
 }
 
@@ -138,7 +150,13 @@
   right: 20px;
   bottom: auto;
   left: auto;
-/*   display: none; */
+}
+
+.loader .gta .info-container.fast-forward-automated-text {
+  top: 20px;
+  right: auto;
+  bottom: auto;
+  left: 20px;
 }
 
 
@@ -222,8 +240,9 @@
 .height-longer .loader .gta .animations-container .background {
   background-size: cover;
   background-position-x: 50%;
-/*   transition: background-position-x 4.1s linear; */
+  transition: background-position-x 4.1s linear;
   transition: background-position-x 3.15s linear;
+  transition: background-position-x 3.5s linear;
 }
 
 .height-longer .loader .gta .animations-container .background.move {
@@ -256,9 +275,9 @@
   background-size: contain;
   background-position: bottom;
   background-position-x: 50%; 
-/*   transition: background-position-x 4.1s linear; */
+  transition: background-position-x 4.1s linear;
   transition: background-position-x 3.15s linear;
-  
+  transition: background-position-x 3.5s linear;
 }
 
 .width-longer .loader .gta .animations-container .character {
@@ -277,11 +296,6 @@
 .height-longer .loader .gta .animations-container.kanye .character {
   background-size: auto 90%;
 }
-
-.height-longer .loader .gta .animations-container .character.move {
-/*   background-position-x: 60%; */
-  
-} 
 
 
 /* GTA - CHARACTER IMAGES */
@@ -400,14 +414,6 @@
   z-index: 3;
 }
 
-.ios .mac-os > .menu-bar .panel {
-/*   font-size: 14px; */
-}
-
-.android .mac-os > .menu-bar .panel {
-/*   font-size: 22px; */
-}
-
 .mac-os .menu-bar .panel.left {
   left: 10px;
 }
@@ -434,14 +440,12 @@
   padding: 0px 10px;
   font-size: unset;
   line-height: 1.7;
-/*   line-height: 1.8; */
   line-height: 22px;
   display: block;
   position: relative;
 }
 
 .android .mac-os .menu-bar .section-container > button {
-/*   line-height: 1.7; */
   line-height: 1.8;
 }
 
@@ -530,7 +534,6 @@
 }
 
 .mac-os .menu-bar .section-container .menu .seperator {
-  width: -webkit-fill-available;
   width: 100%;
   height: 2px;
   background-color: rgba(211, 211, 211, 0.8);
@@ -542,7 +545,6 @@
 
 /* MENU BAR - SECTION CONTAINER - APPLE MENU */
 .mac-os .menu-bar .section-container.apple-menu .menu {
-  width: 333px;
   width: 350px;
   height: fit-content;
   background-color: #6d6d6d;
@@ -656,8 +658,6 @@
 }
 
 .android .mac-os .menu-bar .section-container.date-and-time > button.digital span.text {
-/*   font-size: 20px; */
-/*   line-height: 1.7; */
   line-height: 1.8;
 }
 
@@ -688,12 +688,11 @@
 .mac-os .menu-bar .section-container.profile .menu .avi {
   width: 80px;
   height: 80px;
-  border: 3px solid #fff;
+  border: 1px solid #fff;
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, inset rgba(0, 0, 0, 0.4) 0px 3px 2px;
   background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Images/0.%20Brand%20Documents/2.%20Avi/Logo%20-Foreground%20-%20Comp.jpg");
   background-size: cover;
-  margin: auto;
+  margin: auto auto -4px auto;
 }
 
 .mac-os .menu-bar .section-container.profile .menu .username {
@@ -705,18 +704,12 @@
 
 .mac-os .menu-bar .section-container.profile .menu .bio {
   border-radius: 5px;
-/*   box-shadow: 0px 0px 6px #8f8f8f; 
-  background-color: #ffffff; */
   background-color: rgba(255, 255, 255, 0.8);
   padding: 8px;
   font-size: 12px;
   color: #757575;
   letter-spacing: 0.4px;
   margin: auto;
-}
-
-.android .mac-os .menu-bar .section-container.profile .menu .bio {
-/*   font-size: 16px; */
 }
 
 .mac-os .menu-bar .section-container.profile .menu .accounts {
@@ -761,8 +754,6 @@
 }
 
 .mac-os .menu-bar .panel.right .section-container.notification .menu.cover::before {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
   width: 100%;
   height: 100%;
   background-color: inherit;
@@ -771,8 +762,6 @@
 }
 
 .mac-os .menu-bar .panel.right .section-container.notification.selected .menu a.twitter-timeline {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
   width: 100%;
   height: 100%;
   background-color: inherit;
@@ -784,8 +773,6 @@
 
 /* DESKTOP */
 .mac-os .desktop {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -795,8 +782,6 @@
 }
 
 .mac-os .desktop .files-row {  
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
   width: 100%;
   height: 100%;
   overflow: scroll;
@@ -843,8 +828,8 @@
 
 .mac-os .file .thumbnail-container .file-type-indicator {
   width: fit-content;
-  height: fit-content;
   width: -moz-fit-content;
+  height: fit-content;
   height: -moz-fit-content;
   font-size: 10px;
   text-shadow: 0px 0px 4px #545454;
@@ -910,10 +895,6 @@
   text-align: center;
   white-space: nowrap;
   margin: auto;
-}
-
-.android .mac-os .file .title {
-/*   font-size: 16px; */
 }
 
 .mac-os .file .title:nth-child(2) {
@@ -1000,7 +981,6 @@
   border-bottom: none;
   background-color: transparent;
   flex-shrink: 0;
-/*   z-index: 3; */
 }
 
 .application > .header {
@@ -1018,8 +998,8 @@
 /* HEADER - WINDOW CONTROLS */
 .application .header .top-bar .window-controls {
   width: fit-content;
-  height: fit-content;
   width: -moz-fit-content;
+  height: fit-content;
   height: -moz-fit-content;
   border-radius: 50%;
   display: inline-flex;
@@ -1066,20 +1046,12 @@
 
 .application .header .top-bar .title .title-scroll {
   width: fit-content;
-  height: fit-content;
   width: -moz-fit-content;
+  height: fit-content;
   height: -moz-fit-content;
   font-size: 12.4px;
   white-space: nowrap;
   display: block;
-}
-
-.ios .application .header .top-bar .title .title-scroll {
-/*   font-size: 12.4px; */
-}
-
-.android .application .header .top-bar .title .title-scroll {
-/*   font-size: 16.4px; */
 }
 
 .application .header .top-bar .title .title-scroll.ellipsis {
@@ -1098,8 +1070,8 @@
 /* HEADER - CONTENT CONTROLS */
 .application .header .content-controls {
   width: fit-content;
-  height: fit-content;
   width: -moz-fit-content;
+  height: fit-content;
   height: -moz-fit-content;
   display: inline-flex;
   flex-shrink: 0;
@@ -1135,15 +1107,16 @@
 } 
 
 .application > .header .content-controls > button.icons-b::before {
-  background-size: 11px;
+  background-size: 12.6px;
 }
+
+
 
  
 /* PARENT CONTAINER */
 .application .parent-container {
   width: -webkit-fill-available;
   height: 100%;
-/*   border-radius: 4px; */
   border-radius: 0px 0px 4px 4px;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -1186,6 +1159,7 @@
 .application.text-editor > .header .content-controls.search button.share,
 .application.text-editor > .header .content-controls.search button.credits,
 .application.text-editor > .header .content-controls.share button.search,
+.application.text-editor > .header .content-controls.share button.fast-forward-automated-text,
 .application.text-editor > .header .content-controls.share button.credits {
   display: none;
 }
@@ -1277,14 +1251,6 @@
   text-shadow: 0px 0px 4px #000000;
 }
 
-.ios .application.text-editor .scroll-container p {
-/*   font-size: 14px; */
-}
-
-.android .application.text-editor .scroll-container p {
-/*   font-size: 18px; */
-}
-
 .application.text-editor .scroll-container p.reading::after {
   color: #707070;
 }
@@ -1360,8 +1326,6 @@
 }
 
 .application .parent-container .media .content-controls .blur {
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -1394,7 +1358,6 @@
 
 /* APPLICATION - MEDIA - CONTENT */
 .application .parent-container .media .content {
-  width: -webkit-fill-available;
   width: 100%;
   height: inherit;
   border-radius: inherit;
@@ -1526,15 +1489,11 @@
 
 /* IMAGE PREVIEW - PARENT CONTAINER  */
 .application.image-preview .parent-container {
-/*   width: fit-content;
-  width: 100%;
-  width: -moz-fit-content; */
   background-color: rgba(246, 245, 246, 0.57);
   padding: 2px;
 }
 
 .width-longer .application.image-preview .parent-container {
-  width: auto;
   width: fit-content;
   width: -moz-available;
 }
@@ -1652,8 +1611,8 @@
 
 .application.error .parent-container .section.code .content span {
   width: fit-content;
-  height: fit-content;
   width: -moz-fit-content;
+  height: fit-content;
   height: -moz-fit-content;
   display: block;
   margin: 10px 0px;
@@ -1675,8 +1634,8 @@
 .application.error .parent-container .section.user-experience .content.empty::before {
   content: "What happened slime?";
   width: fit-content;
-  height: fit-content;
   width: -moz-fit-content;
+  height: fit-content;
   height: -moz-fit-content;
   position: absolute;
 }
@@ -1705,10 +1664,6 @@
   left: -218px;
 }
 
-.android .mac-os .background-credits {
-/*   font-size: 16.4px; */
-}
-
 .mac-os .background-credits.show {
   left: 0px;
 }
@@ -1722,8 +1677,8 @@
 
 .mac-os .background-credits .title {
   width: fit-content;
-  height: fit-content;
   width: -moz-fit-content;
+  height: fit-content;
   height: -moz-fit-content;
   line-height: -moz-block-height;
   white-space: nowrap;

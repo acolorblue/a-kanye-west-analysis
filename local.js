@@ -8,7 +8,6 @@ var mac_os = $('.mac-os'),
     image_preview = $('.application.image-preview'),
     world_clock = $('.application.world-clock'),
     error,
-    header,
     window_controls,
     close,
     text_editor_title = "A ***** **** Analysis",
@@ -18,35 +17,13 @@ var mac_os = $('.mac-os'),
     top_bar = $('.application > .header .top-bar'),
     top_bar_children,
     title_scroll = $('.application > .header .title-scroll'),
-    content_controls,
     parent_container = $('.application .parent-container'),
     scroll_container = $('.application .parent-container .scroll-container'),
     scroll_container_class = '.scroll-container',
     uncompleted = !$('.scroll-container').hasClass('completed'),
     completed = $('.scroll-container').hasClass('completed'),
-    media,
-    media_class,
     media_height,
     covered,
-    unwatched,
-    clicked,
-    watched,
-    buffering_indicator,
-    blur,
-    rewind,
-    play_pause,
-    reload,
-    forward,
-    time_adjustments,
-    content,
-    thumbnail,
-    video,
-    video_class,
-    source_link,
-    hidden,
-    media_current_time_mark,
-    paused,
-    playing,
     previous_block,
     next_block,
     selected_exists;
@@ -162,8 +139,7 @@ function loaderGTA() {
       battery_alert,
       loader_hasnt_been_skipped,
       check_animation_completion_interval,
-      end_of_title_interval,
-      remove_loader_interval;
+      end_of_title_interval;
   
   removeLoaderCover();
 
@@ -241,10 +217,13 @@ function loaderGTA() {
       $('.gta .animations-container.michael').removeClass('show');
       $('.gta .text-logo.gta-5').text("");
       $('.gta .skip-loader').addClass('show').click(function() {
+        if (!$('.gta div.fast-forward-automated-text').hasClass('show')) {
+          $('.gta div.fast-forward-automated-text').addClass('show');
+        }
         $('.gta .skip-loader').removeClass('unclicked show');
         $('body > .loader').addClass('skipped');
         $('.gta .animations-container').removeClass('show');
-        if (ios || android) {
+        if (mobile) {
           $('.gta .battery-adjustment, .gta .open-in-different-browser').removeClass('show');
         }
 
@@ -262,6 +241,12 @@ function loaderGTA() {
           $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
           $('.gta .animations-container.kanye').addClass('show');
         }, 1900); 
+        
+        setTimeout(function() {
+          if ($('.gta div.fast-forward-automated-text').hasClass('show')) {
+            $('.gta div.fast-forward-automated-text').removeClass('show');
+          }
+        }, 2300);
 
         setTimeout(function() { 
           titleThenRemoveLoader();
@@ -272,6 +257,9 @@ function loaderGTA() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
         $('.gta .animations-container.michael').remove();
+        if (computer) {
+          $('.gta div.fast-forward-automated-text').addClass('show');
+        }
       }
     }, 5650);
 
@@ -287,6 +275,9 @@ function loaderGTA() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
         $('.gta .animations-container.trevor').removeClass('show');
+        if (mobile) {
+          $('.gta div.fast-forward-automated-text').addClass('show');
+        }
       }
     }, 9200);
     setTimeout(function() {
@@ -295,9 +286,9 @@ function loaderGTA() {
         $('.gta .animations-container.trevor').remove();
         $('.gta .skip-loader').removeClass('show');
 
-        if (ios || android) {
+        if (mobile) {
           $('.gta .battery-adjustment').removeClass('show');
-        } 
+        }
       }
     }, 10700);
 
@@ -305,6 +296,9 @@ function loaderGTA() {
     setTimeout(function() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
+        if (computer) {
+          $('.gta div.fast-forward-automated-text').removeClass('show');
+        }
         $('.gta .animations-container.franklin-and-chop').addClass('show');
         moveLoop();
       }
@@ -313,8 +307,7 @@ function loaderGTA() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
         $('.gta .animations-container.franklin-and-chop').removeClass('show');
-        
-        if (ios || android) {
+        if (mobile) {
           $('.gta .open-in-different-browser').removeClass('show');
         } 
       }
@@ -331,6 +324,9 @@ function loaderGTA() {
     setTimeout(function() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
+        if (mobile) {
+          $('.gta div.fast-forward-automated-text').removeClass('show');
+        }
         $('.gta .text-logo').removeClass('gta-5').addClass('kanye-analysis unread');
         $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
         $('.gta .animations-container.kanye').addClass('show');
@@ -378,11 +374,9 @@ function loaderGTA() {
     function endOfTitle() {
       if ($('.gta .text-logo').text().includes("A ***** **** Analysis")) {
         window.clearInterval(end_of_title_interval); 
-
         setTimeout(function() {
           callRemainderFunctions();
-        }, 100);
-        
+        }, 100); 
         setTimeout(function() {
           removeLoader('.loader', 'slide-up', 0, 3000);
         }, 3600); 
@@ -518,6 +512,14 @@ function applicationChange() {
     $('.file.text').addClass('show selected');
 
     title_scroll.text(text_editor_title);
+    
+    function skip() {
+      if (!$('.scroll-container').hasClass('completed')) { 
+        button.className = 'fast-forward-automated-text forward white outline icons-b abs';
+        $('.application > .header .content-controls').append(button.cloneNode());
+      }
+    }
+    skip();
 
     function credits() {
       if ($('.scroll-container').hasClass('completed')) { 
@@ -531,9 +533,14 @@ function applicationChange() {
       }
     }
     credits();
-
-    button.className = 'search white icons-b abs';
-    $('.application > .header .content-controls').append(button.cloneNode());
+    
+    function search() {
+      if ($('.scroll-container').hasClass('completed')) { 
+        button.className = 'search white icons-b abs';
+        $('.application > .header .content-controls').append(button.cloneNode());
+      }
+    }
+    search(); 
 
     button.className = 'share white icons-b abs';
     $('.application > .header .content-controls').append(button.cloneNode());
@@ -571,11 +578,9 @@ function applicationChange() {
     setTimeout(function() {
       heightFromWidthRatio(application, '.scroll-container', '0.563278');
       heightFromWidthRatio(media, '.scroll-container', '0.563278');
-      heightFromWidthRatio(thumbnail, '.scroll-container', '0.563278');
-    }, 1100);
-        
+    }, 1100); 
     setTimeout(function() {
-      media.find('video')[0].load();
+      // media.find('video')[0].load();
     }, 1400);
   }
   
@@ -820,6 +825,10 @@ function menuBar() {
           setTimeout(function() {
             heightPlacement();
           }, 8000);
+          
+          setTimeout(function() {
+            heightPlacement();
+          }, 13000);
         }
 
         if (embed_doesnt_exist) {
@@ -1007,13 +1016,13 @@ function sharePage() {
           webpage = 'https://acolorblue.co/a-kanye-west-analysis',
           line_break = '%0A',
           window_link,
-          caption = text_editor_title + ", by @acolorblue.",
+          caption = "By @acolorblue.",
           twitter = $(this).hasClass('twitter'),
           instagram = $(this).hasClass('instagram'),
           tumblr = $(this).hasClass('tumblr');
 
       if (twitter) {
-        window_link = 'https://twitter.com/intent/tweet?source=webclient&text=' + caption + line_break + webpage;
+        window_link = 'https://twitter.com/intent/tweet?source=webclient&text=' + webpage;
         window.open(window_link);
       }
 
@@ -1024,7 +1033,8 @@ function sharePage() {
       }
 
       if (tumblr) {
-        window_link = 'https://www.tumblr.com/widgets/share/tool?canonicalUrl=' + poster_link + '&caption=' + '<a href=\'' +  webpage + '\'>' + '<i>' + caption.slice(0, 21) + '</i></a>' + caption.slice(21);
+        $('meta[name=description]').attr('content', 'removed');
+        window_link = 'https://www.tumblr.com/widgets/share/tool?posttype=link' + '&canonicalUrl=' + webpage + '&caption=' + '<i>' +  caption.slice(0, 3) + '<a href=\'' +  'https://acolorblue.tumblr.com' + '\'>' + caption.slice(3) + '</i></a>';
         window.open(window_link);
       }
 
@@ -1051,6 +1061,10 @@ function mediaPreloads() {
   videosToAuto();
   
   setTimeout(function() {
+    $('.panel .section-container').addClass('selected');
+  }, 300);
+  
+  setTimeout(function() {
     $('.media.malcolm-x-police-precinct .play-pause').removeClass('pause').addClass('play');
     $('.media.malcolm-x-police-precinct, .media.kanye-responds-to-cudi').addClass('hide');
   }, 400);
@@ -1060,16 +1074,16 @@ function mediaPreloads() {
     application.addClass('world-clock');
     applicationChange();
   }, 600);
+  
+  setTimeout(function() {
+    $('.panel .section-container').removeClass('selected');
+  }, 1000);
 
   setTimeout(function() {
     applicationRemove();
     application.addClass('text-editor');
     applicationChange();
-  }, 1200);
-  
-  setTimeout(function() {
-    $('.panel .section-container').removeClass('selected');
-  }, 1600);
+  }, 1400);
   
   setTimeout(function() {
     imageBlur('.mac-os', '.application', '.application > .blur', 'background-image');
@@ -1083,7 +1097,7 @@ function mediaPreloads() {
 function callAutomatedText() {
   var call_essay_interval = setInterval(callEssay, 200);
   function callEssay() {
-    if ($('.loader').length == 0) {
+    if ($('body > .loader').length == 0) {
       window.clearInterval(call_essay_interval);
       setTimeout(function() { 
         automatedText('.scroll-container .first p', 2000, [''], 0, '-break-', 800);
@@ -1157,7 +1171,12 @@ function mediaAfterParagraphs() {
     function arragements() {
       checkDeviceLength();
       if (device_width_longer) {
-        media.slideDown(500);
+        if (safari) {
+          media.fadeIn(500);
+        }
+        if (chrome || firefox) {
+          media.slideDown(500);
+        }
         applicationRemove();
         application.addClass('video-player');
         applicationChange();
@@ -1165,11 +1184,11 @@ function mediaAfterParagraphs() {
 
       if (device_height_longer) {
         media.fadeIn(200);
-        media.find('video')[0].load();
+        // media.find('video')[0].load();
         imageBlur(thumbnail, content_controls, blur, 'image-tag'); 
         imageBlurReposition(thumbnail, content_controls, blur, 'image-tag'); 
         primaryColor(thumbnail, top_bar_children, '0.6');
-        media.find('video')[0].load();
+        // media.find('video')[0].load();
       }
       
       $(content_controls).mutate('width height', function(el, info) {
@@ -1428,6 +1447,7 @@ function mediaAfterParagraphs() {
             scroll_container.css('transition', 'margin-top 1s ease-in-out');
             scroll_container.css('margin-top', '');
             scroll_container.addClass('completed');
+            $('.text-editor > .header .content-controls .fast-forward-automated-text').empty().remove();
             setTimeout(function() {
               scroll_container.css('transition', '');
             }, 2000);
@@ -1461,6 +1481,15 @@ function mediaAfterParagraphs() {
             actions();
           }
           credits();
+          
+          function search() {
+            if ($('.scroll-container').hasClass('completed')) { 
+              button.className = 'search white icons-b abs';
+              $('.text-editor > .header .content-controls .credits').after(button.cloneNode());
+              searchTextEditor();
+            }
+          }
+          search();
         }, 3000);
       }
     })
@@ -1840,19 +1869,18 @@ function onFileClick() {
 window.onload = function() {
   onFirstImpression();
   userDeviceSpecifications();
-  userActiveStatus();
+  // userActiveStatus();
   detectElementPropertiesChange();
-  loaderGTA();
+  // loaderGTA();
   menuBar();
   closeApp();
-  searchTextEditor(); 
   sharePage();
   videoPlayback(); 
   onFileClick();
   onWindowClick();
   
   // IF LOADER NOT PRESENT
-  // callRemainderFunctions();
+  callRemainderFunctions();
 }
 
  

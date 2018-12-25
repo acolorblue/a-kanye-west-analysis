@@ -34,54 +34,52 @@ body > .loader {
   -webkit-transform: translateZ(950px);
 }
 
-.loader .gta .foreground-layer .text-logo {
+.loader .gta .foreground-layer .product-logo {
   font-family: Pricedown, Ahamono Monospaced;
+  color: transparent;
+  text-transform: lowercase;
+  text-shadow: none;
 }
 
-.loader .gta .foreground-layer .text-logo.gta-5 {
+.loader .gta .foreground-layer .product-logo.icon {
   width: 180px;
   height: 180px;
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Logos/GTA%205%20-%20Comp.png");
-  background-size: contain;
-  background-position: bottom;
-  color: transparent;
   top: auto;
   right: auto;
   bottom: 20px;
   left: 20px;
 }
 
-.loader .gta .foreground-layer .text-logo.kanye-analysis {
+.loader .gta .foreground-layer .product-logo.icon::before {
+  width: inherit;
+  height: inherit;
+  background-size: contain;
+  background-position: bottom;
+}
+
+.loader .gta .foreground-layer .product-logo.kanye-analysis {
   width: 210px;
   height: 145px;
   font-size: 55px;
   line-height: 0.85;
-  text-transform: lowercase;
-  text-shadow: none;
   -webkit-text-stroke: 2.4px black;
 }
 
-.loader .gta .foreground-layer .text-logo.kanye-analysis.reading::after {
+.loader .gta .foreground-layer .product-logo.kanye-analysis.reading::after {
   color: #eee;
 }
 
-.loader .gta .foreground-layer .icon-logo {
+.loader .gta .foreground-layer .organization-logo {
   width: 40px;
   height: 40px;
   top: auto;
   right: 20px;
   bottom: 20px;
   left: auto;
+}
+
+.loader .gta .foreground-layer .organization-logo::before {
   background-size: contain;
-  background-position: center;
-}
-
-.loader .gta .foreground-layer .icon-logo.rockstar {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Logos/Rockstar%20-%20Comp.png");
-}
-
-.loader .gta .foreground-layer .icon-logo.good-music {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Logos/GOOD%20Music%20-%20Comp.png");
 }
 
 
@@ -106,6 +104,13 @@ body > .loader {
   opacity: 1;
 }
 
+.loader .gta .info-container.loading-indicator {
+  background-color: #000000;
+  right: 20px;
+  bottom: 70px;
+  left: auto;
+}
+
 .loader .gta .info-container.battery-adjustment,
 .loader .gta .info-container.open-in-different-browser,
 .loader .gta .info-container.fast-forward-automated-text {
@@ -116,10 +121,6 @@ body > .loader {
   right: auto;
   bottom: 200px;
   left: 20px;
-}
-
-.ios .loader .gta .info-container.battery-adjustment .title {
-/*   color: #f5cb47; */
 }
 
 .android .loader .gta .info-container.battery-adjustment .title {
@@ -135,13 +136,6 @@ body > .loader {
 .mobile .loader .gta .info-container.open-in-different-browser {
   right: 20px;
   bottom: 116px;
-  left: auto;
-}
-
-.loader .gta .info-container.loading-indicator {
-  background-color: #000000;
-  right: 20px;
-  bottom: 70px;
   left: auto;
 }
 
@@ -161,7 +155,7 @@ body > .loader {
 
 
 /* GTA - INFORMATION CONTAINER ICONS */
-.loader .gta .foreground-layer .info-container .icons-b {
+.loader .gta .foreground-layer .info-container .icon {
   width: 14px;
   height: 14px;
   position: relative;
@@ -172,15 +166,15 @@ body > .loader {
   margin-left: 4px;
 }
 
-.loader .gta .info-container .icons-b.battery.low-power-mode {
+.loader .gta .info-container .icon.battery.low-power-mode {
   width: 18px;
 }
 
-.loader .gta .info-container .icons-b.play-station-x {
+.loader .gta .info-container .icon.play-station-x {
   margin-left: 0px;
 }
 
-.loader .gta .info-container .icons-b::before {
+.loader .gta .info-container .icon::before {
   width: inherit;
   height: inherit;
   background-size: contain;
@@ -211,11 +205,11 @@ body > .loader {
  
 
 /* GTA - BACKGROUND LAYER - BACKGROUND */ 
-.loader .gta .animations-container .background {
+.loader .gta .animations-container .scene {
   background-position: center;
 }
 
-.width-longer .loader .gta .animations-container .background {
+.width-longer .loader .gta.five .animations-container .scene {
   width: 80%;
   height: 80%;
   background-size: contain;
@@ -223,11 +217,11 @@ body > .loader {
   transform-origin: center center 0px;
 }
 
-.width-longer .loader .gta .animations-container .background.move {
-  -webkit-animation: width-longer-background-move 19.5s linear;
+.width-longer .loader .gta.five .animations-container .scene.move {
+  -webkit-animation: gta-V-loading-scene-rotation 19.5s linear;
 }
 
-@-webkit-keyframes width-longer-background-move {  
+@-webkit-keyframes gta-V-loading-scene-rotation {  
   0% {
     transform: perspective(122px) rotateX(-3deg) rotateY(0deg) rotateZ(-2deg);
   }
@@ -237,93 +231,78 @@ body > .loader {
   }
 }
 
-.height-longer .loader .gta .animations-container .background {
+.height-longer .loader .gta.five .animations-container .scene {
   background-size: cover;
   background-position-x: 50%;
-  transition: background-position-x 4.1s linear;
-  transition: background-position-x 3.15s linear;
-  transition: background-position-x 3.5s linear;
+  transition: background-position-x 4s linear;
 }
 
-.height-longer .loader .gta .animations-container .background.move {
+.height-longer .loader .gta.five .animations-container .scene.move {
   background-position-x: 60%;
 }
 
 
 /* GTA - BACKGROUND IMAGES */
-.loader .gta .animations-container.michael .background {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Backgrounds/Michael%20-%20Comp.jpg");
+.gta.five .animations-container.michael .scene {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Interfaces/Organizations/Rockstar%20Games/GTA/V/0.%20Loader/Michael/Scene/Vinewood%20-%20Comp.jpg");
 }
 
-.loader .gta .animations-container.trevor .background {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Backgrounds/Trevor%20-%20Comp.jpg");
+.gta.five .animations-container.trevor .scene {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Interfaces/Organizations/Rockstar%20Games/GTA/V/0.%20Loader/Trevor/Scene/Water%20Mount%20%2B%20Mountain%20-%20Comp.jpg");
 }
 
-.loader .gta .animations-container.franklin-and-chop .background {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Backgrounds/Franklin%20And%20Chop%20-%20Comp.jpg");
+.gta.five .animations-container.franklin-and-chop .scene {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Interfaces/Organizations/Rockstar%20Games/GTA/V/0.%20Loader/Franklin%20And%20Chop/Scene/Liquor%20Store%20-%20Comp.jpg");
 }
 
-.loader .gta .animations-container.kanye .background {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Backgrounds/Kanye%20-%20Comp.jpg");
+.gta.custom .animations-container.kanye .scene {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Interfaces/Organizations/Rockstar%20Games/GTA/Custom/0.%20Loader/Kanye/Scene/Hallway%20-%20Comp.jpg");
 }
 
 
 
 
 /* GTA - CHARACTER */ 
-.loader .gta .animations-container .character {
+.loader .gta.five .animations-container .character {
   background-size: contain;
   background-position: bottom;
   background-position-x: 50%; 
-  transition: background-position-x 4.1s linear;
-  transition: background-position-x 3.15s linear;
-  transition: background-position-x 3.5s linear;
+  transition: background-position-x 4s linear;
 }
 
-.width-longer .loader .gta .animations-container .character {
+.width-longer .loader .gta.five .animations-container .character {
   background-size: auto 95%;
   -webkit-transform: translateZ(900px);
 } 
 
-.width-longer .loader .gta .animations-container .character.move {
+.width-longer .loader .gta.five .animations-container .character.move {
   background-position-x: 60%;
 } 
 
-.height-longer .loader .gta .animations-container .character {
+.height-longer .loader .gta.five .animations-container .character {
   background-size: 90% auto;
 }
 
-.height-longer .loader .gta .animations-container.kanye .character {
+.height-longer .loader .gta.five .animations-container.kanye .character {
   background-size: auto 90%;
 }
 
 
 /* GTA - CHARACTER IMAGES */
-.loader .gta .animations-container.michael .character {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Characters/Michael%20-%20Comp.png");
+.gta.five .animations-container.michael .character {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Interfaces/Organizations/Rockstar%20Games/GTA/V/0.%20Loader/Michael/Character/Gun%20%2B%20Suit%20-%20Comp.png");
 }
 
-.loader .gta .animations-container.trevor .character {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Characters/Trevor%20-%20Comp.png");
+.gta.five .animations-container.trevor .character {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Interfaces/Organizations/Rockstar%20Games/GTA/V/0.%20Loader/Trevor/Character/Bike%20%2B%20Gun%20-%20Comp.png");
 }
 
-.loader .gta .animations-container.franklin-and-chop .character {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Characters/Franklin%20And%20Chop%20-%20Comp.png");
+.gta.five .animations-container.franklin-and-chop .character {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Interfaces/Organizations/Rockstar%20Games/GTA/V/0.%20Loader/Franklin%20And%20Chop/Character/Bat%20%2B%20Chop%20Barking%20-%20Comp.png");
 }
 
-.loader .gta .animations-container.kanye .character {
-  background-image: url("https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/1.%20Loader/GTA/Characters/Kanye%20-%20Comp.png");
-}
-
-
-@-webkit-keyframes skip-loader {  
-  0% {
-    background-position-x: 60%;
-  }
-
-  100% { 
-    background-position-x: 60%;
-  }
+.gta.custom .animations-container.kanye .character {
+  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Interfaces/Organizations/Rockstar%20Games/GTA/Custom/0.%20Loader/Kanye/Character/Hat%20%2B%20Juice%20%2B%20Phone%20-%20Comp.png");
 }
 
 
@@ -362,7 +341,6 @@ body > .loader {
 
 /* MENU BAR */
 .mac-os .menu-bar {
-  width: -webkit-fill-available;
   width: 100%;
   height: 22px;
   box-shadow: 0px 5px 50px rgba(0, 0, 0, .4);
@@ -439,7 +417,6 @@ body > .loader {
   height: inherit;
   padding: 0px 10px;
   font-size: unset;
-  line-height: 1.7;
   line-height: 22px;
   display: block;
   position: relative;
@@ -449,11 +426,11 @@ body > .loader {
   line-height: 1.8;
 }
 
-.mac-os .menu-bar .section-container > .icons-b {
+.mac-os .menu-bar .section-container > .icon {
   width: 35px;
 }
 
-.mac-os .menu-bar .section-container > .icons-b::before {
+.mac-os .menu-bar .section-container > .icon::before {
   width: inherit;
   height: inherit;
   background-size: 15px;
@@ -467,7 +444,7 @@ body > .loader {
   width: 38px;
 }
 
-.mac-os .menu-bar .section-container .notification-center.icons-b::before {
+.mac-os .menu-bar .section-container .notification-center.icon::before {
   background-size: 18px;
 }
 
@@ -514,12 +491,12 @@ body > .loader {
   overflow: hidden;
   padding: 0px 22px;
   font-size: unset;
-  color: #434343;
-  text-align: left;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   line-height: 18px;
   line-height: -moz-block-height;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #434343;
+  text-align: left;
   display: block;
   position: relative;
   margin: 4px 0px;
@@ -566,7 +543,6 @@ body > .loader {
 
 .mac-os .menu-bar .section-container.date-and-time > .menu {
   max-width: 276px;
-/*   max-width: 245px; */
   min-width: 200px; 
   height: fit-content;
   height: -moz-fit-content; 
@@ -641,8 +617,8 @@ body > .loader {
 /* MENU BAR - DATE AND TIME - DIGITAL */
 .mac-os .menu-bar .section-container.date-and-time > button.digital {
   width: fit-content;
-  height: inherit;
   width: -moz-fit-content;
+  height: inherit;
   white-space: nowrap;
 }
 
@@ -650,8 +626,6 @@ body > .loader {
   width: fit-content;
   width: -moz-fit-content;
   height: inherit;
-/*   font-size: 20px; */
-  line-height: 1.7;
   line-height: 22px;
   white-space: nowrap;
   display: block;
@@ -674,10 +648,13 @@ body > .loader {
   height: 276px;
   background: -webkit-linear-gradient(top, #f0f0f0, #ddd);
   background-color: rgba(243, 243, 243, 0.97);
-  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Images/0.%20Brand%20Documents/1.%20Background/Logo%20-%20Background%20-%20Comp.jpg");
   background-size: cover;
   background-position: center;
   padding: 25% 0px;
+}
+
+.mac-os .menu-bar .section-container.profile .menu::before {
+  background-size: cover;
 }
 
 .mac-os .menu-bar .section-container.selected.profile .menu {
@@ -690,9 +667,14 @@ body > .loader {
   height: 80px;
   border: 1px solid #fff;
   border-radius: 50%;
-  background-image: url("https://raw.githubusercontent.com/acolorblue/libraries/master/Images/0.%20Brand%20Documents/2.%20Avi/Logo%20-Foreground%20-%20Comp.jpg");
   background-size: cover;
   margin: auto auto -4px auto;
+  position: relative;
+}
+
+.mac-os .menu-bar .section-container.profile .menu .avi::before {
+  border-radius: inherit;
+  background-size: cover;
 }
 
 .mac-os .menu-bar .section-container.profile .menu .username {
@@ -700,6 +682,7 @@ body > .loader {
   letter-spacing: 0.4px;
   text-shadow: 0px 0px 4px #000000;
   margin: auto;
+  z-index: 2;
 }
 
 .mac-os .menu-bar .section-container.profile .menu .bio {
@@ -707,17 +690,19 @@ body > .loader {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 8px;
   font-size: 12px;
-  color: #757575;
   letter-spacing: 0.4px;
+  color: #757575;
   margin: auto;
+  z-index: 2;
 }
 
 .mac-os .menu-bar .section-container.profile .menu .accounts {
   display: inline-flex;
   margin: auto;
+  z-index: 2;
 }
 
-.mac-os .menu-bar .section-container.profile .menu .accounts .icons-b {
+.mac-os .menu-bar .section-container.profile .menu .accounts .icon {
   width: 18px;
   height: 18px;
   border-radius: 8px;
@@ -728,11 +713,11 @@ body > .loader {
   margin-right: 56px;
 }
 
-.mac-os .menu-bar .section-container.profile .menu .accounts .icons-b:last-child {
+.mac-os .menu-bar .section-container.profile .menu .accounts .icon:last-child {
   margin-right: 0px;
 }
 
-.mac-os .menu-bar .section-container.profile .menu .accounts .icons-b::before {
+.mac-os .menu-bar .section-container.profile .menu .accounts .icon::before {
   background-size: 18px;
   -webkit-filter: drop-shadow(0px 0px 1px #303030);
 }
@@ -835,7 +820,7 @@ body > .loader {
   text-shadow: 0px 0px 4px #545454;
 }
 
-.mac-os .file .thumbnail-container .file-type-indicator.icons-b {
+.mac-os .file .thumbnail-container .file-type-indicator.icon {
   width: 40px;
   height: 40px; 
 }
@@ -846,7 +831,7 @@ body > .loader {
 }
 
 .mac-os .file .thumbnail-container .file-type-indicator.blonded::before,
-.mac-os .file .thumbnail-container .file-type-indicator.gun-in-hand-filled::before {
+.mac-os .file .thumbnail-container .file-type-indicator.gun-in-hand.filled::before {
   -webkit-filter: drop-shadow(0px 0px 1px #eeeeee);
 }
 
@@ -888,12 +873,12 @@ body > .loader {
   overflow: hidden;
   display: block;
   padding: 3px 5px;
-  color: #ffffff;
   font-size: 12px;
   line-height: 1;
+  white-space: nowrap;
+  color: #ffffff;
   text-shadow: 0px 0px 4px #000000;
   text-align: center;
-  white-space: nowrap;
   margin: auto;
 }
 
@@ -1017,11 +1002,11 @@ body > .loader {
   margin: auto auto auto 0px;
 }
 
-.application .window-controls .icons-b::before {
+.application .window-controls .icon::before {
   background-size: 6px;
 }
 
-.application .window-controls .icons-b.close::before {
+.application .window-controls .icon.close::before {
   opacity: 1;
 }
 
@@ -1038,10 +1023,10 @@ body > .loader {
   font-size: 12.4px;
   font-weight: 500;
   letter-spacing: 0.1px;
+  white-space: nowrap;
   text-align: center;
   flex-shrink: 1;
   margin: auto;
-  white-space: nowrap;
 }
 
 .application .header .top-bar .title .title-scroll {
@@ -1090,7 +1075,7 @@ body > .loader {
   margin: auto auto auto 4px;
 } 
 
-.application .header .content-controls > .icons-b {
+.application .header .content-controls > .icon {
   width: 36px;
 }
 
@@ -1106,7 +1091,7 @@ body > .loader {
   background: rgba(255, 255, 255, .1);
 } 
 
-.application > .header .content-controls > button.icons-b::before {
+.application > .header .content-controls > button.icon::before {
   background-size: 12.6px;
 }
 
@@ -1183,9 +1168,9 @@ body > .loader {
   font-family: Helvetica, Ahamono Monospaced;
   font-size: 12.4px;
   font-weight: 500;
+  line-height: 26px;
   color: #ffffff;
   text-align: center;
-  line-height: 26px;
   display: flex;
   margin: auto;
   z-index: 2;
@@ -1215,8 +1200,6 @@ body > .loader {
 }
 
 .application.text-editor > .header .social-platforms button {
-  width: 18px;
-  height: 18px;
   width: 20px;
   height: 20px;
   border-radius: 5px;
@@ -1224,6 +1207,10 @@ body > .loader {
   display: block;
   position: relative;
   margin: auto;
+}
+
+.application.text-editor > .header .social-platforms button.icon::before {
+  background-size: 12px;
 }
 
 
@@ -1309,7 +1296,7 @@ body > .loader {
   height: inherit;
 }
 
-.application .parent-container .media .header .top-bar .icons-b::before {
+.application .parent-container .media .header .top-bar .icon::before {
   -webkit-filter: drop-shadow(0px 0px 1px #303030);
 }
 
@@ -1338,11 +1325,11 @@ body > .loader {
   opacity: 0;
 }
 
-.application .parent-container .media .content-controls button.icons-b:first-of-type {
+.application .parent-container .media .content-controls button.icon:first-of-type {
   margin: auto;
 }
 
-.application .parent-container .media .content-controls .icons-b::before {
+.application .parent-container .media .content-controls .icon::before {
   background-size: 50%;
 }
 
@@ -1656,9 +1643,9 @@ body > .loader {
   font-family: Helvetica, Ahamono Monospaced;
   font-size: 12.4px;
   font-weight: 500;
-  color: #000000;
   letter-spacing: 0.1px;
   line-height: 1;
+  color: #000000;
   top: auto;
   right: auto;
   left: -218px;
@@ -1702,9 +1689,8 @@ body > .loader {
 
 
 /* MEDIA QUERIES */
-/* iPhone 5 */
 @media only screen and (device-width: 320px) 
-  and (-webkit-device-pixel-ratio: 2) {
+                   and (-webkit-device-pixel-ratio: 2) {
     .mac-os .menu-bar .section-container.date-and-time > .menu {
       max-width: 245px;
     }

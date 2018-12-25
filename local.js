@@ -35,7 +35,7 @@ var mac_os = $('.mac-os'),
 function onFirstImpression() {
   if (firstImpression()) {
     html.addClass('new-user');
-    $('.loader .gta .skip-loader').remove();
+    $('.loader .gta.five .skip-loader').remove();
   }
 }
 
@@ -134,7 +134,7 @@ function detectElementPropertiesChange() {
 
 // LOADER
 function loaderGTA() {
-  var background,
+  var scene,
       character,
       battery_alert,
       loader_hasnt_been_skipped,
@@ -146,25 +146,25 @@ function loaderGTA() {
   function infoContainer() {
     if (mobile) {
       if (ios) {
-        $('.battery-adjustment').addClass('show').html("<span class='info white icons-b abs'></span> If '<span class='title'>Low Power Mode</span>'<span class='battery low-power-mode icons-b abs'></span>is turned on, turn it off for peak performance.");
+        $('.battery-adjustment').addClass('show').html("<span class='info white icon'></span> If '<span class='title'>Low Power Mode</span>'<span class='battery low-power-mode icon'></span>is turned on, turn it off for peak performance.");
         
         native_browser = "Safari";
       } 
 
       if (android) {
-        $('.battery-adjustment').addClass('show').html("<span class='info white icons-b abs'></span> If '<span class='title'>Battery Saver Mode</span>' is turned on, turn it off for peak performance.");
+        $('.battery-adjustment').addClass('show').html("<span class='info white icon'></span> If '<span class='title'>Battery Saver Mode</span>' is turned on, turn it off for peak performance.");
         
         native_browser = "Chrome or Firefox";
       }
 
-      $('.open-in-different-browser').addClass('show').html("<span class='info white icons-b abs'></span> If opened in a social networks browser, open in native browser instead for peak performance.");
+      $('.open-in-different-browser').addClass('show').html("<span class='info white icon'></span> If opened in a social networks browser, open in native browser instead for peak performance.");
       $('.open-in-different-browser').html($('.open-in-different-browser').html().replace("native browser", native_browser));
     }
 
     if (computer) {
       if (windows) {
         if (firefox) {
-          $('.gta .open-in-different-browser').addClass('firefox show').html("<span class='info white icons-b abs'></span>Please use Chrome or Safari. Firefox on Windows has ugly scrollbars.");
+          $('.gta.five .open-in-different-browser').addClass('firefox show').html("<span class='info white icon'></span>Please use Chrome or Safari. Firefox on Windows has ugly scrollbars.");
           $('.mac-os > .menu-bar, .mac-os > .desktop').remove();
         }
       }
@@ -181,26 +181,26 @@ function loaderGTA() {
   }
   
   function moveLoop() {
-    background = $('.gta .animations-container.show').find('.background');
-    character = $('.gta .animations-container.show').find('.character');
+    scene = $('.gta.five .animations-container.show').find('.scene');
+    character = $('.gta.five .animations-container.show').find('.character');
     
     checkDeviceLength();
     if (device_width_longer) {
-      $('.gta .animations-container .character').removeClass('move');
+      $('.gta.five .animations-container .character').removeClass('move');
 
       setTimeout(function() {
         character.addClass('move'); 
-        if (!$('.gta .animations-container .background').hasClass('move')) {
-          $('.gta .animations-container .background').addClass('move')
+        if (!$('.gta.five .animations-container .scene').hasClass('move')) {
+          $('.gta.five .animations-container .scene').addClass('move')
         }
       }, 100);
     }
 
     if (device_height_longer) {
-      $('.gta .animations-container .background, .gta .animations-container .character').removeClass('move');
+      $('.gta.five .animations-container .scene, .gta.five .animations-container .character').removeClass('move');
 
       setTimeout(function() {
-        $(background, character).addClass('move');
+        $(scene, character).addClass('move');
       }, 100);
     }
   }
@@ -211,40 +211,40 @@ function loaderGTA() {
     }
     
     // MICHAEL
-    $('.gta .animations-container.michael').addClass('show');
+    $('.gta.five .animations-container.michael').addClass('show');
     moveLoop();
     setTimeout(function() {
-      $('.gta .animations-container.michael').removeClass('show');
-      $('.gta .text-logo.gta-5').text("");
-      $('.gta .skip-loader').addClass('show').click(function() {
-        if (!$('.gta div.fast-forward-automated-text').hasClass('show')) {
-          $('.gta div.fast-forward-automated-text').addClass('show');
+      $('.gta.five .animations-container.michael').removeClass('show');
+      $('.gta.five .product-logo.gta-V').text("");
+      $('.gta.five .skip-loader').addClass('show').click(function() {
+        if (!$('.gta.five div.fast-forward-automated-text').hasClass('show')) {
+          $('.gta.five div.fast-forward-automated-text').addClass('show');
         }
-        $('.gta .skip-loader').removeClass('unclicked show');
+        $('.gta.five .skip-loader').removeClass('unclicked show');
         $('body > .loader').addClass('skipped');
-        $('.gta .animations-container').removeClass('show');
+        $('.gta.five .animations-container').removeClass('show');
         if (mobile) {
-          $('.gta .battery-adjustment, .gta .open-in-different-browser').removeClass('show');
+          $('.gta.five .battery-adjustment, .gta.five .open-in-different-browser').removeClass('show');
         }
 
         setTimeout(function() {
-          $('.gta .skip-loader').remove();
+          $('.gta.five .skip-loader').remove();
         }, 200);
 
         setTimeout(function() {
-          $('.gta .animations-container .background, .gta .animations-container .character').removeClass('move');
-          $('.gta .animations-container.michael, .gta .animations-container.trevor, .gta .animations-container.franklin-and-chop').remove();
+          $('.gta.five .animations-container .scene, .gta.five .animations-container .character').removeClass('move');
+          $('.gta.five .animations-container.michael, .gta.five .animations-container.trevor, .gta.five .animations-container.franklin-and-chop').remove();
         }, 1500);
 
         setTimeout(function() {
-          $('.gta .text-logo').removeClass('gta-5').addClass('kanye-analysis');
-          $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
-          $('.gta .animations-container.kanye').addClass('show');
+          $('.gta.five .product-logo').removeClass('gta-V icon').addClass('kanye-analysis text');
+          $('.gta.five .organization-logo').removeClass('rockstar-games').addClass('good-music');
+          $('.gta.five .animations-container.kanye').addClass('show');
         }, 1900); 
         
         setTimeout(function() {
-          if ($('.gta div.fast-forward-automated-text').hasClass('show')) {
-            $('.gta div.fast-forward-automated-text').removeClass('show');
+          if ($('.gta.five div.fast-forward-automated-text').hasClass('show')) {
+            $('.gta.five div.fast-forward-automated-text').removeClass('show');
           }
         }, 2300);
 
@@ -256,9 +256,9 @@ function loaderGTA() {
     setTimeout(function() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
-        $('.gta .animations-container.michael').remove();
+        $('.gta.five .animations-container.michael').remove();
         if (computer) {
-          $('.gta div.fast-forward-automated-text').addClass('show');
+          $('.gta.five div.fast-forward-automated-text').addClass('show');
         }
       }
     }, 5650);
@@ -267,27 +267,27 @@ function loaderGTA() {
     setTimeout(function() { 
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
-        $('.gta .animations-container.trevor').addClass('show');
+        $('.gta.five .animations-container.trevor').addClass('show');
         moveLoop();
       }
     }, 6050);
     setTimeout(function() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
-        $('.gta .animations-container.trevor').removeClass('show');
+        $('.gta.five .animations-container.trevor').removeClass('show');
         if (mobile) {
-          $('.gta div.fast-forward-automated-text').addClass('show');
+          $('.gta.five div.fast-forward-automated-text').addClass('show');
         }
       }
     }, 9200);
     setTimeout(function() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
-        $('.gta .animations-container.trevor').remove();
-        $('.gta .skip-loader').removeClass('show');
+        $('.gta.five .animations-container.trevor').remove();
+        $('.gta.five .skip-loader').removeClass('show');
 
         if (mobile) {
-          $('.gta .battery-adjustment').removeClass('show');
+          $('.gta.five .battery-adjustment').removeClass('show');
         }
       }
     }, 10700);
@@ -297,26 +297,25 @@ function loaderGTA() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
         if (computer) {
-          $('.gta div.fast-forward-automated-text').removeClass('show');
+          $('.gta.five div.fast-forward-automated-text').removeClass('show');
         }
-        $('.gta .animations-container.franklin-and-chop').addClass('show');
+        $('.gta.five .animations-container.franklin-and-chop').addClass('show');
         moveLoop();
       }
     }, 11100);
     setTimeout(function() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
-        $('.gta .animations-container.franklin-and-chop').removeClass('show');
+        $('.gta.five .animations-container.franklin-and-chop').removeClass('show');
         if (mobile) {
-          $('.gta .open-in-different-browser').removeClass('show');
+          $('.gta.five .open-in-different-browser').removeClass('show');
         } 
       }
     }, 14250);
     setTimeout(function() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
-        $('.gta').removeClass('original');
-        $('.gta .animations-container.franklin-and-chop').remove();
+        $('.gta.five .animations-container.franklin-and-chop').remove();
       }
     }, 15750);
 
@@ -325,11 +324,12 @@ function loaderGTA() {
       checkSkippedStatus();
       if (loader_hasnt_been_skipped) {
         if (mobile) {
-          $('.gta div.fast-forward-automated-text').removeClass('show');
+          $('.gta.five div.fast-forward-automated-text').removeClass('show');
         }
-        $('.gta .text-logo').removeClass('gta-5').addClass('kanye-analysis unread');
-        $('.gta .icon-logo').removeClass('rockstar').addClass('good-music');
-        $('.gta .animations-container.kanye').addClass('show');
+        $('.gta.five').addClass('custom');
+        $('.gta.custom .product-logo').removeClass('gta-V icon').addClass('kanye-analysis text unread');
+        $('.gta.custom .organization-logo').removeClass('rockstar-games').addClass('good-music');
+        $('.gta.custom .animations-container.kanye').addClass('show');
         moveLoop();
       }
     }, 16150);
@@ -338,12 +338,12 @@ function loaderGTA() {
       if (loader_hasnt_been_skipped) {
         check_animation_completion_interval = setInterval(checkAnimationCompletion, 200);
         function checkAnimationCompletion() {
-          background = $('.gta .animations-container.kanye .background').css('transform');
-          character = $('.gta .animations-container.kanye .character').css('background-position-x');
+          scene = $('.gta.custom .animations-container.kanye .scene').css('transform');
+          character = $('.gta.custom .animations-container.kanye .character').css('background-position-x');
           
           checkDeviceLength();
           if (device_width_longer) {
-            background = $('.gta .animations-container.kanye .background').css('transform');
+            scene = $('.gta.custom .animations-container.kanye .scene').css('transform');
             if (character == '60%') {
               window.clearInterval(check_animation_completion_interval);
               setTimeout(function() {
@@ -353,8 +353,8 @@ function loaderGTA() {
           }
           
           if (device_height_longer) {
-            background = $('.gta .animations-container.kanye .background').css('background-position-x');
-            if (background == '60%' && character == '50%') {
+            scene = $('.gta.custom .animations-container.kanye .scene').css('background-position-x');
+            if (scene == '60%' && character == '50%') {
               window.clearInterval(check_animation_completion_interval); 
               setTimeout(function() {
                 titleThenRemoveLoader();
@@ -367,12 +367,12 @@ function loaderGTA() {
   }
 
   function titleThenRemoveLoader() {
-    $('.gta .text-logo').text("A ***** **** Analysis");
-    automatedText('.gta .text-logo', 2000, [''], 0, '-break-', 800);
+    $('.gta.custom .product-logo.kanye-analysis').text("A ***** **** Analysis");
+    automatedText('.gta.custom .product-logo.kanye-analysis', 2000, [''], 0, '-break-', 800);
 
     end_of_title_interval = setInterval(endOfTitle, 200);
     function endOfTitle() {
-      if ($('.gta .text-logo').text().includes("A ***** **** Analysis")) {
+      if ($('.gta.custom .product-logo').text().includes("A ***** **** Analysis")) {
         window.clearInterval(end_of_title_interval); 
         setTimeout(function() {
           callRemainderFunctions();
@@ -515,7 +515,7 @@ function applicationChange() {
     
     function skip() {
       if (!$('.scroll-container').hasClass('completed')) { 
-        button.className = 'fast-forward-automated-text forward white outline icons-b abs';
+        button.className = 'fast-forward-automated-text forward white outline icon';
         $('.application > .header .content-controls').append(button.cloneNode());
       }
     }
@@ -536,13 +536,13 @@ function applicationChange() {
     
     function search() {
       if ($('.scroll-container').hasClass('completed')) { 
-        button.className = 'search white icons-b abs';
+        button.className = 'search white icon';
         $('.application > .header .content-controls').append(button.cloneNode());
       }
     }
     search(); 
 
-    button.className = 'share white icons-b abs';
+    button.className = 'share white icon';
     $('.application > .header .content-controls').append(button.cloneNode());
     
     automatedScrollAdjustment();
@@ -677,12 +677,18 @@ function menuBar() {
         this_is_selected = section_container.hasClass('selected'),
         this_is_not_selected = !this_is_selected,
         selected_exists = $('.menu-bar .section-container.selected').length == 1,
+        button_is_icon = this_element.hasClass('icon'),
         apple_menu = this_element.hasClass('apple-logo'),
         date_and_time = this_element.hasClass('time'),
         profile = this_element.hasClass('name'),
         notification_center = this_element.hasClass('notification-center');
     
+    if (button_is_icon) {
+      this_element.removeClass('black').addClass('white');
+    }
+    
     if (selected_exists) {
+      $('.menu-bar .section-container.selected > .icon').removeClass('white').addClass('black');
       $('.menu-bar .section-container').removeClass('selected');
     }
     
@@ -703,6 +709,14 @@ function menuBar() {
     // DATE AND TIME
     if (date_and_time) {
       function dateAndTime() {
+        $('.date-and-time .menu .item.checked').on('mouseenter mouseover touchstart', function() {
+          $(this).removeClass('black').addClass('white');
+        })
+        
+        $('.date-and-time .menu .item.checked').on('mouseleave touchend', function() {
+          $(this).removeClass('white').addClass('black');
+        })
+        
         $('.date-and-time .menu .item').click(function() {
           var this_item = $(this),
               menu = this_item.parent(),
@@ -711,14 +725,10 @@ function menuBar() {
               digital_clock = $(this).hasClass('digital-clock'),
               location_and_time_preferences = $(this).hasClass('location-and-time-preferences');
 
-          
           function analogOrDigital() {
             if (analog_clock || digital_clock) {
-              if ($('.date-and-time .menu .item').hasClass('checked icons-b abs')) {
-                $('.date-and-time .menu .item').removeClass('checked icons-b abs');
-              }
-              
-              this_item.addClass('checked icons-b abs');
+              $('.date-and-time .menu .item').removeClass('checked black white icon');
+              this_item.addClass('checked black icon');
             }
             
             if (analog_clock) {
@@ -806,7 +816,7 @@ function menuBar() {
         function removeCover() {
           setTimeout(function() {
             window.clearInterval(height_placement_interval);
-            menu.removeClass('cover twitter icons-b abs');
+            menu.removeClass('cover twitter white icon');
             $(window).trigger('resize');
           }, 3000);
           
@@ -990,15 +1000,15 @@ function sharePage() {
     
     function socialPlatformsHidden() {
       if ($('.text-editor > .header .social-platforms').length == 0) {
-        button.className = 'twitter icons-b abs';
+        button.className = 'twitter white icon';
         div.append(button.cloneNode());
 
         if (mobile) {
-          button.className = 'instagram icons-b abs';
+          button.className = 'instagram white icon';
           div.append(button.cloneNode());
         }
 
-        button.className = 'tumblr icons-b abs';
+        button.className = 'tumblr white icon';
         div.append(button.cloneNode());
 
         div.className = 'social-platforms hide';
@@ -1010,7 +1020,7 @@ function sharePage() {
     }
     socialPlatformsHidden();
 
-    // SOCIAL PLATFORMS
+    // SOCIAL PLATFORMS 
     $('.text-editor > .header .social-platforms button').click(function() {
       var poster_link = "https://raw.githubusercontent.com/acolorblue/a-kanye-west-analysis/master/Images/Poster/Portrait.jpg", 
           webpage = 'https://acolorblue.co/a-kanye-west-analysis',
@@ -1033,15 +1043,15 @@ function sharePage() {
       }
 
       if (tumblr) {
-        $('meta[name=description]').attr('content', 'removed');
-        window_link = 'https://www.tumblr.com/widgets/share/tool?posttype=link' + '&canonicalUrl=' + webpage + '&caption=' + '<i>' +  caption.slice(0, 3) + '<a href=\'' +  'https://acolorblue.tumblr.com' + '\'>' + caption.slice(3) + '</i></a>';
+        // window_link = 'https://www.tumblr.com/widgets/share/tool?posttype=link' + '&canonicalUrl=' + webpage + '&caption=' + '<i>' +  caption.slice(0, 3) + '<a href=\'' +  'https://acolorblue.tumblr.com' + '\'>' + caption.slice(3) + '</i></a>';
+        window_link = 'https://www.tumblr.com/widgets/share/tool?posttype=link' + '&canonicalUrl=' + webpage;
         window.open(window_link);
       }
 
       socialPlatformsShown();
     })
   });
-}
+ }
 
 
     
@@ -1062,6 +1072,7 @@ function mediaPreloads() {
   
   setTimeout(function() {
     $('.panel .section-container').addClass('selected');
+    $('.menu-bar .section-container > button.icon').removeClass('black').addClass('white');
   }, 300);
   
   setTimeout(function() {
@@ -1077,6 +1088,8 @@ function mediaPreloads() {
   
   setTimeout(function() {
     $('.panel .section-container').removeClass('selected');
+    $('.menu-bar .section-container > button.icon').removeClass('white').addClass('black');
+    $('.menu-bar .section-container .item.analog-clock.white').removeClass('checked white icon');
   }, 1000);
 
   setTimeout(function() {
@@ -1469,7 +1482,7 @@ function mediaAfterParagraphs() {
 
                 if (mobile) {
                   rotateToLandscape();
-                  button.className = 'close grey ab-mid icons-b abs';
+                  button.className = 'close grey ab-mid icon';
                   $('body .rotate-to-landscape').append(button.cloneNode());
                   $('.rotate-to-landscape .close').click(function() {
                     $('.media.credits').removeClass('visible').css('display', '').addClass('hide');
@@ -1484,7 +1497,7 @@ function mediaAfterParagraphs() {
           
           function search() {
             if ($('.scroll-container').hasClass('completed')) { 
-              button.className = 'search white icons-b abs';
+              button.className = 'search white icon';
               $('.text-editor > .header .content-controls .credits').after(button.cloneNode());
               searchTextEditor();
             }
@@ -1552,7 +1565,7 @@ function videoPlayback() {
       if (!content_controls.hasClass('reloader')) {
         content_controls.addClass('reloader');
         
-        button.className = 'reload icons-b abs'; 
+        button.className = 'reload icon'; 
         content_controls.append(button.cloneNode(true));
         $('.content-controls .reload').click(function() {
           video.load();
@@ -1862,7 +1875,21 @@ function onFileClick() {
     });
 }
 
-  
+
+
+
+// DESKTOP CLICK
+function onWindowClick() {
+  $('.mac-os').click(function() {    
+    selected_exists = $('.menu-bar .section-container.selected').length == 1;
+    if (selected_exists) {
+      $('.menu-bar .section-container.selected > .icon').removeClass('white').addClass('black');
+      $('.menu-bar .section-container').removeClass('selected');
+    }
+  })
+}
+
+
 
 
 // WINDOW ON LOAD
@@ -1871,7 +1898,7 @@ window.onload = function() {
   userDeviceSpecifications();
   // userActiveStatus();
   detectElementPropertiesChange();
-  // loaderGTA();
+  loaderGTA();
   menuBar();
   closeApp();
   sharePage();
@@ -1880,7 +1907,7 @@ window.onload = function() {
   onWindowClick();
   
   // IF LOADER NOT PRESENT
-  callRemainderFunctions();
+  // callRemainderFunctions();
 }
 
  
@@ -1895,19 +1922,6 @@ function callRemainderFunctions() {
   callAutomatedText();
   mediaAfterParagraphs();
   mediaPreloads();
-}
-
-
-
-
-// DESKTOP CLICK
-function onWindowClick() {
-  $('.mac-os').click(function() {    
-    selected_exists = $('.menu-bar .section-container.selected').length == 1;
-    if (selected_exists) {
-      $('.menu-bar .section-container').removeClass('selected');
-    }
-  })
 }
 
 
